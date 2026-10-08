@@ -1,0 +1,40 @@
+# 秘密情報（APIキーなど）
+.env
+.env.*
+!.env.example
+
+# データベースファイル（スキーマとサンプルデータはSQLで管理する）
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# PHP
+vendor/
+
+# Java
+*.class
+target/
+build/
+.gradle/
+
+# Node.js（React / Vue.js / Tailwind CSS のビルドなど）
+node_modules/
+dist/
+
+# ログ
+*.log
+logs/
+
+# エディタ・OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
