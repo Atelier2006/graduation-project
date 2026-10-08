@@ -58,6 +58,7 @@
 - [docs/overview.md](docs/overview.md)：卒業制作Ⅱ 概要説明（目的・テーマ・条件・評価）
 - [docs/checklist.md](docs/checklist.md)：品質・セキュリティ・展示会のチェックリスト
 - [docs/theme-research.md](docs/theme-research.md)：テーマ選定の調査レポート（推奨テーマ・候補の比較・Claude中心の進め方）
+- [docs/theme-research-non-ai.md](docs/theme-research-non-ai.md)：AIを前面に出さない企画案（追加調査・AI案との比較）
 
 ## セットアップ
 
