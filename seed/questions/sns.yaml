@@ -9,7 +9,7 @@
   level: easy
   situation: S07
   targets: [学生]
-  brand: hanashiba
+  brand:
   tactics: [T14, T05, T06]
   examples: [EX-040]
   context: |
@@ -37,7 +37,7 @@
     - text: 投稿への返信を見て、ほかの人の評判がよければ応募する
   hints:
     - target: body
-      note: 「日給5万円」「即日即金」「ホワイト案件」と、報酬の高さと早さばかりを強調し、仕事の中身は「荷物を受け取って届けるだけ」とあいまい。応募の時点で身分証の写真を送らせようとしている。
+      note: 「日給5万円」「即日即金」と報酬の高さと早さばかりを強調し、「ホワイト案件」と安全な仕事のように見せているが、仕事の中身は「荷物を受け取って届けるだけ」とあいまい。応募の時点で身分証の写真を送らせようとしている。
     - target: part:1
       note: 今月作られたばかりで、フォロワーが8人しかなく、同じ募集の投稿しかないアカウント。会社の名前や連絡先も分からない。
   explanation:
@@ -204,7 +204,7 @@
   level: normal
   situation: S12
   targets: [学生]
-  brand: hanashiba
+  brand: ticketnomori
   tactics: [T04, T05, T07]
   examples: [EX-073]
   context: |
@@ -252,7 +252,7 @@
   level: normal
   situation: S18
   targets: [全世代]
-  brand: hanashiba
+  brand:
   tactics: [T04, T07]
   examples: [EX-087]
   context: |
@@ -302,7 +302,7 @@
   level: hard
   situation: S15
   targets: [全世代]
-  brand: tomotomo
+  brand:
   tactics: [T04, T07]
   examples: [EX-080]
   context: |
@@ -590,7 +590,7 @@
   level: normal
   situation: S04
   targets: [社会人, 学生]
-  brand: hanashiba
+  brand:
   tactics: [T12, T11, T05, T07]
   examples: [EX-023]
   context: |

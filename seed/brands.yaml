@@ -148,7 +148,7 @@
   name: そよかぜ市役所
   category: 市役所（架空の市）
   official_domain: city.soyokaze.example
-  official_contact: 大事な手続きは郵送で知らせる。電話で還付金の手続きをATMでさせることはない。公式サイトと公式SNSアカウント（認証バッジあり）でもお知らせを出す。
+  official_contact: 大事な手続きは郵送で知らせる。郵送した書類の返送などを電話で案内することはあるが、電話で還付金の手続きをATMでさせたり、暗証番号を聞いたりすることはない。公式サイトと公式SNSアカウント（認証バッジあり）でもお知らせを出す。
 
 - key: soyokaze_police
   name: そよかぜ警察署

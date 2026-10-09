@@ -47,7 +47,8 @@ python tools/question_bank.py check
   level: easy                 # easy / normal / hard
   situation: S02              # seed/situations.yaml のコード
   targets: [全世代]           # 学生 / 社会人 / 高齢者 / 全世代
-  brand: hashire              # 発信元・なりすまし先の架空ブランド（seed/brands.yaml の key）
+  brand: hashire              # なりすまされた・本物の連絡を出した架空ブランド（seed/brands.yaml の key）。
+                              # 正規の連絡方法が判断の決め手になるブランドも書く。場面になったSNS・アプリというだけなら空にする
   tactics: [T01, T03, T09]    # 詐欺なら1つ以上。本物なら []
   examples: [EX-012]          # もとにした事例集の番号（1つ以上）
   context: |                  # 状況の説明（問題の前に表示する）
