@@ -264,6 +264,15 @@ def check_questions(data, errors: list, warnings: list):
         if not expl.get("why") or not expl.get("action"):
             errors.append(f"{where}: explanation に why と action が必要")
         check_refs(where, q.get("references"), errors)
+        source_titles = {src.get("url"): src.get("title") for e in data["examples"] if e.get("id") in exs
+                         for src in e.get("sources") or []}
+        for r in q.get("references") or []:
+            if not isinstance(r, dict) or not source_titles:
+                continue
+            if r.get("url") not in source_titles:
+                warnings.append(f"{where}: 参考資料 {r.get('url')} が、もとにした事例の出典にない")
+            elif r.get("title") != source_titles[r.get("url")]:
+                warnings.append(f"{where}: 参考資料 {r.get('url')} の title が事例集の出典と違う")
 
         if qtype == "judge":
             ch = q.get("channel")
@@ -376,6 +385,16 @@ def md_escape(text: str) -> str:
     return str(text).replace("|", "｜").strip()
 
 
+def md_link_text(text) -> str:
+    """リンクの文字に入った [ ] がリンクの区切りと間違われないようにする。"""
+    return md_escape(text).replace("[", "\\[").replace("]", "\\]")
+
+
+def md_url(url) -> str:
+    """Markdown のリンク先として壊れないように、空白とかっこを % の形にする。"""
+    return str(url).strip().replace(" ", "%20").replace("(", "%28").replace(")", "%29")
+
+
 def quote_block(text: str) -> list[str]:
     return [f"> {line}" if line.strip() else ">" for line in str(text).strip().splitlines()]
 
@@ -466,7 +485,7 @@ def render_question(q, data) -> list[str]:
     lines.append("")
     lines.append(f"**正しい行動**：{md_escape(expl.get('action', ''))}")
     lines.append("")
-    refs = "、".join(f"[{md_escape(r.get('title', ''))}]({r.get('url')})" for r in q.get("references") or [])
+    refs = "、".join(f"[{md_link_text(r.get('title', ''))}]({md_url(r.get('url'))})" for r in q.get("references") or [])
     lines.append(f"**参考**：{refs}")
     lines.append("")
     lines.append(f"もとにした事例：{'、'.join(q.get('examples') or [])}")
@@ -580,8 +599,8 @@ def render_examples_md(data) -> str:
             srcs = []
             for src in ex.get("sources") or []:
                 pub = f"（{src['published']}）" if src.get("published") else ""
-                srcs.append(f"- {md_escape(src.get('publisher', ''))}：[{md_escape(src.get('title', ''))}]"
-                            f"({src.get('url')}){pub}")
+                srcs.append(f"- {md_escape(src.get('publisher', ''))}：[{md_link_text(src.get('title', ''))}]"
+                            f"({md_url(src.get('url'))}){pub}")
             out += ["**出典**", ""] + srcs + [""]
             if used_by.get(ex["id"]):
                 out += [f"この事例から作った問題：{'、'.join(sorted(used_by[ex['id']]))}", ""]

@@ -112,7 +112,7 @@
   name: トマレル
   category: 宿泊予約サイト
   official_domain: tomareru.example
-  official_contact: 予約の確認はアプリと登録メール。支払い情報の再入力を、宿からのメッセージで求めることはない。
+  official_contact: 予約の確認はアプリと登録メール。問い合わせ先は公式アプリと予約確認メールに書いてある（キャンセルに手数料を電子マネーで払わせることはない）。支払い情報の再入力を、宿からのメッセージで求めることはない。
 
 - key: jobnohako
   name: ジョブノハコ
