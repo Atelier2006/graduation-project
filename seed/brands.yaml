@@ -10,7 +10,7 @@
   name: コトリ銀行
   category: 銀行
   official_domain: kotori-bank.example
-  official_contact: 公式アプリのお知らせと、登録したメールアドレスへのメール（info@kotori-bank.example）。メールやSMSのリンクからログインさせない。ID・パスワード・暗証番号をメール・SMS・電話で聞かない。
+  official_contact: 公式アプリのお知らせと、登録したメールアドレスへのメール（info@kotori-bank.example）。ログインのときの認証番号は、0005から始まる番号からSMSで送る（リンクなし）。メールやSMSのリンクからログインさせない。ID・パスワード・暗証番号をメール・SMS・電話で聞かない。
 
 - key: hitsuji
   name: ヒツジネット銀行
@@ -40,7 +40,7 @@
   name: マチカド郵便
   category: 郵便
   official_domain: machikado-post.example
-  official_contact: 不在のときは紙の不在票。再配達は不在票に書かれた番号か公式サイトから申し込む。
+  official_contact: 不在のときは紙の不在票。再配達は不在票に書かれた番号か公式サイトから申し込む。再配達を申し込んだ人には、受付完了のSMSを0005から始まる番号からリンクなしで送る。
 
 - key: piyo
   name: ピヨモバイル
@@ -70,7 +70,7 @@
   name: ユメミル動画
   category: 動画配信サービス
   official_domain: yumemiru.example
-  official_contact: 支払い方法の変更はアプリかアカウントページから。メールは no-reply@yumemiru.example から届く。
+  official_contact: 支払い方法の変更はアプリかアカウントページから。メールは no-reply@yumemiru.example から届く。キャンペーンは公式SNSアカウント（認証バッジあり）でも行い、当選の手続きはアプリの「お知らせ」から行う（手数料はかからない）。
 
 - key: tomotomo
   name: トモトモ
@@ -94,7 +94,7 @@
   name: チケットノモリ
   category: チケット販売
   official_domain: ticket-nomori.example
-  official_contact: 行けなくなったチケットは公式のリセール（再販売）でだけ受け付ける。
+  official_contact: 抽選結果などのお知らせは、公式アプリと、0005から始まる番号からのSMS（リンクなし）で送る。行けなくなったチケットは公式のリセール（再販売）でだけ受け付ける。
 
 - key: furimarche
   name: フリマルシェ
@@ -106,7 +106,7 @@
   name: ピコピコストア
   category: ゲーム・アプリのストア
   official_domain: pikopiko-store.example
-  official_contact: ゲーム内通貨はストアとゲームの中でだけ販売する。無料で配るサイトはない。
+  official_contact: ゲーム内通貨はストアとゲームの中でだけ販売する。無料で配るサイトはない。公式SNSアカウントは公式サイトからたどれる。
 
 - key: tomareru
   name: トマレル
@@ -118,7 +118,7 @@
   name: ジョブノハコ
   category: 就活サイト
   official_domain: jobnohako.example
-  official_contact: 企業からの連絡はサイトの中のメッセージで届く。登録料や研修費を学生に求めることはない。
+  official_contact: 企業からの連絡はサイトの中のメッセージで届く。メッセージが届くと、登録したメールアドレスにお知らせを送る。登録料や研修費を学生に求めることはない。
 
 - key: hatarakumo
   name: ハタラクモ
@@ -136,7 +136,7 @@
   name: スイスイ高速
   category: 高速道路・ETC
   official_domain: suisui-kosoku.example
-  official_contact: 利用明細は会員ページで確認する。ETCの登録の期限切れをSMSで知らせることはない。
+  official_contact: 利用明細は会員ページで確認する。登録した人には、明細ができたことをメールで知らせる（カード情報は求めない）。ETCの登録の期限切れをSMSで知らせることはない。
 
 - key: furusatokago
   name: ふるさとカゴ
@@ -148,7 +148,7 @@
   name: そよかぜ市役所
   category: 市役所（架空の市）
   official_domain: city.soyokaze.example
-  official_contact: 大事な手続きは郵送で知らせる。電話で還付金の手続きをATMでさせることはない。
+  official_contact: 大事な手続きは郵送で知らせる。電話で還付金の手続きをATMでさせることはない。公式サイトと公式SNSアカウント（認証バッジあり）でもお知らせを出す。
 
 - key: soyokaze_police
   name: そよかぜ警察署
@@ -160,4 +160,4 @@
   name: そよかぜ税務署
   category: 税務署（架空の市）
   official_domain: tax.soyokaze.example
-  official_contact: 税金の未納をSMSで知らせて、リンクから支払わせることはない。
+  official_contact: 税金の未納をSMSで知らせて、リンクから支払わせることはない。電子申告をした人には、お知らせが届いたことを公式ドメインのメールで知らせる（メールにURLは載せない）。

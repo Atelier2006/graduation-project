@@ -2,7 +2,9 @@
 
 使い方:
     python tools/question_bank.py check    # ルールの確認と集計（違反があれば終了コード1）
+    python tools/question_bank.py check --file seed/questions/sms.yaml   # 1つのファイルの問題だけ確かめる
     python tools/question_bank.py render   # docs/question-bank/ に Markdown を書き出す
+    python tools/question_bank.py show EX-001 Q-SM-001   # 事例・問題を番号で表示する
 
 必要なライブラリ: PyYAML（pip install pyyaml）
 """
@@ -79,7 +81,7 @@ def load_yaml(path: Path):
         return yaml.safe_load(f)
 
 
-def load_all():
+def load_all(question_files=None):
     data = {
         "brands": {b["key"]: b for b in load_yaml(SEED / "brands.yaml")},
         "tactics": {t["code"]: t for t in load_yaml(SEED / "tactics.yaml")},
@@ -90,7 +92,8 @@ def load_all():
     ex_path = QB_DOCS / "examples.yaml"
     if ex_path.exists():
         data["examples"] = load_yaml(ex_path) or []
-    for path in sorted((SEED / "questions").glob("*.yaml")):
+    paths = [Path(f) for f in question_files] if question_files else sorted((SEED / "questions").glob("*.yaml"))
+    for path in paths:
         for q in load_yaml(path) or []:
             q["_file"] = path.name
             data["questions"].append(q)
@@ -201,6 +204,22 @@ def check_examples(data, errors: list):
             check_text_safety(f"{where} {path}", text, errors, allow_public_orgs=True)
 
 
+def check_legit_domains(where: str, msg: dict, brand: dict, errors: list):
+    """本物の問題で、リンク・アドレスバー・メールアドレスがブランドの公式ドメインと合っているか。"""
+    official = registrable_domain(brand["official_domain"])
+    found = []
+    for key in ("link", "page_url"):
+        if msg.get(key):
+            found.append((key, host_of(str(msg[key])) or str(msg[key])))
+    sender = str(msg.get("sender") or "")
+    if "@" in sender and not sender.startswith("@"):
+        found.append(("sender", sender))
+    for key, host in found:
+        if registrable_domain(host) != official:
+            errors.append(f"{where}: 本物の問題なのに、{key} のドメイン（{host}）が"
+                          f"{brand['name']}の公式ドメイン（{official}）と違う")
+
+
 def check_questions(data, errors: list, warnings: list):
     ids = Counter(q.get("id") for q in data["questions"])
     example_ids = {ex.get("id") for ex in data["examples"]}
@@ -276,6 +295,8 @@ def check_questions(data, errors: list, warnings: list):
                     warnings.append(f"{where}: hints の {target} が message に書かれていない")
                 if not h.get("note"):
                     errors.append(f"{where}: hints に note がない")
+            if q.get("is_scam") is False and brand in data["brands"]:
+                check_legit_domains(where, msg, data["brands"][brand], errors)
             content = {"context": q.get("context"), "message": msg, "actions": actions}
         else:
             if not str(qid).startswith("Q-UR-"):
@@ -569,9 +590,28 @@ def render_examples_md(data) -> str:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="問題集と事例集の確認・書き出し")
-    parser.add_argument("command", choices=["check", "render"])
+    parser.add_argument("command", choices=["check", "render", "show"])
+    parser.add_argument("ids", nargs="*", help="show で表示する事例・問題の番号（例：EX-001 Q-SM-001）")
+    parser.add_argument("--file", action="append",
+                        help="check で確かめる問題のファイル（何度でも指定できる。省略するとすべて）")
     args = parser.parse_args(argv)
-    data = load_all()
+    if args.file and args.command != "check":
+        parser.error("--file は check でだけ使える")
+    try:
+        data = load_all(args.file)
+    except (OSError, yaml.YAMLError) as e:
+        print(f"エラー: ファイルを読めない（YAMLの書き方を確かめる）: {e}")
+        return 1
+    if args.command == "show":
+        index = {ex.get("id"): ex for ex in data["examples"]}
+        index.update({q.get("id"): {k: v for k, v in q.items() if k != "_file"} for q in data["questions"]})
+        missing = [i for i in args.ids if i not in index]
+        found = [index[i] for i in args.ids if i in index]
+        if found:
+            print(yaml.dump(found, allow_unicode=True, sort_keys=False, width=1000), end="")
+        for i in missing:
+            print(f"見つからない: {i}")
+        return 1 if missing else 0
     errors: list[str] = []
     warnings: list[str] = []
     check_examples(data, errors)
