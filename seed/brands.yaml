@@ -46,7 +46,7 @@
   name: ピヨモバイル
   category: 携帯電話会社
   official_domain: piyo-mobile.example
-  official_contact: 公式SMSは、各社共通の番号（0005から始まる番号）から送る。料金の確認は公式アプリの会員ページで行う。
+  official_contact: 公式SMSは、各社共通の番号（0005から始まる番号）から送る。SMSに公式ドメインのリンクを載せることがある。料金の確認は公式アプリの会員ページで行う。
 
 - key: donguri
   name: ドングリ証券

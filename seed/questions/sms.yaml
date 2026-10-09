@@ -42,8 +42,6 @@
     action: |
       リンクは開かない。荷物が気になるときは、郵便受けに紙の不在票が入っているかを見るか、ハシレ運輸の公式アプリで確かめる。もしリンク先でアプリを入れてしまったら、機内モードにしてからアプリを削除し、消費者ホットライン188や警察相談専用電話 #9110 に相談する。
   references:
-    - title: （ページ名未確認）宅配業者の不在通知等を装った偽SMSに関する注意喚起（PDF）
-      url: https://www.pref.hiroshima.lg.jp/uploaded/attachment/604115.pdf
     - title: トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に
       url: https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html
 
@@ -131,10 +129,10 @@
     action: |
       リンクは開かず、ピヨモバイルの公式アプリから自分でログインして確かめる。もし入力してしまったら、すぐにパスワードと暗証番号を変え、キャリア決済の設定を見直して、ピヨモバイルの窓口に連絡する。
   references:
-    - title: （ページ名未確認）消費生活の注意・警戒情報（携帯電話会社名のSMSからキャリア決済を不正利用された事例）
-      url: https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html
-    - title: （ページ名未確認）消費生活のよくある質問（キャリア決済を不正利用されたときの対応）
-      url: https://www.pref.osaka.lg.jp/faq/o070120/faq_002106.html
+    - title: 2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加
+      url: https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html
+    - title: 2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増
+      url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
 
 - id: Q-SM-004
   title: ポカポカでんきを名乗る「送電停止」のSMS
@@ -177,8 +175,6 @@
     action: |
       リンクは開かない。料金が気になるときは、ポカポカでんきの公式アプリや、郵送で届いた請求書で確かめる。カード番号を入力してしまったら、すぐにカード会社に連絡する。
   references:
-    - title: （ページ名未確認）当社を装った不審なメール・SMSに関する注意喚起
-      url: https://www.tepco.co.jp/ep/archive/20240315.html
     - title: トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート(2026年4月)
       url: https://prtimes.jp/main/html/rd/p/000000232.000034282.html
 
@@ -267,8 +263,8 @@
     action: |
       「送る」の画面が出ても、送らずに閉じる。心当たりのある請求かどうかは、契約している会社の公式サイトや公式アプリで確かめる。送ってしまったら、すぐにクルクルペイのアプリの問い合わせ窓口と、警察相談専用電話 #9110 か消費者ホットライン188に相談する。
   references:
-    - title: （ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起
-      url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
+    - title: トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート(2026年5月)
+      url: https://prtimes.jp/main/html/rd/p/000000235.000034282.html
     - title: ネット詐欺、「QR決済利用」「地方銀行・ネット銀行を装う」事例が増加 BBSS調査
       url: https://ecnomikata.com/ecnews/50909/
 
@@ -359,10 +355,8 @@
     action: |
       リンクは開かず、返信もしない。気になるときは、ポチッと通販の公式アプリを自分で開いて、メッセージセンターに同じお知らせがあるか確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡し、消費者ホットライン188に相談する。
   references:
-    - title: （心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）
-      url: https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html
-    - title: （見守り新鮮情報 第440号 大金が当選したというメール・SMSへの注意）
-      url: https://www.city.osaki.miyagi.jp/material/files/group/6/20230130.pdf
+    - title: 『学マス』公式が注意喚起ーSNSで偽アカウントが出没、DMを受け取った場合は反応せずにブロックを
+      url: https://www.gamebusiness.jp/article/2026/01/07/25921.html
 
 - id: Q-SM-009
   title: 「有料サイトの未納料金」で電話をかけさせるSMS
@@ -489,10 +483,10 @@
     action: |
       自分で開いた公式アプリの画面にだけ入力する。認証番号は、家族にも、銀行を名乗る人にも教えない。自分がログインしていないのに認証番号が届いたときは、公式アプリからパスワードを変え、公式サイトに載っている窓口に知らせる。
   references:
-    - title: インターネット・バンキングの不正送金に関する注意喚起のページ（題名未確認）
-      url: https://www.fsa.go.jp/ordinary/internet-bank_2.html
     - title: 不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ
       url: https://paymentnavi.com/?p=144363
+    - title: 10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ
+      url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
 
 - id: Q-SM-012
   title: 公式ドメインのリンクが付いた「データ残量」のお知らせSMS
@@ -535,8 +529,6 @@
     action: |
       本物でも、データの追加やログインは公式アプリから行うのが安全。SMSのリンクからログインする習慣をつけないでおくと、偽物のSMSが届いたときにもだまされにくい。
   references:
-    - title: SMSの送信元番号（共通ショートコード）に関する案内ページ（題名未確認。2023年4月時点の情報）
-      url: https://www.docomo.ne.jp/service/sms/displayname/
     - title: 意外と知らない? ネットセキュリティの基礎知識
       url: https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html
 
@@ -626,3 +618,51 @@
   references:
     - title: 宅配業者を名乗る不審なSMSに関する緊急情報（題名未確認）
       url: https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/documents/190529_1.pdf
+
+- id: Q-SM-015
+  title: 「運ぶだけで日給3万円」の闇バイトのSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S07
+  targets: [学生]
+  tactics: [T14, T05]
+  examples: [EX-040, EX-043]
+  context: |
+    アルバイトを探している。ある日、知らない番号から次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "080-XXXX-XXXX"
+    subject:
+    body: |
+      【高収入・即日払い】
+      荷物を受け取って、指定の場所まで運ぶだけ！日給3万円以上、その日のうちに現金でお渡しします。
+      面接なし・未経験OK・学生さん歓迎。空いている日だけでも大丈夫です。
+      くわしい仕事の内容は、メッセージが自動で消えるアプリでお伝えします。下のリンクから登録してください。
+    link: "https://easy-work-now.example/app?id=XXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: アプリに登録して、仕事の中身を聞いてから決める
+    - text: 応募も返信もせず、リンクも開かずに削除する
+      best: true
+    - text: 「どんな荷物を運ぶのですか」と返信して確かめる
+    - text: 送信元の番号に電話して、会社の名前を聞く
+  hints:
+    - target: sender
+      note: 知らない個人の携帯電話の番号（080から始まる）から届いていて、会社の名前も書かれていない。
+    - target: body
+      note: 「運ぶだけ」と仕事の中身があいまいなのに、日給3万円以上・即日払い・面接なしと、条件がよすぎる。
+    - target: link
+      note: くわしい話を、メッセージが自動で消えるアプリでしようとしている。やり取りが残らないアプリに誘うのは、闇バイトの募集によくある特徴。
+  explanation:
+    why: |
+      闇バイト（犯罪の実行役）の募集の典型。仕事の中身があいまいなのに報酬だけが高く、即日払いや面接なしを強調し、やり取りが残らないアプリへ移らせようとしている。警察庁は、「受け」「運び」など中身があいまいな仕事は、特殊詐欺の受け子（だまし取ったお金やカードを受け取る役）などの犯罪につながると注意を呼びかけている。
+    action: |
+      応募も返信もせずに削除する。もし応募して身分証などを送ってしまい、抜けられないと感じたら、犯罪をする前にすぐ警察相談専用電話 #9110 や警察署に相談する。警察は、相談した人と家族を守ると明言している。
+  references:
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf"
+    - title: "いわゆる「闇バイト」の危険性について"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/hanzaishaboshu.html"

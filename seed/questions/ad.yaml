@@ -152,8 +152,6 @@
     action: |
       広告は押さずに閉じる。セキュリティのアプリが必要なときは、広告からではなく、公式のアプリストアで内容を確かめてから入れる。もし入れてしまったら、定期的に料金がかかる契約がないか確かめる。
   references:
-    - title: 安心相談窓口だより：スマートフォンの偽のセキュリティ警告から自動継続課金のアプリへ誘導する手口に再注意（題名は要約）
-      url: https://www.ipa.go.jp/security/anshin/attention/2022/mgdayori20221025.html
     - title: 広告からサポート詐欺へ遷移、手口分析レポート公開
       url: https://scan.netsecurity.ne.jp/article/2023/09/29/50009.html
 
@@ -403,7 +401,113 @@
     action: |
       応募するときは、広告からではなく、ユメミル動画のアプリを自分で開いて「お知らせ」から行う。当選のDMが届いても、そのリンクは開かず、アプリの「お知らせ」で確かめる。
   references:
-    - title: 姶良・伊佐地域振興局の公式Instagramのなりすましへの注意喚起（題名未確認）
-      url: https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html
     - title: 「当選通知でだます」偽UQアカウント出現、公式が注意喚起 “UQガチャムク”は無断使用か
       url: https://www.itmedia.co.jp/mobile/articles/2509/19/news060.html
+
+- id: Q-AD-009
+  title: 売り切れた限定グッズが80%オフの広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: easy
+  situation: S12
+  targets: [学生]
+  tactics: [T15, T05, T07]
+  examples: [EX-003, EX-001]
+  context: |
+    SNSを見ていたら、次の広告が出てきた。広告のグッズは、推しのグループの公式ショップで発売日に売り切れた限定品だ。
+  message:
+    sender_name: 推しグッズ専門店 キラメキマート
+    sender:
+    subject:
+    body:
+    link: "https://kirameki-mart-sale.example/limited"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 【本日23:59まで】完売した限定アクリルスタンドが80%オフ！
+      - kind: text
+        text: 公式ショップで売り切れた限定グッズを、特別価格でご用意しました。通常4,400円が、今だけ880円。在庫わずか、なくなり次第終了です！
+      - kind: text
+        text: ※お支払いは銀行振込のみです。振込先は、ご注文のあとにお知らせします。
+      - kind: button
+        text: 今すぐ購入する
+  actions:
+    - text: 本日までなので、売り切れる前に広告からすぐ注文する
+    - text: 広告からは買わず、公式ショップで再販売があるか確かめる
+      best: true
+    - text: 安すぎて不安なので、まず1個だけ注文して届くか試す
+    - text: 広告のサイトで会員登録だけして、在庫を取り置いてもらう
+  hints:
+    - target: part:2
+      note: 公式で売り切れた限定品を「80%オフ」とうたい、「本日23:59まで」と急がせている。
+    - target: link
+      note: リンク先は聞いたことのない通販サイト（kirameki-mart-sale.example）で、公式ショップではない。
+    - target: part:4
+      note: 支払いが銀行振込だけで、振込先は注文のあとに知らせるという。偽の通販サイトによくある特徴。
+  explanation:
+    why: |
+      偽の通販サイトに誘う広告の典型。公式で売り切れた限定品が80%オフという安すぎる値段、「本日まで」「在庫わずか」と急がせる言葉、聞いたことのない通販サイトへのリンク、銀行振込だけの支払いがそろっている。こうしたサイトでは、代金を払っても商品が届かない、広告と違う物が届くといった相談が多い。
+    action: |
+      広告からは買わない。再販売などの情報は、公式ショップや公式SNSで確かめる。振り込んでしまったら、すぐに振込先の銀行に連絡し、消費者ホットライン188に相談する。
+  references:
+    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+      url: "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html"
+    - title: "（ネット通販の偽サイトに関する啓発資料。個人名義の口座を指定されたら詐欺と注意）"
+      url: "https://www3.pref.nara.jp/syouhiseikatsucenter/secure/2091/R6.8.kozika.pdf"
+
+- id: Q-AD-010
+  title: ふつうの求人に見せた闇バイトの広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: normal
+  situation: S07
+  targets: [学生]
+  tactics: [T14, T05]
+  examples: [EX-040]
+  context: |
+    空いた時間にできるアルバイトを探していたら、SNSに次の求人広告が出てきた。
+  message:
+    sender_name: ワカバ配送サポート
+    sender:
+    subject:
+    body:
+    link: "https://wakaba-haiso-job.example/entry"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 【学生歓迎】荷物を運ぶだけ！日給5万円・即日払い
+      - kind: text
+        text: 仕事内容：指定の場所で荷物を受け取り、届け先まで運ぶかんたんなお仕事です。面接なし・履歴書不要・服装自由。空いている日だけでOK！
+      - kind: text
+        text: 応募の連絡は、メッセージが自動で消えるアプリで受け付けています。IDを追加して「バイト希望」と送ってください。
+      - kind: button
+        text: 応募する
+  actions:
+    - text: 日給が高いので、すぐにIDを追加して応募する
+    - text: 身分証は送らないと決めて、仕事の中身だけ聞いてみる
+    - text: リンク先で会社の紹介文を読み、よさそうなら応募する
+    - text: 応募せず、この広告は「報告」や「非表示」にする
+      best: true
+  hints:
+    - target: part:2
+      note: 「荷物を運ぶだけ」で日給5万円・即日払いと、報酬が高すぎる。
+    - target: part:3
+      note: 仕事の中身があいまいで、面接も履歴書もいらないという。
+    - target: part:4
+      note: 連絡に、メッセージが自動で消えるアプリを使わせようとしている。やり取りが残らないアプリに誘うのは、闇バイトの募集によくある特徴。
+  explanation:
+    why: |
+      ふつうの求人広告に見せた、闇バイト（犯罪の実行役）の募集。仕事の中身があいまいなのに報酬が高く、即日払いや面接なしを強調し、やり取りが残らないアプリで連絡させようとしている。警察庁は、闇バイトの募集はふつうのアルバイト募集のように見えるが、報酬の額、支払いの早さ、仕事内容の書き方に特徴が出ると説明している。
+    action: |
+      応募しない。アルバイトは、仕事の内容・勤務先・時給がはっきりした求人から選ぶ。応募してしまい、抜けられない・脅されていると感じたら、犯罪をする前に警察相談専用電話 #9110 や警察署に相談する。
+  references:
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf"
+    - title: "闇バイト対策"
+      url: "https://www.gov-online.go.jp/article/202506/tv-5926.html"

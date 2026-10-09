@@ -23,10 +23,10 @@
     action: |
       コトリ銀行は、メールやSMSのリンクからログインさせない。ログインは、公式アプリかブックマークした公式サイトから行う。
   references:
-    - title: インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）
-      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
     - title: フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ
       url: https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html
+    - title: 不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ
+      url: https://paymentnavi.com/?p=144363
 
 - id: Q-UR-002
   title: 公式の名前に「-shop」を足したURL
@@ -73,8 +73,6 @@
     action: |
       見た目がそっくりでも信じない。パスワードの再設定などは、SMSのリンクではなく、ピヨモバイルの公式アプリやブックマークした公式サイトから行う。
   references:
-    - title: （ページ名未確認）消費生活の注意・警戒情報（携帯電話会社名のSMSからキャリア決済を不正利用された事例）
-      url: https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html
     - title: 2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加
       url: https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html
 
@@ -99,10 +97,8 @@
     action: |
       SMSのリンクは開かない。荷物のことは、郵便受けの紙の不在票や、ハシレ運輸の公式アプリで確かめる。
   references:
-    - title: （ページ名未確認）消費生活のよくある質問（不在通知のSMS・メール）
-      url: https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html
-    - title: 安心相談窓口だより：宅配業者をかたる偽SMSで、スマホの種類によりフィッシングサイトへ誘導する手口（題名は要約）
-      url: https://www.ipa.go.jp/security/anshin/attention/2018/mgdayori20181129.html
+    - title: トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に
+      url: https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html
 
 - id: Q-UR-005
   title: 「@」の前に公式ドメインを書いたURL
@@ -149,10 +145,10 @@
     action: |
       カードの会員サイトは、これからもブックマークや公式アプリから開く。メールやSMSのリンクから開いたページでは、見た目が同じでもIDやパスワードを入力しない。
   references:
-    - title: インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）
-      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
     - title: 10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ
       url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
+    - title: 不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ
+      url: https://paymentnavi.com/?p=144363
 
 - id: Q-UR-007
   title: 長くて複雑だが、税務署の公式ドメインのURL
@@ -175,8 +171,6 @@
     action: |
       URLの長さや複雑さで判断せず、ホスト名の右側を確かめる。税金のお知らせは自分で開いた公式サイトで確かめ、SMSやメールのリンクから支払いや入力をしない。
   references:
-    - title: （ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起
-      url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
     - title: メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起
       url: https://internet.watch.impress.co.jp/docs/news/2112792.html
 
