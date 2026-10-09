@@ -134,7 +134,7 @@
 - 統計（手口別・画面の種類別・年代別のだまされた率、問題ごとの難しさ）
 - 問題の作成・確認・公開の流れ（編集者向け）
 - 相談先の案内、利用規約、プライバシーポリシー
-- 初期の問題40問
+- 初期の問題40問（[問題集](question-bank/README.md)の問題案から選んで仕上げる）
 
 ### 3.2 追加
 
@@ -264,7 +264,10 @@
 
 | 項目 | 必須 | 内容 |
 | --- | --- | --- |
+| 管理用の名前 | ○ | 一覧で見分けるための短い名前 |
 | 画面の種類 | ○ | メール・SMS・SNS・Webサイト・広告・会話 |
+| シチュエーション | ○ | 場面の分類（S01〜S18。[問題集](question-bank/README.md)を参照） |
+| 状況の説明 | | 問題の前提（例：自分でログインした直後、荷物を待っている）。問題の前に表示する |
 | 架空ブランド | | どのブランドをかたるか（またはどのブランドからの本物か） |
 | 正解 | ○ | 本物 または 詐欺 |
 | 送信元の表示名・アドレス（番号） | | メール・SMS・SNSで使う |
@@ -592,6 +595,7 @@ erDiagram
     USER ||--o| PROFILE : "持つ"
     USER ||--o{ CASE : "作る・確認する"
     BRAND |o--o{ CASE : "かたる・発信する"
+    SITUATION ||--o{ CASE : "場面"
     CASE ||--|{ CASE_ACTION : "行動の選択肢"
     CASE ||--|{ HINT : "見るべき場所"
     CASE ||--|{ CASE_REFERENCE : "参考資料"
@@ -624,7 +628,8 @@ ng_words（禁止語）と site_settings（展示会モードの設定）は、�
 | users（Django標準） | id, username, password, is_staff, date_joined | username はユニーク。password はソルト付きハッシュ。メールアドレスは使わない |
 | profiles | id, user_id, nickname, age_group（NULL可）, large_text | user_id はユニーク（1対1）。nickname は NOT NULL |
 | brands | id, name, category, official_domain | name はユニーク。すべて架空 |
-| cases | id, channel, brand_id（NULL可）, is_scam, sender_name, sender_address, subject, body, link_text, link_url, page_url, parts（JSON：画面の部品・会話）, explanation, initial_level, status, author_id, reviewer_id, published_at, created_at, updated_at | channel・is_scam・body・status は NOT NULL。reviewer_id は author_id と別の人（アプリ側で検証） |
+| situations | id, code（S01〜）, name | code はユニーク |
+| cases | id, title, channel, situation_id, context, brand_id（NULL可）, is_scam, sender_name, sender_address, subject, body, link_text, link_url, page_url, parts（JSON：画面の部品・会話）, explanation, initial_level, status, author_id, reviewer_id, published_at, created_at, updated_at | title・channel・situation_id・is_scam・body・status は NOT NULL。reviewer_id は author_id と別の人（アプリ側で検証） |
 | case_actions | id, case_id, label, is_best, sort_order | (case_id, sort_order) はユニーク。is_best は1問に1つ（アプリ側で検証） |
 | hints | id, case_id, target（送信元・件名・本文・リンク・アドレスバー・部品）, note, sort_order | (case_id, sort_order) はユニーク |
 | case_references | id, case_id, title, url | 公的機関などの参考資料 |
@@ -754,7 +759,7 @@ URLの読み方トレーニング（F-14）と、解説の説明文に使う。*
 | 制約 | 出典 |
 | --- | --- |
 | Windows上で動く Python のフレームワークを使う | 概要説明 |
-| DBを使い、テーブルを3つ以上作る（予定は20個） | 概要説明 |
+| DBを使い、テーブルを3つ以上作る（予定は21個） | 概要説明 |
 | Bootstrap か Tailwind CSS を使う | 概要説明 |
 | スマホに対応したレスポンシブデザインにする | 概要説明 |
 | 外部APIは使わない | チェックリスト（使うなら1つ）、展示会のオフライン対策 |

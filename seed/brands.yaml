@@ -1,0 +1,163 @@
+# 架空ブランドの一覧（問題の中でだけ使う）
+#
+# - すべて架空。2026年10月9日に、同じ名前の実在サービスが見つからないことをWeb検索で確かめた。
+#   公開前にチームで最終確認する（要件定義書 18章 未決事項2）。
+# - ドメインは例示用に予約された .example を使う（RFC 2606）。実在のドメインは使わない。
+# - official_contact は「この架空の世界での正規の連絡方法」。本物の問題と詐欺の問題で食い違わないように使う。
+#   実在の多くの会社が公表している方針をもとにしている。
+
+- key: kotori
+  name: コトリ銀行
+  category: 銀行
+  official_domain: kotori-bank.example
+  official_contact: 公式アプリのお知らせと、登録したメールアドレスへのメール（info@kotori-bank.example）。メールやSMSのリンクからログインさせない。ID・パスワード・暗証番号をメール・SMS・電話で聞かない。
+
+- key: hitsuji
+  name: ヒツジネット銀行
+  category: ネット銀行
+  official_domain: hitsuji-netbank.example
+  official_contact: 公式アプリの通知だけで連絡する。振込や出金の確認もアプリの中で行う。
+
+- key: hoshizora
+  name: ホシゾラカード
+  category: クレジットカード
+  official_domain: hoshizora-card.example
+  official_contact: 利用の通知は公式アプリ。不正利用の疑いがあるときは、カード裏面の番号から電話するよう案内する。カード番号・セキュリティコードをメールやSMSで聞かない。
+
+- key: pochitto
+  name: ポチッと通販
+  category: 通販サイト
+  official_domain: pochitto.example
+  official_contact: 注文・発送のメールは order@pochitto.example から届く。大事なお知らせはアカウントの「メッセージセンター」にも必ず表示される。
+
+- key: hashire
+  name: ハシレ運輸
+  category: 宅配業者
+  official_domain: hashire-unyu.example
+  official_contact: 不在のときは紙の不在票を入れる。事前に登録した人には公式アプリで通知する。SMSでリンク付きの不在通知は送らない。
+
+- key: machikado
+  name: マチカド郵便
+  category: 郵便
+  official_domain: machikado-post.example
+  official_contact: 不在のときは紙の不在票。再配達は不在票に書かれた番号か公式サイトから申し込む。
+
+- key: piyo
+  name: ピヨモバイル
+  category: 携帯電話会社
+  official_domain: piyo-mobile.example
+  official_contact: 公式SMSは、各社共通の番号（0005から始まる番号）から送る。料金の確認は公式アプリの会員ページで行う。
+
+- key: donguri
+  name: ドングリ証券
+  category: 証券会社
+  official_domain: donguri-sec.example
+  official_contact: お知らせは会員ページと公式アプリに表示する。メールのリンクからログインさせない。
+
+- key: kurukuru
+  name: クルクルペイ
+  category: QRコード決済
+  official_domain: kurukuru-pay.example
+  official_contact: お知らせはアプリの中だけで表示する。
+
+- key: pokapoka
+  name: ポカポカでんき
+  category: 電力会社
+  official_domain: pokapoka-denki.example
+  official_contact: 料金のお知らせは公式アプリと郵送。未払いのときも、SMSのリンクから支払わせることはない。
+
+- key: yumemiru
+  name: ユメミル動画
+  category: 動画配信サービス
+  official_domain: yumemiru.example
+  official_contact: 支払い方法の変更はアプリかアカウントページから。メールは no-reply@yumemiru.example から届く。
+
+- key: tomotomo
+  name: トモトモ
+  category: メッセージアプリ
+  official_domain: tomotomo.example
+  official_contact: 公式アカウントには認証マークが付く。ログインのための認証番号を人に聞くことはない。
+
+- key: hanashiba
+  name: ハナシバ
+  category: SNS
+  official_domain: hanashiba.example
+  official_contact: 企業や有名人の公式アカウントには認証バッジが付く。
+
+- key: deaeru
+  name: デアエル
+  category: マッチングアプリ
+  official_domain: deaeru.example
+  official_contact: やり取りはアプリの中で行うよう案内している。
+
+- key: ticketnomori
+  name: チケットノモリ
+  category: チケット販売
+  official_domain: ticket-nomori.example
+  official_contact: 行けなくなったチケットは公式のリセール（再販売）でだけ受け付ける。
+
+- key: furimarche
+  name: フリマルシェ
+  category: フリマアプリ
+  official_domain: furimarche.example
+  official_contact: 取引と支払いはアプリの中で完結する。アプリの外での支払いは受け付けない。
+
+- key: pikopiko
+  name: ピコピコストア
+  category: ゲーム・アプリのストア
+  official_domain: pikopiko-store.example
+  official_contact: ゲーム内通貨はストアとゲームの中でだけ販売する。無料で配るサイトはない。
+
+- key: tomareru
+  name: トマレル
+  category: 宿泊予約サイト
+  official_domain: tomareru.example
+  official_contact: 予約の確認はアプリと登録メール。支払い情報の再入力を、宿からのメッセージで求めることはない。
+
+- key: jobnohako
+  name: ジョブノハコ
+  category: 就活サイト
+  official_domain: jobnohako.example
+  official_contact: 企業からの連絡はサイトの中のメッセージで届く。登録料や研修費を学生に求めることはない。
+
+- key: hatarakumo
+  name: ハタラクモ
+  category: 求人・アルバイト
+  official_domain: hatarakumo.example
+  official_contact: 応募と連絡はサイトの中で行う。身分証の画像をチャットで送らせることはない。
+
+- key: mihariban
+  name: ミハリ番セキュリティ
+  category: セキュリティソフト
+  official_domain: mihariban-sec.example
+  official_contact: 警告はインストールしたソフトの画面に出る。警告画面にサポートの電話番号を表示しない。
+
+- key: suisui
+  name: スイスイ高速
+  category: 高速道路・ETC
+  official_domain: suisui-kosoku.example
+  official_contact: 利用明細は会員ページで確認する。ETCの登録の期限切れをSMSで知らせることはない。
+
+- key: furusatokago
+  name: ふるさとカゴ
+  category: ふるさと納税サイト
+  official_domain: furusato-kago.example
+  official_contact: 寄付の支払いはサイトの決済画面から。個人名義の口座への振込は求めない。
+
+- key: soyokaze_city
+  name: そよかぜ市役所
+  category: 市役所（架空の市）
+  official_domain: city.soyokaze.example
+  official_contact: 大事な手続きは郵送で知らせる。電話で還付金の手続きをATMでさせることはない。
+
+- key: soyokaze_police
+  name: そよかぜ警察署
+  category: 警察（架空の市）
+  official_domain: police.soyokaze.example
+  official_contact: 電話でお金を求めない。SNSやビデオ通話で取り調べをしたり、逮捕状を見せたりしない。
+
+- key: soyokaze_tax
+  name: そよかぜ税務署
+  category: 税務署（架空の市）
+  official_domain: tax.soyokaze.example
+  official_contact: 税金の未納をSMSで知らせて、リンクから支払わせることはない。
