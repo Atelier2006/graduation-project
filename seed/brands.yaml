@@ -28,7 +28,7 @@
   name: ポチッと通販
   category: 通販サイト
   official_domain: pochitto.example
-  official_contact: 注文・発送のメールは order@pochitto.example から届く。大事なお知らせはアカウントの「メッセージセンター」にも必ず表示される。
+  official_contact: 注文・発送のメールは order@pochitto.example、キャンペーンのお知らせは campaign@pochitto.example から届く。大事なお知らせはアカウントの「メッセージセンター」にも必ず表示される。
 
 - key: hashire
   name: ハシレ運輸
@@ -58,7 +58,7 @@
   name: クルクルペイ
   category: QRコード決済
   official_domain: kurukuru-pay.example
-  official_contact: お知らせはアプリの中だけで表示する。
+  official_contact: お知らせはアプリの中だけで表示する。お店への支払いは「支払う」、個人どうしのお金のやり取りは「送る」を使う。
 
 - key: pokapoka
   name: ポカポカでんき
@@ -82,7 +82,7 @@
   name: ハナシバ
   category: SNS
   official_domain: hanashiba.example
-  official_contact: 企業や有名人の公式アカウントには認証バッジが付く。
+  official_contact: 企業・公的機関・有名人の公式アカウントには認証バッジが付く。
 
 - key: deaeru
   name: デアエル
@@ -154,7 +154,7 @@
   name: そよかぜ警察署
   category: 警察（架空の市）
   official_domain: police.soyokaze.example
-  official_contact: 電話でお金を求めない。SNSやビデオ通話で取り調べをしたり、逮捕状を見せたりしない。
+  official_contact: 電話でお金を求めない。SNSやビデオ通話で取り調べをしたり、逮捕状を見せたりしない。注意の呼びかけは公式サイトと公式SNSアカウント（認証バッジあり）で行う。
 
 - key: soyokaze_tax
   name: そよかぜ税務署
