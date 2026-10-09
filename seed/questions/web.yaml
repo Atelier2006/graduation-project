@@ -1,0 +1,801 @@
+# Webサイト・偽の警告画面の判定問題（Q-WB-001〜Q-WB-012）
+# もとにした事例は docs/question-bank/examples.yaml、ブランドの正規の連絡方法は seed/brands.yaml を参照。
+
+- id: Q-WB-001
+  title: セキュリティソフトをかたる偽のウイルス警告画面
+  type: judge
+  channel: web
+  is_scam: true
+  level: easy
+  situation: S11
+  targets: [高齢者, 全世代]
+  brand: mihariban
+  tactics: [T01, T04, T08, T10]
+  examples: [EX-064]
+  context: |
+    パソコンにはミハリ番セキュリティを入れている。ニュースサイトの記事を読んでいたら、突然、画面いっぱいに次の表示が出て、警告音と「ウイルスに感染しました」という音声が流れ始めた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://pc-anzen-scan.example/alert/"
+    parts:
+      - kind: warning
+        text: ミハリ番セキュリティ 警告：お使いのパソコンはウイルスに感染しています
+      - kind: text
+        text: 個人情報やカード情報が盗まれるおそれがあります。この画面を閉じたり、パソコンの電源を切ったりしないでください。
+      - kind: text
+        text: 残り時間 04:59　時間内にサポートへご連絡ください
+      - kind: phone
+        text: "050-XXXX-XXXX"
+      - kind: button
+        text: 今すぐサポートに電話する
+  actions:
+    - text: 画面の番号に電話して、ウイルスを消してもらう
+    - text: 画面を閉じる。閉じられなければブラウザを終了する
+      best: true
+    - text: 画面のボタンを押して、案内どおりにソフトを入れる
+    - text: 電源を切らないよう、画面をこのまま開いておく
+  hints:
+    - target: part:4
+      note: 警告画面にサポートの電話番号が出ている。ミハリ番セキュリティは、警告画面に電話番号を出さない。
+    - target: part:3
+      note: 残り時間を出して、警告音とあわせて慌てさせている。
+    - target: page_url
+      note: 警告はブラウザで開いたWebページ（pc-anzen-scan.example）に出ていて、ミハリ番のソフトの画面ではない。
+  explanation:
+    why: |
+      偽のセキュリティ警告で電話をかけさせるサポート詐欺。ミハリ番セキュリティの警告はインストールしたソフトの画面に出て、警告画面にサポートの電話番号は出さない。この警告はWebページの表示なので、ブラウザを閉じれば消える。警告音や残り時間の表示は、慌てさせるための演出。
+    action: |
+      表示された番号には電話しない。画面を閉じ、閉じられなければブラウザを終了し、それでも消えなければパソコンを再起動する（IPAの案内では、Escキーを長押しすると全画面表示を解除できる）。電話してしまったときは、IPAの情報セキュリティ安心相談窓口や消費者ホットライン188に相談する。
+  references:
+    - title: "偽セキュリティ警告（サポート詐欺）対策特集ページ"
+      url: https://www.ipa.go.jp/security/anshin/measures/fakealert.html
+    - title: "偽セキュリティ警告画面の閉じ方体験サイト（題名は要約）"
+      url: https://www.ipa.go.jp/security/anshin/measures/fa-experience.html
+
+- id: Q-WB-002
+  title: 「ロボットではありません」を装う偽の確認画面
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S11
+  targets: [全世代]
+  brand:
+  tactics: [T01, T10]
+  examples: [EX-067]
+  context: |
+    検索結果から、料理のレシピのサイトを開いた。ページが表示される前に「ロボットではありません」の確認が出たので、チェックを入れた。すると、続けて次の画面が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://recipe-kondate.example/recipes/1024"
+    parts:
+      - kind: text
+        text: ［チェック済み］私はロボットではありません
+      - kind: heading
+        text: 追加の確認が必要です
+      - kind: text
+        text: 確認を完了するには、次の手順を行ってください。1. キーボードで指定のキーを押す　2. 自動でコピーされた文字を貼り付ける　3. 指定のキーを押して実行する
+      - kind: button
+        text: 確認しました
+  actions:
+    - text: 手順どおりにキーボードを操作して、確認を終わらせる
+    - text: 何が貼り付けられるのか、試しに貼り付けだけしてみる
+    - text: 手順の操作はせずに、このページを閉じる
+      best: true
+    - text: 「確認しました」を押して、次の画面を見てから決める
+  hints:
+    - target: part:3
+      note: キーボードで文字を貼り付けて実行させようとしている。本物の確認画面は、チェックや画像選びだけで終わり、パソコンで何かを実行させない。
+    - target: part:1
+      note: チェックを入れるところまでは本物の確認画面と同じ見た目なので、見た目だけでは区別できない。
+  explanation:
+    why: |
+      「ロボットではありません」の確認画面（CAPTCHA＝人間が操作しているかを確かめる仕組み）を装った偽の画面。本物の確認画面は、チェックを入れたり画像を選んだりするだけで終わり、キーボードで何かを貼り付けて実行させたり、ファイルをダウンロードさせたりしない。指示どおりにすると、パソコンに不正なプログラムが入り、パスワードなどを盗まれるおそれがある。
+    action: |
+      手順には従わず、ページを閉じる。もし実行してしまったら、パソコンをネットから切り離し、別の端末からパスワードを変えて、IPAの情報セキュリティ安心相談窓口などに相談する。
+  references:
+    - title: "偽の『CAPTCHA』に注意"
+      url: https://www.police.pref.miyagi.jp/cyber/pdf/r7-2-5.pdf
+    - title: "警視庁、偽のCAPTCHA画面でマルウェアを入れさせる手口に注意喚起（題名は要約）"
+      url: https://internet.watch.impress.co.jp/docs/news/2046298.html
+
+- id: Q-WB-003
+  title: 米やバッグが極端に安い偽の通販サイト
+  type: judge
+  channel: web
+  is_scam: true
+  level: easy
+  situation: S01
+  targets: [全世代]
+  brand:
+  tactics: [T15, T05, T07]
+  examples: [EX-001]
+  context: |
+    近所のお店でお米が品薄になっている。ネットで検索すると、次の通販サイトが見つかった。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://komeya-tokka-store.example/item/88"
+    parts:
+      - kind: heading
+        text: "【在庫限り】新米10kg 70%OFF!! 激安セール中"
+      - kind: text
+        text: 通常価格 9,800円 → 特別価格 2,940円（税込）。人気ブランドのバッグも全品70%オフ。
+      - kind: text
+        text: 本日中のご注文で送料無料に成ります。在庫わずかですので、お早めに購入を下さいませ。
+      - kind: text
+        text: お支払い方法：銀行振込のみ　振込先：〇〇銀行 本店 普通 3104287　口座名義：ヤマダ ハナコ
+      - kind: text
+        text: 会社情報：記載なし　お問い合わせ：komeya-tokka@quickmail.example
+      - kind: button
+        text: カートに入れる
+  actions:
+    - text: 安いうちに注文して、指定の口座に振り込む
+    - text: 先に半額だけ振り込み、届いたら残りを払うと伝える
+    - text: 注文の前に、問い合わせ先のメールで在庫を確かめる
+    - text: 注文しない。会社情報や支払い先を確かめられる店で買う
+      best: true
+  hints:
+    - target: part:1
+      note: 品薄のお米が70%オフと、不自然なほど安い。
+    - target: part:4
+      note: 支払いが銀行振込だけで、振込先が個人名義の口座。
+    - target: part:5
+      note: 会社の住所や電話番号がなく、問い合わせ先が誰でも作れるメールのアドレスだけ。
+  explanation:
+    why: |
+      偽の通販サイトの典型。手に入りにくい商品が不自然なほど安く、「成ります」「購入を下さいませ」など日本語もおかしい。支払いは銀行振込だけで振込先が個人名義、会社の住所や電話番号も書かれていない。お金を振り込んでも商品が届かず、連絡もつかなくなるおそれがある。
+    action: |
+      このサイトでは注文しない。買う前に、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を確かめる。振り込んでしまったら、すぐに振込先の銀行と警察に連絡し、消費者ホットライン188にも相談する。
+  references:
+    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
+
+- id: Q-WB-004
+  title: メールのリンクから開いた銀行そっくりのログイン画面
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S03
+  targets: [全世代]
+  brand: kotori
+  tactics: [T01, T02, T06]
+  examples: [EX-018, EX-021]
+  context: |
+    コトリ銀行から「お取引を一時的に制限しました。本人確認をお願いします」というメールが届いた。メールのリンクを開くと、いつもと同じ見た目のログイン画面が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://kotori-bank-login.example/auth"
+    parts:
+      - kind: heading
+        text: コトリ銀行 インターネットバンキング
+      - kind: text
+        text: お取引の制限を解除するため、ご本人確認をお願いいたします。
+      - kind: form
+        fields: [ログインID, ログインパスワード, スマホに届いた認証番号（6けた）]
+      - kind: button
+        text: ログインして制限を解除する
+  actions:
+    - text: 入力せずに閉じ、公式アプリから銀行を開いて確かめる
+      best: true
+    - text: いつもと同じ画面なので、IDとパスワード、認証番号を入れる
+    - text: アドレスバーに銀行の名前が入っているのを確かめてから入力する
+    - text: メールに返信して、取引が制限された理由を聞く
+  hints:
+    - target: page_url
+      note: 本当の持ち主は kotori-bank-login.example で、公式の kotori-bank.example ではない。銀行の名前が入っていても、公式とは限らない。
+    - target: part:2
+      note: メールのリンクから開いた画面で、制限の解除のためにログインさせようとしている。コトリ銀行は、メールやSMSのリンクからログインさせない。
+    - target: part:3
+      note: 認証番号まで入力させている。入れた情報は、その場で本物のサイトで悪用されるおそれがある。
+  explanation:
+    why: |
+      銀行をかたる偽のログイン画面（リアルタイムフィッシング＝入力した情報をその場で悪用する手口）。見た目は本物と区別しにくいが、メールのリンクから開いたログイン画面である時点で疑う。コトリ銀行はメールやSMSのリンクからログインさせない。アドレスバーの本当の持ち主も公式と違う。
+    action: |
+      何も入力せずに画面を閉じ、公式アプリかブックマークからログインしてお知らせを確かめる。入力してしまったら、すぐに銀行に連絡してパスワードを変え、警察にも相談する。
+  references:
+    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
+    - title: "フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ"
+      url: https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html
+
+- id: Q-WB-005
+  title: 寄付額を値引きするふるさと納税の偽サイト
+  type: judge
+  channel: web
+  is_scam: true
+  level: normal
+  situation: S08
+  targets: [社会人]
+  brand: furusatokago
+  tactics: [T01, T15, T05, T07]
+  examples: [EX-051]
+  context: |
+    ふるさと納税の返礼品を探していて、検索結果に出た「ふるさとカゴ」のページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://furusato-kago-sale.example/item/2041"
+    parts:
+      - kind: heading
+        text: ふるさとカゴ　今だけ寄付額30%オフ！
+      - kind: text
+        text: 【返礼品】そよかぜ市産 黒毛和牛 切り落とし 1kg　寄付額 15,000円 → 10,500円
+      - kind: text
+        text: お支払いは銀行振込のみです。振込先：〇〇銀行 本店 普通 5208163　口座名義：スズキ マコト
+      - kind: form
+        fields: [氏名, 住所, 電話番号]
+      - kind: button
+        text: 寄付を申し込む
+  actions:
+    - text: 安いうちに申し込んで、書かれた口座に今日中に振り込む
+    - text: 返礼品が届いてから振り込みたいと、メールで頼んでみる
+    - text: 氏名と住所は入れずに、振込だけ先に済ませておく
+    - text: このページは使わず、公式アプリから申し込む
+      best: true
+  hints:
+    - target: part:1
+      note: 寄付額が「30%オフ」になっている。自治体は返礼品を送っても、寄付額は値引きしない。
+    - target: part:3
+      note: 振込先が個人名義の口座。ふるさとカゴは、個人名義の口座への振込を求めない。
+    - target: page_url
+      note: 本当の持ち主は furusato-kago-sale.example で、公式の furusato-kago.example ではない。
+  explanation:
+    why: |
+      ふるさと納税サイトに似せた偽サイト。自治体は寄付額を値引きしないので、「寄付額30%オフ」は不自然。ふるさとカゴの支払いはサイトの決済画面から行い、個人名義の口座への振込は求めない。アドレスバーの本当の持ち主も公式と違う。
+    action: |
+      このページでは申し込まない。ふるさとカゴの公式アプリやブックマーク、寄付したい自治体の公式サイトの案内から申し込む。振り込んでしまったら、すぐに振込先の銀行と警察に連絡する。
+  references:
+    - title: "（ふるさと納税の偽サイトに関する注意喚起）"
+      url: https://www.pref.fukuoka.lg.jp/contents/furusatonouzei.html
+    - title: "（ふるさと納税サイトを偽装した詐欺サイトに関する注意喚起）"
+      url: https://www.city.kobe.lg.jp/a05822/20250919.html
+
+- id: Q-WB-006
+  title: 警察のサイトに似せたページで見せる「逮捕状」
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S09
+  targets: [全世代]
+  brand: soyokaze_police
+  tactics: [T13, T04, T06, T07]
+  examples: [EX-059, EX-058]
+  context: |
+    知らない番号から電話があり、そよかぜ警察署の警察官を名乗る人に「あなたの口座が犯罪に使われた疑いがある。逮捕状が出ているので、今から言うページで事件番号を入れて確かめて」と言われた。言われたとおりにページを開いて番号を入れると、次の画面が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://soyokaze-police-case.example/warrant"
+    parts:
+      - kind: heading
+        text: そよかぜ警察署　事件照会
+      - kind: warning
+        text: 逮捕状　被疑者：（あなたの氏名）　容疑：詐欺事件への関与の疑い
+      - kind: text
+        text: 在宅のまま捜査を受けるには、資産に犯罪のお金が含まれていないか調べるため、口座の情報を登録してください。捜査上の秘密のため、家族にも話さないでください。
+      - kind: form
+        fields: [銀行名, 支店名, 口座番号, 暗証番号]
+      - kind: button
+        text: 在宅捜査を申請する
+  actions:
+    - text: 逮捕されないよう、口座の情報を入力して申請する
+    - text: 電話の相手が教える番号にかけ直して、本物か確かめる
+    - text: "電話を切り、自分で調べた警察署か #9110 に相談する"
+      best: true
+    - text: 家族に心配をかけないよう、まずは一人で相手の指示どおりにする
+  hints:
+    - target: part:2
+      note: Webページで逮捕状を見せている。警察は、WebサイトやSNS、ビデオ通話で逮捕状を見せない。
+    - target: part:4
+      note: 口座番号や暗証番号を入力させようとしている。警察が捜査を理由に、口座の情報やお金を求めることはない。
+    - target: part:3
+      note: 「家族にも話さないで」と口止めしている。誰にも相談させないための言葉。
+  explanation:
+    why: |
+      警察官を名乗る「ニセ警察詐欺」で、警察のサイトに似せたページを使う手口。自分の名前が入った逮捕状が出ると信じ込みやすいが、警察がWebサイトで逮捕状を見せたり、口座の情報や暗証番号を入力させたりすることはない。「家族にも話さないで」という口止めも、よくある手口。
+    action: |
+      何も入力せずに電話を切る。相手が教えた番号ではなく、自分で調べた最寄りの警察署か、警察相談専用電話 #9110 に相談し、家族にも話す。
+  references:
+    - title: "ニセの警察ウェブサイトに誘導する手口"
+      url: https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/241218/07.html
+    - title: "ニセ警察詐欺に注意！ #ニセ警察詐欺"
+      url: https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/241218/02.html
+
+- id: Q-WB-007
+  title: 「ゲーム内コインが無料」とうたう偽のログインページ
+  type: judge
+  channel: web
+  is_scam: true
+  level: easy
+  situation: S13
+  targets: [学生]
+  brand: pikopiko
+  tactics: [T01, T05, T06]
+  examples: [EX-076]
+  context: |
+    ゲームのチャットで、知らない人から「ピコピコストアのコインがタダでもらえるサイトがあるよ」とリンクが送られてきた。開くと、次のページが出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "http://pikopiko-free-coin.example/get"
+    parts:
+      - kind: heading
+        text: ピコピコストア公式 コイン無料配布キャンペーン
+      - kind: text
+        text: 今だけ！ゲーム内コイン10,000枚を全員に無料でプレゼント。終了まであと 00:09:58
+      - kind: form
+        fields: [ピコピコストアのID, パスワード]
+      - kind: button
+        text: ログインして受け取る
+  actions:
+    - text: 何も入れずに閉じ、コインはゲームの中で確かめる
+      best: true
+    - text: 無料なので、IDとパスワードを入れてコインを受け取る
+    - text: 本物か試すため、わざと違うパスワードを入れてみる
+    - text: もらえたら得なので、友だちにもこのページを教える
+  hints:
+    - target: page_url
+      note: 本当の持ち主は pikopiko-free-coin.example で、公式の pikopiko-store.example ではない。
+    - target: part:2
+      note: ゲーム内コインを無料で配るとうたっている。ピコピコストアには、コインを無料で配るサイトはない。
+    - target: part:3
+      note: 公式ではないページで、IDとパスワードを入力させようとしている。
+  explanation:
+    why: |
+      ゲームのコインやポイントが「無料でもらえる」と誘う偽サイト。ピコピコストアはゲーム内通貨をストアとゲームの中でだけ販売し、無料で配るサイトはない。アドレスバーも公式と違い、IDとパスワードを入れるとアカウントを乗っ取られるおそれがある。
+    action: |
+      何も入力せずにページを閉じる。入力してしまったら、すぐに公式アプリからパスワードを変え、家族や先生にも相談する。
+  references:
+    - title: "「ポイント3倍」「当選」などで誘導、モバゲーを騙るフィッシングサイト(フィッシング対策協議会)"
+      url: https://scan.netsecurity.ne.jp/article/2010/06/14/25308.html
+    - title: "意外と知らない? ネットセキュリティの基礎知識（連載記事）"
+      url: https://internet.watch.impress.co.jp/docs/column/security_basic/1227871.html
+
+- id: Q-WB-008
+  title: 入れているセキュリティソフトの本物の通知画面
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S11
+  targets: [全世代]
+  brand: mihariban
+  tactics: []
+  examples: [EX-070]
+  context: |
+    パソコンに入れているミハリ番セキュリティのアプリから、画面の右下に「危険なファイルを見つけました」という通知が出た。通知を押すと、ミハリ番のアプリの画面が開いた（ブラウザのページではないので、アドレスバーはない）。
+  message:
+    sender_name: ミハリ番セキュリティ
+    sender:
+    subject:
+    body:
+    link:
+    page_url:
+    parts:
+      - kind: heading
+        text: ミハリ番セキュリティ　スキャン結果
+      - kind: text
+        text: 危険なファイルを1件見つけ、隔離しました。対応は必要ありません。
+      - kind: text
+        text: 見つかった場所：ダウンロードのフォルダ　処理：隔離済み　日時：10月15日 21:08
+      - kind: button
+        text: 詳細を見る
+      - kind: button
+        text: 閉じる
+  actions:
+    - text: 検索で「ミハリ番 サポート 電話」と調べ、出てきた番号に電話する
+    - text: 内容を確かめて閉じる。気になれば、アプリの履歴の画面を見る
+      best: true
+    - text: 偽物かもしれないので、ミハリ番のアプリをパソコンから消す
+  hints:
+    - target: part:1
+      note: ブラウザのページではなく、自分で入れたミハリ番のアプリの画面に出ている。ミハリ番の警告は、インストールしたソフトの画面に出る。
+    - target: part:2
+      note: 「隔離しました。対応は必要ありません」とあり、電話番号の表示も、支払いやソフトの追加の要求もない。
+  explanation:
+    why: |
+      ミハリ番セキュリティの本物の通知。ミハリ番の警告はインストールしたソフトの画面に出て、警告画面にサポートの電話番号は出さない。この画面は自分で入れたアプリの通知から開いたもので、電話や支払い、ソフトの追加も求めていない。偽の警告はブラウザのページに出て、電話番号を見せて電話させようとする。
+    action: |
+      内容を確かめて閉じればよい。気になるときは、ミハリ番のアプリを自分で開いて履歴を見る。問い合わせるときは、検索で出た番号ではなく、公式サイトに載っている窓口を使う。
+  references:
+    - title: "偽セキュリティ警告（サポート詐欺）対策特集ページ"
+      url: https://www.ipa.go.jp/security/anshin/measures/fakealert.html
+
+- id: Q-WB-009
+  title: ブックマークから開いた銀行の本物のログイン画面
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S03
+  targets: [全世代]
+  brand: kotori
+  tactics: []
+  examples: [EX-021]
+  context: |
+    残高を確かめるため、前に自分で登録したブックマークから、コトリ銀行のサイトを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://www.kotori-bank.example/login"
+    parts:
+      - kind: heading
+        text: コトリ銀行 インターネットバンキング ログイン
+      - kind: form
+        fields: [ログインID, ログインパスワード]
+      - kind: button
+        text: ログイン
+      - kind: text
+        text: ログインのあと、0005から始まる番号から、SMSで認証番号（6けた）が届きます。次の画面で入力してください。
+  actions:
+    - text: このままIDとパスワードを入れてログインする
+      best: true
+    - text: 念のため、検索で出てきたページからログインし直す
+    - text: SMSで届いた認証番号は、銀行に電話して読み上げる
+  hints:
+    - target: page_url
+      note: アドレスバーは公式ドメインの www.kotori-bank.example。自分で登録したブックマークから開いている。
+    - target: part:4
+      note: 認証番号は、0005から始まる番号からリンクのないSMSで届く。コトリ銀行の正規のやり方と合っている。
+  explanation:
+    why: |
+      コトリ銀行の本物のログイン画面。本物かどうかは画面の見た目ではなく、どこから開いたかと、アドレスバーの本当の持ち主（登録ドメイン）で判断する。この画面は自分で登録したブックマークから開いていて、アドレスバーも公式の kotori-bank.example。認証番号の受け取り方も、コトリ銀行の正規のやり方（0005から始まる番号からのSMS）と合っている。
+    action: |
+      このままログインしてよい。これからも、ログインはブックマークか公式アプリから行い、メールやSMSのリンクからは開かない。認証番号は、ログイン画面以外では誰にも教えない。
+  references:
+    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
+    - title: "10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ"
+      url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
+
+- id: Q-WB-010
+  title: 公式アプリから開いた通販サイトの商品ページ
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S01
+  targets: [全世代]
+  brand: pochitto
+  tactics: []
+  examples: [EX-008]
+  context: |
+    ポチッと通販の公式アプリで電気ケトルを探し、商品ページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://www.pochitto.example/item/K-20418"
+    parts:
+      - kind: heading
+        text: 電気ケトル 1.0L 温度調節つき（ホワイト）
+      - kind: text
+        text: 価格：4,280円（税込）　送料：無料　お届け予定：10月17日〜10月18日
+      - kind: text
+        text: 販売・発送：ポチッと通販　会社情報：そよかぜ市中央1-2-3、電話 03-XXXX-XXXX　返品：商品が届いてから30日以内（未使用のもの）
+      - kind: text
+        text: お支払い方法：クレジットカード、代金引換、コンビニ払い
+      - kind: button
+        text: カートに入れる
+  actions:
+    - text: もっと安い店がないか、知らない通販サイトも探してそこで買う
+    - text: 販売者や返品のルールも確かめられたので、このまま注文する
+      best: true
+    - text: 販売者にメールして、銀行振込で値引きしてもらえないか頼む
+  hints:
+    - target: page_url
+      note: アドレスバーの本当の持ち主は、公式の pochitto.example。公式アプリから開いている。
+    - target: part:3
+      note: 販売者の住所と電話番号、返品のルールが書かれている。
+    - target: part:4
+      note: 支払い方法がカードや代金引換などで、個人名義の口座への振込ではない。
+  explanation:
+    why: |
+      ポチッと通販の本物の商品ページ。公式アプリから開いていて、アドレスバーも公式の pochitto.example。値段も普通で、販売者の住所や電話番号、返品のルールが書かれ、支払いもカードや代金引換など。偽の通販サイトの特徴（極端な値引き、会社情報がない、個人名義の口座への振込だけ）が見当たらない。
+    action: |
+      このまま注文してよい。知らない通販サイトで買うときは、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を先に確かめる。
+  references:
+    - title: "（偽ショッピングサイト対策のページ）"
+      url: https://www.npa.go.jp/bureau/cyber/countermeasures/fake-shop.html
+    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
+
+- id: Q-WB-011
+  title: 市の公式サイトの災害義援金の受付ページ
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S18
+  targets: [全世代]
+  brand: soyokaze_city
+  tactics: []
+  examples: [EX-088]
+  context: |
+    そよかぜ市で大雨の被害が出た。被災した人のために寄付をしたいと思い、ブックマークしている市の公式サイトを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://www.city.soyokaze.example/bousai/gienkin.html"
+    parts:
+      - kind: heading
+        text: 10月の大雨による災害義援金の受付について
+      - kind: text
+        text: 被災された方を支援するため、義援金を受け付けます。お寄せいただいた義援金は、全額を被災された方にお届けします。
+      - kind: text
+        text: 受付期間：2026年10月19日（月）〜12月25日（金）
+      - kind: text
+        text: 振込先：そよかぜ信用金庫 本店 普通預金 0123456　口座名義：そよかぜ市災害義援金
+      - kind: text
+        text: ※市の職員が、電話や訪問、メールで義援金の振込をお願いすることはありません。お問い合わせ：そよかぜ市役所 福祉課（03-XXXX-XXXX）
+  actions:
+    - text: このページに書かれた市の名義の口座に、受付期間内に振り込む
+      best: true
+    - text: SNSで見た「個人で集めて届けます」という投稿の口座に振り込む
+    - text: 市役所を名乗る人から電話が来るのを待ち、その人に直接渡す
+  hints:
+    - target: page_url
+      note: アドレスバーは市の公式ドメイン（city.soyokaze.example）で、ブックマークから開いている。
+    - target: part:4
+      note: 受付口座の名義が「そよかぜ市災害義援金」で、個人名義ではない。
+    - target: part:5
+      note: 問い合わせ先が市役所の窓口で、電話や訪問で振込を頼むことはないと書かれている。
+  explanation:
+    why: |
+      そよかぜ市の公式サイトにある本物の義援金のページ。アドレスバーは市の公式ドメインで、受付口座の名義も市の義援金の名義になっていて、個人名義ではない。受付期間や問い合わせ先も書かれている。偽の呼びかけは、SNSや電話、訪問で、個人名義の口座に振り込ませようとする。
+    action: |
+      寄付するときは、このように公式サイトで受付窓口と振込先を確かめてから振り込む。電話や訪問、SNSで寄付を求められたら応じず、市役所に自分で確かめる。
+  references:
+    - title: "令和6年能登半島地震 大阪府義援金の募集について"
+      url: https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html
+    - title: "（災害に便乗した義援金詐欺などへの注意）"
+      url: https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html
+
+- id: Q-WB-012
+  title: 証券会社の公式アプリから開いたキャンペーンページ
+  type: judge
+  channel: web
+  is_scam: false
+  level: hard
+  situation: S04
+  targets: [社会人]
+  brand: donguri
+  tactics: []
+  examples: [EX-029, EX-030]
+  context: |
+    ドングリ証券に口座を持っている。公式アプリの「お知らせ」に出ていたキャンペーンを押すと、次のページが開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://www.donguri-sec.example/campaign/tsumitate"
+    parts:
+      - kind: heading
+        text: つみたてデビュー応援キャンペーン
+      - kind: text
+        text: 期間中に、つみたて投資を新しく始めた方に、最大5,000円分のドングリポイントをプレゼント。期間：2026年10月1日〜12月31日
+      - kind: text
+        text: 入金は、アプリの「入金」画面から、お客様ご本人名義の証券口座へ。参加するには、アプリの「キャンペーン」画面からエントリーしてください。
+      - kind: text
+        text: 投資信託は元本が保証されていません。値下がりして、損をすることがあります。
+      - kind: text
+        text: ドングリ証券株式会社　金融商品取引業者　そよかぜ財務局長（金商）第XXX号
+  actions:
+    - text: ポイントで釣る詐欺だと思うので、SNSで「この会社は詐欺」と広める
+    - text: SNSで見た「もっとポイントが増える」という個人の口座に入金する
+    - text: 条件とリスクを読み、参加するならアプリからエントリーする
+      best: true
+  hints:
+    - target: page_url
+      note: アドレスバーは公式ドメインの donguri-sec.example で、公式アプリのお知らせから開いている。
+    - target: part:3
+      note: 入金先は自分名義の証券口座。本物の証券会社は、個人名義の口座を入金先に指定しない。
+    - target: part:5
+      note: 金融商品取引業の登録番号が書かれている（実際の業者なら、金融庁の業者一覧で名前と番号を照らし合わせられる）。
+  explanation:
+    why: |
+      ドングリ証券の本物のキャンペーンページ。「ポイントがもらえる」と聞くと利益で釣る手口に見えるが、公式アプリのお知らせから開いていて、アドレスバーも公式ドメイン。入金先は自分名義の証券口座で、元本が保証されないことや登録番号も書かれている。詐欺の投資の誘いは、個人名義の口座に入金させたり、「必ずもうかる」と言ったりする。
+    action: |
+      参加するなら、条件とリスクを読んでから公式アプリで手続きする。SNSや電話など、アプリの外で「もっと得になる」と誘われても、個人名義の口座には入金しない。
+  references:
+    - title: "それ詐欺です！SNS上の投資勧誘にご注意ください！"
+      url: https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html
+    - title: "証券会社や日本証券業協会を騙ったSNS上の偽広告等に注意！"
+      url: https://www.fsa.go.jp/ordinary/chuui/nisekoukoku.html
+
+- id: Q-WB-013
+  title: 検索の上位に出た偽のトマレルのサポート窓口
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S09
+  targets: [全世代]
+  brand: tomareru
+  tactics: [T08, T01, T07]
+  examples: [EX-060]
+  context: |
+    トマレルで予約した旅館を、急な用事でキャンセルしたくなった。急いでいたので「トマレル キャンセル 電話」と検索し、一番上に出てきたページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://tomareru-support.example/cancel"
+    parts:
+      - kind: heading
+        text: トマレル カスタマーサポート（24時間受付）
+      - kind: text
+        text: ご予約のキャンセル・変更・返金のご相談は、お電話で専門のスタッフが承ります。オンラインではキャンセルできないご予約もありますので、お早めにお電話ください。
+      - kind: text
+        text: ※キャンセルのお手続きには、所定の手数料がかかります。手数料の金額とお支払い方法は、お電話でご案内します。
+      - kind: phone
+        text: "050-XXXX-XXXX"
+      - kind: button
+        text: 今すぐ電話する
+  actions:
+    - text: 画面の番号に電話して、キャンセルの手続きを頼む
+    - text: ほかの検索結果のページも開き、番号を見比べてからかける
+    - text: 公式アプリか予約確認メールに書かれた問い合わせ先を使う
+      best: true
+    - text: 電話で手数料の金額だけ聞き、払うかどうかはあとで決める
+  hints:
+    - target: page_url
+      note: 検索で開いたページ。アドレスバーの本当の持ち主（登録ドメイン）は tomareru-support.example で、トマレルの公式ドメイン（tomareru.example）ではない。
+    - target: part:4
+      note: 電話をかけさせようとしている。トマレルの問い合わせ先は、公式アプリと予約確認メールに書いてある。
+    - target: part:3
+      note: キャンセルの手数料の金額や払い方を、電話で案内するとしている。
+  explanation:
+    why: |
+      検索結果の上のほうに出た「サポート窓口」が、本物とは限らない。トマレルの問い合わせ先は公式アプリと予約確認メールに書いてあり、このページの登録ドメイン（URLの本当の持ち主）も公式の tomareru.example ではない。こうした窓口に電話すると、手数料などの名目でお金を求められたり、個人情報を聞かれたりする例が報告されている。
+    action: |
+      企業の問い合わせ先は、検索結果からではなく、公式アプリや予約確認メールなど手元にある正規の情報から探す。お金を払ってしまったときや困ったときは、検索せずに消費者ホットライン188にかける。
+  references:
+    - title: "（検索上位の「相談窓口」に電話して追加の費用を求められた事例を含む資料）"
+      url: "https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf"
+    - title: "（正規のサポートサイトの検索結果に偽の電話番号を表示させる手口の紹介記事）"
+      url: "https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/"
+
+- id: Q-WB-014
+  title: 一点もののバッグの代金を「送る」で払わせる通販サイト
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S01
+  targets: [全世代]
+  tactics: [T15, T07]
+  examples: [EX-007]
+  context: |
+    ずっと探していた、もう作られていない型の一点もののバッグ。検索で見つけた通販サイト「ユズリハ商店」に、相場より少し安い値段で出ていた。写真も説明もていねいだったので注文すると、次の画面が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://yuzuriha-shoten.example/order/complete"
+    parts:
+      - kind: heading
+        text: ご注文ありがとうございます
+      - kind: text
+        text: ご注文番号 YZ-104728／商品 ヴィンテージ レザーハンドバッグ（一点もの）／代金 38,500円（送料無料）
+      - kind: text
+        text: お支払いは、クルクルペイの「送る」機能でお願いいたします。ご注文から24時間以内に、下記のアカウントあてに代金をお送りください。
+      - kind: text
+        text: 送り先のアカウント：カワセ リン　※お支払いを確認したあと、3営業日以内に発送いたします。
+      - kind: button
+        text: クルクルペイを開く
+  actions:
+    - text: 代金は送らずに注文をやめ、困ったら消費者ホットライン188へ
+      best: true
+    - text: 一点ものなので、売れてしまう前に「送る」で代金を送る
+    - text: 送り先が店長の個人アカウントなのか、お店にメールで聞いてから送る
+    - text: 半額だけ先に送り、残りは商品が届いてから送るとお店に伝える
+  hints:
+    - target: part:3
+      note: お店への支払いなのに、個人どうしでお金をやり取りする「送る」機能を使わせようとしている。
+    - target: part:4
+      note: 送り先が、お店の名前ではなく個人の名前のアカウントになっている。
+  explanation:
+    why: |
+      お店（事業者）に代金を払うのに、コード決済の「送る」機能で個人の名前のアカウントへ送らせるのは、悪質な通販サイトの特徴。「送る」は個人どうしでお金をやり取りするための機能で、お店に払うときはふつう「支払う」機能を使う。写真や説明は、フリマサイトなどから流用されていることがあり、見た目だけでは見分けにくい。
+    action: |
+      個人のアカウントへの「送る」で払うよう言われたら、購入をやめる。送ってしまったら、すぐにクルクルペイのアプリから問い合わせ、消費者ホットライン188に相談する。
+  references:
+    - title: "（海外に拠点があるとみられる悪質通販サイトに関する注意喚起。越境消費者センターによる悪質通販サイト情報の公表から2年）"
+      url: "https://www.kokusen.go.jp/news/data/n-20260617_1.html"
+    - title: "国民生活センター、「悪質通販サイト」 手口・相談内容を公開し注意喚起"
+      url: "https://ecnomikata.com/ecnews/50908/"
+
+- id: Q-WB-015
+  title: チケットノモリの本物の公式リセール
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S12
+  targets: [学生]
+  brand: ticketnomori
+  tactics: []
+  examples: [EX-075]
+  context: |
+    抽選に外れてしまった推しのライブ。チケットノモリの公式アプリに「公式リセールの受付が始まりました」とお知らせが届いたので、アプリから公式リセールのページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://ticket-nomori.example/resale/detail?id=58213"
+    parts:
+      - kind: heading
+        text: 公式リセール（定価でのお取引）
+      - kind: text
+        text: 秋のライブツアー2026 そよかぜアリーナ公演／11月23日（月・祝）18:00開演／指定席 1枚
+      - kind: text
+        text: チケット代金 8,800円（定価）＋ リセール手数料 880円　合計 9,680円
+      - kind: text
+        text: 受け取り：チケットノモリ公式アプリの電子チケット（公演の3日前から表示）／支払い：この画面で、登録済みのお支払い方法から
+      - kind: button
+        text: 購入手続きへ進む
+  actions:
+    - text: この画面で購入手続きをして、公式アプリでチケットを受け取る
+      best: true
+    - text: SNSで「定価で譲ります」と投稿している人に連絡して買う
+    - text: 検索広告に出てきたチケット販売サイトで、良い席を探して買う
+    - text: 出品した人と直接やり取りして、個人の口座に代金を振り込む
+  hints:
+    - target: page_url
+      note: アドレスバーの本当の持ち主（登録ドメイン）は ticket-nomori.example で、チケットノモリの公式ドメイン。公式アプリのお知らせから開いたページ。
+    - target: part:3
+      note: 値段は定価に、決められた手数料を足しただけ。高く値上げされていない。
+    - target: part:4
+      note: 受け取りは公式アプリの電子チケットで、支払いもこの画面で完結する。個人の口座への振込を求めていない。
+  explanation:
+    why: |
+      チケットノモリの本物の公式リセールのページ。公式アプリのお知らせから開いていて、アドレスバーの登録ドメイン（URLの本当の持ち主）も公式の ticket-nomori.example。値段は定価に決められた手数料を足したもので、受け取りは公式アプリ、支払いはこの画面の決済と、正規のルートの中で完結している。チケットノモリは、行けなくなったチケットを公式リセールでだけ受け付けている。
+    action: |
+      公式アプリから開いた公式リセールなので、この画面で購入してよい。チケットは公式アプリや公式サイトからたどった正規のルートで買い、SNSの個人間の取引や、検索広告に出てくる転売サイトは使わない。
+  references:
+    - title: "“推し”に会えない!?転売チケットの購入トラブルが急増中"
+      url: "https://www.kokusen.go.jp/news/data/n-20220804_2.html"

@@ -205,8 +205,11 @@ def check_examples(data, errors: list):
 
 
 def check_legit_domains(where: str, msg: dict, brand: dict, errors: list):
-    """本物の問題で、リンク・アドレスバー・メールアドレスがブランドの公式ドメインと合っているか。"""
-    official = registrable_domain(brand["official_domain"])
+    """本物の問題で、リンク・アドレスバー・メールアドレスがブランドの公式ドメイン（またはそのサブドメイン）か。
+
+    登録ドメインではなく公式ドメインそのもので比べる（そよかぜ市役所・警察署・税務署は登録ドメインが同じため）。
+    """
+    official = brand["official_domain"].lower()
     found = []
     for key in ("link", "page_url"):
         if msg.get(key):
@@ -215,7 +218,8 @@ def check_legit_domains(where: str, msg: dict, brand: dict, errors: list):
     if "@" in sender and not sender.startswith("@"):
         found.append(("sender", sender))
     for key, host in found:
-        if registrable_domain(host) != official:
+        host = host.rsplit("@", 1)[-1].split(":", 1)[0].strip(".").lower()
+        if host != official and not host.endswith("." + official):
             errors.append(f"{where}: 本物の問題なのに、{key} のドメイン（{host}）が"
                           f"{brand['name']}の公式ドメイン（{official}）と違う")
 

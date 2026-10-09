@@ -1,0 +1,871 @@
+# メールの判定問題（Q-EM-001〜Q-EM-014）
+# もとにした事例は docs/question-bank/examples.yaml、ブランドの正規の連絡方法は seed/brands.yaml を参照。
+
+- id: Q-EM-001
+  title: 通販サイトをかたる「配送に問題」メール
+  type: judge
+  channel: email
+  is_scam: true
+  level: easy
+  situation: S01
+  targets: [全世代]
+  brand: pochitto
+  tactics: [T01, T04, T06]
+  examples: [EX-002]
+  context: |
+    ポチッと通販はときどき使っているが、いま届くのを待っている荷物はない。
+  message:
+    sender_name: ポチッと通販
+    sender: info@pochitto-order-center.example
+    subject: 【ポチッと通販】お荷物の配送に問題が発生しました
+    body: |
+      お客様各位
+
+      いつもポチッと通販をご利用頂きまして、誠にありがとう御座います。
+      お客様のお荷物は、配送に問題が発生した為、配送を一時停止させて頂いております。
+      お届け先の住所とお支払い情報に、確認が出来ない所がありました。
+
+      24時間以内に下記のリンクより、会員情報の更新をお願い致します。
+      更新が無い場合、ご注文はキャンセルされ、アカウントは利用停止と成ります。
+
+      ※会員情報の更新には、クレジットカード情報の再入力が必要と成ります。
+
+      ポチッと通販 カスタマーサービス
+    link: "https://pochitto-account-update.example/verify"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、会員情報とカード情報を24時間以内に更新する
+    - text: メールに返信して、どの荷物にどんな問題があるのか聞く
+    - text: 公式アプリを開き、注文履歴とメッセージセンターを確かめる
+      best: true
+    - text: 念のため、リンク先で住所だけ入力して、カード情報は入れない
+  hints:
+    - target: sender
+      note: 送信元の本当の持ち主は pochitto-order-center.example。ポチッと通販の注文・発送のメールは order@pochitto.example から届く。
+    - target: body
+      note: 「24時間以内」と期限を区切って急がせ、配送の手続きなのにカード情報の再入力まで求めている。「成ります」「御座います」など日本語も少し不自然。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）は pochitto-account-update.example で、公式の pochitto.example ではない。
+  explanation:
+    why: |
+      ポチッと通販をかたる偽のメール（フィッシング）。本物の注文・発送のメールは order@pochitto.example から届き、大事なお知らせはアカウントの「メッセージセンター」にも必ず出る。このメールは送信元もリンクも公式と違うドメインで、「24時間以内」と急がせてカード情報まで入力させようとしている。
+    action: |
+      リンクは開かず、公式アプリやブックマークした公式サイトにログインして、注文履歴やメッセージセンターに同じ知らせがあるか確かめる。入力してしまったら、すぐにパスワードを変えて、カード会社に連絡する。
+  references:
+    - title: "Amazonプライム会員の更新のためにカード情報を登録させるニセメール(フィッシング対策協議会)"
+      url: https://scan.netsecurity.ne.jp/article/2019/01/16/41836.html
+    - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
+      url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
+
+- id: Q-EM-002
+  title: カード会社をかたる「ご利用制限のお知らせ」
+  type: judge
+  channel: email
+  is_scam: true
+  level: normal
+  situation: S03
+  targets: [全世代]
+  brand: hoshizora
+  tactics: [T01, T03, T04, T06]
+  examples: [EX-012, EX-019]
+  context: |
+    ホシゾラカードを持っていて、ふだんの買い物で使っている。
+  message:
+    sender_name: ホシゾラカード
+    sender: security@hoshizora-card-notice.example
+    subject: 【重要】ホシゾラカード ご利用制限のお知らせ
+    body: |
+      ホシゾラカード会員様
+
+      いつもホシゾラカードをご利用いただき、ありがとうございます。
+      お客様のカードで、第三者による不正利用の可能性がある取引を確認しました。
+      安全のため、現在カードのご利用を一部制限しております。
+
+      制限を解除するには、下記のページでご本人確認（カード番号・有効期限・セキュリティコードの入力）をお願いいたします。
+      10月17日（土）までにご確認いただけない場合は、カードのご利用を停止させていただきます。
+
+      ホシゾラカード セキュリティ対策室
+    link: "https://hoshizora-card.example.member-verify.example/login"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクは使わず、公式アプリで利用状況とお知らせを確かめる
+      best: true
+    - text: リンクを開き、カード番号などを入力して制限を解除する
+    - text: リンク先のページが本物そっくりか、見た目を確かめてから入力する
+    - text: メールに返信して、どの取引が不正利用だったのか教えてもらう
+  hints:
+    - target: link
+      note: 先頭に hoshizora-card.example と入っているが、本当の持ち主（登録ドメイン）は一番右の member-verify.example。公式の名前を飾りとして前に付けている。
+    - target: body
+      note: カード番号とセキュリティコードを入力させようとしている。ホシゾラカードは、メールやSMSでカード番号やセキュリティコードを聞かない。
+    - target: sender
+      note: 送信元の登録ドメインは hoshizora-card-notice.example で、公式の hoshizora-card.example ではない。
+  explanation:
+    why: |
+      カード会社をかたる「ご利用制限」の偽メール。文章は自然だが、リンクの本当の持ち主は member-verify.example で、ホシゾラカードの名前は前に付けた飾り（サブドメイン）にすぎない。ホシゾラカードはメールやSMSでカード番号やセキュリティコードを聞かず、利用の通知は公式アプリで行う。
+    action: |
+      リンクは開かず、公式アプリや自分でブックマークした会員サイトで、利用状況やお知らせを確かめる。カード情報を入力してしまったら、すぐにカード裏面の番号に電話して、カード会社に知らせる。
+  references:
+    - title: "DMARC 通過する独自ドメインフィッシング急増 ~ フィッシング対策協議会「フィッシングレポート2026」"
+      url: https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html
+    - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
+      url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
+
+- id: Q-EM-003
+  title: 市役所をかたる給付金の申請メール
+  type: judge
+  channel: email
+  is_scam: true
+  level: normal
+  situation: S08
+  targets: [全世代]
+  brand: soyokaze_city
+  tactics: [T01, T13, T05, T06]
+  examples: [EX-050, EX-054]
+  context: |
+    そよかぜ市に住んでいる。ニュースで、物価が上がって家計が苦しい世帯への支援が話題になっている。
+  message:
+    sender_name: そよかぜ市役所 給付金担当
+    sender: kyufu@soyokaze-shien.example
+    subject: 【そよかぜ市】緊急支援給付金（1世帯30,000円）申請のご案内
+    body: |
+      そよかぜ市にお住まいの皆様へ
+
+      物価高騰の影響を受けている世帯を支援するため、1世帯あたり30,000円の緊急支援給付金を支給します。
+      受け取りには、下記の申請ページで、世帯主の氏名・住所と、振込先の口座情報（銀行名・支店名・口座番号）の入力が必要です。
+
+      申請期限：10月20日（火）
+      期限を過ぎると受け取れなくなりますので、お早めに申請してください。
+
+      そよかぜ市役所 福祉課 給付金担当
+    link: "https://soyokaze-shien.example/kyufu/apply"
+    page_url:
+    parts: []
+  actions:
+    - text: 期限が近いので、申請ページを開いて口座情報を入力する
+    - text: 市から届いた郵便や、市の公式サイトで案内を確かめる
+      best: true
+    - text: メールに返信して、自分の世帯も受け取れるのかを聞く
+    - text: 口座番号は入れずに、氏名と住所だけ先に入力しておく
+  hints:
+    - target: link
+      note: 申請ページの本当の持ち主は soyokaze-shien.example。そよかぜ市の公式サイトは city.soyokaze.example。
+    - target: body
+      note: メールのURLから口座情報を入力させている。役所は給付金の手続きを、メールのURLからさせない。
+    - target: sender
+      note: 送信元が市の公式ドメイン（soyokaze.example）ではない。
+  explanation:
+    why: |
+      給付金を口実にした偽のメール。そよかぜ市は大事な手続きを郵送で知らせ、メールのURLから申請させたり、口座情報を入力させたりしない。実際の注意喚起でも、役所や国は給付金の手続きでメールのURLから申請させない、とされている。
+    action: |
+      リンクは開かない。給付金があるかどうかは、市から届いた郵便や、自分で調べた市の公式サイト・市役所の窓口で確かめる。入力してしまったときは、警察相談専用電話 #9110 などに相談する。
+  references:
+    - title: "マイナポータルを騙るフィッシングに注意喚起、第 2 弾はすでに終了"
+      url: https://scan.netsecurity.ne.jp/article/2023/12/12/50347.html
+    - title: "国勢調査をかたる不審メールや詐欺にご注意ください"
+      url: https://www.city.minoh.lg.jp/shisei/toukei/kokuseikatarichuui.html
+
+- id: Q-EM-004
+  title: 証券会社をかたる「多要素認証の設定のお願い」
+  type: judge
+  channel: email
+  is_scam: true
+  level: hard
+  situation: S04
+  targets: [社会人]
+  brand: donguri
+  tactics: [T01, T04, T06]
+  examples: [EX-025, EX-026]
+  context: |
+    ドングリ証券に口座があり、ふだんは公式アプリで取引している。最近、証券会社がログインのときの多要素認証（パスワードのほかに、スマホに届く番号なども使う仕組み）を必須にしている、というニュースを見た。
+  message:
+    sender_name: ドングリ証券
+    sender: info@donguri-sec.example
+    subject: 【重要】多要素認証の設定のお願い（11月4日から必須になります）
+    body: |
+      ドングリ証券をご利用のお客様
+
+      いつもドングリ証券をご利用いただき、ありがとうございます。
+      不正ログインの被害を防ぐため、11月4日（水）から、ログインの際の多要素認証の設定を必須とさせていただきます。
+
+      まだ設定がお済みでないお客様は、10月23日（金）までに、下記のページからログインのうえ設定をお願いいたします。
+      期限までに設定いただけない場合、お客様の資産を守るため、お取引を一時的に制限させていただくことがあります。
+
+      ご不便をおかけしますが、ご理解とご協力をお願い申し上げます。
+
+      ドングリ証券 お客様サポートセンター
+    link: "https://donguri-sec-setting.example/mfa/login"
+    page_url:
+    parts: []
+  actions:
+    - text: 差出人が公式のアドレスなので、リンクから設定を済ませる
+    - text: まずリンクを開いて、ログイン画面が本物そっくりか確かめる
+    - text: リンクは使わず、公式アプリにログインしてお知らせを確かめる
+      best: true
+    - text: メールに返信して、本当にドングリ証券からのメールか聞く
+  hints:
+    - target: sender
+      note: 差出人は公式の donguri-sec.example になっているが、差出人のアドレスは偽ることができる（なりすまし）。これだけで本物とは言えない。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）は donguri-sec-setting.example で、公式の donguri-sec.example ではない。
+    - target: body
+      note: 期限を区切って、メールのリンクからログインさせようとしている。ドングリ証券は、メールのリンクからログインさせない。
+  explanation:
+    why: |
+      証券会社をかたる「多要素認証の設定のお願い」の偽メール。本物の証券会社も多要素認証を必須にしているため話の内容は自然で、差出人の表示も本物と同じにできる（なりすまし）。決め手は、メールのリンクからログインさせようとしていること。ドングリ証券はお知らせを会員ページと公式アプリに出し、メールのリンクからログインさせない。
+    action: |
+      メールのリンクは使わず、公式アプリやブックマークした公式サイトから自分でログインして、お知らせや設定の画面を確かめる。身に覚えのないログインや取引がないかも見ておく。
+  references:
+    - title: "2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加"
+      url: https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html
+    - title: "DMARCポリシー「none」または DMARC 対応していないドメイン名のなりすましフィッシングメール増加傾向、7 月のフィッシング報告状況"
+      url: https://scan.netsecurity.ne.jp/article/2024/08/30/51554.html
+
+- id: Q-EM-005
+  title: 税務署をかたる「本日中に払わないと差し押さえ」メール
+  type: judge
+  channel: email
+  is_scam: true
+  level: easy
+  situation: S08
+  targets: [全世代]
+  brand: soyokaze_tax
+  tactics: [T01, T13, T04, T07]
+  examples: [EX-048, EX-055]
+  context:
+  message:
+    sender_name: そよかぜ税務署
+    sender: zeimusho.soyokaze@kantan-mail.example
+    subject: 【最終通告】未納の税金があります（本日中にお支払い下さい）
+    body: |
+      あなた様には、未納の税金 38,600円 があります。
+      本日23時59分までにお支払いが確認出来ない場合、法律に基づき、給料・預金・車などの財産の差し押さえを実行致します。
+
+      お支払いは、下記のページより、コード決済または電子マネーにて至急お手続き下さい。
+
+      そよかぜ税務署 徴収部門
+    link: "https://soyokaze-tax-payment.example/pay"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクは開かず、支払わずに削除する
+      best: true
+    - text: 差し押さえを避けるため、今日のうちにコード決済で払う
+    - text: メールに返信して、何の税金が未納なのかを聞く
+    - text: 払う前に、リンク先のページで金額だけ確かめておく
+  hints:
+    - target: sender
+      note: 送信元の本当の持ち主は kantan-mail.example で、誰でも作れるメールのアドレスに見える。そよかぜ税務署の公式ドメインは tax.soyokaze.example。
+    - target: body
+      note: 「本日中」「差し押さえ」と強い言葉で急がせ、コード決済や電子マネーで払わせようとしている。税金の納め方として不自然。
+    - target: link
+      note: 支払いページの本当の持ち主は soyokaze-tax-payment.example で、税務署の公式ドメインではない。
+  explanation:
+    why: |
+      税務署をかたる偽のメール。税務署がメールで差し押さえを知らせたり、リンク先でコード決済や電子マネーで払わせたりすることはない。そよかぜ税務署のお知らせメールは公式ドメインから届き、URLも載せない。「本日中」「差し押さえ」という強い言葉で考える時間を奪うのも、よくある手口。
+    action: |
+      リンクは開かず、支払わずに削除する。本当に未納がないか気になるときは、自分で調べたそよかぜ税務署の窓口や、消費者ホットライン188に相談する。
+  references:
+    - title: "不審なメールにご注意ください"
+      url: https://www.pref.saitama.lg.jp/a0209/z-kurashiindex/z-fuhin-mail_cyui-kanki.html
+    - title: "メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起"
+      url: https://internet.watch.impress.co.jp/docs/news/2112792.html
+
+- id: Q-EM-006
+  title: 動画配信サービスをかたる「アカウント保留」メール
+  type: judge
+  channel: email
+  is_scam: true
+  level: easy
+  situation: S12
+  targets: [学生, 全世代]
+  brand: yumemiru
+  tactics: [T01, T04, T06]
+  examples: [EX-071]
+  context: |
+    ユメミル動画に登録して、毎月アニメやドラマを見ている。
+  message:
+    sender_name: ユメミル動画
+    sender: billing-yumemiru@account-hold.example
+    subject: 【ユメミル動画】お支払いに問題があります。アカウントを保留しました
+    body: |
+      お客様
+
+      前回のお支払いが完了しなかった為、お客様のアカウントは保留中と成っています。
+      48時間以内にお支払い情報を更新して頂けない場合、アカウントは削除され、視聴履歴やマイリストも全て失われます。
+
+      下記のリンクより、カード番号・有効期限・セキュリティコードを入力して、更新をお願い致します。
+
+      ユメミル動画 サポートチーム
+    link: "https://yumemiru-billing-update.example/card"
+    page_url:
+    parts: []
+  actions:
+    - text: 視聴履歴が消えると困るので、リンク先でカード情報を入力し直す
+    - text: リンクは使わず、ユメミル動画のアプリで支払いの状況を確かめる
+      best: true
+    - text: 48時間以内に返信して、もう少し待ってほしいと伝える
+    - text: カード番号だけ入力して、セキュリティコードは入れない
+  hints:
+    - target: sender
+      note: 送信元は account-hold.example のアドレス。ユメミル動画のメールは no-reply@yumemiru.example から届く。
+    - target: body
+      note: 「48時間以内」「アカウントは削除」と急がせ、メールのリンクからカード情報を入力させようとしている。「成っています」など日本語も少し不自然。
+    - target: link
+      note: リンクの本当の持ち主は yumemiru-billing-update.example で、公式の yumemiru.example ではない。
+  explanation:
+    why: |
+      動画配信サービスをかたる「支払いに問題」の偽メール。ユメミル動画のメールは no-reply@yumemiru.example から届き、支払い方法の変更はアプリかアカウントページから行う。このメールは送信元もリンク先も公式と違い、短い期限で急がせてカード情報を入力させようとしている。
+    action: |
+      リンクは開かず、アプリや自分で開いたアカウントページで支払いの状況を確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡する。
+  references:
+    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)"
+      url: https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html
+
+- id: Q-EM-007
+  title: SNSをかたる「QRコードで本人確認」メール
+  type: judge
+  channel: email
+  is_scam: true
+  level: hard
+  situation: S06
+  targets: [学生, 社会人]
+  brand: hanashiba
+  tactics: [T01, T03, T06]
+  examples: [EX-038]
+  context: |
+    SNSのハナシバを、ふだんはスマホの公式アプリで使っている。パソコンで、ハナシバに登録しているメールアドレスあてに次のメールが届いた。
+  message:
+    sender_name: ハナシバ
+    sender: security@hanashiba.example
+    subject: 【ハナシバ】不審なログインがありました（本人確認のお願い）
+    body: |
+      ハナシバをご利用いただき、ありがとうございます。
+
+      10月14日 02:13ごろ、お客様のアカウントに、いつもと違う環境からのログインがありました。
+      　端末：パソコン（ブラウザ）
+      　場所：不明
+
+      アカウントを守るため、スマートフォンで下のQRコードを読み取り、表示されたページからログインして本人確認を完了してください。
+      24時間以内に確認できない場合、アカウントの利用を一時的に制限します。
+
+      ※セキュリティのため、本人確認はスマートフォンからのみ受け付けています。
+
+      ハナシバ アカウントセキュリティチーム
+    link:
+    page_url:
+    parts:
+      - kind: text
+        text: ［QRコードの画像］
+  actions:
+    - text: スマホでQRコードを読み取り、開いたページでログインする
+    - text: QRコードは読み取らず、公式アプリからログイン履歴を確かめる
+      best: true
+    - text: 読み取ったURLに hanashiba と入っていればログインする
+    - text: メールに返信して、ログインのあった場所を詳しく聞く
+  hints:
+    - target: part:1
+      note: リンクの代わりにQRコードを読み取らせている。読み取るまで行き先（URL）が見えず、スマホの小さな画面では確かめにくい。
+    - target: body
+      note: 「24時間以内」と急がせ、スマホでログインして本人確認をさせようとしている。ログインや本人確認をメールのQRコードでうながすこと自体が怪しい。
+    - target: sender
+      note: 差出人は公式の hanashiba.example になっているが、差出人のアドレスは偽ることができる。これだけで本物とは言えない。
+  explanation:
+    why: |
+      メールのQRコードから偽のログイン画面に誘う手口（QRコードを使ったフィッシング）。QRコードは読み取るまで行き先が見えず、メールの安全対策もすり抜けやすい。差出人の表示が本物でも、ログインや本人確認をメールのQRコードでうながすメールは疑う。
+    action: |
+      QRコードは読み取らない。気になるときは、公式アプリやブックマークから自分でログインしてログイン履歴を確かめ、心当たりのないログインがあればパスワードを変える。
+  references:
+    - title: "QRコードを悪用した手口と対策（題名は要約）"
+      url: https://www.keishicho.metro.tokyo.lg.jp/kurashi/cyber/notes/qrcord.html
+    - title: "QRコード攻撃はなぜメールセキュリティを無力化できるのか? その理由を解説:画像型フィッシングは約400%増"
+      url: https://atmarkit.itmedia.co.jp/ait/spv/2607/08/news048.html
+
+- id: Q-EM-008
+  title: 採用担当を名乗り、別のアプリへの移動と研修費を求めるメール
+  type: judge
+  channel: email
+  is_scam: true
+  level: normal
+  situation: S07
+  targets: [学生]
+  brand: jobnohako
+  tactics: [T01, T05, T06, T07]
+  examples: [EX-043]
+  context: |
+    就職活動中で、就活サイトのジョブノハコからいくつかの企業に応募している。
+  message:
+    sender_name: ジョブノハコ 採用担当
+    sender: saiyou.tantou2026@quickmail.example
+    subject: 【ジョブノハコ】書類選考通過のお知らせ（次の選考のご案内）
+    body: |
+      就職活動中の皆様
+
+      ジョブノハコからご応募いただいた件につきまして、書類選考を通過されましたのでご連絡いたします。
+      次の選考は、メッセージアプリ「トモトモ」でのオンライン説明会となります。
+      下記のIDを友だちに追加し、氏名・大学名・生年月日をお送りください。
+
+      　トモトモID：saiyou-2026-hr
+
+      なお、選考に進むには研修費（登録料）5,000円のお振込みが必要です。
+      10月16日（金）までに、トモトモでご案内する口座へお振込みください。研修を修了された方は、ほぼ全員が内定となっています。
+
+      採用担当
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 書かれたトモトモIDを友だちに追加して、説明会の案内を待つ
+    - text: ほぼ内定がもらえるなら、期限までに研修費を振り込んでおく
+    - text: 研修費を払う前に、トモトモで会社のことを詳しく聞く
+    - text: ジョブノハコにログインし、サイト内のメッセージを確かめる
+      best: true
+  hints:
+    - target: sender
+      note: 送信元は誰でも作れるメールのアドレス（quickmail.example）。ジョブノハコでは、企業からの連絡はサイトの中のメッセージで届く。
+    - target: body
+      note: 選考に進むために研修費（登録料）を振り込ませ、別のメッセージアプリに移るよう言っている。ジョブノハコでは、学生に登録料や研修費を求めない。
+  explanation:
+    why: |
+      就活サイトや採用担当者をかたる偽の連絡。ジョブノハコでは、企業からの連絡はサイトの中のメッセージで届き、登録料や研修費を学生に求めることはない。別のメッセージアプリに移らせる、選考の前にお金を払わせる、宛名が「皆様」で誰にでも送れる文面になっている、という点も詐欺のサイン。
+    action: |
+      返信や振込はせず、ジョブノハコに自分でログインして、サイトの中に同じ連絡が届いているか確かめる。振り込んでしまったときは、すぐに警察に相談する。
+  references:
+    - title: "マイナビを装った詐欺が発生 SMSやSNSを悪用したなりすまし手口に注意喚起"
+      url: https://rocket-boys.co.jp/?p=27516
+
+- id: Q-EM-009
+  title: 通販サイトからの本物の注文確認メール
+  type: judge
+  channel: email
+  is_scam: false
+  level: easy
+  situation: S01
+  targets: [全世代]
+  brand: pochitto
+  tactics: []
+  examples: [EX-002, EX-008]
+  context: |
+    昨日の夜、ポチッと通販の公式アプリで、本を1冊注文した。
+  message:
+    sender_name: ポチッと通販
+    sender: order@pochitto.example
+    subject: 【ポチッと通販】ご注文ありがとうございます（注文番号 P-261008-4417）
+    body: |
+      ポチッと通販をご利用いただき、ありがとうございます。
+      以下の内容でご注文を承りました。
+
+      ■ご注文内容
+      　商品：やさしいパンの焼き方（単行本）
+      　数量：1
+      　お支払い金額：1,980円（税込・送料無料）
+      　お支払い方法：クレジットカード
+      　お届け予定：10月11日（日）〜10月12日（月）
+
+      ご注文の内容や配送の状況は、アプリの「注文履歴」からいつでもご確認いただけます。
+      ※このメールは送信専用です。
+
+      ポチッと通販
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 本物か心配なので、メールに返信して確かめてもらう
+    - text: 気になれば、公式アプリの注文履歴で同じ注文を確かめる
+      best: true
+    - text: 詐欺かもしれないので、すぐにカード会社に連絡してカードを止める
+  hints:
+    - target: sender
+      note: 送信元は order@pochitto.example。ポチッと通販の注文・発送のメールは、このアドレスから届く。
+    - target: body
+      note: 昨日自分がした注文の内容と合っていて、ログインやカード情報の入力を求めていない。リンクもない。
+  explanation:
+    why: |
+      ポチッと通販からの本物の注文確認メール。送信元が公式の order@pochitto.example で、自分が注文した直後に届き、商品や金額も注文と合っている。ログインや入力を求めることもない。偽のメールは、身に覚えのない配送トラブルや会員の更新を知らせ、リンク先で入力させようとする。
+    action: |
+      特別な手続きは要らない。内容が気になるときは、メールではなく公式アプリの注文履歴やメッセージセンターで確かめる。
+  references:
+    - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
+      url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
+    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
+
+- id: Q-EM-010
+  title: 高速道路の利用明細ができたことを知らせる本物のメール
+  type: judge
+  channel: email
+  is_scam: false
+  level: normal
+  situation: S17
+  targets: [社会人]
+  brand: suisui
+  tactics: []
+  examples: [EX-086]
+  context: |
+    スイスイ高速の利用明細サービスに会員登録していて、毎月、明細を見ている。9月も高速道路を何回か使った。
+  message:
+    sender_name: スイスイ高速 利用明細サービス
+    sender: meisai@suisui-kosoku.example
+    subject: 【スイスイ高速】9月分の利用明細ができました
+    body: |
+      スイスイ高速 利用明細サービスをご利用いただき、ありがとうございます。
+
+      2026年9月分のご利用明細ができました。
+      明細は、会員ページにログインしてご確認ください。
+
+      ※このメールは送信専用のため、返信はできません。
+      ※スイスイ高速が、メールでクレジットカードの番号などをおたずねすることはありません。
+      ※会員ページは、ブックマークまたは公式アプリからご利用ください。
+
+      スイスイ高速 利用明細サービス
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: ブックマークか公式アプリから会員ページを開き、明細を見る
+      best: true
+    - text: 本物か不安なので、差出人に「本物ですか」と返信する
+    - text: 検索サイトで「スイスイ高速 明細」と調べ、最初に出たページからログインする
+  hints:
+    - target: sender
+      note: 送信元は、スイスイ高速の公式ドメイン suisui-kosoku.example。
+    - target: body
+      note: 明細ができたことを知らせるだけで、リンクがなく、カード情報も求めていない。会員ページは自分で開くよう案内している。
+  explanation:
+    why: |
+      スイスイ高速からの本物のお知らせメール。スイスイ高速は、登録した人に明細ができたことをメールで知らせ、明細は会員ページで見てもらう。このメールは公式ドメインから届き、リンクもカード情報の入力もない。偽物は「支払いに失敗」「解約予告」などと急がせ、カード番号まで入力させようとする。
+    action: |
+      明細は、ブックマークか公式アプリから会員ページを開いて確かめる。検索結果に出る広告などからログインしない。
+  references:
+    - title: "ETC利用照会サービスをかたるフィッシング詐欺が急増! 偽メール・偽サイトに要注意"
+      url: https://jafmate.jp/car/traffic_topics_20260223_1198471.html
+    - title: "弊社を装った不審メール・SMS・フィッシングサイトにご注意ください"
+      url: https://www.shutoko.jp/news/2025/12/01-phishing/
+
+- id: Q-EM-011
+  title: 電子申告をした人に届く税務署からの本物のお知らせ
+  type: judge
+  channel: email
+  is_scam: false
+  level: hard
+  situation: S08
+  targets: [社会人, 全世代]
+  brand: soyokaze_tax
+  tactics: []
+  examples: [EX-055]
+  context: |
+    今年の春、自分でパソコンから確定申告を電子申告で出した。そのとき、お知らせを受け取るメールアドレスを登録した。
+  message:
+    sender_name: そよかぜ税務署
+    sender: info@tax.soyokaze.example
+    subject: 【そよかぜ税務署】メッセージボックスに重要なお知らせが届いています
+    body: |
+      電子申告をご利用の方へ
+
+      あなたのメッセージボックスに、新しいお知らせが届いています。
+      　お知らせの種類：申告内容の確認について
+      　届いた日：10月13日
+
+      内容は、ふだんお使いの方法で電子申告のページにログインし、メッセージボックスでご確認ください。
+
+      ※このメールは送信専用のため、返信はできません。
+      ※このメールにはURLを載せていません。
+
+      そよかぜ税務署
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 税金のメールは偽物が多いので、読まずに削除する
+    - text: メールに返信して、どんな内容のお知らせか教えてもらう
+    - text: いつもの電子申告のページに自分でログインして読む
+      best: true
+  hints:
+    - target: sender
+      note: 送信元は、そよかぜ税務署の公式ドメイン（tax.soyokaze.example）。
+    - target: body
+      note: お知らせが届いたことを伝えるだけで、URLがなく、支払いや入力も求めていない。自分で電子申告をしたので、お知らせが届くのも自然。
+    - target: subject
+      note: 件名に「重要」とあるが、期限や差し押さえなどの言葉で急がせてはいない。
+  explanation:
+    why: |
+      そよかぜ税務署からの本物のお知らせメール。そよかぜ税務署は、電子申告をした人に、お知らせが届いたことを公式ドメインのメールで知らせ、メールにURLは載せない。このメールも支払いや差し押さえの話はなく、自分でログインして確かめるよう案内しているだけ。偽物は「本日中に払わないと差し押さえ」と急がせ、リンク先で払わせようとする。
+    action: |
+      メールからではなく、いつも使っている電子申告のページに、ブックマークなどから自分でログインして、メッセージボックスを確かめる。
+  references:
+    - title: "メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起"
+      url: https://internet.watch.impress.co.jp/docs/news/2112792.html
+
+- id: Q-EM-012
+  title: 就活サイトからの「企業からメッセージが届きました」
+  type: judge
+  channel: email
+  is_scam: false
+  level: normal
+  situation: S07
+  targets: [学生]
+  brand: jobnohako
+  tactics: []
+  examples: [EX-045]
+  context: |
+    就活サイトのジョブノハコで、3日前にある企業の求人に応募した。
+  message:
+    sender_name: ジョブノハコ
+    sender: notice@jobnohako.example
+    subject: 【ジョブノハコ】企業からメッセージが届きました
+    body: |
+      ジョブノハコをご利用いただき、ありがとうございます。
+
+      ご応募いただいた求人の企業から、新しいメッセージが1件届きました。
+      メッセージの内容は、ジョブノハコにログインし、「メッセージ」画面でご確認ください。
+
+      ※このメールは送信専用です。企業への返信は、ジョブノハコのメッセージ画面から行ってください。
+
+      ジョブノハコ
+    link: "https://www.jobnohako.example/mypage/messages"
+    page_url:
+    parts: []
+  actions:
+    - text: アプリかブックマークからジョブノハコにログインして読む
+      best: true
+    - text: 早く返事をしたいので、このメールに返信して企業に連絡する
+    - text: 「企業から連絡」は詐欺かもしれないので、無視して削除する
+  hints:
+    - target: sender
+      note: 送信元は、ジョブノハコの公式ドメイン jobnohako.example。
+    - target: body
+      note: メッセージが届いたことを知らせ、サイトにログインして読むよう案内しているだけ。お金や個人情報の話はない。
+    - target: link
+      note: リンクの本当の持ち主も、公式の jobnohako.example。
+  explanation:
+    why: |
+      ジョブノハコからの本物のお知らせ。ジョブノハコでは、企業からの連絡はサイトの中のメッセージで届き、届くと登録したメールアドレスにお知らせが来る。応募した後という状況にも合い、送信元もリンクも公式ドメインで、お金の話もない。
+    action: |
+      メッセージは、アプリやブックマークからジョブノハコにログインして読む。もしサイトの中のメッセージでも、お金の支払いや別のアプリへの移動を求められたら、応じずに疑う。
+  references:
+    - title: "採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）"
+      url: https://jp.indeed.com/help/job-seekers/articles/360040122511
+
+- id: Q-EM-013
+  title: 新しいスマホでログインした直後に届いた銀行のお知らせ
+  type: judge
+  channel: email
+  is_scam: false
+  level: hard
+  situation: S03
+  targets: [全世代]
+  brand: kotori
+  tactics: []
+  examples: [EX-019, EX-021]
+  context: |
+    さっき、機種変更した新しいスマホにコトリ銀行の公式アプリを入れて、自分でログインした。その数分後に、次のメールが届いた。
+  message:
+    sender_name: コトリ銀行
+    sender: info@kotori-bank.example
+    subject: 【コトリ銀行】新しい端末からのログインがありました
+    body: |
+      コトリ銀行をご利用いただき、ありがとうございます。
+
+      お客様のアカウントに、新しい端末からのログインがありました。
+      　日時：10月14日 19:42
+      　端末：スマートフォン（公式アプリ）
+
+      お心当たりがある場合は、対応の必要はありません。
+      お心当たりがない場合は、すぐに公式アプリからパスワードを変更し、公式サイトに載っている窓口までご連絡ください。
+
+      ※このメールにリンクはありません。
+      ※コトリ銀行が、メールでID・パスワード・暗証番号をおたずねすることはありません。
+
+      コトリ銀行
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 不正ログインかもしれないので、すぐに銀行に電話して口座を止めてもらう
+    - text: 日時が自分の操作と合うか確かめ、気になれば公式アプリで履歴を見る
+      best: true
+    - text: メールに返信して、本当に自分のログインだったか調べてもらう
+  hints:
+    - target: sender
+      note: 送信元は、コトリ銀行の公式アドレス info@kotori-bank.example。
+    - target: body
+      note: 日時と端末が、さっき自分が新しいスマホでログインしたことと合っている。リンクがなく、何かを入力させることもない。
+  explanation:
+    why: |
+      コトリ銀行からの本物のお知らせ。コトリ銀行は登録したメールアドレスに info@kotori-bank.example からお知らせを送り、メールのリンクからログインさせない。このメールはリンクがなく、IDやパスワードも聞かず、内容も新しいスマホで自分がログインした直後の状況と合っている。「ログインがありました」という話は偽メールにも多いが、決め手は自分の操作と合っていることと、入力をさせないこと。
+    action: |
+      自分のログインなら対応は要らない。気になるときは、メールではなく公式アプリを開いてログイン履歴を確かめる。心当たりがないときは、公式アプリからパスワードを変えて、銀行の窓口に連絡する。
+  references:
+    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
+    - title: "不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ"
+      url: https://paymentnavi.com/?p=144363
+
+- id: Q-EM-014
+  title: カードの期限切れで届いた動画配信サービスの本物のメール
+  type: judge
+  channel: email
+  is_scam: false
+  level: hard
+  situation: S12
+  targets: [学生, 全世代]
+  brand: yumemiru
+  tactics: []
+  examples: [EX-071]
+  context: |
+    ユメミル動画に登録しているクレジットカードの有効期限が、先月で切れた。新しいカードは届いているが、まだ登録し直していない。
+  message:
+    sender_name: ユメミル動画
+    sender: no-reply@yumemiru.example
+    subject: 【ユメミル動画】お支払いができませんでした
+    body: |
+      いつもユメミル動画をご利用いただき、ありがとうございます。
+
+      10月分の月額料金（990円）を、ご登録のクレジットカードでお支払いいただけませんでした。
+      カードの有効期限が切れている可能性があります。
+
+      引き続きご利用いただくには、アプリの「アカウント」画面、またはアカウントページの「お支払い方法」から、お支払い方法を更新してください。
+      更新が済むまで、一部の作品をご覧いただけない場合があります。
+
+      ※ユメミル動画が、メールへの返信でカード番号をおうかがいすることはありません。
+
+      ユメミル動画
+    link: "https://www.yumemiru.example/account"
+    page_url:
+    parts: []
+  actions:
+    - text: 「支払いに問題」は詐欺の決まり文句なので、無視して削除する
+    - text: メールに返信して、新しいカードの番号を伝える
+    - text: アプリを開き、「アカウント」画面からカードを更新する
+      best: true
+  hints:
+    - target: sender
+      note: 送信元は、ユメミル動画の公式アドレス no-reply@yumemiru.example。
+    - target: body
+      note: カードの期限が切れたという自分の状況と合っていて、アプリかアカウントページから更新するよう案内している。短い期限で脅したり、カード番号を入力させたりしていない。
+    - target: link
+      note: リンクの本当の持ち主は、公式の yumemiru.example。
+  explanation:
+    why: |
+      ユメミル動画からの本物のお知らせ。ユメミル動画のメールは no-reply@yumemiru.example から届き、支払い方法の変更はアプリかアカウントページで行う。このメールは送信元もリンクも公式ドメインで、カードの期限が切れたという自分の状況とも合っている。偽物（「アカウントを保留」など）と話題は似ているが、短い期限で脅したり、公式でないページでカード情報を入力させたりしていない。
+    action: |
+      メールのリンクより、ユメミル動画のアプリを開いて「アカウント」画面からお支払い方法を更新するのが確実。
+  references:
+    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)"
+      url: https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html
+
+- id: Q-EM-015
+  title: マチカド郵便をかたる再配達手数料のメール
+  type: judge
+  channel: email
+  is_scam: true
+  level: normal
+  situation: S02
+  targets: [全世代]
+  brand: machikado
+  tactics: [T09, T01, T06]
+  examples: [EX-009, EX-002]
+  context: |
+    通販で注文した本が、今週中にマチカド郵便で届く予定になっている。出かけて帰ってくると、次のメールが届いていた。
+  message:
+    sender_name: マチカド郵便
+    sender: "info@machikado-redelivery.example"
+    subject: 【マチカド郵便】ご不在のためお荷物を持ち戻りました
+    body: |
+      マチカド郵便をご利用いただき、ありがとうございます。
+
+      10月15日 14時20分ごろにお荷物をお届けにうかがいましたが、ご不在のため持ち戻りました。
+
+      お問い合わせ番号：381422075516
+      保管期限：10月22日
+
+      再配達をご希望の場合は、下記のページでお届け先の住所をご確認のうえ、再配達手数料（330円）をクレジットカードでお支払いください。保管期限を過ぎたお荷物は、差出人へお返しします。
+
+      ▼再配達のお申し込みはこちら
+
+      マチカド郵便 お客様サービス係
+    link: "https://machikado-redelivery.example/redelivery?no=381422075516"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開き、住所を確かめて手数料の330円をカードで払う
+    - text: リンク先で住所の確認だけ済ませ、カード番号は入れずに閉じる
+    - text: メールに返信して、どこから届いた荷物なのかを問い合わせる
+    - text: リンクは開かず、不在票か公式サイトで荷物の状況を確かめる
+      best: true
+  hints:
+    - target: sender
+      note: 送信元のアドレスの @ の後ろが machikado-redelivery.example で、マチカド郵便の公式ドメイン（machikado-post.example）ではない。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）も machikado-redelivery.example で、公式サイトではない。
+    - target: body
+      note: 不在をメールで知らせ、再配達のために住所の確認と手数料のカード払いを求めている。マチカド郵便は不在を紙の不在票で知らせ、再配達は不在票の番号か公式サイトで受け付ける。
+  explanation:
+    why: |
+      マチカド郵便をかたる偽の不在通知メール。マチカド郵便は、不在のときは紙の不在票を入れ、再配達は不在票に書かれた番号か公式サイトで受け付ける。送信元とリンクの登録ドメイン（URLの本当の持ち主）も、公式の machikado-post.example ではない。再配達の手続きを口実に、住所やカード番号を入力させる偽のメールやSMSが多く報告されている。
+    action: |
+      荷物を待っているときでも、メールのリンクは開かない。郵便受けの不在票を確かめ、不在票の番号か、ブックマークした公式サイトから申し込む。カード番号を入力してしまったら、すぐにカード会社に連絡する。
+  references:
+    - title: "トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に"
+      url: "https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html"
+    - title: "国内 ISP の認証情報を不正利用して送信されたフィッシングメールに注意呼びかけ"
+      url: "https://scan.netsecurity.ne.jp/article/2026/07/06/55635.html"
+
+- id: Q-EM-016
+  title: ポチッと通販の本物の当選メール
+  type: judge
+  channel: email
+  is_scam: false
+  level: normal
+  situation: S16
+  targets: [全世代]
+  brand: pochitto
+  tactics: []
+  examples: [EX-084, EX-082]
+  context: |
+    先週、ポチッと通販のアプリで「秋のお買い物応援キャンペーン（抽選で500ポイント）」に自分でエントリーした。10月20日、次のメールが届いた。
+  message:
+    sender_name: ポチッと通販
+    sender: "campaign@pochitto.example"
+    subject: 【ポチッと通販】秋のお買い物応援キャンペーン 当選のお知らせ
+    body: |
+      ポチッと通販をご利用いただき、ありがとうございます。
+
+      先日は「秋のお買い物応援キャンペーン」にエントリーいただき、ありがとうございました。抽選の結果、お客様が当選されましたので、お知らせいたします。
+
+      賞品：ポチッとポイント 500ポイント
+      付与日：10月20日（ご登録のアカウントに付与済み）
+      有効期限：付与日から6か月
+
+      ポイントはすでにお客様のアカウントに付与しておりますので、お手続きは必要ありません。
+      同じ内容は、アプリの「メッセージセンター」と「ポイント履歴」でもご確認いただけます。
+
+      ポチッと通販 キャンペーン事務局
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: メールに返信して、ポイントを受け取る手続きがないか聞く
+    - text: 検索で見つけた「当選確認」のページにログインして確かめる
+    - text: アプリを開き、メッセージセンターとポイント履歴で確かめる
+      best: true
+    - text: 当選のメールは詐欺に決まっているので、すぐに削除する
+  hints:
+    - target: sender
+      note: 送信元のアドレスの @ の後ろが pochitto.example で、ポチッと通販の公式ドメイン。
+    - target: subject
+      note: 自分でエントリーしたキャンペーンの結果を知らせている。申し込んでいない懸賞の当選ではない。
+    - target: body
+      note: リンクがなく、パスワードやカード番号の入力も、手数料の支払いも求めていない。手続きは不要で、アプリのメッセージセンターで同じ内容を確かめられると書いている。
+  explanation:
+    why: |
+      ポチッと通販からの本物の当選メール。送信元は公式ドメイン（pochitto.example）で、自分でエントリーしたキャンペーンの結果を知らせている。リンクがなく、パスワードやカード番号の入力、手数料の支払いも求めていない。偽の当選の連絡は、申し込んでいない懸賞の当選を知らせたり、受け取りのために手数料や個人情報の入力を求めたりするのが特徴。
+    action: |
+      本物らしく見えても、当選やポイントの内容は、公式アプリのメッセージセンターやポイント履歴で確かめる。ポチッと通販の大事なお知らせは、メッセージセンターにも必ず表示される。
+  references:
+    - title: "（心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）"
+      url: "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html"
+    - title: "（当選メールの後に手数料を次々と請求された相談事例）"
+      url: "https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf"

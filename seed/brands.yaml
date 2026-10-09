@@ -82,7 +82,7 @@
   name: ハナシバ
   category: SNS
   official_domain: hanashiba.example
-  official_contact: 企業・公的機関・有名人の公式アカウントには認証バッジが付く。
+  official_contact: 企業・公的機関・有名人の公式アカウントには認証バッジが付く。メールのリンクやQRコードからログインや本人確認をさせない。
 
 - key: deaeru
   name: デアエル
