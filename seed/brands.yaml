@@ -136,13 +136,13 @@
   name: スイスイ高速
   category: 高速道路・ETC
   official_domain: suisui-kosoku.example
-  official_contact: 利用明細は会員ページで確認する。登録した人には、明細ができたことをメールで知らせる（カード情報は求めない）。ETCの登録の期限切れをSMSで知らせることはない。
+  official_contact: 利用明細は会員ページ（公式サイトと公式アプリ）で確認する。登録した人には、明細ができたことをメールで知らせる（カード情報は求めない）。ETCの登録の期限切れをSMSで知らせることはない。
 
 - key: furusatokago
   name: ふるさとカゴ
   category: ふるさと納税サイト
   official_domain: furusato-kago.example
-  official_contact: 寄付の支払いはサイトの決済画面から。個人名義の口座への振込は求めない。
+  official_contact: 寄付は公式サイトと公式アプリで受け付け、支払いはその決済画面から。個人名義の口座への振込は求めない。
 
 - key: soyokaze_city
   name: そよかぜ市役所
