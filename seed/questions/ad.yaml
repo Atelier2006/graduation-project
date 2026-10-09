@@ -444,7 +444,7 @@
     - target: part:2
       note: 公式で売り切れた限定品を「80%オフ」とうたい、「本日23:59まで」と急がせている。
     - target: link
-      note: リンク先は聞いたことのない通販サイト（kirameki-mart-sale.example）で、公式ショップではない。
+      note: リンクの持ち主（登録ドメイン）は kirameki-mart-sale.example。聞いたことのない通販サイトで、推しのグループの公式ショップではない。
     - target: part:4
       note: 支払いが銀行振込だけで、振込先は注文のあとに知らせるという。偽の通販サイトによくある特徴。
   explanation:
@@ -453,10 +453,8 @@
     action: |
       広告からは買わない。再販売などの情報は、公式ショップや公式SNSで確かめる。振り込んでしまったら、すぐに振込先の銀行に連絡し、消費者ホットライン188に相談する。
   references:
-    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
-      url: "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html"
-    - title: "（ネット通販の偽サイトに関する啓発資料。個人名義の口座を指定されたら詐欺と注意）"
-      url: "https://www3.pref.nara.jp/syouhiseikatsucenter/secure/2091/R6.8.kozika.pdf"
+    - title: 見守り新鮮情報 第515号（怪しい通販サイトにご注意）
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
 
 - id: Q-AD-010
   title: ふつうの求人に見せた闇バイトの広告
