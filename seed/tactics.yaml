@@ -4,7 +4,7 @@
   description: 企業・サービス・公的機関の名前をかたる
 - code: T02
   name: そっくりドメイン
-  description: つづり違い、紛らわしい文字（l と 1 など）、別の文字体系の文字を使う
+  description: つづり違い、紛らわしい文字（l と 1 など）、別の文字体系の文字を使う。公式の名前に単語を足したドメイン（kotori-bank-login.example など）も含む
 - code: T03
   name: URLの見せかけ
   description: 短縮URL、正規の名前をサブドメインに入れる、表示と飛び先が違う
