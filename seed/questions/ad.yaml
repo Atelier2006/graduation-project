@@ -1,0 +1,409 @@
+# 広告の問題（Q-AD-001〜Q-AD-008）
+# 書き方は docs/question-bank/writing-guide.md を参照。確認：python tools/question_bank.py check --file seed/questions/ad.yaml
+
+- id: Q-AD-001
+  title: 有名投資家を名乗る「無料の投資講座」の広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: easy
+  situation: S04
+  targets: [社会人, 高齢者]
+  tactics: [T01, T05, T11]
+  examples: [EX-022]
+  context: |
+    SNSのタイムラインを見ていたら、次の広告が表示された。
+  message:
+    sender_name: フクフク投資塾
+    sender:
+    subject:
+    body:
+    link: "https://fukufuku-juku.example/lp/"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: テレビでおなじみの有名投資家が、あなたに無料で投資を教えます
+      - kind: text
+        text: 必ず月20万円の利益！元本保証で初心者も安心。参加者の9割が3か月でプラスに。先着30名・本日締め切り。
+      - kind: button
+        text: トモトモの投資グループに参加する（無料）
+  actions:
+    - text: ボタンを押して、トモトモの投資グループに参加する
+    - text: 無料なので、損はないと考えて話だけ聞いてみる
+    - text: 広告からは連絡せず、グループにも参加しない
+      best: true
+    - text: 本日締め切りなので、まず先着の枠だけ申し込む
+  hints:
+    - target: part:2
+      note: 有名人が無料で投資を教える、という広告は、有名人の名前や写真を勝手に使った詐欺によくある形。
+    - target: part:3
+      note: 「必ず」「元本保証」と、もうかることを約束している。投資で利益が約束されることはない。
+    - target: part:4
+      note: メッセージアプリの投資グループに誘っている。グループでは、ほかの参加者がもうけたように見せる書き込みが続き、最後に大金を振り込ませる。
+  explanation:
+    why: |
+      有名な投資家が無料で教える、という広告から投資グループに誘い、最後に大金を振り込ませるSNS型投資詐欺の入口。投資で「必ず」もうかることはなく、「元本保証」「本日締め切り」も、考える時間を奪うための言葉だ。2025年のSNS型投資詐欺では、だます側との最初の接点として広告がもっとも多かった（警察庁）。
+    action: |
+      広告からは連絡せず、グループにも参加しない。投資を勧められたら、相手が金融庁の登録を受けた業者かを確かめ、個人名義の口座には振り込まない。お金を払ってしまったら、すぐに警察相談専用電話 #9110 に相談する。
+  references:
+    - title: それ詐欺です！SNS上の投資勧誘にご注意ください！
+      url: https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html
+    - title: 令和7年における特殊詐欺及びSNS型投資・ロマンス詐欺の認知・検挙状況等について（確定値）
+      url: https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html
+
+- id: Q-AD-002
+  title: 「初回500円・いつでも解約OK」のサプリの広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: hard
+  situation: S01
+  targets: [全世代]
+  tactics: [T05]
+  examples: [EX-005]
+  context: |
+    動画を見ていたら、途中で次の広告が流れた。ちょうどダイエット用のサプリを試してみたいと思っていた。
+  message:
+    sender_name: ハレヤカ堂 公式ショップ
+    sender:
+    subject:
+    body:
+    link: "https://hareyaka-do.example/lp/slim"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 初回お試し 500円（税込・送料無料）
+      - kind: text
+        text: いつでも解約OK！まずは気軽に試してみてください。
+      - kind: button
+        text: 500円で試してみる
+      - kind: text
+        text: ※4回以上の継続購入が条件です。2回目以降は毎月8,800円（税込）でお届けします。
+  actions:
+    - text: 500円なら損はないので、ボタンから申し込む
+    - text: 「いつでも解約OK」なので、1回目が届いたら解約する
+    - text: 友だちにも教えて、一緒にお試しを申し込む
+    - text: 小さな文字の条件と支払総額を確かめてから決める
+      best: true
+  hints:
+    - target: part:5
+      note: 小さな文字で「4回以上の継続購入が条件」「2回目以降は毎月8,800円」と書かれている。4回分の合計は26,900円になる。
+    - target: part:3
+      note: 大きな文字の「いつでも解約OK」と、小さな文字の「4回以上の継続購入が条件」が食い違っている。
+  explanation:
+    why: |
+      大きな文字で「いつでも解約OK」と書きながら、小さな文字では「4回以上の継続購入が条件」と書いていて、大事な条件が食い違っている。安さや気軽さを大きく見せて本当の条件を目立たなくするのは、定期購入のトラブルによくある、だまして申し込ませる広告だ。この条件では支払いは合計26,900円になり、1回だけの買い物だと思い込むと、すぐには解約できずに高い代金を払い続けることになる。
+    action: |
+      申し込む前に、小さな文字の条件や、注文の最終確認画面に書かれた定期購入の条件・支払総額・解約の方法を確かめる。通信販売にはクーリング・オフがないので、困ったら早めに消費者ホットライン188に相談する。
+  references:
+    - title: 見守り新鮮情報 第487号（その申込み、定期購入ではありませんか？最終確認画面チェックリスト）
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen487.html
+    - title: 「定期縛りなし」が「解約するまで続く定期購入」だと思わなかった相談事例 国民生活センターが注意喚起
+      url: https://ecnomikata.com/ecnews/45999
+
+- id: Q-AD-003
+  title: ニュースサイトの広告枠に出た「ウイルス感染」の表示
+  type: judge
+  channel: ad
+  is_scam: true
+  level: normal
+  situation: S11
+  targets: [全世代]
+  tactics: [T04, T10]
+  examples: [EX-066, EX-069]
+  context: |
+    スマホでニュースサイトの記事を読んでいたら、記事の途中の広告枠に次の表示が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link: "https://virus-kujo-app.example/install"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: warning
+        text: 警告！お使いのスマホは78%ウイルスに感染しています
+      - kind: text
+        text: このままでは写真や連絡先が壊れるおそれがあります。今すぐ無料アプリで駆除してください。
+      - kind: button
+        text: 今すぐ駆除する
+  actions:
+    - text: 「今すぐ駆除する」を押して、無料アプリを入れる
+    - text: 広告は押さず、気になるならページを閉じる
+      best: true
+    - text: 広告の会社に問い合わせて、感染しているか聞く
+    - text: すぐにスマホを初期化して、ウイルスを消す
+  hints:
+    - target: part:1
+      note: 「広告」と表示されている。広告は、あなたのスマホの中の状態を調べることはできない。
+    - target: part:2
+      note: 「78%感染」のような表示は、本物のセキュリティソフトの警告ではない。
+    - target: part:4
+      note: ボタンからアプリを入れさせようとしている。入れたアプリが、定期的に料金がかかるものの場合もある。
+  explanation:
+    why: |
+      広告の枠に出た「ウイルスに感染しています」という表示は、偽の警告だ。広告やWebページは、あなたのスマホの中を調べることはできない。慌てさせてアプリを入れさせ、定期的に料金がかかる契約をさせたり、偽のサポートに電話させたりする手口がある。
+    action: |
+      広告は押さずに閉じる。セキュリティのアプリが必要なときは、広告からではなく、公式のアプリストアで内容を確かめてから入れる。もし入れてしまったら、定期的に料金がかかる契約がないか確かめる。
+  references:
+    - title: 安心相談窓口だより：スマートフォンの偽のセキュリティ警告から自動継続課金のアプリへ誘導する手口に再注意（題名は要約）
+      url: https://www.ipa.go.jp/security/anshin/attention/2022/mgdayori20221025.html
+    - title: 広告からサポート詐欺へ遷移、手口分析レポート公開
+      url: https://scan.netsecurity.ne.jp/article/2023/09/29/50009.html
+
+- id: Q-AD-004
+  title: ゲーム内コインが安く買えるという「課金代行」の広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: normal
+  situation: S13
+  targets: [学生]
+  tactics: [T05, T06, T07]
+  examples: [EX-077]
+  context: |
+    スマホゲームを遊んでいる。このゲームのコインは、ピコピコストアとゲームの中で売られている。攻略情報のサイトを見ていたら、次の広告が出た。
+  message:
+    sender_name: 課金代行 ラクラクコイン
+    sender:
+    subject:
+    body:
+    link: "https://rakuraku-coin.example/order"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 課金代行で、ゲーム内コインが正規の5%の値段に！
+      - kind: text
+        text: 1万円分のコインが500円。ゲームのIDとパスワードを送るだけで、すぐにコインを入れておきます。
+      - kind: button
+        text: 今すぐ注文する
+  actions:
+    - text: 安いので、IDとパスワードを送って注文する
+    - text: まず500円分だけ頼んで、本当に届くか試す
+    - text: 代行は使わず、コインはゲームの中で買う
+      best: true
+    - text: パスワードを変えてから、IDと一緒に送る
+  hints:
+    - target: part:3
+      note: ゲームのIDとパスワードを送らせようとしている。教えると、アカウントを乗っ取られるおそれがある。
+    - target: part:2
+      note: 正規の5%という、ありえない安さで誘っている。このゲームのコインは、ピコピコストアとゲームの中でだけ売られている。
+  explanation:
+    why: |
+      正規よりずっと安くゲーム内のコインが買えるとうたう「課金代行」の広告。多くのゲームでは、課金代行やアカウントの売買は利用規約で禁止されていて、不正な手段が使われていれば、頼んだ人も罪に問われることがある。ピコピコストアのゲーム内通貨は、ストアとゲームの中でだけ売られている。IDとパスワードを渡せば、アカウントを乗っ取られるおそれもある。
+    action: |
+      課金代行やアカウントの売買は使わず、ゲーム内通貨は正規のストアやゲームの中で買う。IDとパスワードは誰にも教えない。困ったときは消費者ホットライン188に相談する。
+  references:
+    - title: CYBER NEWS 2024 Vol.2
+      url: https://www.police.pref.hokkaido.lg.jp/00ps/yoichi-syo/kakuka/01_keimu/002_ibemt/200saiseki/syoutyuugakuseimuke/CYBER%20NEWS%202024_Vol.2.pdf
+    - title: 不正な「RMT行為」は犯罪集団の資金洗浄に使用されている―利用側ユーザーが罪に問われる場合も
+      url: https://www.gamebusiness.jp/article/2025/08/28/24949.html
+
+- id: Q-AD-005
+  title: 「スマホで1日5分、月30万円」の副業の広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: normal
+  situation: S07
+  targets: [学生, 社会人]
+  tactics: [T05, T07, T11]
+  examples: [EX-041, EX-042]
+  context: |
+    アルバイトのほかにも収入がほしいと思っていた。SNSを見ていたら、次の広告が表示された。
+  message:
+    sender_name: スキマ副業ラボ
+    sender:
+    subject:
+    body:
+    link: "https://sukima-fukugyo.example/entry"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: スマホで1日5分、月30万円！
+      - kind: text
+        text: 経験・スキルは不要。マニュアルどおりにタップするだけ。まずは無料相談から。
+      - kind: text
+        text: 「始めて1か月で50万円稼げました」（20代・学生）
+      - kind: button
+        text: 無料で相談する
+  actions:
+    - text: うまい話なので、広告からは申し込まない
+      best: true
+    - text: 無料なので、とりあえず相談だけしてみる
+    - text: 体験談があるので信用して、すぐに申し込む
+    - text: 相談して、サポート代が高ければ借りて払う
+  hints:
+    - target: part:2
+      note: 「1日5分で月30万円」と、少しの作業で大きな収入を約束している。
+    - target: part:3
+      note: 何をする仕事なのかが書かれていない。「無料相談」のあとで、高額なサポート契約をすすめられることが多い。
+    - target: part:4
+      note: 体験談は広告を出した側が自由に書けるもので、本当かどうか確かめられない。
+  explanation:
+    why: |
+      「スマホで簡単に高収入」とうたう副業の広告から相談させ、高額なサポート契約を結ばせる手口。お金がないと言うと、借金をしてまで払うよう言われる例もある。何をして稼ぐのかが書かれておらず、少しの作業で大きな収入を約束している点が危ない。
+    action: |
+      広告からは申し込まない。もし勧誘されても、その場で契約や借り入れをしない。困ったら消費者ホットライン188に相談する。
+  references:
+    - title: 副業サポートや投資の名目で借金させる業者に注意!−複数の貸金業者から次々と借り入れさせる手口が目立ちます−
+      url: https://www.kokusen.go.jp/news/data/n-20260520_1.html
+
+- id: Q-AD-006
+  title: ポチッと通販の「秋の大感謝祭」の広告
+  type: judge
+  channel: ad
+  is_scam: false
+  level: easy
+  situation: S01
+  targets: [全世代]
+  brand: pochitto
+  tactics: []
+  examples: [EX-008, EX-003]
+  context: |
+    ポチッと通販のアカウントを持っている。SNSを見ていたら、次の広告が表示された。
+  message:
+    sender_name: ポチッと通販
+    sender:
+    subject:
+    body:
+    link: "https://pochitto.example/campaign/autumn2026"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 秋の大感謝祭 ポイント最大10%還元
+      - kind: text
+        text: 10月15日（木）〜10月25日（日）。期間中にエントリーしてお買い物をすると、ポイントが最大10%もらえます。くわしい条件はキャンペーンページで。
+      - kind: button
+        text: キャンペーンページを見る
+  actions:
+    - text: 広告のボタンからログインして、すぐにエントリーする
+    - text: 公式アプリで、同じキャンペーンがあるか確かめる
+      best: true
+    - text: 広告は全部怪しいので、キャンペーンは使わない
+    - text: SNSに「これ本物？」と投稿して、答えを待つ
+  hints:
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は pochitto.example で、ポチッと通販の公式ドメインと同じ。
+    - target: part:3
+      note: 期間と条件が書かれているだけで、カード情報や個人情報の入力は求めていない。還元も「最大10%」と、ありえないほどの値引きではない。
+  explanation:
+    why: |
+      リンクの持ち主（登録ドメイン）がポチッと通販の公式ドメインの pochitto.example で、内容もふつうのセールの案内なので、本物の広告だ。急がせたり、個人情報を求めたりもしていない。ただ、広告の中には有名な会社の名前を勝手に使ったものもあるので、見た目やロゴだけで本物と決めない。
+    action: |
+      広告のボタンからではなく、公式アプリやブックマークした公式サイトを自分で開き、同じキャンペーンが出ているか確かめてから使う。
+  references:
+    - title: 見守り新鮮情報 第515号（怪しい通販サイトにご注意）
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
+
+- id: Q-AD-007
+  title: チケットノモリの「公式リセール」の広告
+  type: judge
+  channel: ad
+  is_scam: false
+  level: normal
+  situation: S12
+  targets: [学生]
+  brand: ticketnomori
+  tactics: []
+  examples: [EX-075]
+  context: |
+    来月のライブのチケットを持っているが、用事ができて行けなくなった。動画アプリを見ていたら、次の広告が流れた。
+  message:
+    sender_name: チケットノモリ
+    sender:
+    subject:
+    body:
+    link: "https://ticket-nomori.example/resale"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 行けなくなったチケットは、公式リセールへ
+      - kind: text
+        text: 定価で出品でき、買う人も安心。出品は公式アプリの「マイチケット」から。手数料は、売れたときだけかかります。
+      - kind: button
+        text: くわしく見る
+  actions:
+    - text: SNSで「譲ります」と投稿し、買ってくれる人を探す
+    - text: 広告は怪しいので、チケットはそのままにしておく
+    - text: フリマアプリで、定価より少し高く出品する
+    - text: 公式アプリを開き、マイチケットからリセールに出す
+      best: true
+  hints:
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は ticket-nomori.example で、チケットノモリの公式ドメインと同じ。
+    - target: part:3
+      note: 出品は公式アプリから、と案内している。チケットノモリは、行けなくなったチケットを公式のリセールでだけ受け付けている。
+  explanation:
+    why: |
+      リンクの持ち主がチケットノモリの公式ドメインの ticket-nomori.example で、内容も「行けなくなったチケットは公式のリセールで」という正規の方法の案内なので、本物の広告だ。チケットの売り買いは、SNSでの個人どうしの取引や転売仲介サイトでトラブルが多く、公式のリセールを使うのが安全だ。
+    action: |
+      広告のボタンからではなく、チケットノモリの公式アプリを自分で開いてリセールに出す。SNSで知らない人とチケットの取引をしない。
+  references:
+    - title: “推し”に会えない!?転売チケットの購入トラブルが急増中
+      url: https://www.kokusen.go.jp/news/data/n-20220804_2.html
+
+- id: Q-AD-008
+  title: ユメミル動画の「1年分の視聴権が当たる」キャンペーンの広告
+  type: judge
+  channel: ad
+  is_scam: false
+  level: hard
+  situation: S16
+  targets: [全世代]
+  brand: yumemiru
+  tactics: []
+  examples: [EX-084]
+  context: |
+    ユメミル動画を使っている。SNSを見ていたら、次の広告が表示された。
+  message:
+    sender_name: ユメミル動画
+    sender:
+    subject:
+    body:
+    link: "https://yumemiru.example/campaign/new-release"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 新作公開記念！抽選で100名様に「1年分の視聴権」をプレゼント
+      - kind: text
+        text: 応募はユメミル動画アプリの「お知らせ」から。応募にも受け取りにも、手数料はかかりません。当選した方には、アプリの「お知らせ」でご連絡します。
+      - kind: button
+        text: キャンペーンの詳細を見る
+  actions:
+    - text: アプリを自分で開き、お知らせに同じ案内があるか見る
+      best: true
+    - text: プレゼントの話は詐欺なので、広告を通報する
+    - text: 広告のコメント欄に、メールアドレスを書いて応募する
+    - text: あとで当選のDMが来たら、そのリンクから手続きする
+  hints:
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は yumemiru.example で、ユメミル動画の公式ドメインと同じ。
+    - target: part:3
+      note: 応募も当選の連絡もアプリの「お知らせ」で行い、手数料はかからないと書かれている。ユメミル動画の正規のキャンペーンの方法と同じ。
+  explanation:
+    why: |
+      「プレゼント」「抽選」という言葉で怪しく見えるが、リンクの持ち主は公式の yumemiru.example で、応募も当選の連絡もアプリの「お知らせ」で行い、手数料もかからない。ユメミル動画の正規のキャンペーンの方法と合っているので、本物の広告だ。偽物は、公式に似たアカウントからDMで「当選」を知らせ、手数料やカード情報を求めてくる。
+    action: |
+      応募するときは、広告からではなく、ユメミル動画のアプリを自分で開いて「お知らせ」から行う。当選のDMが届いても、そのリンクは開かず、アプリの「お知らせ」で確かめる。
+  references:
+    - title: 姶良・伊佐地域振興局の公式Instagramのなりすましへの注意喚起（題名未確認）
+      url: https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html
+    - title: 「当選通知でだます」偽UQアカウント出現、公式が注意喚起 “UQガチャムク”は無断使用か
+      url: https://www.itmedia.co.jp/mobile/articles/2509/19/news060.html

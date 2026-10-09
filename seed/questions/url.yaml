@@ -1,0 +1,205 @@
+# URLの読み方の問題（Q-UR-001〜Q-UR-008）
+# 問い：このURLの本当の持ち主（登録ドメイン）はどれ？ .example では、ホスト名の最後の2つの区切りが登録ドメインになる。
+# 書き方は docs/question-bank/writing-guide.md の5章を参照。確認：python tools/question_bank.py check --file seed/questions/url.yaml
+
+- id: Q-UR-001
+  title: 銀行の公式ドメインを前に付けたURL
+  type: url
+  is_scam: true
+  level: easy
+  situation: S03
+  targets: [全世代]
+  brand: kotori
+  tactics: [T03]
+  examples: [EX-018, EX-021]
+  context: |
+    コトリ銀行を名乗るSMSに「お取引を一時停止しました。ご本人確認をお願いします」と書かれ、次のURLが付いていた。
+  url: "https://kotori-bank.example.account-verify.example/login"
+  choices: [kotori-bank.example, account-verify.example, login]
+  answer: account-verify.example
+  explanation:
+    why: |
+      URLの本当の持ち主（登録ドメイン）は、「//」のあとから次の「/」までの部分（ホスト名）の、一番右側で決まる。.example では「.」（ドット）で区切った右から2つの部分なので、このURLの持ち主は account-verify.example だ。前にある kotori-bank.example は、持ち主が自由に付けられる飾り（サブドメイン）で、コトリ銀行とは関係がない。
+    action: |
+      コトリ銀行は、メールやSMSのリンクからログインさせない。ログインは、公式アプリかブックマークした公式サイトから行う。
+  references:
+    - title: インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
+    - title: フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ
+      url: https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html
+
+- id: Q-UR-002
+  title: 公式の名前に「-shop」を足したURL
+  type: url
+  is_scam: true
+  level: normal
+  situation: S01
+  targets: [全世代]
+  brand: pochitto
+  tactics: [T02]
+  examples: [EX-002]
+  context: |
+    「【ポチッと通販】秋の特別セール 本日限り」という件名のメールに、次のURLが書かれていた。
+  url: "https://pochitto-shop.example/sale"
+  choices: [pochitto.example, shop.example, pochitto-shop.example, sale]
+  answer: pochitto-shop.example
+  explanation:
+    why: |
+      このURLのホスト名は pochitto-shop.example で、登録ドメイン（本当の持ち主）もそのまま pochitto-shop.example だ。区切りは「.」（ドット）で、ハイフン（-）は区切りではないので、「pochitto-shop」でひとつの名前になる。ポチッと通販の公式ドメインは pochitto.example なので、名前に「-shop」を足しただけの、別の持ち主のサイトだ。
+    action: |
+      セールの情報は、メールのリンクからではなく、公式アプリやブックマークした公式サイトで確かめる。ポチッと通販の大事なお知らせは、アカウントの「メッセージセンター」にも表示される。
+  references:
+    - title: 2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増
+      url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
+
+- id: Q-UR-003
+  title: 「l」を数字の「1」に変えたURL
+  type: url
+  is_scam: true
+  level: normal
+  situation: S05
+  targets: [全世代]
+  brand: piyo
+  tactics: [T02]
+  examples: [EX-032]
+  context: |
+    ピヨモバイルを名乗るSMSに「パスワードの再設定をお願いします」と書かれ、次のURLが付いていた。
+  url: "https://www.piyo-mobi1e.example/login"
+  choices: [piyo-mobi1e.example, piyo-mobile.example, www.piyo-mobi1e.example, login]
+  answer: piyo-mobi1e.example
+  explanation:
+    why: |
+      ホスト名は www.piyo-mobi1e.example で、登録ドメイン（本当の持ち主）は右から2つの区切りの piyo-mobi1e.example だ。よく見ると「mobile」の「l（エル）」が数字の「1」になっていて、公式の piyo-mobile.example とは別の持ち主になる。前の www は持ち主が付けた部分で、持ち主を決めるのは右側だ。
+    action: |
+      見た目がそっくりでも信じない。パスワードの再設定などは、SMSのリンクではなく、ピヨモバイルの公式アプリやブックマークした公式サイトから行う。
+  references:
+    - title: （ページ名未確認）消費生活の注意・警戒情報（携帯電話会社名のSMSからキャリア決済を不正利用された事例）
+      url: https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html
+    - title: 2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加
+      url: https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html
+
+- id: Q-UR-004
+  title: 公式ドメインをパスの中に入れたURL
+  type: url
+  is_scam: true
+  level: hard
+  situation: S02
+  targets: [全世代]
+  brand: hashire
+  tactics: [T03, T09]
+  examples: [EX-009, EX-010]
+  context: |
+    ハシレ運輸の名前で「お荷物をお届けできませんでした。再配達はこちら」というSMSが届き、次のURLが付いていた。
+  url: "https://delivery-status.example/hashire-unyu.example/redelivery"
+  choices: [hashire-unyu.example, redelivery, delivery-status.example]
+  answer: delivery-status.example
+  explanation:
+    why: |
+      ホスト名は「//」のあとから最初の「/」までの delivery-status.example で、これが登録ドメイン（本当の持ち主）だ。そのあとの「/hashire-unyu.example/redelivery」はパス（サイトの中の場所）で、持ち主が自由に名前を付けられる。公式ドメインの名前が入っていても、パスの中にあるなら持ち主とは関係ない。そもそもハシレ運輸は、リンク付きの不在通知をSMSで送らない。
+    action: |
+      SMSのリンクは開かない。荷物のことは、郵便受けの紙の不在票や、ハシレ運輸の公式アプリで確かめる。
+  references:
+    - title: （ページ名未確認）消費生活のよくある質問（不在通知のSMS・メール）
+      url: https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html
+    - title: 安心相談窓口だより：宅配業者をかたる偽SMSで、スマホの種類によりフィッシングサイトへ誘導する手口（題名は要約）
+      url: https://www.ipa.go.jp/security/anshin/attention/2018/mgdayori20181129.html
+
+- id: Q-UR-005
+  title: 「@」の前に公式ドメインを書いたURL
+  type: url
+  is_scam: true
+  level: hard
+  situation: S12
+  targets: [全世代]
+  brand: yumemiru
+  tactics: [T03]
+  examples: [EX-071]
+  context: |
+    ユメミル動画を名乗るメールに「前回のお支払いが完了しませんでした。お支払い方法を更新してください」と書かれ、次のURLが付いていた。
+  url: "https://yumemiru.example@billing-update.example/account"
+  choices: [yumemiru.example, account, billing-update.example]
+  answer: billing-update.example
+  explanation:
+    why: |
+      URLの中に「@」があるときは、「@」より前の部分は行き先とは関係がなく、実際に開くのは「@」の後ろの billing-update.example だ。これがこのURLの登録ドメイン（本当の持ち主）になる。前の yumemiru.example は、本物に見せかけるための飾りだ。
+    action: |
+      ユメミル動画の支払い方法の変更は、アプリかアカウントページから自分で行う。メールのリンクは開かない。
+  references:
+    - title: 「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)
+      url: https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html
+
+- id: Q-UR-006
+  title: 公式ドメインのサブドメインに「?」以下が付いたURL
+  type: url
+  is_scam: false
+  level: normal
+  situation: S03
+  targets: [全世代]
+  brand: hoshizora
+  tactics: []
+  examples: [EX-021]
+  context: |
+    ブックマークからホシゾラカードの会員サイトを開くと、ログイン画面のアドレスバーに次のURLが表示された。
+  url: "https://member.hoshizora-card.example/login?next=%2Fstatement"
+  choices: [member.hoshizora-card.example, hoshizora-card.example, statement]
+  answer: hoshizora-card.example
+  explanation:
+    why: |
+      ホスト名は member.hoshizora-card.example で、登録ドメイン（本当の持ち主）は右から2つの区切りの hoshizora-card.example だ。ホシゾラカードの公式ドメインと同じなので、本物のサイトになる。前の member は持ち主が自分で付けたサブドメインで、「?」より後ろはページに渡す情報なので、持ち主には関係しない。
+    action: |
+      カードの会員サイトは、これからもブックマークや公式アプリから開く。メールやSMSのリンクから開いたページでは、見た目が同じでもIDやパスワードを入力しない。
+  references:
+    - title: インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
+    - title: 10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ
+      url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
+
+- id: Q-UR-007
+  title: 長くて複雑だが、税務署の公式ドメインのURL
+  type: url
+  is_scam: false
+  level: hard
+  situation: S08
+  targets: [社会人, 全世代]
+  brand: soyokaze_tax
+  tactics: []
+  examples: [EX-055]
+  context: |
+    ブックマークしてある、そよかぜ税務署の公式サイトから、申告についてのお知らせのページを開いた。アドレスバーに次のURLが表示されている。
+  url: "https://www.tax.soyokaze.example/shinkoku/notice/2026?from=top"
+  choices: [www.tax.soyokaze.example, shinkoku, tax.soyokaze.example, soyokaze.example]
+  answer: soyokaze.example
+  explanation:
+    why: |
+      URLが長くても、持ち主を決めるのはホスト名（www.tax.soyokaze.example）の右側の2つの区切り、soyokaze.example だ。そよかぜ税務署の公式ドメイン tax.soyokaze.example も soyokaze.example の中にあり、www や tax はその前に付けたサブドメインになる。「/」より後ろのパスや「?」より後ろは、持ち主には関係しない。
+    action: |
+      URLの長さや複雑さで判断せず、ホスト名の右側を確かめる。税金のお知らせは自分で開いた公式サイトで確かめ、SMSやメールのリンクから支払いや入力をしない。
+  references:
+    - title: （ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起
+      url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
+    - title: メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起
+      url: https://internet.watch.impress.co.jp/docs/news/2112792.html
+
+- id: Q-UR-008
+  title: 就活サイトのシンプルなURL
+  type: url
+  is_scam: false
+  level: easy
+  situation: S07
+  targets: [学生]
+  brand: jobnohako
+  tactics: []
+  examples: [EX-045]
+  context: |
+    ジョブノハコから「企業からメッセージが届きました」というお知らせのメールが来た。ブックマークからジョブノハコを開いてメッセージの画面に進むと、アドレスバーに次のURLが表示された。
+  url: "https://jobnohako.example/mypage/messages"
+  choices: [jobnohako.example, mypage, messages]
+  answer: jobnohako.example
+  explanation:
+    why: |
+      ホスト名は jobnohako.example で、これがそのまま登録ドメイン（本当の持ち主）になる。ジョブノハコの公式ドメインと同じなので、本物のサイトだ。後ろの「/mypage/messages」は、サイトの中の場所（パス）を表している。
+    action: |
+      企業からの連絡は、ブックマークからジョブノハコを開き、サイトの中のメッセージで読む。登録料や研修費を求められたら、払わずに相手にしない（ジョブノハコは学生にお金を求めない）。
+  references:
+    - title: 採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）
+      url: https://jp.indeed.com/help/job-seekers/articles/360040122511
