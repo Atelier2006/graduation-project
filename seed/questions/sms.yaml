@@ -1,0 +1,628 @@
+# SMS の問題（Q-SM-001〜Q-SM-014）
+# 書き方は docs/question-bank/writing-guide.md を参照。確認：python tools/question_bank.py check --file seed/questions/sms.yaml
+
+- id: Q-SM-001
+  title: ハシレ運輸を名乗る不在通知のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S02
+  targets: [全世代]
+  brand: hashire
+  tactics: [T01, T04, T09]
+  examples: [EX-009, EX-011]
+  context: |
+    平日の夕方、スマホに次のSMSが届いた。家族あての荷物がときどき届く家に住んでいる。
+  message:
+    sender_name:
+    sender: "080-XXXX-XXXX"
+    subject:
+    body: |
+      【ハシレ運輸】お荷物のお届けに伺いましたが、ご不在の為持ち帰りしました。保管期限は本日までとなっております。下記URLより再配達のお手続きをお願い致します。
+    link: "http://saihaitatsu-uketsuke.example/?no=XXXXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、保管期限が切れる前に再配達を申し込む
+    - text: 送信元の番号に電話をかけて、どの荷物なのかを聞く
+    - text: リンクは使わず、ハシレ運輸の公式アプリや不在票で確かめる
+      best: true
+    - text: 「心当たりがないので確認してください」と返信する
+  hints:
+    - target: sender
+      note: 宅配業者の窓口ではなく、個人の携帯電話の番号（080から始まる番号）から届いている。
+    - target: body
+      note: 「持ち帰りしました」など日本語が少し不自然で、「保管期限は本日まで」と急がせている。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）は saihaitatsu-uketsuke.example。ハシレ運輸の公式ドメイン hashire-unyu.example ではない。
+  explanation:
+    why: |
+      宅配業者をかたる不在通知の偽SMSで、とても多い手口。ハシレ運輸は、不在のときは紙の不在票を入れ、リンク付きの不在通知をSMSで送ることはない。個人の携帯番号から届いたことや、リンクの持ち主（登録ドメイン）が公式と違うことも、偽物のサインだ。リンクを開くと、偽サイトで不正なアプリを入れさせられたり、IDやパスワードを入力させられたりする。
+    action: |
+      リンクは開かない。荷物が気になるときは、郵便受けに紙の不在票が入っているかを見るか、ハシレ運輸の公式アプリで確かめる。もしリンク先でアプリを入れてしまったら、機内モードにしてからアプリを削除し、消費者ホットライン188や警察相談専用電話 #9110 に相談する。
+  references:
+    - title: （ページ名未確認）宅配業者の不在通知等を装った偽SMSに関する注意喚起（PDF）
+      url: https://www.pref.hiroshima.lg.jp/uploaded/attachment/604115.pdf
+    - title: トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に
+      url: https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html
+
+- id: Q-SM-002
+  title: 会社名のない「住所不明で保管中」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: hard
+  situation: S02
+  targets: [全世代]
+  tactics: [T04, T09]
+  examples: [EX-010, EX-011]
+  context: |
+    3日前に通販サイトで服を注文し、荷物が届くのを待っている。そこに、知らない番号から次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "090-XXXX-XXXX"
+    subject:
+    body: |
+      お客様のお荷物について、お届け先のご住所が確認できないため、配送センターで保管しております。保管期間を過ぎますとご依頼主様へ返送となりますので、至急、下記よりご住所の確認をお願いいたします。
+    link: "https://track-delivery.example/a/XXXXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、お届け先の住所を入力し直す
+    - text: 送信元の番号に電話をかけて、どこの会社か確かめる
+    - text: リンクは使わず、注文した通販サイトで配送状況を見る
+      best: true
+    - text: 「住所に間違いはありません」と返信して様子を見る
+  hints:
+    - target: body
+      note: 宅配業者の名前も、注文したお店の名前も書かれていない。どの荷物のことか分からないのに、「至急」とリンクを開かせようとしている。
+    - target: sender
+      note: 宅配業者の窓口ではなく、知らない携帯電話の番号（090から始まる番号）から届いている。
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は track-delivery.example。どの会社のものか分からず、本物かどうか確かめようがない。
+  explanation:
+    why: |
+      会社名を出さずに「住所が確認できない」「至急」とだけ書き、荷物を待っている人にリンクを開かせる偽SMS。荷物を待っているときほど本物に見えるが、どの会社からの、どの荷物の連絡なのかが分からない。住所は注文のときに自分で入力していて、本当に問題があるかどうかは、注文したお店の注文履歴や配送状況で確かめられる。
+    action: |
+      リンクは開かない。注文した通販サイトやアプリの注文履歴から配送状況を確かめ、気になるときはそこに書かれた配送会社の公式サイトで調べる。リンク先でアプリを入れるよう言われても、入れない。
+  references:
+    - title: スミッシングによる不正アプリへの注意喚起（題名は要約）
+      url: https://www.pref.shiga.lg.jp/police/seikatu/304409/304411/334419.html
+    - title: 安心相談窓口だより：宅配業者をかたる偽SMSから不審なアプリを入れさせる手口（題名は要約）
+      url: https://www.ipa.go.jp/security/anshin/attention/2018/mgdayori20180808.html
+
+- id: Q-SM-003
+  title: ピヨモバイルを名乗る「パスワード変更」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: normal
+  situation: S05
+  targets: [全世代]
+  brand: piyo
+  tactics: [T01, T04, T06]
+  examples: [EX-032, EX-036]
+  context: |
+    ピヨモバイルのスマホを使っている。夜、次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "090-XXXX-XXXX"
+    subject:
+    body: |
+      【ピヨモバイル】お客様のアカウントで、不正利用の可能性がある操作を検知しました。安全のため、24時間以内に下記からパスワードの変更をお願いします。
+    link: "https://piyo-anshin-check.example/login"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、24時間以内にパスワードを変更する
+    - text: リンクは使わず、公式アプリにログインして確かめる
+      best: true
+    - text: 送信元の番号に電話をかけて、不正利用の内容を聞く
+    - text: リンク先で、いまのパスワードが正しいかだけ確かめる
+  hints:
+    - target: sender
+      note: ピヨモバイルの公式SMSは、0005から始まる共通の番号から届く。これは090から始まる個人の携帯電話の番号。
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は piyo-anshin-check.example。ピヨモバイルの公式ドメイン piyo-mobile.example ではない。
+  explanation:
+    why: |
+      携帯電話会社を名乗り、「不正利用の可能性」と不安にさせて、偽サイトでパスワードを入力させる手口。パスワードを変えるという、正しそうな対策に見せかけている。ピヨモバイルの公式SMSは0005から始まる番号から届くが、これは個人の携帯番号から届き、リンクも公式ドメインではない。盗まれた情報でキャリア決済（携帯料金とまとめて払う仕組み）を使われ、あとで高額な請求が来ることがある。
+    action: |
+      リンクは開かず、ピヨモバイルの公式アプリから自分でログインして確かめる。もし入力してしまったら、すぐにパスワードと暗証番号を変え、キャリア決済の設定を見直して、ピヨモバイルの窓口に連絡する。
+  references:
+    - title: （ページ名未確認）消費生活の注意・警戒情報（携帯電話会社名のSMSからキャリア決済を不正利用された事例）
+      url: https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html
+    - title: （ページ名未確認）消費生活のよくある質問（キャリア決済を不正利用されたときの対応）
+      url: https://www.pref.osaka.lg.jp/faq/o070120/faq_002106.html
+
+- id: Q-SM-004
+  title: ポカポカでんきを名乗る「送電停止」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S08
+  targets: [全世代, 高齢者]
+  brand: pokapoka
+  tactics: [T01, T04, T07]
+  examples: [EX-046]
+  context: |
+    家の電気はポカポカでんきと契約している。昼すぎ、次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "080-XXXX-XXXX"
+    subject:
+    body: |
+      【ポカポカでんき】電気料金のお支払いが確認出来ておりません。本日中にお支払いが無い場合、明日午前より送電を停止致します。お支払いは下記から。コンビニで買えるプリペイドカードでもお支払い頂けます。
+    link: "http://denki-shiharai-center.example/?id=XXXXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、送電が止まる前に料金を支払う
+    - text: コンビニでプリペイドカードを買い、その番号で支払う
+    - text: リンクは使わず、公式アプリで請求の状況を確かめる
+      best: true
+    - text: 送信元の番号に電話して、支払いを待ってもらう
+  hints:
+    - target: body
+      note: 「本日中」「送電を停止」と慌てさせ、電気料金をプリペイドカードで払わせようとしている。
+    - target: sender
+      note: 電力会社の窓口ではなく、個人の携帯電話の番号（080から始まる番号）から届いている。
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は denki-shiharai-center.example。ポカポカでんきの公式ドメイン pokapoka-denki.example ではない。
+  explanation:
+    why: |
+      電力会社をかたり、「未払い」「送電停止」で慌てさせてお金を払わせる偽SMS。ポカポカでんきの料金のお知らせは公式アプリと郵送で届き、未払いのときもSMSのリンクから支払わせることはない。電気料金をプリペイドカードで払わせようとするのも、詐欺のはっきりしたサインだ。
+    action: |
+      リンクは開かない。料金が気になるときは、ポカポカでんきの公式アプリや、郵送で届いた請求書で確かめる。カード番号を入力してしまったら、すぐにカード会社に連絡する。
+  references:
+    - title: （ページ名未確認）当社を装った不審なメール・SMSに関する注意喚起
+      url: https://www.tepco.co.jp/ep/archive/20240315.html
+    - title: トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート(2026年4月)
+      url: https://prtimes.jp/main/html/rd/p/000000232.000034282.html
+
+- id: Q-SM-005
+  title: スイスイ高速を名乗る「ETC登録の期限切れ」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: normal
+  situation: S17
+  targets: [社会人]
+  brand: suisui
+  tactics: [T01, T03, T04, T06]
+  examples: [EX-085]
+  context: |
+    車で通勤していて、スイスイ高速のETCをよく使っている。利用明細を見るための会員ページにも登録している。
+  message:
+    sender_name:
+    sender: "070-XXXX-XXXX"
+    subject:
+    body: |
+      【スイスイ高速】ETCサービスのご登録の有効期限が近づいております。期限を過ぎますとご登録は解約となります。継続をご希望の方は、10月16日までに下記よりお手続きください。
+    link: "https://suisui-kosoku.etc-koushin.example/login"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開いて、解約される前に継続の手続きをする
+    - text: リンクは使わず、ブックマークした会員ページで確かめる
+      best: true
+    - text: 「継続を希望します」と返信して、手続きを頼む
+    - text: 送信元の番号に電話して、手続きのしかたを聞く
+  hints:
+    - target: body
+      note: スイスイ高速は、ETCの登録の期限切れをSMSで知らせることはない。「解約」で不安にさせて、手続きを急がせている。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）は etc-koushin.example。前の suisui-kosoku は飾りで、公式ドメイン suisui-kosoku.example とは別物。
+  explanation:
+    why: |
+      高速道路やETCのサービスをかたり、「解約」「期限切れ」で不安にさせて偽サイトに誘う手口。スイスイ高速は、ETCの登録の期限切れをSMSで知らせることはなく、利用明細も会員ページで確かめる仕組みだ。リンクは公式の名前を前に付けただけの別の持ち主のもので、開くとログインIDやパスワード、カード番号を入力させられる。
+    action: |
+      リンクは開かず、ブックマークした公式サイトの会員ページに自分でログインして確かめる。カード番号を入力してしまったら、すぐにカード会社に連絡する。
+  references:
+    - title: ETC利用照会サービスをかたるフィッシング詐欺が急増! 偽メール・偽サイトに要注意
+      url: https://jafmate.jp/car/traffic_topics_20260223_1198471.html
+    - title: 弊社を装った不審メール・SMS・フィッシングサイトにご注意ください
+      url: https://www.shutoko.jp/news/2025/12/01-phishing/
+
+- id: Q-SM-006
+  title: 未払いの料金をクルクルペイの送金で払わせるSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: normal
+  situation: S03
+  targets: [学生, 全世代]
+  brand: kurukuru
+  tactics: [T01, T04, T07]
+  examples: [EX-014]
+  context: |
+    ふだんからクルクルペイを使っている。次のSMSのリンクを押したら、クルクルペイのアプリが開き、知らない人の名前あてに「3,980円を送る」という送金の画面が表示された。
+  message:
+    sender_name:
+    sender: "070-XXXX-XXXX"
+    subject:
+    body: |
+      【クルクルペイ】ご利用サイトの料金3,980円が未払いとなっております。本日中に下記リンクからお支払いください。リンクを押すとアプリが開きます。
+    link: "https://kurukuru-pay.example/send/XXXXXXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: 表示された3,980円をそのまま送って、支払いを済ませる
+    - text: 送らずに閉じ、請求は契約先の公式サイトで確かめる
+      best: true
+    - text: 送る前に、SMSの番号に電話して金額が正しいか聞く
+    - text: 送金のメッセージ欄に「料金の支払い」と書いてから送る
+  hints:
+    - target: body
+      note: クルクルペイのお知らせはアプリの中だけで、SMSでは届かない。どのサイトの料金なのかも書かれていない。
+    - target: link
+      note: リンクの持ち主は本物の kurukuru-pay.example だが、開くのは料金の支払いではなく、知らない人への「送金」の画面。
+    - target: sender
+      note: 個人の携帯電話の番号（070から始まる番号）から届いている。
+  explanation:
+    why: |
+      料金の未払いを口実に、コード決済アプリの「送金」で知らない人にお金を送らせる手口。開く送金の画面は本物のアプリなので見た目はおかしくないが、料金の支払いを個人あての送金でさせる会社はない。クルクルペイのお知らせはアプリの中だけで表示され、SMSで支払いを求めることもない。
+    action: |
+      送金の画面が出ても「送る」を押さずに閉じる。心当たりのある請求かどうかは、契約している会社の公式サイトや公式アプリで確かめる。送ってしまったら、すぐにクルクルペイのアプリの問い合わせ窓口と、警察相談専用電話 #9110 か消費者ホットライン188に相談する。
+  references:
+    - title: （ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起
+      url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
+    - title: ネット詐欺、「QR決済利用」「地方銀行・ネット銀行を装う」事例が増加 BBSS調査
+      url: https://ecnomikata.com/ecnews/50909/
+
+- id: Q-SM-007
+  title: 本物のお知らせと同じ画面に届いた「料金が高額」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: hard
+  situation: S05
+  targets: [全世代]
+  brand: piyo
+  tactics: [T01, T03, T04, T06]
+  examples: [EX-035, EX-036]
+  context: |
+    ピヨモバイルを使っている。いつもピヨモバイルのお知らせが届くメッセージの画面（スレッド）に、新しいSMSが並んで表示された。送信元には「ピヨモバイル」と表示されている。
+  message:
+    sender_name:
+    sender: ピヨモバイル
+    subject:
+    body: |
+      【ピヨモバイル】今月のご利用料金が高額になっております（10月9日時点 48,620円）。身に覚えのないご利用がないか、下記の会員ページから至急ご確認ください。
+    link: "https://piyo-mobile.mypage-login.example/"
+    page_url:
+    parts: []
+  actions:
+    - text: いつもの画面に届いたので、リンクから料金を確かめる
+    - text: リンクは使わず、公式アプリの会員ページで料金を見る
+      best: true
+    - text: 「心当たりがありません」と返信して、調べてもらう
+    - text: リンク先でログインし、明細を見るだけにして閉じる
+  hints:
+    - target: sender
+      note: 送信元の表示は偽ることができ、偽物が本物のお知らせと同じ画面に並ぶこともある。表示や並び方だけでは本物と言えない。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）は mypage-login.example。前の piyo-mobile は飾りで、公式ドメイン piyo-mobile.example ではない。
+    - target: body
+      note: 「高額」「至急」で不安にさせ、リンクの会員ページに行かせようとしている。ピヨモバイルの料金は、公式アプリの会員ページで確かめるもの。
+  explanation:
+    why: |
+      送信元の名前を偽り、本物のお知らせと同じ画面に紛れ込む偽SMS。スマホのメッセージアプリは送信元の表示ごとに画面をまとめるため、偽物が本物のすぐ下に並ぶことがある。ピヨモバイルの料金は公式アプリの会員ページで確かめるもので、このリンクの持ち主も公式ドメインではない。
+    action: |
+      送信元の表示や、いつもの画面にあることを理由に信じない。リンクは開かず、返信もしないで、ピヨモバイルの公式アプリの会員ページで料金を確かめる。
+  references:
+    - title: 意外と知らない? ネットセキュリティの基礎知識
+      url: https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html
+    - title: 「偽基地局」からの携帯電話サービスへの混信について注意を呼びかけ
+      url: https://scan.netsecurity.ne.jp/article/2025/05/06/52793.html
+
+- id: Q-SM-008
+  title: ポチッと通販の「周年記念の抽選に当選」のSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S16
+  targets: [全世代]
+  brand: pochitto
+  tactics: [T01, T05, T06, T07]
+  examples: [EX-082]
+  context: |
+    ポチッと通販はときどき使うが、抽選やキャンペーンに申し込んだ覚えはない。
+  message:
+    sender_name:
+    sender: "080-XXXX-XXXX"
+    subject:
+    body: |
+      【ポチッと通販 10周年記念】おめでとうございます！厳正な抽選の結果、人気のゲーム機に当選されました。送料500円のお支払いで発送致します。本日23:59までに下記よりカード情報をご登録下さい。
+    link: "http://tousen-uketori.example/g?id=XXXXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: 送料500円だけなので、リンクからカード情報を登録する
+    - text: リンクは開かず、公式アプリのメッセージセンターを見る
+      best: true
+    - text: 送信元の番号に電話して、本当に当選したのか聞く
+    - text: 「受け取りたいです」と返信して、手続きを待つ
+  hints:
+    - target: body
+      note: 申し込んだ覚えのない抽選に「当選」し、受け取るために送料とカード情報を求めている。「本日23:59まで」と急がせてもいる。
+    - target: sender
+      note: 通販会社の窓口ではなく、個人の携帯電話の番号（080から始まる番号）から届いている。
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は tousen-uketori.example。ポチッと通販の公式ドメイン pochitto.example ではない。
+  explanation:
+    why: |
+      当選をかたり、送料や手数料を口実にカード情報を入力させる手口。申し込んでいない抽選に当たることはなく、賞品を受け取るのにお金やカード情報が必要と言われたら詐欺を疑う。ポチッと通販の大事なお知らせは、アカウントの「メッセージセンター」にも必ず表示される。
+    action: |
+      リンクは開かず、返信もしない。気になるときは、ポチッと通販の公式アプリを自分で開いて、メッセージセンターに同じお知らせがあるか確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡し、消費者ホットライン188に相談する。
+  references:
+    - title: （心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）
+      url: https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html
+    - title: （見守り新鮮情報 第440号 大金が当選したというメール・SMSへの注意）
+      url: https://www.city.osaki.miyagi.jp/material/files/group/6/20230130.pdf
+
+- id: Q-SM-009
+  title: 「有料サイトの未納料金」で電話をかけさせるSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S09
+  targets: [全世代, 高齢者]
+  tactics: [T01, T04, T07, T08]
+  examples: [EX-031]
+  context: |
+    有料のサイトに登録した覚えはない。朝、次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "090-XXXX-XXXX"
+    subject:
+    body: |
+      【重要】有料動画サイトのご利用料金が未納となっております。本日中にご連絡が無い場合、法的手続きに移行致します。至急、下記までご連絡下さい。
+      お問い合わせ窓口：03-XXXX-XXXX（サイト料金管理センター）
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 書かれている番号に電話して、何の料金かを聞く
+    - text: 電話はせずに無視し、不安なら188に相談する
+      best: true
+    - text: 裁判にならないよう、今日中に言われた方法で払う
+    - text: 「利用した覚えはありません」と返信しておく
+  hints:
+    - target: body
+      note: 身に覚えのない料金なのに、「本日中」「法的手続き」と不安にさせ、書かれた番号に電話をかけさせようとしている。
+    - target: sender
+      note: 会社の窓口ではなく、個人の携帯電話の番号（090から始まる番号）から届いている。
+  explanation:
+    why: |
+      「未納料金がある」と言って電話をかけさせ、コンビニで電子マネーを買わせて番号を聞き出す、架空料金請求詐欺の入口。身に覚えのない請求、「本日中」「法的手続き」という脅し、連絡先が電話番号だけ、という点がそろっている。料金の支払いのために、コンビニで電子マネーを買わせる事業者はない。
+    action: |
+      書かれた番号には電話せず、返信もしない。心当たりがあるときは、使っているサービスの公式サイトなど、自分で調べた窓口で確かめる。不安なときは消費者ホットライン188か、警察相談専用電話 #9110 に相談する。
+  references:
+    - title: 架空料金請求詐欺
+      url: https://www.npa.go.jp/bureau/safetylife/sos47/case/fictitious-billing/
+
+- id: Q-SM-010
+  title: ピヨモバイルの「料金確定」のお知らせSMS
+  type: judge
+  channel: sms
+  is_scam: false
+  level: normal
+  situation: S05
+  targets: [全世代]
+  brand: piyo
+  tactics: []
+  examples: [EX-036]
+  context: |
+    ピヨモバイルのスマホを使っている。月の初めに、次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "0005-XX-XXXX"
+    subject:
+    body: |
+      【ピヨモバイル】9月分のご利用料金が確定しました。ご請求額と内訳は、ピヨモバイル公式アプリの会員ページでご確認いただけます。
+      ※このSMSには返信できません。
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 公式アプリを自分で開いて、会員ページで請求額を見る
+      best: true
+    - text: 送信元の番号に電話をかけて、請求額を教えてもらう
+    - text: 「本当にピヨモバイルですか」と返信して確かめる
+    - text: SMSは怪しいので、この番号を受信拒否にする
+  hints:
+    - target: sender
+      note: ピヨモバイルの公式SMSが使う、0005から始まる各社共通の番号から届いている。
+    - target: body
+      note: リンクがなく、パスワードなどの入力も求めていない。料金の確認は公式アプリの会員ページで、と案内している。
+  explanation:
+    why: |
+      ピヨモバイルの公式SMSは、各社共通の0005から始まる番号から届く。このSMSはその番号から届き、リンクも入力のお願いもなく、料金の確認を公式アプリの会員ページに案内している。ピヨモバイルの正規の連絡方法と合っている、本物のお知らせだ。
+    action: |
+      料金は、自分で公式アプリを開いて会員ページで確かめる。番号が本物らしくても、リンクからパスワードを入力させるSMSが届いたときは、そのリンクは開かない。
+  references:
+    - title: SMSの送信元番号（共通ショートコード）に関する案内ページ（題名未確認。2023年4月時点の情報）
+      url: https://www.docomo.ne.jp/service/sms/displayname/
+
+- id: Q-SM-011
+  title: 自分でログインした直後に届いた認証番号のSMS
+  type: judge
+  channel: sms
+  is_scam: false
+  level: easy
+  situation: S03
+  targets: [全世代]
+  brand: kotori
+  tactics: []
+  examples: [EX-021, EX-019]
+  context: |
+    いま自分でコトリ銀行の公式アプリを開いてログインし、「SMSで届いた認証番号を入力してください」という画面になった。すぐに次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "0005-XX-XXXX"
+    subject:
+    body: |
+      【コトリ銀行】認証番号：482193
+      この番号の有効期限は10分です。この番号を他人に教えないでください。当行の行員がお聞きすることはありません。
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 自分で開いているアプリの画面に、認証番号を入力する
+      best: true
+    - text: コトリ銀行に電話して、届いた番号を伝えて確かめる
+    - text: 不安なので、番号を家族に送って本物か見てもらう
+    - text: SMSは信用できないので、ログインをやめる
+  hints:
+    - target: sender
+      note: コトリ銀行が認証番号を送るのに使う、0005から始まる番号から届いている。
+    - target: body
+      note: 自分がログインした直後に届き、リンクはない。「他人に教えないで」「行員が聞くことはない」という注意も書かれている。
+  explanation:
+    why: |
+      自分でログインした直後に、0005から始まる番号からリンクなしで届いた認証番号で、本物だ。コトリ銀行は、ログインのときの認証番号を、0005から始まる番号からリンクなしのSMSで送ると決めている。認証番号は、自分が操作している画面に、自分で入力するためのものだ。
+    action: |
+      自分で開いた公式アプリの画面にだけ入力する。認証番号は、家族にも、銀行を名乗る人にも教えない。自分がログインしていないのに認証番号が届いたときは、公式アプリからパスワードを変え、公式サイトに載っている窓口に知らせる。
+  references:
+    - title: インターネット・バンキングの不正送金に関する注意喚起のページ（題名未確認）
+      url: https://www.fsa.go.jp/ordinary/internet-bank_2.html
+    - title: 不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ
+      url: https://paymentnavi.com/?p=144363
+
+- id: Q-SM-012
+  title: 公式ドメインのリンクが付いた「データ残量」のお知らせSMS
+  type: judge
+  channel: sms
+  is_scam: false
+  level: hard
+  situation: S05
+  targets: [全世代]
+  brand: piyo
+  tactics: []
+  examples: [EX-036, EX-035]
+  context: |
+    ピヨモバイルを使っている。今月は動画をたくさん見たので、データの残りが少ないことに気づいていた。そこに次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "0005-XX-XXXX"
+    subject:
+    body: |
+      【ピヨモバイル】今月のデータ容量の残りが10%を下回りました。データの追加は、ピヨモバイル公式アプリ、または下記の会員ページから行えます。
+    link: "https://piyo-mobile.example/mypage/data"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクの会員ページを開き、ログインしてデータを追加する
+    - text: リンクは使わず、公式アプリを開いて残りの容量を見る
+      best: true
+    - text: リンク付きのSMSは詐欺なので、この番号を受信拒否にする
+    - text: 「データを追加してください」とSMSに返信する
+  hints:
+    - target: sender
+      note: ピヨモバイルの公式SMSが使う、0005から始まる各社共通の番号から届いている。
+    - target: link
+      note: リンクの持ち主（登録ドメイン）は piyo-mobile.example で、ピヨモバイルの公式ドメインと同じ。
+    - target: body
+      note: データをたくさん使ったという自分の状況と合っている。急がせたり、SMSの中でパスワードを聞いたりしていない。
+  explanation:
+    why: |
+      0005から始まる公式の番号から届き、リンクの持ち主（登録ドメイン）も公式の piyo-mobile.example なので、本物のお知らせだ。データをたくさん使ったという状況とも合っていて、急がせたり、お金や暗証番号を求めたりもしていない。「リンク付きのSMSはすべて詐欺」ではなく、送信元・リンクの持ち主・内容をあわせて判断する。
+    action: |
+      本物でも、データの追加やログインは公式アプリから行うのが安全。SMSのリンクからログインする習慣をつけないでおくと、偽物のSMSが届いたときにもだまされにくい。
+  references:
+    - title: SMSの送信元番号（共通ショートコード）に関する案内ページ（題名未確認。2023年4月時点の情報）
+      url: https://www.docomo.ne.jp/service/sms/displayname/
+    - title: 意外と知らない? ネットセキュリティの基礎知識
+      url: https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html
+
+- id: Q-SM-013
+  title: 自分で申し込んだライブ抽選の当選のSMS
+  type: judge
+  channel: sms
+  is_scam: false
+  level: normal
+  situation: S12
+  targets: [学生]
+  brand: ticketnomori
+  tactics: []
+  examples: [EX-075]
+  context: |
+    好きなバンドのライブのチケットを、チケットノモリの公式アプリから自分で抽選に申し込んでいた。今日はその結果が発表される日で、夕方に次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "0005-XX-XXXX"
+    subject:
+    body: |
+      【チケットノモリ】抽選結果のお知らせ
+      お申し込みの公演に当選しました。お支払い期限：10月20日（火）23:00。お支払いは、チケットノモリ公式アプリの「申込履歴」から行ってください。
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: 公式アプリを自分で開き、申込履歴を見てから支払う
+      best: true
+    - text: 当選の知らせは詐欺が多いので、何もせず削除する
+    - text: SMSに返信して、支払いのしかたを教えてもらう
+    - text: 送信元の番号に電話して、本当に当選したか聞く
+  hints:
+    - target: sender
+      note: チケットノモリがお知らせに使う、0005から始まる番号から届いている。
+    - target: body
+      note: リンクはなく、支払いは公式アプリの「申込履歴」から、と案内している。自分で申し込んだ抽選の発表の日に届いた。
+  explanation:
+    why: |
+      自分で申し込んだ抽選の結果が、発表の日に、チケットノモリが使う0005から始まる番号からリンクなしで届いた。支払いも公式アプリに案内していて、チケットノモリの正規の連絡方法と合っている。申し込んでいない抽選の「当選」は詐欺を疑うが、これは自分の行動に続いて届いたお知らせだ。
+    action: |
+      公式アプリを自分で開き、申込履歴で当選を確かめてから、アプリの中で支払う。チケットは公式の販売ルートで買い、SNSで見つけた知らない人とは取引しない。
+  references:
+    - title: “推し”に会えない!?転売チケットの購入トラブルが急増中
+      url: https://www.kokusen.go.jp/news/data/n-20220804_2.html
+
+- id: Q-SM-014
+  title: 自分で再配達を申し込んだあとに届いた受付完了のSMS
+  type: judge
+  channel: sms
+  is_scam: false
+  level: hard
+  situation: S02
+  targets: [全世代]
+  brand: machikado
+  tactics: []
+  examples: [EX-011]
+  context: |
+    郵便受けにマチカド郵便の不在票が入っていた。ブックマークしてあるマチカド郵便の公式サイトから、自分で再配達を申し込んだ。その5分後、次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "0005-XX-XXXX"
+    subject:
+    body: |
+      【マチカド郵便】再配達のお申し込みを受け付けました。
+      お届け予定：10月10日（土）午前中
+      お問い合わせ番号（下4桁）：3871
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: SMSに返信して、お届けの時間を午後に変えてもらう
+    - text: 宅配のSMSは詐欺が多いので、申し込みを取り消す
+    - text: このまま待ち、変更は公式サイトから行う
+      best: true
+    - text: 送信元の番号に電話して、本当に受け付けたか聞く
+  hints:
+    - target: body
+      note: 自分で再配達を申し込んだ5分後に届き、お届けの予定など内容も申し込みと合っている。リンクはない。
+    - target: sender
+      note: マチカド郵便が受付完了のSMSに使う、0005から始まる番号から届いている。
+  explanation:
+    why: |
+      宅配のSMSには偽物が多いが、これは自分で公式サイトから再配達を申し込んだ直後に届いた、受付完了のお知らせだ。マチカド郵便は、再配達を申し込んだ人に、0005から始まる番号からリンクなしで受付完了のSMSを送ると決めている。届いた時期・送信元・内容が、正規の連絡方法とすべて合っている。
+    action: |
+      そのまま予定の日時に受け取る。日時を変えたいときは、SMSに返信せず、ブックマークした公式サイトや不在票に書かれた番号から手続きする。
+  references:
+    - title: 宅配業者を名乗る不審なSMSに関する緊急情報（題名未確認）
+      url: https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/documents/190529_1.pdf

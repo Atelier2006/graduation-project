@@ -1,0 +1,607 @@
+# 追加の問題（担当 W4）：足りない手口・画面の種類を埋める11問
+# メール・SMS・Web・広告・SNS・会話が混ざっている。id の記号と channel を合わせる
+# （Q-EM は email、Q-SM は sms、Q-WB は web、Q-AD は ad、Q-SN は sns、Q-CH は chat）。
+
+- id: Q-EM-015
+  title: マチカド郵便をかたる再配達手数料のメール
+  type: judge
+  channel: email
+  is_scam: true
+  level: normal
+  situation: S02
+  targets: [全世代]
+  brand: machikado
+  tactics: [T09, T01, T06]
+  examples: [EX-009, EX-002]
+  context: |
+    通販で注文した本が、今週中にマチカド郵便で届く予定になっている。出かけて帰ってくると、次のメールが届いていた。
+  message:
+    sender_name: マチカド郵便
+    sender: "info@machikado-redelivery.example"
+    subject: 【マチカド郵便】ご不在のためお荷物を持ち戻りました
+    body: |
+      マチカド郵便をご利用いただき、ありがとうございます。
+
+      10月15日 14時20分ごろにお荷物をお届けにうかがいましたが、ご不在のため持ち戻りました。
+
+      お問い合わせ番号：381422075516
+      保管期限：10月22日
+
+      再配達をご希望の場合は、下記のページでお届け先の住所をご確認のうえ、再配達手数料（330円）をクレジットカードでお支払いください。保管期限を過ぎたお荷物は、差出人へお返しします。
+
+      ▼再配達のお申し込みはこちら
+
+      マチカド郵便 お客様サービス係
+    link: "https://machikado-redelivery.example/redelivery?no=381422075516"
+    page_url:
+    parts: []
+  actions:
+    - text: リンクを開き、住所を確かめて手数料の330円をカードで払う
+    - text: リンク先で住所の確認だけ済ませ、カード番号は入れずに閉じる
+    - text: メールに返信して、どこから届いた荷物なのかを問い合わせる
+    - text: リンクは開かず、不在票か公式サイトで荷物の状況を確かめる
+      best: true
+  hints:
+    - target: sender
+      note: 送信元のアドレスの @ の後ろが machikado-redelivery.example で、マチカド郵便の公式ドメイン（machikado-post.example）ではない。
+    - target: link
+      note: リンクの本当の持ち主（登録ドメイン）も machikado-redelivery.example で、公式サイトではない。
+    - target: body
+      note: 不在をメールで知らせ、再配達のために住所の確認と手数料のカード払いを求めている。マチカド郵便は不在を紙の不在票で知らせ、再配達は不在票の番号か公式サイトで受け付ける。
+  explanation:
+    why: |
+      マチカド郵便をかたる偽の不在通知メール。マチカド郵便は、不在のときは紙の不在票を入れ、再配達は不在票に書かれた番号か公式サイトで受け付ける。送信元とリンクの登録ドメイン（URLの本当の持ち主）も、公式の machikado-post.example ではない。再配達の手続きを口実に、住所やカード番号を入力させる偽のメールやSMSが多く報告されている。
+    action: |
+      荷物を待っているときでも、メールのリンクは開かない。郵便受けの不在票を確かめ、不在票の番号か、ブックマークした公式サイトから申し込む。カード番号を入力してしまったら、すぐにカード会社に連絡する。
+  references:
+    - title: "トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に"
+      url: "https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html"
+    - title: "国内 ISP の認証情報を不正利用して送信されたフィッシングメールに注意呼びかけ"
+      url: "https://scan.netsecurity.ne.jp/article/2026/07/06/55635.html"
+
+- id: Q-EM-016
+  title: ポチッと通販の本物の当選メール
+  type: judge
+  channel: email
+  is_scam: false
+  level: normal
+  situation: S16
+  targets: [全世代]
+  brand: pochitto
+  tactics: []
+  examples: [EX-084, EX-082]
+  context: |
+    先週、ポチッと通販のアプリで「秋のお買い物応援キャンペーン（抽選で500ポイント）」に自分でエントリーした。10月20日、次のメールが届いた。
+  message:
+    sender_name: ポチッと通販
+    sender: "campaign@pochitto.example"
+    subject: 【ポチッと通販】秋のお買い物応援キャンペーン 当選のお知らせ
+    body: |
+      ポチッと通販をご利用いただき、ありがとうございます。
+
+      先日は「秋のお買い物応援キャンペーン」にエントリーいただき、ありがとうございました。抽選の結果、お客様が当選されましたので、お知らせいたします。
+
+      賞品：ポチッとポイント 500ポイント
+      付与日：10月20日（ご登録のアカウントに付与済み）
+      有効期限：付与日から6か月
+
+      ポイントはすでにお客様のアカウントに付与しておりますので、お手続きは必要ありません。
+      同じ内容は、アプリの「メッセージセンター」と「ポイント履歴」でもご確認いただけます。
+
+      ポチッと通販 キャンペーン事務局
+    link:
+    page_url:
+    parts: []
+  actions:
+    - text: メールに返信して、ポイントを受け取る手続きがないか聞く
+    - text: 検索で見つけた「当選確認」のページにログインして確かめる
+    - text: アプリを開き、メッセージセンターとポイント履歴で確かめる
+      best: true
+    - text: 当選のメールは詐欺に決まっているので、すぐに削除する
+  hints:
+    - target: sender
+      note: 送信元のアドレスの @ の後ろが pochitto.example で、ポチッと通販の公式ドメイン。
+    - target: subject
+      note: 自分でエントリーしたキャンペーンの結果を知らせている。申し込んでいない懸賞の当選ではない。
+    - target: body
+      note: リンクがなく、パスワードやカード番号の入力も、手数料の支払いも求めていない。手続きは不要で、アプリのメッセージセンターで同じ内容を確かめられると書いている。
+  explanation:
+    why: |
+      ポチッと通販からの本物の当選メール。送信元は公式ドメイン（pochitto.example）で、自分でエントリーしたキャンペーンの結果を知らせている。リンクがなく、パスワードやカード番号の入力、手数料の支払いも求めていない。偽の当選の連絡は、申し込んでいない懸賞の当選を知らせたり、受け取りのために手数料や個人情報の入力を求めたりするのが特徴。
+    action: |
+      本物らしく見えても、当選やポイントの内容は、公式アプリのメッセージセンターやポイント履歴で確かめる。ポチッと通販の大事なお知らせは、メッセージセンターにも必ず表示される。
+  references:
+    - title: "（心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）"
+      url: "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html"
+    - title: "（当選メールの後に手数料を次々と請求された相談事例）"
+      url: "https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf"
+
+- id: Q-SM-015
+  title: 「運ぶだけで日給3万円」の闇バイトのSMS
+  type: judge
+  channel: sms
+  is_scam: true
+  level: easy
+  situation: S07
+  targets: [学生]
+  tactics: [T14, T05]
+  examples: [EX-040, EX-043]
+  context: |
+    アルバイトを探している。ある日、知らない番号から次のSMSが届いた。
+  message:
+    sender_name:
+    sender: "080-XXXX-XXXX"
+    subject:
+    body: |
+      【高収入・即日払い】
+      荷物を受け取って、指定の場所まで運ぶだけ！日給3万円以上、その日のうちに現金でお渡しします。
+      面接なし・未経験OK・学生さん歓迎。空いている日だけでも大丈夫です。
+      くわしい仕事の内容は、メッセージが自動で消えるアプリでお伝えします。下のリンクから登録してください。
+    link: "https://easy-work-now.example/app?id=XXXX"
+    page_url:
+    parts: []
+  actions:
+    - text: アプリに登録して、仕事の中身を聞いてから決める
+    - text: 応募も返信もせず、リンクも開かずに削除する
+      best: true
+    - text: 「どんな荷物を運ぶのですか」と返信して確かめる
+    - text: 送信元の番号に電話して、会社の名前を聞く
+  hints:
+    - target: sender
+      note: 知らない個人の携帯電話の番号（080から始まる）から届いていて、会社の名前も書かれていない。
+    - target: body
+      note: 「運ぶだけ」と仕事の中身があいまいなのに、日給3万円以上・即日払い・面接なしと、条件がよすぎる。
+    - target: link
+      note: くわしい話を、メッセージが自動で消えるアプリでしようとしている。やり取りが残らないアプリに誘うのは、闇バイトの募集によくある特徴。
+  explanation:
+    why: |
+      闇バイト（犯罪の実行役）の募集の典型。仕事の中身があいまいなのに報酬だけが高く、即日払いや面接なしを強調し、やり取りが残らないアプリへ移らせようとしている。警察庁は、「受け」「運び」など中身があいまいな仕事は、特殊詐欺の受け子（だまし取ったお金やカードを受け取る役）などの犯罪につながると注意を呼びかけている。
+    action: |
+      応募も返信もせずに削除する。もし応募して身分証などを送ってしまい、抜けられないと感じたら、犯罪をする前にすぐ警察相談専用電話 #9110 や警察署に相談する。警察は、相談した人と家族を守ると明言している。
+  references:
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf"
+    - title: "いわゆる「闇バイト」の危険性について"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/hanzaishaboshu.html"
+
+- id: Q-WB-013
+  title: 検索の上位に出た偽のトマレルのサポート窓口
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S09
+  targets: [全世代]
+  brand: tomareru
+  tactics: [T08, T01, T07]
+  examples: [EX-060]
+  context: |
+    トマレルで予約した旅館を、急な用事でキャンセルしたくなった。急いでいたので「トマレル キャンセル 電話」と検索し、一番上に出てきたページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://tomareru-support.example/cancel"
+    parts:
+      - kind: heading
+        text: トマレル カスタマーサポート（24時間受付）
+      - kind: text
+        text: ご予約のキャンセル・変更・返金のご相談は、お電話で専門のスタッフが承ります。オンラインではキャンセルできないご予約もありますので、お早めにお電話ください。
+      - kind: text
+        text: ※キャンセルのお手続きには、所定の手数料がかかります。手数料の金額とお支払い方法は、お電話でご案内します。
+      - kind: phone
+        text: "050-XXXX-XXXX"
+      - kind: button
+        text: 今すぐ電話する
+  actions:
+    - text: 画面の番号に電話して、キャンセルの手続きを頼む
+    - text: ほかの検索結果のページも開き、番号を見比べてからかける
+    - text: 公式アプリか予約確認メールに書かれた問い合わせ先を使う
+      best: true
+    - text: 電話で手数料の金額だけ聞き、払うかどうかはあとで決める
+  hints:
+    - target: page_url
+      note: 検索で開いたページ。アドレスバーの本当の持ち主（登録ドメイン）は tomareru-support.example で、トマレルの公式ドメイン（tomareru.example）ではない。
+    - target: part:4
+      note: 電話をかけさせようとしている。トマレルの問い合わせ先は、公式アプリと予約確認メールに書いてある。
+    - target: part:3
+      note: キャンセルの手数料の金額や払い方を、電話で案内するとしている。
+  explanation:
+    why: |
+      検索結果の上のほうに出た「サポート窓口」が、本物とは限らない。トマレルの問い合わせ先は公式アプリと予約確認メールに書いてあり、このページの登録ドメイン（URLの本当の持ち主）も公式の tomareru.example ではない。こうした窓口に電話すると、手数料などの名目でお金を求められたり、個人情報を聞かれたりする例が報告されている。
+    action: |
+      企業の問い合わせ先は、検索結果からではなく、公式アプリや予約確認メールなど手元にある正規の情報から探す。お金を払ってしまったときや困ったときは、検索せずに消費者ホットライン188にかける。
+  references:
+    - title: "（検索上位の「相談窓口」に電話して追加の費用を求められた事例を含む資料）"
+      url: "https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf"
+    - title: "（正規のサポートサイトの検索結果に偽の電話番号を表示させる手口の紹介記事）"
+      url: "https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/"
+
+- id: Q-WB-014
+  title: 一点もののバッグの代金を「送る」で払わせる通販サイト
+  type: judge
+  channel: web
+  is_scam: true
+  level: hard
+  situation: S01
+  targets: [全世代]
+  tactics: [T15, T07]
+  examples: [EX-007]
+  context: |
+    ずっと探していた、もう作られていない型の一点もののバッグ。検索で見つけた通販サイト「ユズリハ商店」に、相場より少し安い値段で出ていた。写真も説明もていねいだったので注文すると、次の画面が出た。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://yuzuriha-shoten.example/order/complete"
+    parts:
+      - kind: heading
+        text: ご注文ありがとうございます
+      - kind: text
+        text: ご注文番号 YZ-104728／商品 ヴィンテージ レザーハンドバッグ（一点もの）／代金 38,500円（送料無料）
+      - kind: text
+        text: お支払いは、クルクルペイの「送る」機能でお願いいたします。ご注文から24時間以内に、下記のアカウントあてに代金をお送りください。
+      - kind: text
+        text: 送り先のアカウント：カワセ リン　※お支払いを確認したあと、3営業日以内に発送いたします。
+      - kind: button
+        text: クルクルペイを開く
+  actions:
+    - text: 代金は送らずに注文をやめ、困ったら消費者ホットライン188へ
+      best: true
+    - text: 一点ものなので、売れてしまう前に「送る」で代金を送る
+    - text: 送り先が店長の個人アカウントなのか、お店にメールで聞いてから送る
+    - text: 半額だけ先に送り、残りは商品が届いてから送るとお店に伝える
+  hints:
+    - target: part:3
+      note: お店への支払いなのに、個人どうしでお金をやり取りする「送る」機能を使わせようとしている。
+    - target: part:4
+      note: 送り先が、お店の名前ではなく個人の名前のアカウントになっている。
+  explanation:
+    why: |
+      お店（事業者）に代金を払うのに、コード決済の「送る」機能で個人の名前のアカウントへ送らせるのは、悪質な通販サイトの特徴。「送る」は個人どうしでお金をやり取りするための機能で、お店に払うときはふつう「支払う」機能を使う。写真や説明は、フリマサイトなどから流用されていることがあり、見た目だけでは見分けにくい。
+    action: |
+      個人のアカウントへの「送る」で払うよう言われたら、購入をやめる。送ってしまったら、すぐにクルクルペイのアプリから問い合わせ、消費者ホットライン188に相談する。
+  references:
+    - title: "（海外に拠点があるとみられる悪質通販サイトに関する注意喚起。越境消費者センターによる悪質通販サイト情報の公表から2年）"
+      url: "https://www.kokusen.go.jp/news/data/n-20260617_1.html"
+    - title: "国民生活センター、「悪質通販サイト」 手口・相談内容を公開し注意喚起"
+      url: "https://ecnomikata.com/ecnews/50908/"
+
+- id: Q-WB-015
+  title: チケットノモリの本物の公式リセール
+  type: judge
+  channel: web
+  is_scam: false
+  level: normal
+  situation: S12
+  targets: [学生]
+  brand: ticketnomori
+  tactics: []
+  examples: [EX-075]
+  context: |
+    抽選に外れてしまった推しのライブ。チケットノモリの公式アプリに「公式リセールの受付が始まりました」とお知らせが届いたので、アプリから公式リセールのページを開いた。
+  message:
+    sender_name:
+    sender:
+    subject:
+    body:
+    link:
+    page_url: "https://ticket-nomori.example/resale/detail?id=58213"
+    parts:
+      - kind: heading
+        text: 公式リセール（定価でのお取引）
+      - kind: text
+        text: 秋のライブツアー2026 そよかぜアリーナ公演／11月23日（月・祝）18:00開演／指定席 1枚
+      - kind: text
+        text: チケット代金 8,800円（定価）＋ リセール手数料 880円　合計 9,680円
+      - kind: text
+        text: 受け取り：チケットノモリ公式アプリの電子チケット（公演の3日前から表示）／支払い：この画面で、登録済みのお支払い方法から
+      - kind: button
+        text: 購入手続きへ進む
+  actions:
+    - text: この画面で購入手続きをして、公式アプリでチケットを受け取る
+      best: true
+    - text: SNSで「定価で譲ります」と投稿している人に連絡して買う
+    - text: 検索広告に出てきたチケット販売サイトで、良い席を探して買う
+    - text: 出品した人と直接やり取りして、個人の口座に代金を振り込む
+  hints:
+    - target: page_url
+      note: アドレスバーの本当の持ち主（登録ドメイン）は ticket-nomori.example で、チケットノモリの公式ドメイン。公式アプリのお知らせから開いたページ。
+    - target: part:3
+      note: 値段は定価に、決められた手数料を足しただけ。高く値上げされていない。
+    - target: part:4
+      note: 受け取りは公式アプリの電子チケットで、支払いもこの画面で完結する。個人の口座への振込を求めていない。
+  explanation:
+    why: |
+      チケットノモリの本物の公式リセールのページ。公式アプリのお知らせから開いていて、アドレスバーの登録ドメイン（URLの本当の持ち主）も公式の ticket-nomori.example。値段は定価に決められた手数料を足したもので、受け取りは公式アプリ、支払いはこの画面の決済と、正規のルートの中で完結している。チケットノモリは、行けなくなったチケットを公式リセールでだけ受け付けている。
+    action: |
+      公式アプリから開いた公式リセールなので、この画面で購入してよい。チケットは公式アプリや公式サイトからたどった正規のルートで買い、SNSの個人間の取引や、検索広告に出てくる転売サイトは使わない。
+  references:
+    - title: "“推し”に会えない!?転売チケットの購入トラブルが急増中"
+      url: "https://www.kokusen.go.jp/news/data/n-20220804_2.html"
+
+- id: Q-AD-009
+  title: 売り切れた限定グッズが80%オフの広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: easy
+  situation: S12
+  targets: [学生]
+  tactics: [T15, T05, T07]
+  examples: [EX-003, EX-001]
+  context: |
+    SNSを見ていたら、次の広告が出てきた。広告のグッズは、推しのグループの公式ショップで発売日に売り切れた限定品だ。
+  message:
+    sender_name: 推しグッズ専門店 キラメキマート
+    sender:
+    subject:
+    body:
+    link: "https://kirameki-mart-sale.example/limited"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 【本日23:59まで】完売した限定アクリルスタンドが80%オフ！
+      - kind: text
+        text: 公式ショップで売り切れた限定グッズを、特別価格でご用意しました。通常4,400円が、今だけ880円。在庫わずか、なくなり次第終了です！
+      - kind: text
+        text: ※お支払いは銀行振込のみです。振込先は、ご注文のあとにお知らせします。
+      - kind: button
+        text: 今すぐ購入する
+  actions:
+    - text: 本日までなので、売り切れる前に広告からすぐ注文する
+    - text: 広告からは買わず、公式ショップで再販売があるか確かめる
+      best: true
+    - text: 安すぎて不安なので、まず1個だけ注文して届くか試す
+    - text: 広告のサイトで会員登録だけして、在庫を取り置いてもらう
+  hints:
+    - target: part:2
+      note: 公式で売り切れた限定品を「80%オフ」とうたい、「本日23:59まで」と急がせている。
+    - target: link
+      note: リンク先は聞いたことのない通販サイト（kirameki-mart-sale.example）で、公式ショップではない。
+    - target: part:4
+      note: 支払いが銀行振込だけで、振込先は注文のあとに知らせるという。偽の通販サイトによくある特徴。
+  explanation:
+    why: |
+      偽の通販サイトに誘う広告の典型。公式で売り切れた限定品が80%オフという安すぎる値段、「本日まで」「在庫わずか」と急がせる言葉、聞いたことのない通販サイトへのリンク、銀行振込だけの支払いがそろっている。こうしたサイトでは、代金を払っても商品が届かない、広告と違う物が届くといった相談が多い。
+    action: |
+      広告からは買わない。再販売などの情報は、公式ショップや公式SNSで確かめる。振り込んでしまったら、すぐに振込先の銀行に連絡し、消費者ホットライン188に相談する。
+  references:
+    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+      url: "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html"
+    - title: "（ネット通販の偽サイトに関する啓発資料。個人名義の口座を指定されたら詐欺と注意）"
+      url: "https://www3.pref.nara.jp/syouhiseikatsucenter/secure/2091/R6.8.kozika.pdf"
+
+- id: Q-AD-010
+  title: ふつうの求人に見せた闇バイトの広告
+  type: judge
+  channel: ad
+  is_scam: true
+  level: normal
+  situation: S07
+  targets: [学生]
+  tactics: [T14, T05]
+  examples: [EX-040]
+  context: |
+    空いた時間にできるアルバイトを探していたら、SNSに次の求人広告が出てきた。
+  message:
+    sender_name: ワカバ配送サポート
+    sender:
+    subject:
+    body:
+    link: "https://wakaba-haiso-job.example/entry"
+    page_url:
+    parts:
+      - kind: ad_label
+        text: 広告
+      - kind: heading
+        text: 【学生歓迎】荷物を運ぶだけ！日給5万円・即日払い
+      - kind: text
+        text: 仕事内容：指定の場所で荷物を受け取り、届け先まで運ぶかんたんなお仕事です。面接なし・履歴書不要・服装自由。空いている日だけでOK！
+      - kind: text
+        text: 応募の連絡は、メッセージが自動で消えるアプリで受け付けています。IDを追加して「バイト希望」と送ってください。
+      - kind: button
+        text: 応募する
+  actions:
+    - text: 日給が高いので、すぐにIDを追加して応募する
+    - text: 身分証は送らないと決めて、仕事の中身だけ聞いてみる
+    - text: リンク先で会社の紹介文を読み、よさそうなら応募する
+    - text: 応募せず、この広告は「報告」や「非表示」にする
+      best: true
+  hints:
+    - target: part:2
+      note: 「荷物を運ぶだけ」で日給5万円・即日払いと、報酬が高すぎる。
+    - target: part:3
+      note: 仕事の中身があいまいで、面接も履歴書もいらないという。
+    - target: part:4
+      note: 連絡に、メッセージが自動で消えるアプリを使わせようとしている。やり取りが残らないアプリに誘うのは、闇バイトの募集によくある特徴。
+  explanation:
+    why: |
+      ふつうの求人広告に見せた、闇バイト（犯罪の実行役）の募集。仕事の中身があいまいなのに報酬が高く、即日払いや面接なしを強調し、やり取りが残らないアプリで連絡させようとしている。警察庁は、闇バイトの募集はふつうのアルバイト募集のように見えるが、報酬の額、支払いの早さ、仕事内容の書き方に特徴が出ると説明している。
+    action: |
+      応募しない。アルバイトは、仕事の内容・勤務先・時給がはっきりした求人から選ぶ。応募してしまい、抜けられない・脅されていると感じたら、犯罪をする前に警察相談専用電話 #9110 や警察署に相談する。
+  references:
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）"
+      url: "https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf"
+    - title: "闇バイト対策"
+      url: "https://www.gov-online.go.jp/article/202506/tv-5926.html"
+
+- id: Q-SN-013
+  title: 料理仲間から暗号資産の投資に誘うDM
+  type: judge
+  channel: sns
+  is_scam: true
+  level: normal
+  situation: S04
+  targets: [社会人, 学生]
+  brand: hanashiba
+  tactics: [T12, T11, T05, T07]
+  examples: [EX-023]
+  context: |
+    ハナシバに料理の写真を投稿していたら、同じく料理が好きな「ゆうき」さんからコメントが来た。それから2週間、毎日DMでレシピの話をしている。会ったことはない。今日、次のDMが届いた。
+  message:
+    sender_name: ゆうき｜おうちごはん
+    sender: "@yuki_ouchigohan"
+    subject:
+    body: |
+      今日の肉じゃが、すごくおいしそうだった！いつも投稿を見るのが楽しみなんだ。
+
+      実はずっと言おうか迷ってたんだけど、私、半年前から暗号資産の取引をしていて、毎月10万円くらい増えてるの。新しいお鍋も、その利益で買ったんだよ。
+
+      私が使ってる取引所のアプリなら、先生がサポートしてくれるから初心者でも大丈夫。いつも仲良くしてくれるお礼に、特別に教えたいな。
+      下のリンクからアプリを入れて、まずは3万円から一緒に始めてみない？
+    link: "https://coin-up-trade.example/invite?code=YUKI"
+    page_url:
+    parts:
+      - kind: profile
+        text: 認証バッジなし・フォロワー236人・料理の写真の投稿が多い・2か月前に作られたアカウント
+  actions:
+    - text: 毎日話している仲なので、3万円だけ試しに始めてみる
+    - text: 相手が送ってくれる利益の画面を見て、本当なら始める
+    - text: アプリは入れず、投資の誘いは断ってやり取りをやめる
+      best: true
+    - text: 「本当にもうかるの？」と返信して、くわしく聞いてみる
+  hints:
+    - target: body
+      note: ネットだけで知り合った相手が、親しくなってから暗号資産の投資をすすめている。「毎月10万円くらい増えてる」と、もうかる話ばかりしている。
+    - target: link
+      note: 知らない取引所のアプリへの招待リンク。本当の持ち主（登録ドメイン）は coin-up-trade.example。
+    - target: part:1
+      note: 2か月前に作られたばかりのアカウントで、会ったこともない相手。
+  explanation:
+    why: |
+      SNSで知り合い、会ったことのない相手が、親しくなってから投資をすすめるのは、投資詐欺によくある流れ。「毎月増えている」「初心者でも大丈夫」と、もうかる話だけをして、知らない取引所のアプリに誘っている。始めると利益が出ているように見せ、出金しようとすると「認証金」などの名目で追加のお金を求める例が報告されている。
+    action: |
+      リンクのアプリは入れず、投資の誘いは断る。暗号資産の取引所が、金融庁・財務局に登録された業者かどうかは、金融庁のサイトで確かめられる。お金を送ってしまったら、すぐに消費者ホットライン188や警察相談専用電話 #9110 に相談する。
+  references:
+    - title: "見守り新鮮情報 第530号（SNSで勧誘される暗号資産の詐欺的な投資話）"
+      url: "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html"
+
+- id: Q-SN-014
+  title: そよかぜ警察署の本物の注意喚起の投稿
+  type: judge
+  channel: sns
+  is_scam: false
+  level: easy
+  situation: S09
+  targets: [全世代]
+  brand: soyokaze_police
+  tactics: []
+  examples: [EX-062]
+  context: |
+    ハナシバを見ていたら、そよかぜ警察署のアカウントの投稿が流れてきた。
+  message:
+    sender_name: そよかぜ警察署
+    sender: "@soyokaze_police"
+    subject:
+    body: |
+      【ニセ警察詐欺にご注意ください】
+      警察官を名乗る人から「あなたの口座が犯罪に使われている」などと電話があり、SNSのメッセージやビデオ通話に誘われる被害が、市内で相次いでいます。
+
+      警察官が、
+      ・SNSやメッセージアプリで連絡したり、ビデオ通話で取り調べをしたりすることはありません。
+      ・逮捕状や警察手帳の画像を送ることはありません。
+      ・捜査のためだと言って、お金を振り込ませることはありません。
+
+      不安なときは、電話をいったん切って、警察相談専用電話「#9110」か、そよかぜ警察署にご相談ください。
+      #ニセ警察詐欺 #そよかぜ警察署
+    link:
+    page_url:
+    parts:
+      - kind: profile
+        text: 認証バッジあり・フォロワー1.8万人・「そよかぜ警察署の公式アカウントです」と紹介・警察署の公式サイトの「公式SNS」のページからたどれる
+  actions:
+    - text: 内容を覚えて、家族にも同じ注意を伝えておく
+      best: true
+    - text: 本物か分からないので、投稿に返信して警察署に質問する
+    - text: 警察を名乗るアカウントは偽物が多いので、ブロックする
+    - text: ハッシュタグで見つけた「相談窓口」のアカウントにDMする
+  hints:
+    - target: part:1
+      note: 認証バッジがあり、そよかぜ警察署の公式サイトからたどれる公式アカウント。
+    - target: body
+      note: リンクがなく、個人情報やお金も求めていない。本物の警察が「しないこと」を知らせる注意喚起。
+  explanation:
+    why: |
+      そよかぜ警察署の公式アカウントによる、本物の注意喚起の投稿。認証バッジがあり、警察署の公式サイトからたどれるアカウントで、リンクがなく、個人情報やお金も求めていない。内容も「警察はSNSやビデオ通話で取り調べをしない」「逮捕状の画像を送らない」という、本物の警察のきまりと合っている。警察が公式アカウントでみんなに注意を呼びかけることはあっても、一人ひとりにSNSで連絡してくることはない。
+    action: |
+      内容を覚えて、家族や友だちにも伝えておく。警察を名乗る電話やメッセージで不安になったら、いったん切って、自分で調べた警察署の番号か警察相談専用電話 #9110 に相談する。
+  references:
+    - title: "ニセ警察詐欺に注意！ #ニセ警察詐欺"
+      url: "https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/241218/02.html"
+    - title: "ビデオ通話を悪用した“偽警察官・検察官”の詐欺に注意！！"
+      url: "https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/250428/01.html"
+
+- id: Q-CH-014
+  title: サークルの先輩からのもうけ話の勧誘
+  type: judge
+  channel: chat
+  is_scam: true
+  level: normal
+  situation: S04
+  targets: [学生]
+  tactics: [T12, T05, T11, T04]
+  examples: [EX-024]
+  context: |
+    大学のサークルで何度も一緒に活動しているハルカ先輩から、メッセージアプリ「トモトモ」で連絡が来た。
+  message:
+    sender_name: ハルカ先輩
+    sender:
+    subject:
+    body:
+    link:
+    page_url:
+    parts:
+      - kind: event
+        text: トモトモで、サークルのハルカ先輩からメッセージが届いた。
+      - kind: say
+        who: 相手
+        name: ハルカ先輩
+        text: 久しぶり！急にごめんね。すごい人を紹介したいんだけど、今週末あいてる？
+      - kind: say
+        who: あなた
+        text: あいてますけど、どんな人ですか？
+      - kind: say
+        who: 相手
+        name: ハルカ先輩
+        text: 20代で、投資だけで生活してる人。その人が開いてる投資の勉強会に、私も入ってるの。入会金は30万円だけど、毎月の配当ですぐに取り戻せるよ。
+      - kind: say
+        who: あなた
+        text: 30万円なんて、とても払えないです……
+      - kind: say
+        who: 相手
+        name: ハルカ先輩
+        text: 大丈夫、学生でも借りられるところがあるから、借りてもすぐ返せるよ。それに、友だちを1人紹介するごとに5万円の紹介料が入るから、何人か誘えば実質タダだよ。
+      - kind: say
+        who: 相手
+        name: ハルカ先輩
+        text: 枠が少ないから、今週中に決めてね。信頼してる後輩にしか声をかけてないんだ。
+  actions:
+    - text: 先輩の紹介だから信用できると考え、借りてでも入会する
+    - text: 入会しないとはっきり断り、困ったら消費者ホットライン188へ
+      best: true
+    - text: 「考えておきます」と返して、そのあいだに誘えそうな友だちを探す
+    - text: 勉強会に一度だけ行ってみて、すごい人の話を聞いてから決める
+  hints:
+    - target: part:6
+      note: 友だちを紹介すると紹介料が入る仕組み（マルチ取引）で、借金をしてでも払うようにすすめている。
+    - target: part:4
+      note: 「毎月の配当ですぐに取り戻せる」と、必ずもうかるような言い方をしている。
+    - target: part:7
+      note: 「今週中に」と急がせ、「信頼してる後輩にしか」と特別扱いして、断りにくくしている。
+  explanation:
+    why: |
+      人を紹介すると報酬が出る仕組み（マルチ取引）を使った、形のない「もうけ話」への勧誘。「借りてもすぐ返せる」と借金をすすめる、「紹介料で実質タダ」ともうけを強調する、「今週中に」と急がせる、というはっきりしたサインがある。誘ってくる先輩自身も、もうかると信じ込んでいることがあり、身近な人からの誘いほど断りにくい。借金をしてまで、必ずもうかる話はない。
+    action: |
+      その場で決めず、入会する気がなければはっきり断る。借金をしてまで契約しない。困ったときや契約してしまったときは、消費者ホットライン188に相談する（条件によっては、クーリング・オフ＝決められた期間内なら契約をやめられる制度が使える）。
+  references:
+    - title: "新生活での友人・先輩・SNSからの投資やもうけ話の勧誘に関する注意喚起（題名未確認）"
+      url: "https://www.pref.tottori.lg.jp/secure/922405/support206.pdf"
+    - title: "若者に広がる「モノなしマルチ商法」の注意喚起（題名未確認）"
+      url: "https://www.kokusen.go.jp/news/data/n-20190725_1.html"
