@@ -524,10 +524,11 @@ def render_questions_md(data) -> str:
     out += ["", "| 難易度 | 問題数 |", "| --- | --- |"]
     out += [f"| {label} | {c['level'][k]} |" for k, label in LEVELS.items()]
     out += ["", "**手口と画面の種類の対応**（数字は問題数）", ""]
-    header = "| 手口 | " + " | ".join(label for _, label in CHANNELS.values()) + " | 合計 |"
-    out += [header, "| --- |" + " --- |" * (len(CHANNELS) + 1)]
+    header = "| 手口 | " + " | ".join(label for _, label in CHANNELS.values()) + " | URL問題 | 合計 |"
+    out += [header, "| --- |" + " --- |" * (len(CHANNELS) + 2)]
+    url_tactics = Counter(t for q in qs if q.get("type") == "url" for t in (q.get("tactics") or []))
     for code, t in data["tactics"].items():
-        cells = [str(c["tactic_channel"][(code, ch)] or "") for ch in CHANNELS]
+        cells = [str(c["tactic_channel"][(code, ch)] or "") for ch in CHANNELS] + [str(url_tactics[code] or "")]
         out.append(f"| {code} {t['name']} | " + " | ".join(cells) + f" | {c['tactic'][code]} |")
     out += ["", "| シチュエーション | 問題数 |", "| --- | --- |"]
     out += [f"| {code} {s['name']} | {c['situation'][code]} |" for code, s in data["situations"].items()]

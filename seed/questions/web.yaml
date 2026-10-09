@@ -481,7 +481,7 @@
       url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
 
 - id: Q-WB-010
-  title: 公式アプリから開いた通販サイトの商品ページ
+  title: ブックマークから開いた通販サイトの商品ページ
   type: judge
   channel: web
   is_scam: false
