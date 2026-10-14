@@ -168,11 +168,11 @@
   context: |
     スマホゲームを遊んでいる。このゲームのコインは、ピコピコストアとゲームの中で売られている。攻略情報のサイトを見ていたら、次の広告が出た。
   message:
-    sender_name: 課金代行 ラクラクコイン
+    sender_name: 課金代行 ポンポコジェム
     sender:
     subject:
     body:
-    link: "https://rakuraku-coin.example/order"
+    link: "https://ponpoko-gem.example/order"
     page_url:
     parts:
       - kind: ad_label
@@ -469,11 +469,11 @@
   context: |
     空いた時間にできるアルバイトを探していたら、SNSに次の求人広告が出てきた。
   message:
-    sender_name: ワカバ配送サポート
+    sender_name: モクレン配送サポート
     sender:
     subject:
     body:
-    link: "https://wakaba-haiso-job.example/entry"
+    link: "https://mokuren-haiso-job.example/entry"
     page_url:
     parts:
       - kind: ad_label

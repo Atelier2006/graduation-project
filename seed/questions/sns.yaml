@@ -258,8 +258,8 @@
   context: |
     大きな地震があった次の日、ハナシバで多くの人に共有されている次の投稿を見かけた。
   message:
-    sender_name: 被災地応援プロジェクト
-    sender: "@hisaichi_ouen_pj"
+    sender_name: ソラノテ募金プロジェクト
+    sender: "@soranote_bokin_pj"
     subject:
     body: |
       【拡散希望】昨日の地震で、多くの方が避難所で不安な夜を過ごしています。
