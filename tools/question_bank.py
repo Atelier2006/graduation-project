@@ -168,6 +168,11 @@ def check_refs(where: str, refs, errors: list):
             errors.append(f"{where}: 参考資料[{i}] の url が正しくない")
         if not r.get("title"):
             errors.append(f"{where}: 参考資料[{i}] に title がない")
+        checked = r.get("checked") if isinstance(r, dict) else None
+        if checked is not None and checked != "not_opened" and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(checked)):
+            errors.append(f"{where}: 参考資料[{i}] の checked は日付（2026-10-14）か not_opened")
+        if isinstance(r, dict) and r.get("supports") not in (None, "yes", "partial"):
+            errors.append(f"{where}: 参考資料[{i}] の supports は yes か partial")
 
 
 def check_examples(data, errors: list):
@@ -610,8 +615,14 @@ def render_examples_md(data) -> str:
             srcs = []
             for src in ex.get("sources") or []:
                 pub = f"（{src['published']}）" if src.get("published") else ""
+                if src.get("checked") == "not_opened":
+                    note = "　※ページを開いて確かめられていない"
+                elif src.get("checked"):
+                    note = f"　{src['checked']} に開いて確認" + ("（一部を裏づけ）" if src.get("supports") == "partial" else "")
+                else:
+                    note = ""
                 srcs.append(f"- {md_escape(src.get('publisher', ''))}：[{md_link_text(src.get('title', ''))}]"
-                            f"({md_url(src.get('url'))}){pub}")
+                            f"({md_url(src.get('url'))}){pub}{note}")
             out += ["**出典**", ""] + srcs + [""]
             if used_by.get(ex["id"]):
                 out += [f"この事例から作った問題：{'、'.join(sorted(used_by[ex['id']]))}", ""]
