@@ -34,6 +34,8 @@ CHANNELS = {
     "chat": ("CH", "会話"),
 }
 LEVELS = {"easy": "やさしい", "normal": "ふつう", "hard": "むずかしい"}
+# 事例の裏づけの強さ（high：公的機関を含む2つ以上の出典 / medium：公的機関1つか民間2つ / low：民間1つ）
+CONFIDENCE = {"high": "高", "medium": "中", "low": "低"}
 TARGETS = {"学生", "社会人", "高齢者", "全世代"}
 HINT_TARGETS = {"sender", "subject", "body", "link", "page_url"}
 HINT_LABELS = {
@@ -193,6 +195,8 @@ def check_examples(data, errors: list):
                 errors.append(f"{where}: targets に不正な値（{t}）")
         if ex.get("level") not in LEVELS:
             errors.append(f"{where}: level が不正（{ex.get('level')}）")
+        if ex.get("confidence") not in (None, *CONFIDENCE):
+            errors.append(f"{where}: confidence は high / medium / low（{ex.get('confidence')}）")
         for field in ("title", "right_action"):
             if not ex.get(field):
                 errors.append(f"{where}: {field} がない")
@@ -589,6 +593,8 @@ def render_examples_md(data) -> str:
             if ex.get("tactics"):
                 tags.append("手口：" + "、".join(
                     f"{t} {data['tactics'][t]['name']}" for t in ex["tactics"] if t in data["tactics"]))
+            if ex.get("confidence") in CONFIDENCE:
+                tags.append("裏づけ：" + CONFIDENCE[ex["confidence"]])
             out += ["｜".join(tags), ""]
             if ex.get("flow"):
                 out += ["**流れ**", "", str(ex["flow"]).strip(), ""]
