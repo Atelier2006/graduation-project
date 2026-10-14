@@ -53,7 +53,7 @@
   references:
     - title: "偽セキュリティ警告（サポート詐欺）対策特集ページ"
       url: https://www.ipa.go.jp/security/anshin/measures/fakealert.html
-    - title: "偽セキュリティ警告画面の閉じ方体験サイト（題名は要約）"
+    - title: "偽のセキュリティ警告画面の閉じ方体験サイト"
       url: https://www.ipa.go.jp/security/anshin/measures/fa-experience.html
 
 - id: Q-WB-002
@@ -102,9 +102,9 @@
     action: |
       手順には従わず、ページを閉じる。もし実行してしまったら、パソコンをネットから切り離し、別の端末からパスワードを変えて、IPAの情報セキュリティ安心相談窓口などに相談する。
   references:
-    - title: "偽の『CAPTCHA』に注意"
+    - title: "偽の「CAPTCHA」に注意！"
       url: https://www.police.pref.miyagi.jp/cyber/pdf/r7-2-5.pdf
-    - title: "警視庁、偽のCAPTCHA画面でマルウェアを入れさせる手口に注意喚起（題名は要約）"
+    - title: "警視庁、偽のCAPTCHA画面でマルウェアをインストールさせる手口に注意喚起"
       url: https://internet.watch.impress.co.jp/docs/news/2046298.html
 
 - id: Q-WB-003
@@ -159,7 +159,7 @@
     action: |
       このサイトでは注文しない。買う前に、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を確かめる。振り込んでしまったら、すぐに振込先の銀行と警察に連絡し、消費者ホットライン188にも相談する。
   references:
-    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+    - title: "怪しい通販サイトにご注意"
       url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
 
 - id: Q-WB-004
@@ -210,7 +210,7 @@
     action: |
       何も入力せずに画面を閉じ、公式アプリかブックマークからログインしてお知らせを確かめる。入力してしまったら、すぐに銀行に連絡してパスワードを変え、警察にも相談する。
   references:
-    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+    - title: "フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）"
       url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
     - title: "フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ"
       url: https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html
@@ -265,9 +265,9 @@
     action: |
       このページでは申し込まない。ふるさとカゴの公式アプリやブックマーク、寄付したい自治体の公式サイトの案内から申し込む。振り込んでしまったら、すぐに振込先の銀行と警察に連絡する。
   references:
-    - title: "（ふるさと納税の偽サイトに関する注意喚起）"
+    - title: "ふるさと納税の偽サイトにご注意ください！！"
       url: https://www.pref.fukuoka.lg.jp/contents/furusatonouzei.html
-    - title: "（ふるさと納税サイトを偽装した詐欺サイトに関する注意喚起）"
+    - title: "【重要なお知らせ】ふるさと納税を装った詐欺サイトにご注意ください"
       url: https://www.city.kobe.lg.jp/a05822/20250919.html
 
 - id: Q-WB-006
@@ -375,9 +375,9 @@
     action: |
       何も入力せずにページを閉じる。入力してしまったら、すぐに公式アプリからパスワードを変え、家族や先生にも相談する。
   references:
-    - title: "オンラインゲームに関する注意喚起資料（題名未確認）"
-      url: https://www.police.pref.nara.jp/cmsfiles/contents/0000004/4510/onlinegame.pdf
-    - title: "意外と知らない? ネットセキュリティの基礎知識（連載記事）"
+    - title: "「ポイント3倍」「当選」などで誘導、モバゲーを騙るフィッシングサイト（フィッシング対策協議会）"
+      url: https://scan.netsecurity.ne.jp/article/2010/06/14/25308.html
+    - title: "オンラインゲームのアカウントが盗まれる？"
       url: https://internet.watch.impress.co.jp/docs/column/security_basic/1227871.html
 
 - id: Q-WB-008
@@ -475,9 +475,9 @@
     action: |
       このままログインしてよい。これからも、ログインはブックマークか公式アプリから行い、メールやSMSのリンクからは開かない。認証番号は、自分で開いた本物のログイン画面にだけ入れ、電話やメールで聞かれても教えない。
   references:
-    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+    - title: "フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）"
       url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
-    - title: "10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ"
+    - title: "10 月の不正取引件数は 333 件に ～ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ"
       url: https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html
 
 - id: Q-WB-010
@@ -529,9 +529,9 @@
     action: |
       このまま注文してよい。知らない通販サイトで買うときは、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を先に確かめる。
   references:
-    - title: "（偽ショッピングサイト対策のページ）"
+    - title: "偽ショッピングサイト・詐欺サイト対策"
       url: https://www.npa.go.jp/bureau/cyber/countermeasures/fake-shop.html
-    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+    - title: "怪しい通販サイトにご注意"
       url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
 
 - id: Q-WB-011
@@ -585,7 +585,7 @@
   references:
     - title: "令和6年能登半島地震 大阪府義援金の募集について"
       url: https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html
-    - title: "（災害に便乗した義援金詐欺などへの注意）"
+    - title: "震災に便乗した義援金詐欺や悪質商法にご注意ください！"
       url: https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html
 
 - id: Q-WB-012
@@ -693,9 +693,9 @@
       企業の問い合わせ先は、検索結果からではなく、公式アプリや予約確認メールなど手元にある正規の情報から探す。お金を払ってしまったときや困ったときは、検索せずに消費者ホットライン188にかける。
   references:
     - title: "（検索上位の「相談窓口」に電話して追加の費用を求められた事例を含む資料）"
-      url: "https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf"
-    - title: "（正規のサポートサイトの検索結果に偽の電話番号を表示させる手口の紹介記事）"
-      url: "https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/"
+      url: https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf
+    - title: "まさか公式で？ NetflixやAppleのサイトに潜む「偽の電話番号」詐欺、その巧妙な手口とは"
+      url: https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/
 
 - id: Q-WB-014
   title: 一点もののバッグの代金を「送る」で払わせる通販サイト
@@ -745,10 +745,10 @@
     action: |
       個人のアカウントへの「送る」で払うよう言われたら、購入をやめる。送ってしまったら、すぐにクルクルペイのアプリから問い合わせ、消費者ホットライン188に相談する。
   references:
-    - title: "（海外に拠点があるとみられる悪質通販サイトに関する注意喚起。越境消費者センターによる悪質通販サイト情報の公表から2年）"
-      url: "https://www.kokusen.go.jp/news/data/n-20260617_1.html"
-    - title: "国民生活センター、「悪質通販サイト」 手口・相談内容を公開し注意喚起"
-      url: "https://ecnomikata.com/ecnews/50908/"
+    - title: "悪質通販サイトにご注意ください－フリマサイトの画像や文言を流用したサイトも！－"
+      url: https://www.kokusen.go.jp/news/data/n-20260617_1.html
+    - title: "国民生活センター、「悪質通販サイト」　手口・相談内容を公開し注意喚起"
+      url: https://ecnomikata.com/ecnews/50908/
 
 - id: Q-WB-015
   title: チケットノモリの本物の公式リセール
@@ -800,5 +800,5 @@
     action: |
       公式アプリから開いた公式リセールなので、この画面で購入してよい。チケットは公式アプリや公式サイトからたどった正規のルートで買い、SNSの個人間の取引や、検索広告に出てくる転売サイトは使わない。
   references:
-    - title: "“推し”に会えない!?転売チケットの購入トラブルが急増中"
-      url: "https://www.kokusen.go.jp/news/data/n-20220804_2.html"
+    - title: "“推し”に会えない！？転売チケットの購入トラブルが急増中！"
+      url: https://www.kokusen.go.jp/news/data/n-20220804_2.html

@@ -125,7 +125,7 @@
     action: |
       いったん電話を切り、前から知っている息子の番号にかけて確かめる（この電話の中で質問しても、ごまかされることがある）。家族にも相談し、知らない人に現金を渡さない。不安なときは警察相談専用電話#9110や近くの警察署に相談する。
   references:
-    - title: 特殊詐欺の手口
+    - title: "特殊詐欺とは"
       url: https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html
 
 - id: Q-CH-003
@@ -241,9 +241,9 @@
     action: |
       カードを渡さず、暗証番号も書かない。いったん帰ってもらい、通帳に書かれたコトリ銀行の番号か警察相談専用電話#9110に、自分から電話して相談する。
   references:
-    - title: キャッシュカード詐欺盗(すり替え型)の手口
+    - title: "キャッシュカード詐欺盗（すり替え型）の手口"
       url: https://www.pref.saitama.lg.jp/a0311/hurikomesagi/cashcardsagi-teguchi.html
-    - title: 特殊詐欺の手口
+    - title: "特殊詐欺とは"
       url: https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html
 
 - id: Q-CH-005
@@ -426,9 +426,9 @@
     action: |
       これ以上お金を払わず、やり取りをやめる。すでに入れたお金については、すぐに警察相談専用電話#9110や近くの警察署、振込先の銀行に相談する。
   references:
-    - title: 見守り新鮮情報 第530号（SNSで勧誘される暗号資産の詐欺的な投資話）
+    - title: "SNSで勧誘される詐欺的な暗号資産の投資話　被害回復は困難です"
       url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html
-    - title: それ詐欺です！SNS上の投資勧誘にご注意ください！
+    - title: "それ詐欺です！SNS上の投資勧誘にご注意ください！"
       url: https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html
 
 - id: Q-CH-008
@@ -481,9 +481,9 @@
     action: |
       アプリの外での取引には応じず、やり取りも支払いもフリマルシェのアプリの中だけで行う。困ったときはフリマルシェに相談し、それでも解決しなければ消費者ホットライン188に相談する。
   references:
-    - title: （フリマアプリで架空取引を持ちかけられるトラブルに関する注意喚起）
-      url: https://www.kokusen.go.jp/news/data/n-20211118_1.html
-    - title: （フリマアプリ・個人間取引の相談事例）
+    - title: "かしこく使おう ネットオークションとフリマアプリ 〜トラブルを防ぐには〜"
+      url: https://www.city.setagaya.lg.jp/documents/1129/netokushontohurimaapuri_2.pdf
+    - title: "フリマアプリのトラブルに注意！-個人間取引は自己責任-"
       url: https://www.pref.saitama.lg.jp/b0304/shohisoudan/jirei/tsuhan/20170825.html
 
 - id: Q-CH-009
@@ -603,7 +603,7 @@
     action: |
       担当者の案内に従って、カードを止めてもらう。あとで公式アプリで利用明細を確かめ、ほかに身に覚えのない利用がないか見ておく。
   references:
-    - title: 銀行協会職員などを名乗る詐欺への注意のページ（題名未確認）
+    - title: "全国銀行協会の偽サイトにご注意！"
       url: https://www.zenginkyo.or.jp/topic/detail/nid/9013/
 
 - id: Q-CH-011
@@ -717,7 +717,7 @@
     action: |
       ジョブノハコのメッセージ画面から返信して、面接の日程を伝える。選考の途中でお金や身分証の画像を求められたら応じず、ジョブノハコや学校の就職の窓口に相談する。
   references:
-    - title: 採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）
+    - title: "採用企業からの不審な連絡を見極めたい"
       url: https://jp.indeed.com/help/job-seekers/articles/360040122511
 
 - id: Q-CH-013
@@ -844,7 +844,7 @@
     action: |
       その場で決めず、入会する気がなければはっきり断る。借金をしてまで契約しない。困ったときや契約してしまったときは、消費者ホットライン188に相談する（条件によっては、クーリング・オフ＝決められた期間内なら契約をやめられる制度が使える）。
   references:
-    - title: "新生活での友人・先輩・SNSからの投資やもうけ話の勧誘に関する注意喚起（題名未確認）"
-      url: "https://www.pref.tottori.lg.jp/secure/922405/support206.pdf"
-    - title: "若者に広がる「モノなしマルチ商法」の注意喚起（題名未確認）"
-      url: "https://www.kokusen.go.jp/news/data/n-20190725_1.html"
+    - title: "学生に広がる投資やもうけ話に注意"
+      url: https://www.pref.tottori.lg.jp/secure/922405/support206.pdf
+    - title: "友だちから誘われても断れますか？若者に広がる「モノなしマルチ商法」に注意！"
+      url: https://www.kokusen.go.jp/news/data/n-20190725_1.html

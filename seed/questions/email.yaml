@@ -53,7 +53,7 @@
     action: |
       リンクは開かず、公式アプリやブックマークした公式サイトにログインして、注文履歴やメッセージセンターに同じ知らせがあるか確かめる。入力してしまったら、すぐにパスワードを変えて、カード会社に連絡する。
   references:
-    - title: "Amazonプライム会員の更新のためにカード情報を登録させるニセメール(フィッシング対策協議会)"
+    - title: "Amazonプライム会員の更新のためにカード情報を登録させるニセメール（フィッシング対策協議会）"
       url: https://scan.netsecurity.ne.jp/article/2019/01/16/41836.html
     - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
       url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
@@ -108,7 +108,7 @@
     action: |
       リンクは開かず、公式アプリや自分でブックマークした会員サイトで、利用状況やお知らせを確かめる。カード情報を入力してしまったら、すぐにカード裏面の番号に電話して、カード会社に知らせる。
   references:
-    - title: "DMARC 通過する独自ドメインフィッシング急増 ~ フィッシング対策協議会「フィッシングレポート2026」"
+    - title: "DMARC 通過する独自ドメインフィッシング急増 ～ フィッシング対策協議会「フィッシングレポート2026」"
       url: https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html
     - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
       url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
@@ -162,7 +162,7 @@
     action: |
       リンクは開かない。給付金があるかどうかは、市から届いた郵便や、自分で調べた市の公式サイト・市役所の窓口で確かめる。入力してしまったときは、警察相談専用電話 #9110 などに相談する。
   references:
-    - title: "給付金をかたる詐欺メールへの注意の資料（題名未確認）"
+    - title: "給付金等に関する不審メールについて（サイバーセキュリティの置き薬 2020年第17号）"
       url: https://police.pref.toyama.jp/documents/1389/r02_17.pdf
     - title: "国勢調査をかたる不審メールや詐欺にご注意ください"
       url: https://www.city.minoh.lg.jp/shisei/toukei/kokuseikatarichuui.html
@@ -218,7 +218,7 @@
     action: |
       メールのリンクは使わず、公式アプリやブックマークした公式サイトから自分でログインして、お知らせや設定の画面を確かめる。身に覚えのないログインや取引がないかも見ておく。
   references:
-    - title: "（ページ名未確認）証券会社などを装う偽メールの注意喚起（2025年2〜4月の急増）"
+    - title: "証券会社を装ったフィッシング詐欺による不正取引が急増しています！"
       url: https://www.city.hiroshima.lg.jp/living/shouhi/1025695/1025698/1039798.html
     - title: "2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加"
       url: https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html
@@ -268,7 +268,7 @@
     action: |
       リンクは開かず、支払わずに削除する。本当に未納がないか気になるときは、自分で調べたそよかぜ税務署の窓口や、消費者ホットライン188に相談する。
   references:
-    - title: "（ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起"
+    - title: "国税庁がSMSやメールで税金の納付を求めることはありません！－国税庁やe-Taxをかたる不審なSMSやメールに注意－"
       url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
     - title: "不審なメールにご注意ください"
       url: https://www.pref.saitama.lg.jp/a0209/z-kurashiindex/z-fuhin-mail_cyui-kanki.html
@@ -321,7 +321,7 @@
     action: |
       リンクは開かず、アプリや自分で開いたアカウントページで支払いの状況を確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡する。
   references:
-    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)"
+    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認（フィッシング対策協議会）"
       url: https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html
 
 - id: Q-EM-007
@@ -378,9 +378,9 @@
     action: |
       QRコードは読み取らない。気になるときは、公式アプリやブックマークから自分でログインしてログイン履歴を確かめ、心当たりのないログインがあればパスワードを変える。
   references:
-    - title: "QRコードを悪用した手口と対策（題名は要約）"
+    - title: "QRコードを利用する時の注意点"
       url: https://www.keishicho.metro.tokyo.lg.jp/kurashi/cyber/notes/qrcord.html
-    - title: "QRコード攻撃はなぜメールセキュリティを無力化できるのか? その理由を解説:画像型フィッシングは約400%増"
+    - title: "QRコード攻撃はなぜメールセキュリティを無力化できるのか？　その理由を解説：画像型フィッシングは約400％増"
       url: https://atmarkit.itmedia.co.jp/ait/spv/2607/08/news048.html
 
 - id: Q-EM-008
@@ -489,7 +489,7 @@
   references:
     - title: "2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増"
       url: https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html
-    - title: "見守り新鮮情報 第515号（怪しい通販サイトにご注意）"
+    - title: "怪しい通販サイトにご注意"
       url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html
 
 - id: Q-EM-010
@@ -595,9 +595,9 @@
     action: |
       メールからではなく、いつも使っている電子申告のページに、ブックマークなどから自分でログインして、メッセージボックスを確かめる。
   references:
-    - title: "（ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起"
+    - title: "国税庁がSMSやメールで税金の納付を求めることはありません！－国税庁やe-Taxをかたる不審なSMSやメールに注意－"
       url: https://www.kokusen.go.jp/news/data/n-20260527_1.html
-    - title: "メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起"
+    - title: "メールで税金の納付を求めることはありません！ 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起"
       url: https://internet.watch.impress.co.jp/docs/news/2112792.html
 
 - id: Q-EM-012
@@ -647,7 +647,7 @@
     action: |
       メッセージは、アプリやブックマークからジョブノハコにログインして読む。もしサイトの中のメッセージでも、お金の支払いや別のアプリへの移動を求められたら、応じずに疑う。
   references:
-    - title: "採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）"
+    - title: "採用企業からの不審な連絡を見極めたい"
       url: https://jp.indeed.com/help/job-seekers/articles/360040122511
 
 - id: Q-EM-013
@@ -700,7 +700,7 @@
     action: |
       自分のログインなら対応は要らない。気になるときは、メールではなく公式アプリを開いてログイン履歴を確かめる。心当たりがないときは、公式アプリからパスワードを変えて、銀行の窓口に連絡する。
   references:
-    - title: "インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）"
+    - title: "フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）"
       url: https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf
     - title: "不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ"
       url: https://paymentnavi.com/?p=144363
@@ -755,7 +755,7 @@
     action: |
       メールのリンクより、ユメミル動画のアプリを開いて「アカウント」画面からお支払い方法を更新するのが確実。
   references:
-    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)"
+    - title: "「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認（フィッシング対策協議会）"
       url: https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html
 
 - id: Q-EM-015
@@ -810,10 +810,10 @@
     action: |
       荷物を待っているときでも、メールのリンクは開かない。郵便受けの不在票を確かめ、不在票の番号か、ブックマークした公式サイトから申し込む。カード番号を入力してしまったら、すぐにカード会社に連絡する。
   references:
-    - title: "（ページ名未確認）消費生活のよくある質問（不在通知のSMS・メール）"
-      url: "https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html"
-    - title: "トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に"
-      url: "https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html"
+    - title: "宅配便業者と思われるところから「お客様宛にお荷物のお届けにあがりましたが不在のため、持ち帰りました。配送物は下記よりご確認ください。」という内容のショートメッセージが届いた。身に覚えがないが、どうしたらよいか。"
+      url: https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html
+    - title: "トビラシステムズ、特殊詐欺／フィッシング詐欺の独自調査レポートを公開　宅配事業者をかたるSMS文面が約9割に"
+      url: https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html
 
 - id: Q-EM-016
   title: ポチッと通販の本物の当選メール
@@ -867,7 +867,7 @@
     action: |
       本物らしく見えても、当選やポイントの内容は、公式アプリのメッセージセンターやポイント履歴で確かめる。ポチッと通販の大事なお知らせは、メッセージセンターにも必ず表示される。
   references:
-    - title: "（心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）"
-      url: "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html"
-    - title: "（当選メールの後に手数料を次々と請求された相談事例）"
-      url: "https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf"
+    - title: "【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について"
+      url: https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html
+    - title: "突然届いた当選メールに注意してください"
+      url: https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf

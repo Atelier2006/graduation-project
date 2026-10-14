@@ -46,7 +46,7 @@
     action: |
       応募しない。身分証や顔写真は送らない。もし応募してしまった、抜けられなくなったというときは、すぐに警察相談専用電話#9110や近くの警察署に相談する。
   references:
-    - title: ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴"
       url: https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf
 
 - id: Q-SN-002
@@ -93,9 +93,9 @@
     action: |
       認証番号は誰にも送らない。電話や直接会うなど、トモトモ以外の方法で友だちに確かめ、乗っ取られていたら教えてあげる。
   references:
-    - title: （ページ名未確認）メッセージアプリの友だちになりすます手口の注意喚起
+    - title: "不正アクセス（LINE乗っ取り）"
       url: https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html
-    - title: （資料名未確認）メッセージアプリ乗っ取りの注意喚起（PDF）
+    - title: "SNSアカウントの乗っ取りに注意！"
       url: https://www.pref.yamaguchi.lg.jp/uploaded/attachment/209293.pdf
 
 - id: Q-SN-003
@@ -144,10 +144,10 @@
     action: |
       DMのリンクは開かず、返信もしない。アカウントをブロックし、ハナシバに通報する。当選が気になるときは、ポチッと通販の公式サイトに載っているリンクから公式アカウントを開いて確かめる。
   references:
-    - title: ＳＮＳのなりすましアカウントに注意
+    - title: "ＳＮＳのなりすましアカウントに注意"
       url: https://www.pref.tochigi.lg.jp/keisatu/n14/seikatu/documents/20260123092947.pdf
-    - title: （消費生活通信 SNSのプレゼント企画に応募した相談事例）
-      url: https://www.city.tochigi.lg.jp/uploaded/attachment/66744.pdf
+    - title: "【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について"
+      url: https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html
 
 - id: Q-SN-004
   title: マッチングアプリで親しくなった相手からの暗号資産投資の誘い
@@ -241,7 +241,7 @@
     action: |
       SNSで知り合った人に先にお金を送らない。チケットは、チケットノモリの公式リセールなどの正規のルートで探す。困ったときは消費者ホットライン188に相談する。
   references:
-    - title: "“推し”に会えない!?転売チケットの購入トラブルが急増中"
+    - title: "“推し”に会えない！？転売チケットの購入トラブルが急増中！"
       url: https://www.kokusen.go.jp/news/data/n-20220804_2.html
 
 - id: Q-SN-006
@@ -289,10 +289,10 @@
     action: |
       寄付は、自治体や支援団体の公式サイトに載っている窓口から行う。怪しい投稿は拡散しない。迷ったときは警察相談専用電話#9110や消費者ホットライン188に相談する。
   references:
-    - title: 義援金等を装った詐欺にご注意!
+    - title: "義援金等を装った詐欺にご注意！＜令和８年熊本地震関連＞"
       url: https://www.fsa.go.jp/ordinary/earthquake202607/gienkinsagi.html
-    - title: 寄付先が不透明な募金は詐欺の可能性あり！
-      url: https://www.police.pref.nara.jp/cmsfiles/contents/0000000/737/R8.8.7.pdf
+    - title: "震災に便乗した義援金詐欺や悪質商法にご注意ください！"
+      url: https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html
 
 - id: Q-SN-007
   title: 親せきのいつものアカウントから「電子マネーのカードを買って番号を送って」
@@ -338,9 +338,9 @@
     action: |
       カードは買わず、番号も送らない。前から知っている電話番号にかけるなど、トモトモ以外の方法で本人に確かめる。乗っ取りが分かったら、ほかの家族にも知らせる。
   references:
-    - title: （ページ名未確認）メッセージアプリの友だちになりすます手口の注意喚起
+    - title: "不正アクセス（LINE乗っ取り）"
       url: https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html
-    - title: （ページ名未確認）アカウント乗っ取りの注意喚起
+    - title: "SNSやメールの乗っ取り・なりすましに注意！"
       url: https://www.pref.kumamoto.jp/site/police/280796.html
 
 - id: Q-SN-008
@@ -388,7 +388,7 @@
     action: |
       DMの中では手続きせず、自分でユメミル動画の公式アプリを開いて「お知らせ」から受け取る。アプリに案内が見当たらないときは、手続きしない。
   references:
-    - title: 姶良・伊佐地域振興局の公式Instagramのなりすましへの注意喚起（題名未確認）
+    - title: "【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について"
       url: https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html
 
 - id: Q-SN-009
@@ -484,9 +484,9 @@
     action: |
       寄付は、市の公式サイトに載っている窓口と振込先を確かめてから行う。返信欄やDMで別の振込先を案内されても使わない。
   references:
-    - title: 令和6年能登半島地震 大阪府義援金の募集について
+    - title: "令和6年能登半島地震 大阪府義援金の募集について"
       url: https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html
-    - title: （災害に便乗した義援金詐欺などへの注意）
+    - title: "震災に便乗した義援金詐欺や悪質商法にご注意ください！"
       url: https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html
 
 - id: Q-SN-011
@@ -533,7 +533,7 @@
     action: |
       自分でハタラクモのサイトを開いて同じ求人を探し、内容を確かめてから応募する。応募のあとで、チャットで身分証の画像を送るよう言われたら、応じずに相談する。
   references:
-    - title: ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）
+    - title: "ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴"
       url: https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf
 
 - id: Q-SN-012
@@ -579,8 +579,8 @@
     action: |
       取引画面で返信し、アプリの手順どおりに発送する。もし相手がアプリの外でのやり取りや支払いを持ちかけてきたら応じず、フリマルシェに相談する。
   references:
-    - title: （フリマアプリで架空取引を持ちかけられるトラブルに関する注意喚起）
-      url: https://www.kokusen.go.jp/news/data/n-20211118_1.html
+    - title: "かしこく使おう ネットオークションとフリマアプリ 〜トラブルを防ぐには〜"
+      url: https://www.city.setagaya.lg.jp/documents/1129/netokushontohurimaapuri_2.pdf
 
 - id: Q-SN-013
   title: 料理仲間から暗号資産の投資に誘うDM
@@ -628,8 +628,8 @@
     action: |
       リンクのアプリは入れず、投資の誘いは断る。暗号資産の取引所が、金融庁・財務局に登録された業者かどうかは、金融庁のサイトで確かめられる。お金を送ってしまったら、すぐに消費者ホットライン188や警察相談専用電話#9110に相談する。
   references:
-    - title: "見守り新鮮情報 第530号（SNSで勧誘される暗号資産の詐欺的な投資話）"
-      url: "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html"
+    - title: "SNSで勧誘される詐欺的な暗号資産の投資話　被害回復は困難です"
+      url: https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html
 
 - id: Q-SN-014
   title: そよかぜ警察署の本物の注意喚起の投稿

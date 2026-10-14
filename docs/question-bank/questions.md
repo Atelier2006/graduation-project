@@ -110,7 +110,7 @@
 
 **正しい行動**：リンクは開かず、公式アプリやブックマークした公式サイトにログインして、注文履歴やメッセージセンターに同じ知らせがあるか確かめる。入力してしまったら、すぐにパスワードを変えて、カード会社に連絡する。
 
-**参考**：[Amazonプライム会員の更新のためにカード情報を登録させるニセメール(フィッシング対策協議会)](https://scan.netsecurity.ne.jp/article/2019/01/16/41836.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
+**参考**：[Amazonプライム会員の更新のためにカード情報を登録させるニセメール（フィッシング対策協議会）](https://scan.netsecurity.ne.jp/article/2019/01/16/41836.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
 
 もとにした事例：EX-002
 
@@ -155,7 +155,7 @@
 
 **正しい行動**：リンクは開かず、公式アプリや自分でブックマークした会員サイトで、利用状況やお知らせを確かめる。カード情報を入力してしまったら、すぐにカード裏面の番号に電話して、カード会社に知らせる。
 
-**参考**：[DMARC 通過する独自ドメインフィッシング急増 ~ フィッシング対策協議会「フィッシングレポート2026」](https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
+**参考**：[DMARC 通過する独自ドメインフィッシング急増 ～ フィッシング対策協議会「フィッシングレポート2026」](https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
 
 もとにした事例：EX-012、EX-019
 
@@ -199,7 +199,7 @@
 
 **正しい行動**：リンクは開かない。給付金があるかどうかは、市から届いた郵便や、自分で調べた市の公式サイト・市役所の窓口で確かめる。入力してしまったときは、警察相談専用電話 #9110 などに相談する。
 
-**参考**：[給付金をかたる詐欺メールへの注意の資料（題名未確認）](https://police.pref.toyama.jp/documents/1389/r02_17.pdf)、[国勢調査をかたる不審メールや詐欺にご注意ください](https://www.city.minoh.lg.jp/shisei/toukei/kokuseikatarichuui.html)
+**参考**：[給付金等に関する不審メールについて（サイバーセキュリティの置き薬 2020年第17号）](https://police.pref.toyama.jp/documents/1389/r02_17.pdf)、[国勢調査をかたる不審メールや詐欺にご注意ください](https://www.city.minoh.lg.jp/shisei/toukei/kokuseikatarichuui.html)
 
 もとにした事例：EX-050、EX-054
 
@@ -245,7 +245,7 @@
 
 **正しい行動**：メールのリンクは使わず、公式アプリやブックマークした公式サイトから自分でログインして、お知らせや設定の画面を確かめる。身に覚えのないログインや取引がないかも見ておく。
 
-**参考**：[（ページ名未確認）証券会社などを装う偽メールの注意喚起（2025年2〜4月の急増）](https://www.city.hiroshima.lg.jp/living/shouhi/1025695/1025698/1039798.html)、[2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加](https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html)
+**参考**：[証券会社を装ったフィッシング詐欺による不正取引が急増しています！](https://www.city.hiroshima.lg.jp/living/shouhi/1025695/1025698/1039798.html)、[2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加](https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html)
 
 もとにした事例：EX-025、EX-026
 
@@ -284,7 +284,7 @@
 
 **正しい行動**：リンクは開かず、支払わずに削除する。本当に未納がないか気になるときは、自分で調べたそよかぜ税務署の窓口や、消費者ホットライン188に相談する。
 
-**参考**：[（ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起](https://www.kokusen.go.jp/news/data/n-20260527_1.html)、[不審なメールにご注意ください](https://www.pref.saitama.lg.jp/a0209/z-kurashiindex/z-fuhin-mail_cyui-kanki.html)
+**参考**：[国税庁がSMSやメールで税金の納付を求めることはありません！－国税庁やe-Taxをかたる不審なSMSやメールに注意－](https://www.kokusen.go.jp/news/data/n-20260527_1.html)、[不審なメールにご注意ください](https://www.pref.saitama.lg.jp/a0209/z-kurashiindex/z-fuhin-mail_cyui-kanki.html)
 
 もとにした事例：EX-048、EX-055
 
@@ -327,7 +327,7 @@
 
 **正しい行動**：リンクは開かず、アプリや自分で開いたアカウントページで支払いの状況を確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡する。
 
-**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
+**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認（フィッシング対策協議会）](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
 
 もとにした事例：EX-071
 
@@ -373,7 +373,7 @@
 
 **正しい行動**：QRコードは読み取らない。気になるときは、公式アプリやブックマークから自分でログインしてログイン履歴を確かめ、心当たりのないログインがあればパスワードを変える。
 
-**参考**：[QRコードを悪用した手口と対策（題名は要約）](https://www.keishicho.metro.tokyo.lg.jp/kurashi/cyber/notes/qrcord.html)、[QRコード攻撃はなぜメールセキュリティを無力化できるのか? その理由を解説:画像型フィッシングは約400%増](https://atmarkit.itmedia.co.jp/ait/spv/2607/08/news048.html)
+**参考**：[QRコードを利用する時の注意点](https://www.keishicho.metro.tokyo.lg.jp/kurashi/cyber/notes/qrcord.html)、[QRコード攻撃はなぜメールセキュリティを無力化できるのか？　その理由を解説：画像型フィッシングは約400％増](https://atmarkit.itmedia.co.jp/ait/spv/2607/08/news048.html)
 
 もとにした事例：EX-038
 
@@ -462,7 +462,7 @@
 
 **正しい行動**：特別な手続きは要らない。内容が気になるときは、メールではなく公式アプリの注文履歴やメッセージセンターで確かめる。
 
-**参考**：[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)、[見守り新鮮情報 第515号（怪しい通販サイトにご注意）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
+**参考**：[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)、[怪しい通販サイトにご注意](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
 
 もとにした事例：EX-002、EX-008
 
@@ -547,7 +547,7 @@
 
 **正しい行動**：メールからではなく、いつも使っている電子申告のページに、ブックマークなどから自分でログインして、メッセージボックスを確かめる。
 
-**参考**：[（ページ名未確認）国税庁やe-Taxをかたる不審なSMSやメールに関する注意喚起](https://www.kokusen.go.jp/news/data/n-20260527_1.html)、[メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起](https://internet.watch.impress.co.jp/docs/news/2112792.html)
+**参考**：[国税庁がSMSやメールで税金の納付を求めることはありません！－国税庁やe-Taxをかたる不審なSMSやメールに注意－](https://www.kokusen.go.jp/news/data/n-20260527_1.html)、[メールで税金の納付を求めることはありません！ 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起](https://internet.watch.impress.co.jp/docs/news/2112792.html)
 
 もとにした事例：EX-055
 
@@ -589,7 +589,7 @@
 
 **正しい行動**：メッセージは、アプリやブックマークからジョブノハコにログインして読む。もしサイトの中のメッセージでも、お金の支払いや別のアプリへの移動を求められたら、応じずに疑う。
 
-**参考**：[採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）](https://jp.indeed.com/help/job-seekers/articles/360040122511)
+**参考**：[採用企業からの不審な連絡を見極めたい](https://jp.indeed.com/help/job-seekers/articles/360040122511)
 
 もとにした事例：EX-045
 
@@ -633,7 +633,7 @@
 
 **正しい行動**：自分のログインなら対応は要らない。気になるときは、メールではなく公式アプリを開いてログイン履歴を確かめる。心当たりがないときは、公式アプリからパスワードを変えて、銀行の窓口に連絡する。
 
-**参考**：[インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)
+**参考**：[フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)
 
 もとにした事例：EX-019、EX-021
 
@@ -678,7 +678,7 @@
 
 **正しい行動**：メールのリンクより、ユメミル動画のアプリを開いて「アカウント」画面からお支払い方法を更新するのが確実。
 
-**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
+**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認（フィッシング対策協議会）](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
 
 もとにした事例：EX-071
 
@@ -725,7 +725,7 @@
 
 **正しい行動**：荷物を待っているときでも、メールのリンクは開かない。郵便受けの不在票を確かめ、不在票の番号か、ブックマークした公式サイトから申し込む。カード番号を入力してしまったら、すぐにカード会社に連絡する。
 
-**参考**：[（ページ名未確認）消費生活のよくある質問（不在通知のSMS・メール）](https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html)、[トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
+**参考**：[宅配便業者と思われるところから「お客様宛にお荷物のお届けにあがりましたが不在のため、持ち帰りました。配送物は下記よりご確認ください。」という内容のショートメッセージが届いた。身に覚えがないが、どうしたらよいか。](https://www.pref.osaka.lg.jp/faq/o070120/faq_002107.html)、[トビラシステムズ、特殊詐欺／フィッシング詐欺の独自調査レポートを公開　宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
 
 もとにした事例：EX-009、EX-002
 
@@ -770,7 +770,7 @@
 
 **正しい行動**：本物らしく見えても、当選やポイントの内容は、公式アプリのメッセージセンターやポイント履歴で確かめる。ポチッと通販の大事なお知らせは、メッセージセンターにも必ず表示される。
 
-**参考**：[（心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）](https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html)、[（当選メールの後に手数料を次々と請求された相談事例）](https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf)
+**参考**：[【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について](https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html)、[突然届いた当選メールに注意してください](https://www.city.kitamoto.lg.jp/material/files/group/44/983_p22.pdf)
 
 もとにした事例：EX-084、EX-082
 
@@ -807,7 +807,7 @@
 
 **正しい行動**：リンクは開かない。荷物が気になるときは、郵便受けに紙の不在票が入っているかを見るか、ハシレ運輸の公式アプリで確かめる。もしリンク先でアプリを入れてしまったら、機内モードにしてからアプリを削除し、消費者ホットライン188や警察相談専用電話 #9110 に相談する。
 
-**参考**：[トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
+**参考**：[トビラシステムズ、特殊詐欺／フィッシング詐欺の独自調査レポートを公開　宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
 
 もとにした事例：EX-009、EX-010、EX-011
 
@@ -842,7 +842,7 @@
 
 **正しい行動**：リンクは開かない。注文した通販サイトやアプリの注文履歴から配送状況を確かめ、気になるときはそこに書かれた配送会社の公式サイトで調べる。リンク先でアプリを入れるよう言われても、入れない。
 
-**参考**：[スミッシングによる不正アプリへの注意喚起（題名は要約）](https://www.pref.shiga.lg.jp/police/seikatu/304409/304411/334419.html)、[安心相談窓口だより：宅配業者をかたる偽SMSから不審なアプリを入れさせる手口（題名は要約）](https://www.ipa.go.jp/security/anshin/attention/2018/mgdayori20180808.html)
+**参考**：[不正アプリが勝手にSMSを送信しているケースが発生！アンインストールしないと通信料金が増加し続けます！](https://www.pref.shiga.lg.jp/police/seikatu/304409/304411/334419.html)、[宅配便業者をかたる偽ショートメッセージに関する相談が急増中](https://www.ipa.go.jp/security/anshin/attention/2018/mgdayori20180808.html)
 
 もとにした事例：EX-010、EX-011
 
@@ -876,7 +876,7 @@
 
 **正しい行動**：リンクは開かず、ピヨモバイルの公式アプリから自分でログインして確かめる。もし入力してしまったら、すぐにパスワードと暗証番号を変え、キャリア決済の設定を見直して、ピヨモバイルの窓口に連絡する。
 
-**参考**：[2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加](https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
+**参考**：[かながわ消費生活注意・警戒情報第96号 携帯電話会社をかたる偽SMSにご注意！](https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html)、[2026年7月のフィッシング報告状況、Amazon をかたるフィッシングが急増](https://scan.netsecurity.ne.jp/article/2026/08/27/56042.html)
 
 もとにした事例：EX-032、EX-036
 
@@ -911,7 +911,7 @@
 
 **正しい行動**：リンクは開かない。料金が気になるときは、ポカポカでんきの公式アプリや、郵送で届いた請求書で確かめる。カード番号を入力してしまったら、すぐにカード会社に連絡する。
 
-**参考**：[トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート(2026年4月)](https://prtimes.jp/main/html/rd/p/000000232.000034282.html)
+**参考**：[トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート（2026年4月）](https://prtimes.jp/main/html/rd/p/000000232.000034282.html)
 
 もとにした事例：EX-046
 
@@ -980,7 +980,7 @@
 
 **正しい行動**：「送る」の画面が出ても、送らずに閉じる。心当たりのある請求かどうかは、契約している会社の公式サイトや公式アプリで確かめる。送ってしまったら、すぐにクルクルペイのアプリの問い合わせ窓口と、警察相談専用電話 #9110 か消費者ホットライン188に相談する。
 
-**参考**：[トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート(2026年5月)](https://prtimes.jp/main/html/rd/p/000000235.000034282.html)、[ネット詐欺、「QR決済利用」「地方銀行・ネット銀行を装う」事例が増加 BBSS調査](https://ecnomikata.com/ecnews/50909/)
+**参考**：[トビラシステムズ 特殊詐欺・フィッシング詐欺に関するレポート（2026年5月）](https://prtimes.jp/main/html/rd/p/000000235.000034282.html)、[ネット詐欺、「QR決済利用」「地方銀行・ネット銀行を装う」事例が増加　BBSS調査](https://ecnomikata.com/ecnews/50909/)
 
 もとにした事例：EX-014
 
@@ -1015,7 +1015,7 @@
 
 **正しい行動**：送信元の表示や、いつもの画面にあることを理由に信じない。リンクは開かず、返信もしないで、ピヨモバイルの公式アプリの会員ページで料金を確かめる。
 
-**参考**：[意外と知らない? ネットセキュリティの基礎知識](https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html)、[「偽基地局」からの携帯電話サービスへの混信について注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/05/06/52793.html)
+**参考**：[これは見破れないかも？ 「犯罪者のSMS」と「正規のSMS」が混ざって表示される送信元偽装](https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html)、[「偽基地局」からの携帯電話サービスへの混信について注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/05/06/52793.html)
 
 もとにした事例：EX-035、EX-036
 
@@ -1050,7 +1050,7 @@
 
 **正しい行動**：リンクは開かず、返信もしない。気になるときは、ポチッと通販の公式アプリを自分で開いて、メッセージセンターに同じお知らせがあるか確かめる。カード情報を入力してしまったら、すぐにカード会社に連絡し、消費者ホットライン188に相談する。
 
-**参考**：[（心当たりのない海外宝くじ・懸賞の当選SMSに関するよくある質問）](https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2020_16.html)
+**参考**：[くらしウォッチャーだより 第188号](https://www.city.osaki.miyagi.jp/material/files/group/6/20230130.pdf)
 
 もとにした事例：EX-082
 
@@ -1116,7 +1116,7 @@
 
 **正しい行動**：料金は、自分で公式アプリを開いて会員ページで確かめる。番号が本物らしくても、リンクからパスワードを入力させるSMSが届いたときは、そのリンクは開かない。
 
-**参考**：[SMSの送信元番号（共通ショートコード）に関する案内ページ（題名未確認。2023年4月時点の情報）](https://www.docomo.ne.jp/service/sms/displayname/)
+**参考**：[共通ショートコード](https://www.docomo.ne.jp/service/sms/displayname/)
 
 もとにした事例：EX-036
 
@@ -1149,7 +1149,7 @@
 
 **正しい行動**：自分で開いた公式アプリの画面にだけ入力する。認証番号は、家族にも、銀行を名乗る人にも教えない。自分がログインしていないのに認証番号が届いたときは、公式アプリからパスワードを変え、公式サイトに載っている窓口に知らせる。
 
-**参考**：[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)、[10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)
+**参考**：[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)、[10 月の不正取引件数は 333 件に ～ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)
 
 もとにした事例：EX-021、EX-019
 
@@ -1184,7 +1184,7 @@
 
 **正しい行動**：本物でも、データの追加やログインは公式アプリから行うのが安全。SMSのリンクからログインする習慣をつけないでおくと、偽物のSMSが届いたときにもだまされにくい。
 
-**参考**：[意外と知らない? ネットセキュリティの基礎知識](https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html)
+**参考**：[これは見破れないかも？ 「犯罪者のSMS」と「正規のSMS」が混ざって表示される送信元偽装](https://internet.watch.impress.co.jp/docs/column/security_basic/1240344.html)
 
 もとにした事例：EX-036、EX-035
 
@@ -1217,7 +1217,7 @@
 
 **正しい行動**：公式アプリを自分で開き、申込履歴で当選を確かめてから、アプリの中で支払う。チケットは公式の販売ルートで買い、SNSで見つけた知らない人とは取引しない。
 
-**参考**：[“推し”に会えない!?転売チケットの購入トラブルが急増中](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
+**参考**：[“推し”に会えない！？転売チケットの購入トラブルが急増中！](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
 
 もとにした事例：EX-075
 
@@ -1251,7 +1251,7 @@
 
 **正しい行動**：そのまま予定の日時に受け取る。日時を変えたいときは、SMSに返信せず、ブックマークした公式サイトや不在票に書かれた番号から手続きする。
 
-**参考**：[宅配業者を名乗る不審なSMSに関する緊急情報（題名未確認）](https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/documents/190529_1.pdf)
+**参考**：[宅配事業者からの連絡を装ったＳＭＳに注意！～不審アプリのインストールやフィッシングによる被害につながります～](https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/documents/190529_1.pdf)
 
 もとにした事例：EX-011
 
@@ -1287,7 +1287,7 @@
 
 **正しい行動**：はっきり断り、学生証や免許証の写真は送らない。先輩がすでに関わっていそうなら、家族や先生、警察相談専用電話 #9110 に相談する。もし応募してしまい、抜けられないと感じたら、犯罪をする前にすぐ警察に相談する。警察は、相談した人と家族を守ると明言している。
 
-**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)、[いわゆる「闇バイト」の危険性について](https://www.npa.go.jp/bureau/safetylife/yamibaito/hanzaishaboshu.html)
+**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)、[いわゆる「闇バイト」の危険性について](https://www.npa.go.jp/bureau/safetylife/yamibaito/hanzaishaboshu.html)
 
 もとにした事例：EX-040
 
@@ -1326,7 +1326,7 @@
 
 **正しい行動**：応募しない。身分証や顔写真は送らない。もし応募してしまった、抜けられなくなったというときは、すぐに警察相談専用電話#9110や近くの警察署に相談する。
 
-**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)
+**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)
 
 もとにした事例：EX-040
 
@@ -1362,7 +1362,7 @@
 
 **正しい行動**：認証番号は誰にも送らない。電話や直接会うなど、トモトモ以外の方法で友だちに確かめ、乗っ取られていたら教えてあげる。
 
-**参考**：[（ページ名未確認）メッセージアプリの友だちになりすます手口の注意喚起](https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html)、[（資料名未確認）メッセージアプリ乗っ取りの注意喚起（PDF）](https://www.pref.yamaguchi.lg.jp/uploaded/attachment/209293.pdf)
+**参考**：[不正アクセス（LINE乗っ取り）](https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html)、[SNSアカウントの乗っ取りに注意！](https://www.pref.yamaguchi.lg.jp/uploaded/attachment/209293.pdf)
 
 もとにした事例：EX-037
 
@@ -1401,7 +1401,7 @@
 
 **正しい行動**：DMのリンクは開かず、返信もしない。アカウントをブロックし、ハナシバに通報する。当選が気になるときは、ポチッと通販の公式サイトに載っているリンクから公式アカウントを開いて確かめる。
 
-**参考**：[ＳＮＳのなりすましアカウントに注意](https://www.pref.tochigi.lg.jp/keisatu/n14/seikatu/documents/20260123092947.pdf)、[（消費生活通信 SNSのプレゼント企画に応募した相談事例）](https://www.city.tochigi.lg.jp/uploaded/attachment/66744.pdf)
+**参考**：[ＳＮＳのなりすましアカウントに注意](https://www.pref.tochigi.lg.jp/keisatu/n14/seikatu/documents/20260123092947.pdf)、[【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について](https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html)
 
 もとにした事例：EX-083、EX-082
 
@@ -1474,7 +1474,7 @@
 
 **正しい行動**：SNSで知り合った人に先にお金を送らない。チケットは、チケットノモリの公式リセールなどの正規のルートで探す。困ったときは消費者ホットライン188に相談する。
 
-**参考**：[“推し”に会えない!?転売チケットの購入トラブルが急増中](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
+**参考**：[“推し”に会えない！？転売チケットの購入トラブルが急増中！](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
 
 もとにした事例：EX-073
 
@@ -1484,7 +1484,7 @@
 
 **状況**：大きな地震があった次の日、ハナシバで多くの人に共有されている次の投稿を見かけた。
 
-> **被災地応援プロジェクト（@hisaichi_ouen_pj）**
+> **ソラノテ募金プロジェクト（@soranote_bokin_pj）**
 >
 > 【拡散希望】昨日の地震で、多くの方が避難所で不安な夜を過ごしています。
 > 私たちは、被災地に直接お金を届けるため、義援金を集めています。
@@ -1511,7 +1511,7 @@
 
 **正しい行動**：寄付は、自治体や支援団体の公式サイトに載っている窓口から行う。怪しい投稿は拡散しない。迷ったときは警察相談専用電話#9110や消費者ホットライン188に相談する。
 
-**参考**：[義援金等を装った詐欺にご注意!](https://www.fsa.go.jp/ordinary/earthquake202607/gienkinsagi.html)、[寄付先が不透明な募金は詐欺の可能性あり！](https://www.police.pref.nara.jp/cmsfiles/contents/0000000/737/R8.8.7.pdf)
+**参考**：[義援金等を装った詐欺にご注意！＜令和８年熊本地震関連＞](https://www.fsa.go.jp/ordinary/earthquake202607/gienkinsagi.html)、[震災に便乗した義援金詐欺や悪質商法にご注意ください！](https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html)
 
 もとにした事例：EX-087
 
@@ -1547,7 +1547,7 @@
 
 **正しい行動**：カードは買わず、番号も送らない。前から知っている電話番号にかけるなど、トモトモ以外の方法で本人に確かめる。乗っ取りが分かったら、ほかの家族にも知らせる。
 
-**参考**：[（ページ名未確認）メッセージアプリの友だちになりすます手口の注意喚起](https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html)、[（ページ名未確認）アカウント乗っ取りの注意喚起](https://www.pref.kumamoto.jp/site/police/280796.html)
+**参考**：[不正アクセス（LINE乗っ取り）](https://www.pref.kagoshima.jp/ja13/cyber_teguchi08.html)、[SNSやメールの乗っ取り・なりすましに注意！](https://www.pref.kumamoto.jp/site/police/280796.html)
 
 もとにした事例：EX-080
 
@@ -1584,7 +1584,7 @@
 
 **正しい行動**：DMの中では手続きせず、自分でユメミル動画の公式アプリを開いて「お知らせ」から受け取る。アプリに案内が見当たらないときは、手続きしない。
 
-**参考**：[姶良・伊佐地域振興局の公式Instagramのなりすましへの注意喚起（題名未確認）](https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html)
+**参考**：[【注意喚起】姶良・伊佐地域振興局公式インスタグラムアカウントのなりすまし事案について](https://www.pref.kagoshima.jp/aa02/kohokocho/kouhoushi/instagram/airatyuuikanki.html)
 
 もとにした事例：EX-084
 
@@ -1659,7 +1659,7 @@
 
 **正しい行動**：寄付は、市の公式サイトに載っている窓口と振込先を確かめてから行う。返信欄やDMで別の振込先を案内されても使わない。
 
-**参考**：[令和6年能登半島地震 大阪府義援金の募集について](https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html)、[（災害に便乗した義援金詐欺などへの注意）](https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html)
+**参考**：[令和6年能登半島地震 大阪府義援金の募集について](https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html)、[震災に便乗した義援金詐欺や悪質商法にご注意ください！](https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html)
 
 もとにした事例：EX-088
 
@@ -1697,7 +1697,7 @@
 
 **正しい行動**：自分でハタラクモのサイトを開いて同じ求人を探し、内容を確かめてから応募する。応募のあとで、チャットで身分証の画像を送るよう言われたら、応じずに相談する。
 
-**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)
+**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)
 
 もとにした事例：EX-045、EX-040
 
@@ -1732,7 +1732,7 @@
 
 **正しい行動**：取引画面で返信し、アプリの手順どおりに発送する。もし相手がアプリの外でのやり取りや支払いを持ちかけてきたら応じず、フリマルシェに相談する。
 
-**参考**：[（フリマアプリで架空取引を持ちかけられるトラブルに関する注意喚起）](https://www.kokusen.go.jp/news/data/n-20211118_1.html)
+**参考**：[かしこく使おう ネットオークションとフリマアプリ 〜トラブルを防ぐには〜](https://www.city.setagaya.lg.jp/documents/1129/netokushontohurimaapuri_2.pdf)
 
 もとにした事例：EX-078
 
@@ -1771,7 +1771,7 @@
 
 **正しい行動**：リンクのアプリは入れず、投資の誘いは断る。暗号資産の取引所が、金融庁・財務局に登録された業者かどうかは、金融庁のサイトで確かめられる。お金を送ってしまったら、すぐに消費者ホットライン188や警察相談専用電話#9110に相談する。
 
-**参考**：[見守り新鮮情報 第530号（SNSで勧誘される暗号資産の詐欺的な投資話）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html)
+**参考**：[SNSで勧誘される詐欺的な暗号資産の投資話　被害回復は困難です](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html)
 
 もとにした事例：EX-023
 
@@ -1852,7 +1852,7 @@
 
 **正しい行動**：表示された番号には電話しない。画面を閉じ、閉じられなければブラウザを終了し、それでも消えなければパソコンを再起動する（IPAの案内では、Escキーを長押しすると全画面表示を解除できる）。電話してしまったときは、IPAの情報セキュリティ安心相談窓口や消費者ホットライン188に相談する。
 
-**参考**：[偽セキュリティ警告（サポート詐欺）対策特集ページ](https://www.ipa.go.jp/security/anshin/measures/fakealert.html)、[偽セキュリティ警告画面の閉じ方体験サイト（題名は要約）](https://www.ipa.go.jp/security/anshin/measures/fa-experience.html)
+**参考**：[偽セキュリティ警告（サポート詐欺）対策特集ページ](https://www.ipa.go.jp/security/anshin/measures/fakealert.html)、[偽のセキュリティ警告画面の閉じ方体験サイト](https://www.ipa.go.jp/security/anshin/measures/fa-experience.html)
 
 もとにした事例：EX-064
 
@@ -1887,7 +1887,7 @@
 
 **正しい行動**：手順には従わず、ページを閉じる。もし実行してしまったら、パソコンをネットから切り離し、別の端末からパスワードを変えて、IPAの情報セキュリティ安心相談窓口などに相談する。
 
-**参考**：[偽の『CAPTCHA』に注意](https://www.police.pref.miyagi.jp/cyber/pdf/r7-2-5.pdf)、[警視庁、偽のCAPTCHA画面でマルウェアを入れさせる手口に注意喚起（題名は要約）](https://internet.watch.impress.co.jp/docs/news/2046298.html)
+**参考**：[偽の「CAPTCHA」に注意！](https://www.police.pref.miyagi.jp/cyber/pdf/r7-2-5.pdf)、[警視庁、偽のCAPTCHA画面でマルウェアをインストールさせる手口に注意喚起](https://internet.watch.impress.co.jp/docs/news/2046298.html)
 
 もとにした事例：EX-067
 
@@ -1925,7 +1925,7 @@
 
 **正しい行動**：このサイトでは注文しない。買う前に、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を確かめる。振り込んでしまったら、すぐに振込先の銀行と警察に連絡し、消費者ホットライン188にも相談する。
 
-**参考**：[見守り新鮮情報 第515号（怪しい通販サイトにご注意）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
+**参考**：[怪しい通販サイトにご注意](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
 
 もとにした事例：EX-001
 
@@ -1961,7 +1961,7 @@
 
 **正しい行動**：何も入力せずに画面を閉じ、公式アプリかブックマークからログインしてお知らせを確かめる。入力してしまったら、すぐに銀行に連絡してパスワードを変え、警察にも相談する。
 
-**参考**：[インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ](https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html)
+**参考**：[フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[フィッシングによるインターネットバンキングへの不正送金被害が急増、「不正アクセス」「個人情報の確認」「取引の停止」等のワードに注意呼びかけ](https://scan.netsecurity.ne.jp/article/2023/12/29/50419.html)
 
 もとにした事例：EX-018、EX-021
 
@@ -1998,7 +1998,7 @@
 
 **正しい行動**：このページでは申し込まない。ふるさとカゴの公式アプリやブックマーク、寄付したい自治体の公式サイトの案内から申し込む。振り込んでしまったら、すぐに振込先の銀行と警察に連絡する。
 
-**参考**：[（ふるさと納税の偽サイトに関する注意喚起）](https://www.pref.fukuoka.lg.jp/contents/furusatonouzei.html)、[（ふるさと納税サイトを偽装した詐欺サイトに関する注意喚起）](https://www.city.kobe.lg.jp/a05822/20250919.html)
+**参考**：[ふるさと納税の偽サイトにご注意ください！！](https://www.pref.fukuoka.lg.jp/contents/furusatonouzei.html)、[【重要なお知らせ】ふるさと納税を装った詐欺サイトにご注意ください](https://www.city.kobe.lg.jp/a05822/20250919.html)
 
 もとにした事例：EX-051
 
@@ -2072,7 +2072,7 @@
 
 **正しい行動**：何も入力せずにページを閉じる。入力してしまったら、すぐに公式アプリからパスワードを変え、家族や先生にも相談する。
 
-**参考**：[オンラインゲームに関する注意喚起資料（題名未確認）](https://www.police.pref.nara.jp/cmsfiles/contents/0000004/4510/onlinegame.pdf)、[意外と知らない? ネットセキュリティの基礎知識（連載記事）](https://internet.watch.impress.co.jp/docs/column/security_basic/1227871.html)
+**参考**：[「ポイント3倍」「当選」などで誘導、モバゲーを騙るフィッシングサイト（フィッシング対策協議会）](https://scan.netsecurity.ne.jp/article/2010/06/14/25308.html)、[オンラインゲームのアカウントが盗まれる？](https://internet.watch.impress.co.jp/docs/column/security_basic/1227871.html)
 
 もとにした事例：EX-076
 
@@ -2141,7 +2141,7 @@
 
 **正しい行動**：このままログインしてよい。これからも、ログインはブックマークか公式アプリから行い、メールやSMSのリンクからは開かない。認証番号は、自分で開いた本物のログイン画面にだけ入れ、電話やメールで聞かれても教えない。
 
-**参考**：[インターネットバンキングの不正送金に関する注意喚起資料（題名は要約）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)
+**参考**：[フィッシングによるものとみられるインターネットバンキングに係る不正送金被害の急増について（注意喚起）](https://www.fsa.go.jp/ordinary/internet-bank_2/10.pdf)、[10 月の不正取引件数は 333 件に ～ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)
 
 もとにした事例：EX-021
 
@@ -2177,7 +2177,7 @@
 
 **正しい行動**：このまま注文してよい。知らない通販サイトで買うときは、事業者の名前・住所・電話番号、返品のルール、支払い先の名義を先に確かめる。
 
-**参考**：[（偽ショッピングサイト対策のページ）](https://www.npa.go.jp/bureau/cyber/countermeasures/fake-shop.html)、[見守り新鮮情報 第515号（怪しい通販サイトにご注意）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
+**参考**：[偽ショッピングサイト・詐欺サイト対策](https://www.npa.go.jp/bureau/cyber/countermeasures/fake-shop.html)、[怪しい通販サイトにご注意](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
 
 もとにした事例：EX-008
 
@@ -2213,7 +2213,7 @@
 
 **正しい行動**：寄付するときは、このように公式サイトで受付窓口と振込先を確かめてから振り込む。電話や訪問、SNSで寄付を求められたら応じず、市役所に自分で確かめる。
 
-**参考**：[令和6年能登半島地震 大阪府義援金の募集について](https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html)、[（災害に便乗した義援金詐欺などへの注意）](https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html)
+**参考**：[令和6年能登半島地震 大阪府義援金の募集について](https://www.pref.osaka.lg.jp/o020080/kikikanri/r6_noto_gienkin/index.html)、[震災に便乗した義援金詐欺や悪質商法にご注意ください！](https://www.pref.shizuoka.jp/kurashikankyo/shohiseikatsu/1066984/1085125.html)
 
 もとにした事例：EX-088
 
@@ -2286,7 +2286,7 @@
 
 **正しい行動**：企業の問い合わせ先は、検索結果からではなく、公式アプリや予約確認メールなど手元にある正規の情報から探す。お金を払ってしまったときや困ったときは、検索せずに消費者ホットライン188にかける。
 
-**参考**：[（検索上位の「相談窓口」に電話して追加の費用を求められた事例を含む資料）](https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf)、[（正規のサポートサイトの検索結果に偽の電話番号を表示させる手口の紹介記事）](https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/)
+**参考**：[（検索上位の「相談窓口」に電話して追加の費用を求められた事例を含む資料）](https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000016/16949/000388228.pdf)、[まさか公式で？ NetflixやAppleのサイトに潜む「偽の電話番号」詐欺、その巧妙な手口とは](https://www.lifehacker.jp/article/2507scammers-are-hijacking-legitimate-tech-support-sites/)
 
 もとにした事例：EX-060
 
@@ -2322,7 +2322,7 @@
 
 **正しい行動**：個人のアカウントへの「送る」で払うよう言われたら、購入をやめる。送ってしまったら、すぐにクルクルペイのアプリから問い合わせ、消費者ホットライン188に相談する。
 
-**参考**：[（海外に拠点があるとみられる悪質通販サイトに関する注意喚起。越境消費者センターによる悪質通販サイト情報の公表から2年）](https://www.kokusen.go.jp/news/data/n-20260617_1.html)、[国民生活センター、「悪質通販サイト」 手口・相談内容を公開し注意喚起](https://ecnomikata.com/ecnews/50908/)
+**参考**：[悪質通販サイトにご注意ください－フリマサイトの画像や文言を流用したサイトも！－](https://www.kokusen.go.jp/news/data/n-20260617_1.html)、[国民生活センター、「悪質通販サイト」　手口・相談内容を公開し注意喚起](https://ecnomikata.com/ecnews/50908/)
 
 もとにした事例：EX-007
 
@@ -2359,7 +2359,7 @@
 
 **正しい行動**：公式アプリから開いた公式リセールなので、この画面で購入してよい。チケットは公式アプリや公式サイトからたどった正規のルートで買い、SNSの個人間の取引や、検索広告に出てくる転売サイトは使わない。
 
-**参考**：[“推し”に会えない!?転売チケットの購入トラブルが急増中](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
+**参考**：[“推し”に会えない！？転売チケットの購入トラブルが急増中！](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
 
 もとにした事例：EX-075
 
@@ -2399,7 +2399,7 @@
 
 **正しい行動**：広告からは連絡せず、グループにも参加しない。投資を勧められたら、相手が金融庁の登録を受けた業者かを確かめ、個人名義の口座には振り込まない。お金を払ってしまったら、すぐに警察相談専用電話 #9110 に相談する。
 
-**参考**：[それ詐欺です！SNS上の投資勧誘にご注意ください！](https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html)、[令和7年における特殊詐欺及びSNS型投資・ロマンス詐欺の認知・検挙状況等について（確定値）](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html)
+**参考**：[それ詐欺です！SNS上の投資勧誘にご注意ください！](https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html)、[令和７年における特殊詐欺及びＳＮＳ型投資・ロマンス詐欺の認知・検挙状況等について（確定値）](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html)
 
 もとにした事例：EX-022
 
@@ -2437,7 +2437,7 @@
 
 **正しい行動**：申し込む前に、小さな文字の条件や、注文の最終確認画面に書かれた定期購入の条件・支払総額・解約の方法を確かめる。大きな文字と条件が食い違う広告からは申し込まない。通信販売にはクーリング・オフがないので、困ったら早めに消費者ホットライン188に相談する。
 
-**参考**：[見守り新鮮情報 第487号（その申込み、定期購入ではありませんか？最終確認画面チェックリスト）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen487.html)、[「定期縛りなし」が「解約するまで続く定期購入」だと思わなかった相談事例 国民生活センターが注意喚起](https://ecnomikata.com/ecnews/45999)
+**参考**：[その申込み、定期購入ではありませんか？最終確認画面チェックリスト](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen487.html)、[通信販売での定期購入](https://www.kokusen.go.jp/soudan_topics/data/subscription_traps.html)
 
 もとにした事例：EX-005
 
@@ -2483,14 +2483,14 @@
 
 **状況**：スマホゲームを遊んでいる。このゲームのコインは、ピコピコストアとゲームの中で売られている。攻略情報のサイトを見ていたら、次の広告が出た。
 
-> **課金代行 ラクラクコイン**
+> **課金代行 ポンポコジェム**
 >
 > [1] 表示：広告
 > [2] 見出し：課金代行で、ゲーム内コインが正規の5%の値段に！
 > [3] 文：1万円分のコインが500円。ゲームのIDとパスワードを送るだけで、すぐにコインを入れておきます。
 > [4] ［今すぐ注文する］ボタン
 >
-> リンク：`https://rakuraku-coin.example/order`
+> リンク：`https://ponpoko-gem.example/order`
 
 **正解**：詐欺
 
@@ -2510,7 +2510,7 @@
 
 **正しい行動**：課金代行やアカウントの売買は使わず、ゲーム内通貨は正規のストアやゲームの中で買う。IDとパスワードは誰にも教えない。困ったときは消費者ホットライン188に相談する。
 
-**参考**：[CYBER NEWS 2024 Vol.2](https://www.police.pref.hokkaido.lg.jp/00ps/yoichi-syo/kakuka/01_keimu/002_ibemt/200saiseki/syoutyuugakuseimuke/CYBER%20NEWS%202024_Vol.2.pdf)、[不正な「RMT行為」は犯罪集団の資金洗浄に使用されている―利用側ユーザーが罪に問われる場合も](https://www.gamebusiness.jp/article/2025/08/28/24949.html)
+**参考**：[STOP！RMT！](https://www.cesa.or.jp/assets/pdf/action/rmt-caution.pdf)、[不正な「RMT行為」は犯罪集団の資金洗浄に使用されている―利用側ユーザーが罪に問われる場合も](https://www.gamebusiness.jp/article/2025/08/28/24949.html)
 
 もとにした事例：EX-077
 
@@ -2549,7 +2549,7 @@
 
 **正しい行動**：広告からは申し込まない。もし勧誘されても、その場で契約や借り入れをしない。困ったら消費者ホットライン188に相談する。
 
-**参考**：[副業サポートや投資の名目で借金させる業者に注意!−複数の貸金業者から次々と借り入れさせる手口が目立ちます−](https://www.kokusen.go.jp/news/data/n-20260520_1.html)
+**参考**：[副業サポートや投資の名目で借金させる業者に注意！－複数の貸金業者から次々と借り入れさせる手口が目立ちます－](https://www.kokusen.go.jp/news/data/n-20260520_1.html)
 
 もとにした事例：EX-041、EX-042
 
@@ -2586,7 +2586,7 @@
 
 **正しい行動**：広告のボタンからではなく、公式アプリやブックマークした公式サイトを自分で開き、同じキャンペーンが出ているか確かめてから使う。
 
-**参考**：[見守り新鮮情報 第515号（怪しい通販サイトにご注意）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
+**参考**：[怪しい通販サイトにご注意](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
 
 もとにした事例：EX-008、EX-003
 
@@ -2623,7 +2623,7 @@
 
 **正しい行動**：広告のボタンからではなく、チケットノモリの公式アプリを自分で開いてリセールに出す。SNSで知らない人とチケットの取引をしない。
 
-**参考**：[“推し”に会えない!?転売チケットの購入トラブルが急増中](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
+**参考**：[“推し”に会えない！？転売チケットの購入トラブルが急増中！](https://www.kokusen.go.jp/news/data/n-20220804_2.html)
 
 もとにした事例：EX-075
 
@@ -2660,7 +2660,7 @@
 
 **正しい行動**：応募するときは、広告からではなく、ユメミル動画のアプリを自分で開いて「お知らせ」から行う。当選のDMが届いても、そのリンクは開かず、アプリの「お知らせ」で確かめる。
 
-**参考**：[「当選通知でだます」偽UQアカウント出現、公式が注意喚起 “UQガチャムク”は無断使用か](https://www.itmedia.co.jp/mobile/articles/2509/19/news060.html)
+**参考**：[「当選通知でだます」偽UQアカウント出現、公式が注意喚起　“UQガチャムク”は無断使用か](https://www.itmedia.co.jp/mobile/articles/2509/19/news060.html)
 
 もとにした事例：EX-084
 
@@ -2699,7 +2699,7 @@
 
 **正しい行動**：広告からは買わない。再販売などの情報は、公式ショップや公式SNSで確かめる。振り込んでしまったら、すぐに振込先の銀行に連絡し、消費者ホットライン188に相談する。
 
-**参考**：[見守り新鮮情報 第515号（怪しい通販サイトにご注意）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
+**参考**：[怪しい通販サイトにご注意](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html)
 
 もとにした事例：EX-003、EX-001
 
@@ -2709,7 +2709,7 @@
 
 **状況**：空いた時間にできるアルバイトを探していたら、SNSに次の求人広告が出てきた。
 
-> **ワカバ配送サポート**
+> **モクレン配送サポート**
 >
 > [1] 表示：広告
 > [2] 見出し：書類の回収・お届けスタッフ募集　日給18,000円＋交通費
@@ -2717,7 +2717,7 @@
 > [4] 文：応募の流れ：面接は通話で5分だけ。採用後の連絡は、メッセージが自動で消えるアプリで行います。報酬は、お仕事のあとに指定の場所に置いた封筒で、現金でお渡しします。
 > [5] ［応募する］ボタン
 >
-> リンク：`https://wakaba-haiso-job.example/entry`
+> リンク：`https://mokuren-haiso-job.example/entry`
 
 **正解**：詐欺
 
@@ -2737,7 +2737,7 @@
 
 **正しい行動**：応募しない。アルバイトは、仕事の内容・勤務先・時給がはっきりした求人から選ぶ。応募してしまい、抜けられない・脅されていると感じたら、犯罪をする前に警察相談専用電話 #9110 や警察署に相談する。
 
-**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴（PDF）](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)、[闇バイト対策](https://www.gov-online.go.jp/article/202506/tv-5926.html)
+**参考**：[ＳＮＳなどで求人情報を探している方へ 犯罪実行者募集情報の特徴](https://www.npa.go.jp/bureau/safetylife/yamibaito/tokutyou.pdf)、[闇バイト対策](https://www.gov-online.go.jp/article/202506/tv-5926.html)
 
 もとにした事例：EX-040
 
@@ -2815,7 +2815,7 @@
 
 **正しい行動**：いったん電話を切り、前から知っている息子の番号にかけて確かめる（この電話の中で質問しても、ごまかされることがある）。家族にも相談し、知らない人に現金を渡さない。不安なときは警察相談専用電話#9110や近くの警察署に相談する。
 
-**参考**：[特殊詐欺の手口](https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html)
+**参考**：[特殊詐欺とは](https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html)
 
 もとにした事例：EX-079
 
@@ -2888,7 +2888,7 @@
 
 **正しい行動**：カードを渡さず、暗証番号も書かない。いったん帰ってもらい、通帳に書かれたコトリ銀行の番号か警察相談専用電話#9110に、自分から電話して相談する。
 
-**参考**：[キャッシュカード詐欺盗(すり替え型)の手口](https://www.pref.saitama.lg.jp/a0311/hurikomesagi/cashcardsagi-teguchi.html)、[特殊詐欺の手口](https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html)
+**参考**：[キャッシュカード詐欺盗（すり替え型）の手口](https://www.pref.saitama.lg.jp/a0311/hurikomesagi/cashcardsagi-teguchi.html)、[特殊詐欺とは](https://www.keishicho.metro.tokyo.lg.jp/kurashi/tokushu/furikome/furikome.html)
 
 もとにした事例：EX-015、EX-020
 
@@ -2999,7 +2999,7 @@
 
 **正しい行動**：これ以上お金を払わず、やり取りをやめる。すでに入れたお金については、すぐに警察相談専用電話#9110や近くの警察署、振込先の銀行に相談する。
 
-**参考**：[見守り新鮮情報 第530号（SNSで勧誘される暗号資産の詐欺的な投資話）](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html)、[それ詐欺です！SNS上の投資勧誘にご注意ください！](https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html)
+**参考**：[SNSで勧誘される詐欺的な暗号資産の投資話　被害回復は困難です](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen530.html)、[それ詐欺です！SNS上の投資勧誘にご注意ください！](https://www.fsa.go.jp/receipt/toushisagi_koukoku/shuhou.html)
 
 もとにした事例：EX-063、EX-023
 
@@ -3033,7 +3033,7 @@
 
 **正しい行動**：アプリの外での取引には応じず、やり取りも支払いもフリマルシェのアプリの中だけで行う。困ったときはフリマルシェに相談し、それでも解決しなければ消費者ホットライン188に相談する。
 
-**参考**：[（フリマアプリで架空取引を持ちかけられるトラブルに関する注意喚起）](https://www.kokusen.go.jp/news/data/n-20211118_1.html)、[（フリマアプリ・個人間取引の相談事例）](https://www.pref.saitama.lg.jp/b0304/shohisoudan/jirei/tsuhan/20170825.html)
+**参考**：[かしこく使おう ネットオークションとフリマアプリ 〜トラブルを防ぐには〜](https://www.city.setagaya.lg.jp/documents/1129/netokushontohurimaapuri_2.pdf)、[フリマアプリのトラブルに注意！-個人間取引は自己責任-](https://www.pref.saitama.lg.jp/b0304/shohisoudan/jirei/tsuhan/20170825.html)
 
 もとにした事例：EX-078
 
@@ -3106,7 +3106,7 @@
 
 **正しい行動**：担当者の案内に従って、カードを止めてもらう。あとで公式アプリで利用明細を確かめ、ほかに身に覚えのない利用がないか見ておく。
 
-**参考**：[銀行協会職員などを名乗る詐欺への注意のページ（題名未確認）](https://www.zenginkyo.or.jp/topic/detail/nid/9013/)
+**参考**：[全国銀行協会の偽サイトにご注意！](https://www.zenginkyo.or.jp/topic/detail/nid/9013/)
 
 もとにした事例：EX-020、EX-012
 
@@ -3178,7 +3178,7 @@
 
 **正しい行動**：ジョブノハコのメッセージ画面から返信して、面接の日程を伝える。選考の途中でお金や身分証の画像を求められたら応じず、ジョブノハコや学校の就職の窓口に相談する。
 
-**参考**：[採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）](https://jp.indeed.com/help/job-seekers/articles/360040122511)
+**参考**：[採用企業からの不審な連絡を見極めたい](https://jp.indeed.com/help/job-seekers/articles/360040122511)
 
 もとにした事例：EX-045
 
@@ -3253,7 +3253,7 @@
 
 **正しい行動**：その場で決めず、入会する気がなければはっきり断る。借金をしてまで契約しない。困ったときや契約してしまったときは、消費者ホットライン188に相談する（条件によっては、クーリング・オフ＝決められた期間内なら契約をやめられる制度が使える）。
 
-**参考**：[新生活での友人・先輩・SNSからの投資やもうけ話の勧誘に関する注意喚起（題名未確認）](https://www.pref.tottori.lg.jp/secure/922405/support206.pdf)、[若者に広がる「モノなしマルチ商法」の注意喚起（題名未確認）](https://www.kokusen.go.jp/news/data/n-20190725_1.html)
+**参考**：[学生に広がる投資やもうけ話に注意](https://www.pref.tottori.lg.jp/secure/922405/support206.pdf)、[友だちから誘われても断れますか？若者に広がる「モノなしマルチ商法」に注意！](https://www.kokusen.go.jp/news/data/n-20190725_1.html)
 
 もとにした事例：EX-024
 
@@ -3323,7 +3323,7 @@
 
 **正しい行動**：見た目がそっくりでも信じない。パスワードの再設定などは、SMSのリンクではなく、ピヨモバイルの公式アプリやブックマークした公式サイトから行う。
 
-**参考**：[2025年7月のフィッシング報告状況、証券会社をかたるフィッシングメールの配信が再び増加](https://scan.netsecurity.ne.jp/article/2025/08/28/53521.html)
+**参考**：[かながわ消費生活注意・警戒情報第96号 携帯電話会社をかたる偽SMSにご注意！](https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/311017.html)
 
 もとにした事例：EX-032
 
@@ -3345,7 +3345,7 @@
 
 **正しい行動**：SMSのリンクは開かない。荷物のことは、郵便受けの紙の不在票や、ハシレ運輸の公式アプリで確かめる。
 
-**参考**：[トビラシステムズ、特殊詐欺/フィッシング詐欺の独自調査レポートを公開 宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
+**参考**：[トビラシステムズ、特殊詐欺／フィッシング詐欺の独自調査レポートを公開　宅配事業者をかたるSMS文面が約9割に](https://www.itmedia.co.jp/mobile/spv/2311/29/news180.html)
 
 もとにした事例：EX-009、EX-010
 
@@ -3367,7 +3367,7 @@
 
 **正しい行動**：ユメミル動画の支払い方法の変更は、アプリかアカウントページから自分で行う。メールのリンクは開かない。
 
-**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認(フィッシング対策協議会)](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
+**参考**：[「支払いが完了しなかった」、Netflixを騙るフィッシングメールを確認（フィッシング対策協議会）](https://scan.netsecurity.ne.jp/article/2018/02/26/40635.html)
 
 もとにした事例：EX-071
 
@@ -3389,7 +3389,7 @@
 
 **正しい行動**：カードの会員サイトは、これからもブックマークや公式アプリから開く。メールやSMSのリンクから開いたページでは、見た目が同じでもIDやパスワードを入力しない。
 
-**参考**：[10 月の不正取引件数は 333 件に ~ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)、[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)
+**参考**：[10 月の不正取引件数は 333 件に ～ 金融庁、インターネット取引サービスへの不正アクセス・不正取引に注意を呼びかけ](https://scan.netsecurity.ne.jp/article/2025/11/27/54109.html)、[不正送金被害の爆発的増加にフィッシング対策協議会が警鐘 リアルタイムフィッシングなど巧妙化する手口から身を守れ](https://paymentnavi.com/?p=144363)
 
 もとにした事例：EX-021
 
@@ -3412,7 +3412,7 @@
 
 **正しい行動**：URLの長さや複雑さで判断せず、ホスト名の右側を確かめる。税金のお知らせは自分で開いた公式サイトで確かめ、SMSやメールのリンクから支払いや入力をしない。
 
-**参考**：[メールで税金の納付を求めることはありません! 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起](https://internet.watch.impress.co.jp/docs/news/2112792.html)
+**参考**：[メールで税金の納付を求めることはありません！ 国税庁やe-Taxをかたる不審なメールに、国民生活センターが注意喚起](https://internet.watch.impress.co.jp/docs/news/2112792.html)
 
 もとにした事例：EX-055
 
@@ -3434,6 +3434,6 @@
 
 **正しい行動**：企業からの連絡は、ブックマークからジョブノハコを開き、サイトの中のメッセージで読む。登録料や研修費を求められたら、払わずに相手にしない（ジョブノハコは学生にお金を求めない）。
 
-**参考**：[採用企業や採用担当者からの不審な連絡を見極める方法についてのヘルプ記事（題名未確認）](https://jp.indeed.com/help/job-seekers/articles/360040122511)
+**参考**：[採用企業からの不審な連絡を見極めたい](https://jp.indeed.com/help/job-seekers/articles/360040122511)
 
 もとにした事例：EX-045
