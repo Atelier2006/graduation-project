@@ -58,7 +58,7 @@
 - [docs/overview.md](docs/overview.md)：卒業制作Ⅱ 概要説明（目的・テーマ・条件・評価）
 - [docs/checklist.md](docs/checklist.md)：品質・セキュリティ・展示会のチェックリスト
 - [docs/requirements.md](docs/requirements.md)：要件定義書（ネット詐欺見抜きトレーニング）
-- [docs/project-plan.md](docs/project-plan.md)：プロジェクト計画書（ゴール・WBS・PERT・スケジュール・体制・リスク・ルール）
+- [docs/project-plan/](docs/project-plan/README.md)：プロジェクト計画書（1項目1ファイル。ゴール・成果物・WBS/PERT・スケジュール・ステークホルダー・コミュニケーション・品質・リスク・ルール）
 - [docs/question-bank/](docs/question-bank/README.md)：問題集（問題案92問と、もとにした事例集88件。書き方ガイド・MVPの40問の案）
 - [docs/theme-research.md](docs/theme-research.md)：テーマ選定の調査レポート（推奨テーマ・候補の比較・Claude中心の進め方）
 - [docs/theme-research-non-ai.md](docs/theme-research-non-ai.md)：AIを前面に出さない企画案（追加調査・AI案との比較）
