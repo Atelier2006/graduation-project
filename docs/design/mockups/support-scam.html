@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>③ サポート詐欺 画面デザイン見本</title>
+<link rel="stylesheet" href="common.css">
+<style>
+/* おうちごはんレシピ帳（架空のふつうのサイト） */
+.rc-head { display: flex; align-items: center; gap: 26px; padding: 14px 36px; background: #fff7ee; border-bottom: 1px solid #f3dcc2; }
+.rc-logo { font-size: 21px; font-weight: 800; color: #d9661f; }
+.rc-head nav { display: flex; gap: 20px; font-size: 13.5px; color: #6b4a2e; font-weight: 700; }
+.rc-main { display: flex; gap: 28px; padding: 22px 36px; }
+.rc-art { flex: 1; }
+.rc-art h2 { margin: 0 0 12px; font-size: 22px; }
+.rc-photo { height: 230px; border-radius: 10px; background: linear-gradient(135deg, #f6c58f, #d9822b); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; font-weight: 700; }
+.rc-art ul { font-size: 14px; line-height: 1.9; padding-left: 20px; }
+.rc-side { width: 250px; }
+.ad { border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 12px; color: var(--sub); }
+.ad .box { height: 170px; margin-top: 6px; border-radius: 6px; background: repeating-linear-gradient(45deg, #f1f1f1, #f1f1f1 10px, #e7e7e7 10px, #e7e7e7 20px); display: flex; align-items: center; justify-content: center; color: #444; font-weight: 700; font-size: 14px; text-align: center; }
+/* 偽の警告画面（全画面） */
+.fs { width: 1000px; height: 640px; background: #0b3d91; position: relative; overflow: hidden; border: 1px solid #b8bdc4; border-radius: 10px; color: #fff; }
+.fs-toast { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); background: rgba(32,33,36,.92); color: #fff; font-size: 13px; padding: 8px 16px; border-radius: 6px; z-index: 3; }
+.fs-bar { background: #d93025; padding: 10px 24px; font-weight: 800; font-size: 15px; display: flex; gap: 10px; align-items: center; margin-top: 52px; }
+.fs-dlg { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); width: 640px; background: #fff; color: var(--ink); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.45); overflow: hidden; }
+.fs-dlg .h { background: #d93025; color: #fff; padding: 12px 18px; font-size: 18px; font-weight: 800; }
+.fs-dlg .b { padding: 16px 20px; font-size: 14px; line-height: 1.7; }
+.tel { text-align: center; margin: 10px 0 6px; }
+.tel .num { font-size: 34px; font-weight: 900; color: #d93025; letter-spacing: 1px; }
+.tel small { display: block; color: var(--sub); font-size: 12px; }
+.countdown { background: #fff3cd; border: 1px solid #f0c64a; border-radius: 6px; padding: 7px 10px; font-size: 13px; font-weight: 700; text-align: center; }
+.scanlist { position: absolute; left: 24px; bottom: 20px; width: 300px; font-size: 12px; line-height: 1.7; opacity: .95; }
+.scanlist .bar { height: 8px; background: rgba(255,255,255,.25); border-radius: 4px; overflow: hidden; margin: 4px 0 6px; }
+.scanlist .bar i { display: block; width: 76%; height: 100%; background: #ffcc00; }
+.spk { position: absolute; right: 24px; bottom: 20px; font-size: 13px; }
+/* 遠隔操作のアプリ */
+.rh-page { padding: 30px 60px; }
+.rh-page h2 { margin: 0 0 8px; font-size: 24px; }
+.rh-dl { display: inline-block; margin-top: 14px; background: #1a73e8; color: #fff; border-radius: 8px; padding: 13px 26px; font-weight: 800; }
+.conn { margin-top: 22px; border: 2px dashed #1a73e8; border-radius: 10px; padding: 14px 18px; width: 420px; }
+.conn .id { font-size: 30px; font-weight: 900; letter-spacing: 3px; }
+.osdlg { position: absolute; right: 70px; top: 120px; width: 400px; background: #fff; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,.35); border: 1px solid #ccc; }
+.osdlg .h { background: #f3f3f3; padding: 10px 14px; font-size: 13px; color: var(--sub); border-bottom: 1px solid #ddd; }
+.osdlg .b { padding: 16px; font-size: 14px; line-height: 1.7; }
+.osdlg .btns { display: flex; gap: 10px; justify-content: flex-end; padding: 0 16px 16px; }
+.osdlg .btns span { border: 1px solid #bbb; border-radius: 6px; padding: 7px 22px; font-size: 14px; }
+.osdlg .btns span.p { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+.dim { position: absolute; inset: 0; background: rgba(0,0,0,.25); }
+/* スマホの検索結果 */
+.m-res { padding: 10px 14px; }
+.m-res .r { border-bottom: 8px solid #f1f3f4; padding: 10px 0 12px; }
+.m-res .site { font-size: 11.5px; color: #4d5156; }
+.m-res h3 { margin: 4px 0; font-size: 16px; font-weight: 400; color: #1a0dab; line-height: 1.4; }
+.m-res p { margin: 0; font-size: 12.5px; color: #4d5156; line-height: 1.55; }
+.m-srch { margin: 8px 14px 0; border: 1px solid #dfe1e5; border-radius: 22px; padding: 9px 14px; font-size: 13.5px; }
+</style>
+</head>
+<body>
+<div class="page-title">
+  <h1>③ サポート詐欺：突然の警告画面と「今すぐお電話を」</h1>
+  <p>架空のサイト：おうちごはんレシピ帳／ミハリ番セキュリティ（かたられる会社）／RemoteHelp（偽の遠隔操作アプリ）。赤い番号＝見抜くポイント、緑の番号＝確かめると分かること。</p>
+</div>
+
+<!-- 3-1 ふつうのサイト -->
+<div class="row" id="row-a">
+  <div class="scene">
+    <h2>3-1 ふつうのサイトを見ている <span class="chip pc">パソコン</span><span class="chip real">はじまり</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">簡単！鶏の照り焼き｜おうちごはんレシピ帳</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">www.ouchi-recipe.example</span><span class="path">/recipes/teriyaki</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="rc-head"><span class="rc-logo">おうちごはんレシピ帳</span><nav><span>今日の献立</span><span>主菜</span><span>副菜</span><span>お弁当</span></nav></div>
+        <div class="rc-main">
+          <div class="rc-art"><h2>簡単！鶏の照り焼き</h2><div class="rc-photo">（料理の写真）</div>
+            <ul><li>鶏もも肉　1枚</li><li>しょうゆ・みりん　各大さじ2</li><li>砂糖　大さじ1</li></ul></div>
+          <div class="rc-side"><div class="ad">広告<div class="box clue" data-n="1">今だけ！<br>無料で動画が見放題</div></div></div>
+        </div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>ふつうのサイトでも、広告などを押したあと、突然あやしい画面に変わることがある（シナリオでは、広告を押す・しばらく見ていると、次の警告画面に変わる）</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3-2 偽の警告画面 -->
+<div class="row" id="row-b">
+  <div class="scene">
+    <h2>3-2 突然の警告画面（全画面） <span class="chip pc">パソコン</span><span class="chip fake">詐欺</span></h2>
+    <div class="fs">
+      <div class="fs-toast clue good" data-n="4">全画面表示を終了するには <b>Esc</b> キーを長押ししてください</div>
+      <div class="fs-bar">⚠ ミハリ番セキュリティ　セキュリティ警告</div>
+      <div class="fs-dlg">
+        <div class="h">⚠ 警告：ウイルスを検出しました</div>
+        <div class="b">お使いのパソコンは <b>トロイの木馬型スパイウェア</b> に感染しています。個人情報、写真、クレジットカード情報が盗まれる危険があります。<br>直ちに、下記のサポートセンターにお電話ください。
+          <div class="tel clue" data-n="1"><span class="num">050-XXXX-XXXX</span><small>ミハリ番セキュリティ サポートセンター（通話料無料・24時間受付）</small></div>
+          <div class="countdown clue" data-n="2">04:59 以内にお電話がない場合、このパソコンはロックされます</div>
+        </div>
+      </div>
+      <div class="scanlist clue" data-n="3">スキャン中…　76%<div class="bar"><i></i></div>感染ファイル：4件<br>Trojan.Spy.Agent ／ Adware.Banker</div>
+      <div class="spk">🔊 警告音が鳴り続ける</div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>ブラウザの中に電話番号が出る。本物のセキュリティソフトは、画面に電話番号を出して電話させない</span></li>
+      <li><span class="n">2</span><span>「5分以内」「ロックされる」と急がせ、こわがらせる</span></li>
+      <li><span class="n">3</span><span>ブラウザで見ているだけなのに「スキャン中」。ホームページにパソコンの中を調べることはできない</span></li>
+      <li><span class="n ok">4</span><span><b>Escキーを長押し</b>すると全画面が終わり、タブやブラウザを閉じられる（閉じられなければ再起動）</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3-3 スマホで検索、3-4 電話、3-6 電子マネー -->
+<div class="row" id="row-c">
+  <div class="scene">
+    <h2>3-3 スマホで警告の文を検索 <span class="chip sp">スマホ</span><span class="chip real">確かめる</span></h2>
+    <div class="phone">
+      <div class="sbar"><span>14:21</span><span class="r">▮▮▮ 5G ▭</span></div>
+      <div class="m-omni"><div class="bar"><span class="lockmark">🔒</span><span class="host">www.search.example</span><span class="path">/search?q=…</span></div></div>
+      <div class="screen web">
+        <div class="m-srch">ウイルスを検出しました 電話番号 050</div>
+        <div class="m-res">
+          <div class="r clue good" data-n="1"><div class="site">そよかぜ警察署 › 防犯情報</div><h3>偽のセキュリティ警告に注意（サポート詐欺）</h3><p>画面に出た番号に電話しないでください。Escキーを長押しして全画面を終わらせ、ブラウザを閉じましょう…</p></div>
+          <div class="r clue good" data-n="2"><div class="site">ミハリ番セキュリティ › よくある質問</div><h3>当社の名前をかたる警告画面について</h3><p>当社が、ブラウザの警告画面で電話番号を表示し、お電話をお願いすることはありません…</p></div>
+          <div class="r"><div class="site">しつもん広場 › 質問</div><h3>パソコンに「ウイルス感染」と出て音が鳴りやみません</h3><p>ベストアンサー：それはサポート詐欺です。電話してはいけません…</p></div>
+        </div>
+      </div>
+      <div class="m-tool"><span>‹</span><span>›</span><span>⇪</span><span>▢</span></div>
+      <div class="home-ind"></div>
+    </div>
+    <ul class="notes" style="width:360px">
+      <li><span class="n ok">1</span><span>警察の防犯情報で、サポート詐欺だと分かる</span></li>
+      <li><span class="n ok">2</span><span>名前を使われた会社も「電話番号は出さない」と書いている</span></li>
+    </ul>
+  </div>
+
+  <div class="scene">
+    <h2>3-4 表示の番号に電話（通話） <span class="chip sp">スマホ</span><span class="chip fake">詐欺</span></h2>
+    <div class="phone call">
+      <div class="sbar"><span>14:23</span><span class="r">▮▮▮ 5G ▭</span></div>
+      <div class="call-head"><div class="num">050-XXXX-XXXX</div><div class="st">通話中　02:15</div></div>
+      <div class="screen">
+        <div class="chat">
+          <div class="bub in">はい、ミハリ番サポートセンターです。</div>
+          <div class="bub out">パソコンにウイルスの警告が出て…</div>
+          <div class="bub in">それは大変危険な状態です。今すぐ専門の技術者が、遠隔で修理します。</div>
+          <div class="bub in clue" data-n="1">パソコンで「remote-help.example」を開いて、アプリを入れてください。</div>
+        </div>
+      </div>
+      <div class="choices"><div class="choice">言われたとおりにする</div><div class="choice alt">家族に相談すると言う</div><div class="choice hang">電話を切る</div></div>
+      <div class="home-ind" style="background:#10151c"></div>
+    </div>
+    <ul class="notes" style="width:360px">
+      <li><span class="n">1</span><span>遠隔操作のアプリを入れさせ、知らない人にパソコンを操作させようとする</span></li>
+    </ul>
+  </div>
+
+  <div class="scene">
+    <h2>3-6 「修理代」を電子マネーで <span class="chip sp">スマホ</span><span class="chip fake">詐欺</span></h2>
+    <div class="phone call">
+      <div class="sbar"><span>14:41</span><span class="r">▮▮▮ 5G ▭</span></div>
+      <div class="call-head"><div class="num">050-XXXX-XXXX</div><div class="st">通話中　20:03</div></div>
+      <div class="screen">
+        <div class="chat">
+          <div class="bub in">修理が終わりました。サポート料金は5万円です。</div>
+          <div class="bub in clue" data-n="1">お支払いは、コンビニで電子マネーのカードを5万円分買って、裏の番号を読み上げてください。</div>
+          <div class="bub in clue" data-n="2">今日中にお支払いがないと、パソコンがまた使えなくなります。</div>
+        </div>
+      </div>
+      <div class="choices"><div class="choice">コンビニで買って番号を伝える</div><div class="choice hang">電話を切って家族に相談する</div></div>
+      <div class="home-ind" style="background:#10151c"></div>
+    </div>
+    <ul class="notes" style="width:360px">
+      <li><span class="n">1</span><span>電子マネーの番号を伝えさせるのは、詐欺の決まった手口</span></li>
+      <li><span class="n">2</span><span>また期限で急がせる</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3-5 遠隔操作のアプリ -->
+<div class="row" id="row-d">
+  <div class="scene">
+    <h2>3-5 遠隔操作のアプリを入れる <span class="chip pc">パソコン</span><span class="chip fake">詐欺</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">RemoteHelp｜遠隔サポートツール</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">remote-help.example</span><span class="path">/download</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="rh-page"><h2>遠隔サポートツール RemoteHelp</h2>
+          <div style="font-size:14px;color:var(--sub)">サポート担当者の指示にしたがって、アプリをダウンロードしてください。</div>
+          <div class="rh-dl">ダウンロード（無料）</div>
+          <div class="conn clue" data-n="2"><div style="font-size:13px;color:var(--sub)">接続番号を担当者に伝えてください</div><div class="id">482 913 557</div></div>
+        </div>
+        <div class="dim"></div>
+        <div class="osdlg"><div class="h">アプリのインストールの確認</div>
+          <div class="b">このアプリがデバイスに変更を加えることを許可しますか？<br><b>RemoteHelp</b><br><span class="clue" data-n="1">確認済みの発行元：不明</span></div>
+          <div class="btns"><span class="p">はい</span><span>いいえ</span></div></div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>電話の相手に言われて、知らないアプリに「はい」を押そうとしている（発行元も不明）</span></li>
+      <li><span class="n">2</span><span>接続番号を伝えると、相手がこのパソコンを自由に操作できるようになる</span></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

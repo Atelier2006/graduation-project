@@ -110,4 +110,4 @@
 
 ---
 
-[← 3. テンプレートの選定](03-template.md) ｜ [表紙・目次](README.md)
+[← 3. テンプレートの選定](03-template.md) ｜ [表紙・目次](README.md) ｜ [5. シナリオ別の画面デザイン →](05-screen-design.md)

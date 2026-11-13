@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>② 偽通販 画面デザイン見本</title>
+<link rel="stylesheet" href="common.css">
+<style>
+/* 架空の検索サイト */
+.srch-top { display: flex; align-items: center; gap: 22px; padding: 18px 30px 8px; }
+.srch-logo { font-size: 26px; font-weight: 800; letter-spacing: 1px; }
+.srch-logo span:nth-child(1) { color: #3f7be0; } .srch-logo span:nth-child(2) { color: #e2533f; } .srch-logo span:nth-child(3) { color: #f2b51d; }
+.srch-logo span:nth-child(4) { color: #3f7be0; } .srch-logo span:nth-child(5) { color: #2f9e57; } .srch-logo span:nth-child(6) { color: #e2533f; }
+.srch-box { flex: 0 0 560px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 10px 18px; font-size: 15px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.srch-tabs { display: flex; gap: 22px; padding: 4px 0 8px 178px; font-size: 13px; color: var(--sub); border-bottom: 1px solid #ebebeb; }
+.srch-tabs .on { color: #1a73e8; border-bottom: 3px solid #1a73e8; padding-bottom: 6px; }
+.res { padding: 6px 30px 0 178px; width: 820px; }
+.res .count { font-size: 12px; color: var(--sub); margin: 8px 0 14px; }
+.r { margin-bottom: 22px; }
+.r .site { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #202124; }
+.r .fav { width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.r .site small { display: block; color: #4d5156; font-size: 11.5px; }
+.r h3 { margin: 4px 0 3px; font-size: 19px; font-weight: 400; color: #1a0dab; }
+.r p { margin: 0; font-size: 13.5px; color: #4d5156; line-height: 1.55; }
+.stars { color: #e37400; font-size: 12.5px; }
+/* 偽の通販サイト：派手な色、急がせる表示 */
+:root { --ky: #c8102e; --ky-y: #ffd60a; }
+.ky-top { background: #111; color: var(--ky-y); text-align: center; font-size: 12.5px; padding: 6px 0; font-weight: 700; }
+.ky-head { display: flex; align-items: center; gap: 28px; padding: 12px 34px; border-bottom: 2px solid #eee; }
+.ky-logo { font-size: 24px; font-weight: 900; color: var(--ky); letter-spacing: 1px; font-style: italic; }
+.ky-logo b { color: #111; }
+.ky-head nav { display: flex; gap: 20px; font-size: 13.5px; font-weight: 700; }
+.ky-head .cart { margin-left: auto; font-size: 13px; }
+.ky-sale { background: linear-gradient(90deg, var(--ky) 0%, #ff4d2e 100%); color: #fff; display: flex; align-items: center; gap: 18px; padding: 10px 34px; font-weight: 800; }
+.ky-sale .big { font-size: 22px; }
+.ky-sale .cd { margin-left: auto; background: #fff; color: var(--ky); border-radius: 6px; padding: 4px 10px; font-size: 15px; }
+.prod { display: flex; gap: 34px; padding: 22px 34px; }
+.shoe { width: 380px; height: 300px; background: #f4f4f4; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.pinfo { flex: 1; }
+.pinfo h2 { margin: 0 0 10px; font-size: 21px; }
+.price-old { color: var(--sub); text-decoration: line-through; font-size: 14px; }
+.price { color: var(--ky); font-size: 34px; font-weight: 900; }
+.off { background: var(--ky); color: #fff; font-weight: 800; border-radius: 4px; padding: 2px 8px; font-size: 15px; margin-left: 8px; vertical-align: middle; }
+.left { color: var(--ky); font-weight: 800; margin: 6px 0 10px; }
+.sizes { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 14px; }
+.sizes span { border: 1px solid #bbb; border-radius: 4px; padding: 5px 10px; font-size: 13px; }
+.cartbtn { background: var(--ky-y); color: #111; font-weight: 900; text-align: center; border-radius: 6px; padding: 13px; font-size: 16px; width: 360px; }
+.trust { display: flex; gap: 10px; margin-top: 12px; font-size: 12px; }
+.trust span { border: 1px solid #2f9e57; color: #2f9e57; border-radius: 4px; padding: 3px 8px; font-weight: 700; }
+.ky-foot { position: absolute; bottom: 0; left: 0; right: 0; background: #222; color: #ddd; font-size: 12.5px; padding: 12px 34px; display: flex; gap: 22px; }
+.ky-foot span { text-decoration: underline; }
+.law { padding: 18px 34px; }
+.law h2 { font-size: 20px; margin: 0 0 12px; }
+.law table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+.law th { width: 220px; background: #f6f6f6; text-align: left; font-weight: 700; }
+.law th, .law td { border: 1px solid #e2e2e2; padding: 9px 12px; }
+.done { padding: 20px 34px; }
+.done h2 { margin: 0 0 6px; font-size: 21px; }
+.done .bank { margin-top: 12px; border: 2px solid var(--ky); border-radius: 8px; width: 560px; }
+.done .bank div { display: flex; border-bottom: 1px solid #eee; padding: 8px 14px; font-size: 14px; }
+.done .bank div b { width: 130px; flex: none; }
+/* ヒツジネット銀行（架空のネット銀行） */
+.hb-head { background: #3aa0d8; color: #fff; padding: 6px 16px 12px; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 17px; }
+.hb-title { font-size: 17px; font-weight: 800; margin: 16px 16px 10px; }
+.hb-rows { margin: 0 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.hb-rows div { padding: 10px 14px; border-bottom: 1px solid #eee; font-size: 13px; }
+.hb-rows div:last-child { border-bottom: none; }
+.hb-rows small { display: block; color: var(--sub); font-size: 11.5px; margin-bottom: 2px; }
+.hb-rows b { font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="page-title">
+  <h1>② 偽通販：検索で見つけた激安ショッピングサイト</h1>
+  <p>架空のサイト：検索サイト「SEARCH」（名前は未定）／偽の通販サイト「KUTSU-YASU MARKET」（仮）／ヒツジネット銀行／コトリ銀行。赤い番号＝見抜くポイント、緑の番号＝確かめると分かること。</p>
+</div>
+
+<!-- 2-1 検索の結果 -->
+<div class="row" id="row-a">
+  <div class="scene">
+    <h2>2-1 検索の結果 <span class="chip pc">パソコン</span><span class="chip fake">詐欺の入口</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">人気スニーカー 激安 - SEARCH</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">www.search.example</span><span class="path">/search?q=人気スニーカー+激安</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="srch-top"><div class="srch-logo"><span>S</span><span>E</span><span>A</span><span>R</span><span>C</span><span>H</span></div><div class="srch-box">人気スニーカー 激安</div></div>
+        <div class="srch-tabs"><span class="on">すべて</span><span>ショッピング</span><span>画像</span><span>ニュース</span></div>
+        <div class="res">
+          <div class="count">約 1,240,000 件</div>
+          <div class="r"><div class="site"><span class="fav" style="background:#c8102e;color:#fff">K</span><span>KUTSU-YASU MARKET<small>https://kutsuyasu-market.example › sale</small></span></div>
+            <h3 class="clue" data-n="1">【公式】人気スニーカーが最大70%OFF｜KUTSU-YASU MARKET</h3>
+            <p>人気ブランドのスニーカーが今だけ最大70%OFF！全品送料無料・即日発送。在庫限りの閉店セールを開催中…</p></div>
+          <div class="r"><div class="site"><span class="fav">ポ</span><span>ポチッと通販<small>https://www.pochitto.example › shoes</small></span></div>
+            <h3>スニーカー 人気ランキング｜ポチッと通販</h3>
+            <p>メンズ・レディースの人気スニーカーを毎日更新。レビュー 4.5以上の商品だけを集めました…</p></div>
+          <div class="r clue good" data-n="2"><div class="site"><span class="fav">市</span><span>そよかぜ市<small>https://www.city.soyokaze.example › shohi</small></span></div>
+            <h3>偽の通販サイトにご注意ください｜そよかぜ市 消費生活センター</h3>
+            <p>極端に安い値段、銀行振込だけの支払い、会社の住所や電話番号がない、などに当てはまるサイトは…</p></div>
+        </div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>「公式」「最大70%OFF」「閉店セール」。検索の上の方に出ても、安全なお店とは限らない</span></li>
+      <li><span class="n ok">2</span><span>同じ検索結果に、市の注意喚起が出ている（読むと見分け方が分かる）</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2-2 偽の通販サイト -->
+<div class="row" id="row-b">
+  <div class="scene">
+    <h2>2-2 偽の通販サイトの商品ページ <span class="chip pc">パソコン</span><span class="chip fake">詐欺</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab">人気スニーカー 激安 - SEARCH</div><div class="b-tab on">【閉店セール】KUTSU-YASU MARKET</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">kutsuyasu-market.example</span><span class="path">/products/run-white</span></div><span>☆</span></div>
+      <div class="b-body">
+        <div class="ky-top"><span class="clue" data-n="3">全商品は送料無料させていただきます！</span>本日限りの大特価</div>
+        <div class="ky-head"><span class="ky-logo">KUTSU-YASU <b>MARKET</b></span><nav><span>メンズ</span><span>レディース</span><span>キッズ</span><span>セール</span></nav><span class="cart">🛒 カート（0）</span></div>
+        <div class="ky-sale"><span class="big">閉店セール 最大70%OFF</span><span>全品送料無料</span><span class="cd clue" data-n="2">セール終了まで 00:14:59</span></div>
+        <div class="prod">
+          <div class="shoe"><svg width="300" height="170" viewBox="0 0 300 170"><path d="M20 120 C40 70 90 60 120 62 C150 64 160 90 200 96 C240 102 270 110 280 128 L282 142 L18 142 Z" fill="#fff" stroke="#888" stroke-width="3"/><path d="M18 142 L282 142 L282 152 L18 152 Z" fill="#c8102e"/><path d="M110 75 L150 100 M100 85 L140 108 M92 96 L130 116" stroke="#888" stroke-width="3"/></svg></div>
+          <div class="pinfo">
+            <h2>人気ランニングスニーカー ホワイト（男女兼用）</h2>
+            <div class="price-old">通常価格 16,500円</div>
+            <div class="clue" data-n="1" style="display:inline-block"><span class="price">4,980円</span><span class="off">70%OFF</span></div>
+            <div class="left">残りわずか！あと3点</div>
+            <div style="font-size:13px;font-weight:700">サイズ</div>
+            <div class="sizes"><span>23.0</span><span>24.0</span><span>25.0</span><span>26.0</span><span>27.0</span><span>28.0</span></div>
+            <div class="cartbtn">カートに入れる</div>
+            <div class="trust"><span>本物保証100%</span><span>安心安全</span><span>即日発送</span></div>
+          </div>
+        </div>
+        <div class="ky-foot"><span class="clue good" data-n="4">会社概要</span><span>特定商取引法に基づく表記</span><span>お問い合わせ</span><span style="margin-left:auto;text-decoration:none">© KUTSU-YASU MARKET</span></div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>定価の70%引き。ほかの店とくらべて安すぎる</span></li>
+      <li><span class="n">2</span><span>残り時間と「残りわずか」で急がせる</span></li>
+      <li><span class="n">3</span><span>日本語が少しおかしい（「送料無料させていただきます」）</span></li>
+      <li><span class="n ok">4</span><span>買う前に、ページの下の「会社概要」「特定商取引法に基づく表記」を見る</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2-3 特定商取引法に基づく表記 -->
+<div class="row" id="row-c">
+  <div class="scene">
+    <h2>2-3 特定商取引法に基づく表記（調べる） <span class="chip pc">パソコン</span><span class="chip fake">詐欺</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">特定商取引法に基づく表記｜KUTSU-YASU MARKET</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">kutsuyasu-market.example</span><span class="path">/law</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="ky-head"><span class="ky-logo">KUTSU-YASU <b>MARKET</b></span><nav><span>メンズ</span><span>レディース</span><span>キッズ</span><span>セール</span></nav><span class="cart">🛒 カート（1）</span></div>
+        <div class="law"><h2>特定商取引法に基づく表記</h2>
+          <table>
+            <tr><th>販売業者</th><td>クツヤス商事株式会社</td></tr>
+            <tr><th>所在地</th><td><span class="clue" data-n="1">東京都中央区銀座1丁目</span></td></tr>
+            <tr><th>電話番号</th><td><span class="clue" data-n="2">お問い合わせはメールのみ受け付けております</span></td></tr>
+            <tr><th>メールアドレス</th><td><span class="clue" data-n="3">kutsuyasu.shop2026@freemail.example</span></td></tr>
+            <tr><th>お支払い方法</th><td><span class="clue" data-n="4">銀行振込のみ（前払い）</span></td></tr>
+            <tr><th>商品の引渡し時期</th><td>ご入金の確認後、3〜5営業日以内に発送</td></tr>
+            <tr><th>返品・交換</th><td>お客様のご都合による返品は承っておりません</td></tr>
+          </table></div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>住所が番地まで書かれていない</span></li>
+      <li><span class="n">2</span><span>電話番号がない</span></li>
+      <li><span class="n">3</span><span>会社なのに、だれでも作れるフリーメールのアドレス</span></li>
+      <li><span class="n">4</span><span>支払いが銀行振込（前払い）だけ。カードや代金引換が使えない</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2-4 店の名前で検索 -->
+<div class="row" id="row-d">
+  <div class="scene">
+    <h2>2-4 店の名前で検索（調べる） <span class="chip pc">パソコン</span><span class="chip real">確かめる</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab">【閉店セール】KUTSU-YASU MARKET</div><div class="b-tab on">KUTSU-YASU MARKET 評判 - SEARCH</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">www.search.example</span><span class="path">/search?q=KUTSU-YASU+MARKET+評判</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="srch-top"><div class="srch-logo"><span>S</span><span>E</span><span>A</span><span>R</span><span>C</span><span>H</span></div><div class="srch-box">KUTSU-YASU MARKET 評判</div></div>
+        <div class="srch-tabs"><span class="on">すべて</span><span>ショッピング</span><span>画像</span><span>ニュース</span></div>
+        <div class="res">
+          <div class="count">約 312 件</div>
+          <div class="r clue good" data-n="1"><div class="site"><span class="fav">Q</span><span>しつもん広場<small>https://qa-hiroba.example › question › 88213</small></span></div>
+            <h3>KUTSU-YASU MARKETで注文したのに商品が届きません</h3>
+            <p>先週、代金を振り込みましたが、商品が届かず、メールの返事もありません。同じ人はいますか？…</p></div>
+          <div class="r"><div class="site"><span class="fav">口</span><span>みんなの通販レビュー<small>https://tsuhan-review.example › shop › kutsuyasu</small></span></div>
+            <h3>KUTSU-YASU MARKETの口コミ・評判</h3>
+            <p><span class="stars">★☆☆☆☆ 1.2</span>　「届かない」「連絡がつかない」という口コミが多数あります…</p></div>
+          <div class="r clue good" data-n="2"><div class="site"><span class="fav">市</span><span>そよかぜ市<small>https://www.city.soyokaze.example › shohi › list</small></span></div>
+            <h3>相談が多い通販サイトの一覧｜そよかぜ市 消費生活センター</h3>
+            <p>商品が届かないという相談が寄せられているサイト：KUTSU-YASU MARKET ほか…</p></div>
+        </div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n ok">1</span><span>店の名前で検索すると、「届かない」という書き込みが見つかる</span></li>
+      <li><span class="n ok">2</span><span>市の消費生活センターの一覧にも名前が出ている</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2-5 注文の完了 ＋ 2-6 銀行のアプリ -->
+<div class="row" id="row-e">
+  <div class="scene">
+    <h2>2-5 注文の完了（振込のお願い） <span class="chip pc">パソコン</span><span class="chip fake">詐欺</span></h2>
+    <div class="browser">
+      <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">ご注文完了｜KUTSU-YASU MARKET</div></div>
+      <div class="b-bar"><span>‹</span><span>›</span><span>↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">kutsuyasu-market.example</span><span class="path">/order/complete</span></div><span>☆</span></div>
+      <div class="b-body short">
+        <div class="ky-head"><span class="ky-logo">KUTSU-YASU <b>MARKET</b></span><nav><span>メンズ</span><span>レディース</span><span>キッズ</span><span>セール</span></nav><span class="cart">🛒 カート（0）</span></div>
+        <div class="done"><h2>ご注文ありがとうございます</h2>
+          <div style="font-size:14px;line-height:1.7">ご注文番号：KY-20261118-0413<br>下記の口座へ <b class="clue" data-n="2">24時間以内</b> にお振込みください。お振込みの確認ができない場合、ご注文はキャンセルとなります。</div>
+          <div class="bank">
+            <div><b>銀行名</b>コトリ銀行</div><div><b>支店名</b>さくら支店</div><div><b>口座種別</b>普通</div><div><b>口座番号</b>1234XXX</div>
+            <div><b>口座名義</b><span class="clue" data-n="1">ヤマダ タロウ</span></div><div style="border-bottom:none"><b>お振込金額</b>4,980円</div>
+          </div>
+          <div style="font-size:12.5px;color:var(--sub);margin-top:8px">※お振込み手数料はお客様のご負担となります。</div>
+        </div>
+      </div>
+    </div>
+    <ul class="notes" style="width:1000px">
+      <li><span class="n">1</span><span>振込先が会社ではなく、個人の名前の口座</span></li>
+      <li><span class="n">2</span><span>「24時間以内」と急がせる</span></li>
+    </ul>
+  </div>
+
+  <div class="scene">
+    <h2>2-6 銀行のアプリで振込 <span class="chip sp">スマホ</span><span class="chip fake">詐欺</span></h2>
+    <div class="phone">
+      <div class="sbar" style="background:#3aa0d8;color:#fff"><span>10:31</span><span class="r">▮▮▮ 5G ▭</span></div>
+      <div class="hb-head"><svg width="28" height="28" viewBox="0 0 30 30"><rect width="30" height="30" rx="7" fill="#fff"/><circle cx="11" cy="14" r="5" fill="#cfe9f7"/><circle cx="17" cy="12" r="5" fill="#cfe9f7"/><circle cx="19" cy="17" r="5" fill="#cfe9f7"/><circle cx="12" cy="18" r="5" fill="#cfe9f7"/><circle cx="21" cy="21" r="3" fill="#3aa0d8"/></svg>ヒツジネット銀行</div>
+      <div class="screen" style="background:#f5f9fc">
+        <div class="hb-title">振込内容の確認</div>
+        <div class="hb-rows" style="background:#fff">
+          <div><small>振込先</small><b>コトリ銀行　さくら支店</b><br>普通　1234XXX</div>
+          <div><small>受取人名</small><b class="clue" data-n="1">ヤマダ タロウ</b></div>
+          <div><small>振込金額</small><b>4,980円</b></div>
+          <div><small>手数料</small><b>0円</b></div>
+        </div>
+        <div style="margin:10px 16px 0;font-size:12px;color:#a50e0e" class="clue good" data-n="2">お振込み後の取り消しはできません。振込先をよくお確かめください。</div>
+        <div class="f-btn" style="background:#3aa0d8;color:#fff;margin:18px 16px 0">振込を実行する</div>
+        <div class="f-btn" style="border:1.5px solid #3aa0d8;color:#3aa0d8;margin:10px 16px 0">やめる</div>
+      </div>
+      <div class="home-ind" style="background:#f5f9fc"></div>
+    </div>
+    <ul class="notes" style="width:360px">
+      <li><span class="n">1</span><span>受取人が店の名前（会社名）ではなく個人の名前</span></li>
+      <li><span class="n ok">2</span><span>振り込んだら取り消せない。ここが最後の引き返すチャンス</span></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
