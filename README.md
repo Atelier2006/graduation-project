@@ -78,9 +78,17 @@
 | `accounts/` | 会員：会員登録・ログイン・マイページ・会員の情報。ログインしたときに記録を引き継ぐ処理（`signals.py`） |
 | `quiz/` | 力だめしテスト（体験の前と後）とアンケート |
 | `templates/` | すべての画面の共通部分（ヘッダー・メニュー・フッター） |
+| `html/` | **HTML版**：サーバーなしで `html/index.html` をダブルクリックして使える版（記録はそのブラウザの中だけ。会員登録とランキングはなし）。くわしくは [html/README.md](html/README.md) |
 | `prototype/` | 試作品（サーバーなしで開ける）。ここで直したものは `python tools/sync_prototype.py` で `sim/static/sim/` にうつす |
 | `e2e/` | ブラウザで最初から最後まで通して確かめるテスト（Playwright） |
 | `docs/` | 概要説明・要件定義・計画書・検討資料 |
+
+## HTML版（サーバーなしで動かす）
+
+`html/index.html` をダブルクリックすると、ブラウザで開いて、体験・テスト・アンケート・結果・みんなの結果（そのブラウザの分）まで使えます。Python も VSCode も要りません。
+仮想環境・シナリオ・CSS・写真・テストの問題は Django 版がもとです。それらを直したら `python tools/build_html.py` で `html/` にうつします（`python manage.py test` で、うつし忘れが分かります）。
+
+提出の条件（フレームワークとデータベースを使う）を満たすのは Django 版です。HTML版は、手軽に見せるとき・配るとき用です。
 
 ## セットアップ（Windows）
 
@@ -131,6 +139,7 @@ python tools/sync_prototype.py --check   # プロトタイプと static が同�
 ```powershell
 python manage.py runserver               # 別のターミナルで動かしたまま
 node e2e/site.js                         # 3本の体験 → 結果の保存 → 解説 → テスト → 会員登録 → 記録の引き継ぎ → みんなの結果
+node e2e/html.js                         # HTML版（サーバーは要らない）
 node prototype/tests/playthrough.js      # プロトタイプの3本の主な道
 ```
 

@@ -106,3 +106,15 @@ class StatsTests(TestCase):
         names = [r["name"] for r in res.context["ranking"]]
         self.assertEqual(names, ["アリス"])
         self.assertNotContains(res, "ボブ")
+
+
+class HtmlVersionTests(TestCase):
+    def test_html_version_is_up_to_date(self):
+        """HTML版（html/）が、Django 版の仮想環境・シナリオ・テストの問題と同じか。違うときは python tools/build_html.py を実行する。"""
+        import subprocess
+        import sys
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parent.parent
+        r = subprocess.run([sys.executable, str(root / "tools" / "build_html.py"), "--check"], capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(r.returncode, 0, "HTML版が古いです。python tools/build_html.py を実行してください。\n" + r.stdout)

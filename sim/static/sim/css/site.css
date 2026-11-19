@@ -11,6 +11,8 @@
 .messages .alert { margin: 0; border-radius: 4px; font-size: .92rem; }
 
 .wrap.narrow { max-width: 760px; }
+.mark-red { color: #d93025; font-weight: 700; }
+.mark-green { color: #1e8e3e; font-weight: 700; }
 #main a:not([class]) { color: var(--navy); text-underline-offset: 3px; }
 
 /* ===== ホームの「もっと使う」 ===== */
@@ -18,7 +20,7 @@
 .more-card { display: flex; flex-direction: column; gap: .35rem; border: 1px solid var(--line); border-radius: 5px; padding: 1.1rem 1.2rem; text-decoration: none; color: var(--ink); background: #fff; transition: border-color .15s; }
 .more-card:hover { border-color: var(--navy); color: var(--ink); }
 .more-card b { color: var(--navy); font-size: 1.02rem; }
-.more-card small { color: var(--sub); line-height: 1.7; }
+.more-card small, .more-card span { color: var(--sub); line-height: 1.75; font-size: .9rem; }
 
 /* ===== フォーム ===== */
 .form-panel { border-bottom: 0; }
