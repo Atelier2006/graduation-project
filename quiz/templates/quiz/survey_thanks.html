@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}ありがとうございました｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap narrow"><section class="result ok"><h1>ありがとうございました</h1><p class="mt-2">いただいた答えは、教材をよくするために使います。</p></section>
+  <div class="btn-row"><a class="btn btn-main" href="{% url 'sim:stats' %}">みんなの結果を見る</a><a class="btn btn-sub" href="{% url 'sim:help' %}">相談先を確かめる</a><a class="btn btn-sub" href="{% url 'sim:home' %}">ホームへ</a></div></div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}練習中：{{ sc.number }} {{ sc.title }}｜詐欺シミュ{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'sim/css/devices.css' %}"><link rel="stylesheet" href="{% static 'sim/css/vm.css' %}"><link rel="stylesheet" href="{% static 'sim/css/web.css' %}">{% endblock %}
+{% block body_class %}playing{% endblock %}
+{% block content %}<noscript><div class="wrap"><div class="notice">体験には JavaScript が必要です。ブラウザの設定で JavaScript を有効にしてください。</div></div></noscript>{% endblock %}
+{% block vm %}<div id="vm-root"></div>{% endblock %}
+{% block extra_js %}{% csrf_token %}{% include "sim/_engine.html" %}
+<script>SagiSim.page.play({ id: "{{ sc.slug|escapejs }}", api: "{% url 'sim:api_play' %}", fallback: "{% url 'sim:explain' sc.slug %}" });</script>{% endblock %}

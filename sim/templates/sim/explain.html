@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}解説：{{ sc.number }} {{ sc.title }}｜詐欺シミュ{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'sim/css/devices.css' %}"><link rel="stylesheet" href="{% static 'sim/css/vm.css' %}"><link rel="stylesheet" href="{% static 'sim/css/web.css' %}">{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">解説：{{ sc.number }} {{ sc.title }}</h1>
+  <p class="page-lead">体験した画面に、見るとよかった場所の印を付けました。<span class="mark-red">赤い番号</span>＝見抜くポイント、<span class="mark-green">緑の番号</span>＝確かめると分かること です。</p>
+  <div id="explain"><noscript><div class="notice">解説の画面を表示するには JavaScript が必要です。</div></noscript></div>
+  <h3 class="h5 fw-bold mt-4 mb-3">相談先（本物の窓口）</h3>{% include "sim/_contacts.html" %}
+  <div class="btn-row"><a class="btn btn-main btn-lg" href="{% url 'sim:mode' %}">ほかの詐欺も体験する</a><a class="btn btn-sub" href="{% url 'sim:start' sc.slug %}">もう一度体験する</a><a class="btn btn-sub" href="{% url 'quiz:index' %}">力だめしテスト</a></div>
+</div>
+{% endblock %}
+{% block extra_js %}{% include "sim/_engine.html" %}<script>SagiSim.page.explain({ id: "{{ sc.slug|escapejs }}", el: "explain" });</script>{% endblock %}

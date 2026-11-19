@@ -15,8 +15,8 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# PHP
-vendor/
+# PHP（Composer の vendor はいちばん上のフォルダだけ。static の vendor は入れる）
+/vendor/
 
 # Java
 *.class
@@ -38,3 +38,11 @@ logs/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Django
+/staticfiles/
+/media/
+
+# テストで保存した画面
+/e2e/screenshots/
+/prototype/tests/screenshots/

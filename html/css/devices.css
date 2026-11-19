@@ -1,0 +1,587 @@
+/* 詐欺シミュ プロトタイプ：仮想スマホ・仮想パソコンと、シナリオに出てくるサイト・アプリの見た目
+ *
+ * 各サイトの見た目は、Refero Styles（https://styles.refero.design）の実在サイトのスタイルから
+ * 文字の大きさ・余白・角の丸み・線・部品の作りだけを借りた（どのスタイルを参考にしたかは prototype/DESIGN.md）。
+ * ロゴ・ブランドの色・文章・画像は借りていない。会社やサイトはすべて架空。
+ */
+:root {
+  --ink: #202124; --sub: #5f6368; --line: #dadce0; --clue: #d93025;
+  --font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "IPAPGothic", sans-serif;
+  --ios: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "IPAPGothic", sans-serif;
+  --win: "Segoe UI", "Yu Gothic UI", "Meiryo UI", "Meiryo", "Noto Sans JP", "IPAPGothic", sans-serif;
+  --web: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", "IPAPGothic", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "IPAGothic", monospace;
+}
+
+/* ---------- Bootstrap の初期値（Reboot）を、仮想デバイスの中では打ち消す ---------- */
+:where(.vm-dev, .mini) { font-family: var(--ios); line-height: normal; color: var(--ink); -webkit-font-smoothing: antialiased; }
+:where(.vm-dev, .mini) :is(h1, h2, h3, h4, p, ul, ol, dl, dd, figure) { margin: 0; }
+:where(.vm-dev, .mini) :is(h1, h2, h3, h4) { font-weight: 700; line-height: 1.3; }
+:where(.vm-dev, .mini) :is(ul, ol) { padding: 0; list-style: none; }
+:where(.vm-dev, .mini) button { border: 0; background: none; padding: 0; font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+:where(.vm-dev, .mini) input { font: inherit; }
+:where(.vm-dev, .mini) img { display: block; max-width: 100%; }
+:where(.vm-dev, .mini) a { color: inherit; text-decoration: none; }
+.ic { display: inline-block; vertical-align: middle; flex: none; }
+
+/* ---------- 見抜くポイントの印（体験中は出さず、解説の画面＝.reveal の中でだけ出す） ---------- */
+.clue { position: relative; }
+.reveal .clue { outline: 2px dashed var(--clue); outline-offset: 2px; border-radius: 2px; }
+.reveal .clue::after { content: attr(data-n); position: absolute; top: -11px; right: -11px; width: 19px; height: 19px; border-radius: 50%; background: var(--clue); color: #fff; font: 700 11px/19px var(--font); text-align: center; z-index: 5; }
+.reveal .clue.good { outline-color: #1e8e3e; }
+.reveal .clue.good::after { background: #1e8e3e; }
+
+/* =====================================================================
+   仮想スマホ（ふつうのスマホの作りに合わせる。メーカーのロゴは使わない）
+   ===================================================================== */
+.phone { width: 360px; height: 740px; border: 11px solid #1c1c1e; border-radius: 48px; overflow: hidden; position: relative; background: #fff; display: flex; flex-direction: column; box-shadow: 0 0 0 1px #3a3a3c, 0 18px 40px rgba(0,0,0,.18); }
+.phone::before { content: ""; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 98px; height: 28px; border-radius: 16px; background: #000; z-index: 30; }
+.sbar { height: 46px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 6px 28px 0 32px; font: 600 15px/1 var(--ios); position: relative; z-index: 2; }
+.sbar .ind { display: flex; gap: 5px; align-items: center; }
+.home-ind { height: 22px; flex: none; display: flex; justify-content: center; align-items: center; cursor: pointer; background: transparent; }
+.home-ind::after { content: ""; width: 128px; height: 5px; border-radius: 3px; background: #111; }
+.pscreen { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+
+/* 背景（ロック画面・ホーム画面は同じ壁紙） */
+.phone.bar-lock, .phone.bar-home { background-color: #1f3550; background-image: radial-gradient(120% 70% at 20% 10%, #5b7fa6 0%, rgba(91,127,166,0) 60%), radial-gradient(90% 60% at 90% 90%, #b88b6a 0%, rgba(184,139,106,0) 65%); color: #fff; }
+.phone.bar-lock .home-ind::after, .phone.bar-home .home-ind::after, .phone.bar-dark .home-ind::after { background: #fff; }
+.phone.bar-dark { background: #1c1c1e; color: #fff; }
+
+/* ロック画面 */
+.lock-top { text-align: center; margin-top: 10px; text-shadow: 0 1px 6px rgba(0,0,0,.18); }
+.lock-date { font: 600 18px/1.2 var(--ios); opacity: .95; }
+.lock-time { font: 700 84px/1 var(--ios); letter-spacing: -2px; margin-top: 2px; }
+.lock-notes { margin-top: 26px; padding: 0 10px; display: flex; flex-direction: column; gap: 8px; }
+.lock-bottom { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 40px 8px; }
+.lk { width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,.28); display: flex; align-items: center; justify-content: center; color: #fff; }
+.lock-open { color: #fff; font: 500 13px var(--ios); opacity: .85; }
+
+/* 通知 */
+.noti { display: flex; gap: 10px; width: 100%; text-align: left; align-items: flex-start; background: rgba(245,245,247,.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); color: #111; border-radius: 22px; padding: 12px 14px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.ni { width: 38px; height: 38px; border-radius: 9px; flex: none; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.ni svg { width: 26px; height: 26px; }
+.ni .cal { transform: scale(.7); }
+.nb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.nh { display: flex; gap: 8px; align-items: baseline; }
+.nh b { font: 600 15px/1.3 var(--ios); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nt { font: 400 13px var(--ios); color: #6e6e73; flex: none; }
+.nx { font: 400 15px/1.35 var(--ios); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ホーム画面 */
+.home-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 0; padding: 18px 14px 0; }
+.hicon { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #fff; position: relative; }
+.hicon i { width: 62px; height: 62px; border-radius: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+.hicon > span { font: 400 11.5px/1.1 var(--ios); text-shadow: 0 1px 3px rgba(0,0,0,.35); white-space: nowrap; }
+.hicon .badge-n { position: absolute; top: -6px; right: 4px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: #ff3b30; color: #fff; font: 600 13px/22px var(--ios); text-align: center; }
+.cal { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.cal small { color: #ff3b30; font: 600 10px var(--ios); }
+.cal b { color: #111; font: 300 30px var(--ios); margin-top: 1px; }
+.home-dots { margin-top: auto; display: flex; gap: 8px; justify-content: center; padding-bottom: 12px; }
+.home-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.45); }
+.home-dots i.on { background: #fff; }
+.home-dock { margin: 0 10px 6px; padding: 14px 8px; border-radius: 32px; background: rgba(255,255,255,.22); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); display: grid; grid-template-columns: repeat(4, 1fr); }
+.home-dock .hicon > span { display: none; }
+
+/* アプリの上の部分（戻る・題名） */
+.ios-nav { flex: none; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 6px 10px 10px; border-bottom: .5px solid #c6c6c8; background: rgba(249,249,249,.94); font-family: var(--ios); }
+.ios-nav .back { display: flex; align-items: center; color: #007aff; font-size: 17px; }
+.ios-nav b { font: 600 17px var(--ios); text-align: center; }
+.ios-nav > span:last-child { justify-self: end; color: #007aff; }
+.placeholder { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; color: #8e8e93; font: 400 15px/1.6 var(--ios); padding: 30px; background: #f2f2f7; }
+
+/* メッセージ（SMS） */
+.msg-head { flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 12px 8px; border-bottom: .5px solid #c6c6c8; background: rgba(249,249,249,.94); position: relative; font-family: var(--ios); }
+.msg-head .back { position: absolute; left: 8px; top: 10px; color: #007aff; display: flex; align-items: center; font-size: 17px; }
+.msg-av { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(180deg,#a5aab3,#868b94); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.msg-av::before { content: ""; width: 26px; height: 26px; border-radius: 50% 50% 0 0; background: #e6e8eb; margin-bottom: -6px; box-shadow: 0 -16px 0 -6px #e6e8eb; }
+.msg-head .num { font: 400 12px var(--ios); color: #111; display: flex; align-items: center; gap: 2px; }
+.msg-body { flex: 1; overflow: hidden; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; font-family: var(--ios); }
+.msg-when { text-align: center; font: 400 11px/1.4 var(--ios); color: #8e8e93; margin: 2px 0 8px; }
+.msg-when b { font-weight: 600; }
+.bub-in { align-self: flex-start; max-width: 78%; background: #e9e9eb; color: #000; border-radius: 18px; padding: 8px 12px; font: 400 16px/1.38 var(--ios); word-break: break-all; position: relative; }
+.bub-in::before { content: ""; position: absolute; left: -5px; bottom: 0; width: 14px; height: 16px; background: #e9e9eb; border-bottom-right-radius: 14px; }
+.bub-in::after { content: ""; position: absolute; left: -10px; bottom: 0; width: 10px; height: 16px; background: #fff; border-bottom-right-radius: 10px; }
+.bub-in .lnk { color: #007aff; text-decoration: underline; text-align: left; word-break: break-all; }
+.msg-unknown { margin-top: 14px; text-align: center; font: 400 12.5px/1.5 var(--ios); color: #8e8e93; padding: 0 16px; }
+.msg-unknown .acts { display: flex; justify-content: center; gap: 22px; margin-top: 6px; }
+.msg-unknown .acts button { color: #007aff; font-size: 14px; }
+.msg-unknown .acts button.del { color: #ff3b30; }
+.msg-input { flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 10px 4px; font-family: var(--ios); }
+.msg-input .plus { width: 32px; height: 32px; border-radius: 50%; background: #e9e9eb; display: flex; align-items: center; justify-content: center; color: #8e8e93; }
+.msg-input .field { flex: 1; border: 1px solid #c6c6c8; border-radius: 18px; padding: 7px 12px; font-size: 15px; color: #a1a1a6; display: flex; justify-content: space-between; align-items: center; }
+
+/* スマホのブラウザ（アドレスバーが下にある形） */
+.mb-page { flex: 1; overflow: auto; position: relative; background: #fff; }
+.mb-bar { flex: none; display: flex; gap: 8px; align-items: center; padding: 8px 12px 6px; background: rgba(249,249,249,.96); border-top: .5px solid #c6c6c8; }
+.mb-url { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; background: #e9e9eb; border-radius: 13px; padding: 9px 12px; font: 400 15px var(--ios); color: #111; }
+.mb-url .aa { font-size: 13px; color: #111; flex: none; }
+.mb-url .host { flex: 1; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mb-url .re { color: #111; flex: none; }
+.mb-x { color: #8e8e93; flex: none; }
+.mb-tool { flex: none; display: flex; justify-content: space-between; padding: 4px 22px 2px; background: rgba(249,249,249,.96); color: #007aff; }
+.mb-tool .dim { color: #c7c7cc; }
+
+/* 通話（話した内容を、字幕のように文字で出す） */
+.call { flex: 1; min-height: 0; display: flex; flex-direction: column; background: linear-gradient(180deg, #3a3f47 0%, #1c1c1e 55%, #111 100%); color: #fff; font-family: var(--ios); }
+.call-head { text-align: center; padding: 8px 0 12px; }
+.call-head .num { font: 400 30px/1.2 var(--ios); letter-spacing: .5px; }
+.call-head .st { font: 400 16px var(--ios); color: rgba(255,255,255,.65); margin-top: 4px; }
+.call-cap { font: 500 11px var(--ios); color: rgba(255,255,255,.45); text-align: center; letter-spacing: .04em; margin-bottom: 6px; }
+.call-log { flex: 1; min-height: 0; overflow: hidden; padding: 0 14px; display: flex; flex-direction: column; gap: 8px; }
+.cl-in, .cl-out { max-width: 86%; padding: 9px 12px; border-radius: 16px; font: 400 15px/1.45 var(--ios); }
+.cl-in { align-self: flex-start; background: rgba(255,255,255,.14); }
+.cl-out { align-self: flex-end; background: rgba(52,199,89,.85); }
+.call-choices { flex: none; padding: 10px 14px 4px; display: grid; gap: 8px; }
+.call-choices .ch { display: block; width: 100%; text-align: center; background: rgba(255,255,255,.16); color: #fff; border-radius: 14px; padding: 12px 10px; font: 600 15px var(--ios); }
+.call-choices .end { display: flex; align-items: center; justify-content: center; gap: 10px; background: none; padding: 4px 0 0; }
+.call-choices .end i { width: 58px; height: 58px; border-radius: 50%; background: #ff3b30; display: flex; align-items: center; justify-content: center; }
+.call-choices .end i svg { transform: rotate(135deg); }
+.call-choices .end span { font: 500 14px var(--ios); }
+
+/* 電話のキーパッド */
+.dial { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0 0; background: #fff; font-family: var(--ios); }
+.dial-num { height: 46px; font: 400 32px var(--ios); letter-spacing: 1px; color: #000; }
+.dial-help { min-height: 24px; margin-bottom: 8px; }
+.dial-help button { color: #007aff; font: 400 14px var(--ios); }
+.dial-pad { display: grid; grid-template-columns: repeat(3, 76px); gap: 14px 24px; }
+.dial-pad span { width: 76px; height: 76px; border-radius: 50%; background: #e5e5ea; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; }
+.dial-pad span b { font: 400 32px/1 var(--ios); }
+.dial-pad span small { font: 600 9px var(--ios); letter-spacing: 1.5px; margin-top: 1px; }
+.dial-call { margin-top: 14px; width: 76px; height: 76px; border-radius: 50%; background: #34c759; display: flex; align-items: center; justify-content: center; color: #fff; }
+.dial-call.off { opacity: .45; }
+.dial-tabs { margin-top: auto; width: 100%; display: flex; justify-content: space-around; padding: 8px 0 0; border-top: .5px solid #c6c6c8; font: 400 10px var(--ios); color: #8e8e93; }
+.dial-tabs .on { color: #007aff; }
+
+/* 家族とのチャット（トモトモ。架空のメッセージアプリ） */
+.tm-head { flex: none; display: flex; align-items: center; gap: 10px; padding: 4px 12px 10px; border-bottom: 1px solid #eee; font-family: var(--ios); }
+.tm-head .back { color: #ff8a3d; display: flex; }
+.tm-av { width: 36px; height: 36px; border-radius: 50%; background: #ffe1cc; color: #c2560f; font: 600 14px/36px var(--ios); text-align: center; }
+.tm-tt { display: flex; flex-direction: column; }
+.tm-tt b { font: 600 16px var(--ios); }
+.tm-tt small { font: 400 12px var(--ios); color: #8e8e93; }
+.tm-chat { flex: 1; min-height: 0; overflow: hidden; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; background: #f6f1ec; font-family: var(--ios); }
+.tm-day { align-self: center; font: 400 11px var(--ios); color: #fff; background: rgba(0,0,0,.18); border-radius: 10px; padding: 2px 10px; }
+.tm-row { display: flex; gap: 8px; align-items: flex-start; }
+.tm-row.seq { display: none; }
+.tm-row.seq.show { display: flex; }
+.tm-face { width: 32px; height: 32px; border-radius: 50%; background: #cfe3f5; color: #2a5d8a; font: 600 13px/32px var(--ios); text-align: center; flex: none; }
+.tm-row small { font: 400 11px var(--ios); color: #6e6e73; }
+.tm-b { max-width: 240px; border-radius: 16px; padding: 8px 12px; font: 400 15px/1.45 var(--ios); }
+.tm-b.in { background: #fff; margin-top: 2px; }
+.tm-b.out { align-self: flex-end; background: #ffb47f; color: #3a1d06; position: relative; }
+.tm-b.out small { position: absolute; left: -30px; bottom: 2px; font-size: 10px; color: #8e8e93; }
+.tm-compose { flex: none; padding: 8px 10px 4px; border-top: 1px solid #eee; background: #fff; }
+.tm-send { display: flex; gap: 8px; align-items: center; width: 100%; border: 1px solid #ddd; border-radius: 18px; padding: 8px 8px 8px 14px; text-align: left; }
+.tm-send span { flex: 1; font: 400 14px/1.4 var(--ios); color: #111; }
+.tm-send b { flex: none; background: #ff8a3d; color: #fff; border-radius: 14px; padding: 6px 12px; font: 600 13px var(--ios); }
+.tm-input { display: block; border: 1px solid #ddd; border-radius: 18px; padding: 8px 14px; color: #a1a1a6; font: 400 14px var(--ios); }
+
+/* =====================================================================
+   仮想パソコン（ブラウザ）
+   ===================================================================== */
+.pc-frame { width: 1000px; height: 684px; border: 1px solid #a9adb3; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.16); position: relative; font-family: var(--win); }
+.b-tabs { height: 40px; background: #dee3ea; display: flex; align-items: flex-end; padding: 0 0 0 8px; gap: 4px; }
+.b-tab { height: 34px; width: 240px; background: #fff; border-radius: 9px 9px 0 0; display: flex; align-items: center; gap: 8px; padding: 0 8px 0 12px; font: 400 12px var(--win); color: #1f1f1f; }
+.b-tab .tt { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.b-tab .x { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #474747; }
+.b-tab .x:hover { background: #e8eaed; }
+.newtab { width: 28px; height: 28px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; color: #474747; border-radius: 50%; }
+.win { margin-left: auto; align-self: flex-start; display: flex; height: 32px; }
+.win span { width: 46px; display: flex; align-items: center; justify-content: center; color: #1f1f1f; }
+.b-bar { height: 44px; display: flex; gap: 6px; align-items: center; padding: 0 10px; background: #fff; border-bottom: 1px solid #e3e3e3; }
+.b-bar .nav { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #474747; }
+.b-bar .nav.dim { color: #c4c7c5; }
+.b-bar .prof { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #474747; }
+.b-omni { flex: 1; height: 34px; background: #eef1f5; border-radius: 17px; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 6px; font: 400 14px var(--win); text-align: left; cursor: pointer; }
+.b-omni:hover { background: #e3e7ed; }
+.b-omni .tune { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #474747; }
+.b-omni .host { color: #1f1f1f; white-space: nowrap; }
+.b-omni .path { color: #5e5e5e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
+.b-omni .star { color: #474747; }
+.bm { height: 28px; display: flex; gap: 4px; align-items: center; padding: 0 10px; font: 400 12px var(--win); color: #1f1f1f; border-bottom: 1px solid #e3e3e3; }
+.bmi { display: flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 12px; }
+button.bmi:hover { background: #eef1f5; }
+.fav { width: 16px; height: 16px; border-radius: 4px; flex: none; color: #fff; font: 700 9px/16px var(--font); text-align: center; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; }
+.fav svg { width: 16px; height: 16px; }
+.pc-frame .b-body { height: 571px; overflow: auto; position: relative; }
+
+/* =====================================================================
+   ハシレ運輸（架空の宅配業者）— Custo のスタイルを参考：
+   色を抑えた面、1px の細い線、角は 8px、主な操作だけ丸いボタン、影は使わない
+   ===================================================================== */
+.hs { --hs: #0a7d4f; --hs-d: #075c3a; --hs-ink: #111; --hs-steel: #8e9194; --hs-hair: #d8d8d8; --hs-linen: #a7aaad; --hs-band: #eef1ef; font-family: var(--web); color: var(--hs-ink); }
+.hs-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: .02em; }
+/* パソコンの公式サイト */
+.hs-nav { display: flex; align-items: center; gap: 28px; padding: 18px 40px; border-bottom: 1px solid var(--hs-hair); }
+.hs-nav .hs-logo { font-size: 19px; color: var(--hs); }
+.hs-nav nav { display: flex; gap: 26px; font-size: 15px; margin: 0 auto; }
+.hs-pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid currentColor; border-radius: 31px; padding: 9px 22px; font-size: 15px; line-height: 1.2; }
+.hs-hero { background: var(--hs); color: #fff; padding: 40px 40px 44px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: end; }
+.hs-hero h2 { font-size: 38px; line-height: 1.15; font-weight: 400; letter-spacing: .01em; }
+.hs-hero p { margin-top: 10px; font-size: 16px; line-height: 1.6; opacity: .9; }
+.hs-track label { display: block; font-size: 14px; margin-bottom: 8px; opacity: .9; }
+.hs-track .row { display: flex; gap: 8px; }
+.hs-in { flex: 1; background: #fff; border: 1px solid var(--hs-hair); border-radius: 8px; padding: 13px 16px; font-size: 15px; color: var(--hs-steel); }
+.hs-hero .hs-pill { color: #fff; }
+.hs-two { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 34px 40px; }
+.hs-cap { font-size: 15px; line-height: 1.43; }
+.hs-imp { color: #b3261e; margin-right: 6px; }
+.hs-foot { border-top: 1px solid var(--hs-linen); padding: 16px 40px; font-size: 13px; color: var(--hs-steel); display: flex; gap: 22px; }
+/* スマホの公式アプリ */
+.hs-app { flex: 1; min-height: 0; display: flex; flex-direction: column; background: #fff; }
+.hs-app-head { flex: none; display: flex; align-items: center; justify-content: space-between; padding: 6px 18px 12px; }
+.hs-app-head .hs-logo { font-size: 18px; color: var(--hs); }
+.hs-tabs { flex: none; display: flex; gap: 22px; padding: 0 18px; border-bottom: 1px solid var(--hs-hair); font-size: 15px; }
+.hs-tabs span { padding: 10px 0; color: var(--hs-steel); }
+.hs-tabs .on { color: var(--hs-ink); box-shadow: inset 0 -2px 0 var(--hs-ink); }
+.hs-app-body { flex: 1; overflow: hidden; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.hs-sec { font-size: 13px; color: var(--hs-steel); }
+.hs-empty { border: 1px solid var(--hs-hair); border-radius: 8px; padding: 22px 16px; text-align: center; }
+.hs-empty b { display: block; font-size: 16px; font-weight: 500; }
+.hs-empty span { display: block; margin-top: 6px; font-size: 13px; color: var(--hs-steel); }
+.hs-alert { border-left: 3px solid #b3261e; padding: 4px 0 4px 12px; font-size: 14px; line-height: 1.6; }
+.hs-alert b { display: block; font-weight: 600; margin-bottom: 2px; }
+.hs-list li { display: flex; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--hs-hair); font-size: 15px; }
+.hs-list li span:last-child { color: var(--hs-steel); }
+/* スマホのサイト（偽のサイトも、この見た目をまねている） */
+.hs-m-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--hs-hair); }
+.hs-m-head .hs-logo { font-size: 17px; color: var(--hs); }
+.hs-m-head .ic { color: var(--hs-ink); }
+.hs-m { padding: 20px 18px 24px; }
+.hs-m h2 { font-size: 24px; line-height: 1.25; font-weight: 400; }
+.hs-m .lead { margin-top: 8px; font-size: 14px; line-height: 1.6; color: #444; }
+.hs-note { margin-top: 14px; background: var(--hs-band); border-radius: 8px; padding: 12px 14px; font-size: 13px; line-height: 1.6; }
+.hs-f { display: block; margin-top: 16px; font-size: 13px; font-weight: 600; }
+.hs-f input { display: block; width: 100%; margin-top: 6px; border: 1px solid var(--hs-hair); border-radius: 8px; padding: 13px 14px; font-size: 16px; color: #333; background: #fff; }
+.hs-btn { display: block; width: 100%; margin-top: 22px; background: var(--hs); color: #fff; border-radius: 31px; padding: 14px; text-align: center; font-size: 16px; font-weight: 600; }
+.hs-btn.ghost { background: #fff; color: var(--hs-ink); border: 1px solid var(--hs-ink); margin-top: 10px; font-weight: 400; }
+.hs-sub { margin-top: 14px; text-align: center; font-size: 13px; color: var(--hs-steel); }
+.hs-m-foot { border-top: 1px solid var(--hs-hair); padding: 14px 18px; font-size: 11.5px; color: var(--hs-steel); text-align: center; }
+.hs-steps { display: flex; gap: 6px; margin-bottom: 14px; }
+.hs-steps span { flex: 1; text-align: center; font-size: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--hs-hair); color: var(--hs-steel); }
+.hs-steps .on { border-color: var(--hs); color: var(--hs-ink); font-weight: 600; }
+.hs-two-in { display: flex; gap: 10px; }
+.hs-two-in > * { flex: 1; }
+
+/* =====================================================================
+   サガシモ（架空の検索サイト）— Perplexity のスタイルを参考：
+   生成りの地、墨色の文字、細い線、色は1色（深い青緑）だけ、文字の太さは 400 と 500
+   ===================================================================== */
+.sg { --sg-bg: #faf8f5; --sg-card: #fdfbfa; --sg-ink: #27251e; --sg-gr: #72706b; --sg-ash: #92918b; --sg-hair: #d1d1cd; --sg-teal: #016a71; background: var(--sg-bg); color: var(--sg-ink); font-family: var(--web); min-height: 100%; }
+.sg-mark { font-weight: 400; letter-spacing: .04em; color: #27251e; position: relative; display: inline-block; padding-right: .28em; }
+.sg-mark i { position: absolute; right: 0; top: .12em; width: .2em; height: .2em; border-radius: 50%; background: #016a71; }
+.sg-top { display: flex; align-items: center; gap: 22px; padding: 18px 32px 12px; }
+.sg-box { flex: 0 0 600px; display: flex; align-items: center; gap: 10px; background: var(--sg-bg); border: 1px solid var(--sg-hair); border-radius: 12px; padding: 11px 14px; font-size: 16px; }
+.sg-box .ic { color: var(--sg-gr); }
+.sg-box .q { flex: 1; }
+.sg-tabs { display: flex; gap: 6px; padding: 0 32px 12px 150px; border-bottom: 1px solid var(--sg-hair); }
+.sg-tabs span { border-radius: 9999px; padding: 6px 12px; font-size: 13px; color: var(--sg-gr); }
+.sg-tabs .on { background: var(--sg-teal); color: #fff; }
+.sg-res { padding: 14px 32px 20px 150px; max-width: 900px; }
+.sg-count { font-size: 12px; color: var(--sg-ash); margin-bottom: 16px; }
+.sg-r { margin-bottom: 24px; }
+.sg-site { display: flex; align-items: center; gap: 10px; }
+.sg-site .fv { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--sg-hair); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex: none; }
+.sg-site b { display: block; font-size: 14px; font-weight: 500; }
+.sg-site small { display: block; font-size: 12px; color: var(--sg-gr); }
+.sg-r h3 { margin-top: 6px; font-size: 19px; font-weight: 500; line-height: 1.35; }
+.sg-r h3 button { color: #1a4f8a; text-align: left; }
+.sg-r h3 button:hover { text-decoration: underline; }
+.sg-r p { margin-top: 4px; font-size: 14px; line-height: 1.55; color: var(--sg-gr); }
+.sg-stars { color: #b06b00; }
+.sg-new { text-align: center; padding-top: 80px; }
+.sg-new .sg-box { margin: 22px auto 0; width: 600px; color: var(--sg-gr); }
+.sg-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+.sg-chips button { background: var(--sg-card); border-radius: 16px; padding: 12px 16px; font-size: 14px; color: var(--sg-ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); text-align: left; }
+.sg-chips button:hover { box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--sg-hair); }
+.sg-tiles { display: flex; gap: 14px; justify-content: center; margin-top: 30px; }
+.sg-tile { width: 112px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px; border-radius: 16px; font-size: 13px; color: var(--sg-ink); }
+.sg-tile:hover { background: var(--sg-card); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.sg-tile i { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 16px; font-weight: 500; color: #fff; }
+.sg-label { margin-top: 26px; font-size: 12px; color: var(--sg-ash); }
+/* スマホの検索 */
+.sg-m { padding: 14px 16px 20px; }
+.sg-m .sg-box { flex: none; width: 100%; font-size: 15px; padding: 10px 12px; }
+.sg-m .sg-r { margin: 18px 0 0; padding-bottom: 16px; border-bottom: 1px solid var(--sg-hair); }
+.sg-m .sg-r h3 { font-size: 17px; }
+.sg-m .sg-r p { font-size: 13.5px; }
+
+/* =====================================================================
+   KUTSU-YASU MARKET（偽の通販サイト）— Adanola のスタイルを参考：
+   白と黒だけの画面、黒い告知の帯、角のない写真、細い黒い線、影なし。
+   本物そっくりの「きれいな通販サイト」にして、見た目では見分けられないようにする
+   ===================================================================== */
+.ky { --ky-ink: #000; --ky-2: #333; --ky-mist: #e5e7eb; --ky-fog: #f0efe7; --ky-stone: #cccccc; --ky-sale: #b3001b; font-family: var(--web); color: var(--ky-ink); letter-spacing: .025em; background: #fff; min-height: 100%; }
+.ky-ann { background: #000; color: #fff; text-align: center; font-size: 11px; padding: 6px 0; letter-spacing: .06em; }
+.ky-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 12px 28px; border-bottom: 1px solid #000; }
+.ky-nav nav { display: flex; gap: 18px; font-size: 12px; font-weight: 500; }
+.ky-mark { font-size: 24px; font-weight: 700; letter-spacing: .14em; text-align: center; }
+.ky-mark small { display: block; font-size: 9px; letter-spacing: .5em; font-weight: 500; margin-top: 1px; }
+.ky-icons { display: flex; gap: 16px; justify-content: flex-end; align-items: center; font-size: 11px; }
+.ky-icons .bagn { position: relative; }
+.ky-icons .bagn b { position: absolute; top: -4px; right: -7px; width: 15px; height: 15px; border-radius: 50%; background: #000; color: #fff; font-size: 9px; line-height: 15px; text-align: center; }
+.ky-crumb { padding: 12px 28px 0; font-size: 11px; color: var(--ky-2); }
+.ky-prod { display: grid; grid-template-columns: 74px 430px 1fr; gap: 18px; padding: 14px 28px 20px; }
+.ky-thumbs { display: flex; flex-direction: column; gap: 8px; }
+.ky-thumbs img { width: 74px; height: 74px; object-fit: cover; }
+.ky-thumbs img.on { outline: 1px solid #000; outline-offset: 2px; }
+.ky-main { width: 430px; height: 430px; object-fit: cover; }
+.ky-info { padding-left: 10px; }
+.ky-brand { font-size: 11px; color: var(--ky-2); letter-spacing: .12em; }
+.ky-info h2 { font-size: 18px; font-weight: 500; line-height: 1.45; margin-top: 6px !important; }
+.ky-price { display: flex; align-items: baseline; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.ky-price s { font-size: 13px; color: #777; }
+.ky-price b { font-size: 24px; font-weight: 500; color: var(--ky-sale); }
+.ky-off { background: #000; color: #fff; font-size: 11px; padding: 3px 7px; }
+.ky-tax { font-size: 11px; color: #777; }
+.ky-timer { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12.5px; color: var(--ky-sale); }
+.ky-stock { margin-top: 4px; font-size: 12.5px; }
+.ky-opt { margin-top: 14px; font-size: 12px; }
+.ky-sw { display: flex; gap: 6px; margin-top: 6px; }
+.ky-sw i { width: 16px; height: 16px; display: block; }
+.ky-sw i.on { outline: 1px solid #000; outline-offset: 2px; }
+.ky-sizes { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 6px; }
+.ky-sizes span { border: 1px solid var(--ky-stone); text-align: center; padding: 8px 0; font-size: 12px; }
+.ky-sizes span.on { border-color: #000; background: #000; color: #fff; }
+.ky-sizes span.out { color: #bbb; text-decoration: line-through; }
+.ky-btn { display: block; width: 100%; margin-top: 16px; border: 1px solid #000; border-radius: 4px; padding: 12px; text-align: center; font-size: 13px; font-weight: 500; letter-spacing: .1em; }
+.ky-btn.fill { background: #000; color: #fff; margin-top: 8px; }
+.ky-trust { display: flex; gap: 14px; margin-top: 12px; font-size: 11px; color: var(--ky-2); flex-wrap: wrap; }
+.ky-trust span { display: flex; align-items: center; gap: 4px; }
+.ky-foot { border-top: 1px solid #000; padding: 16px 28px; display: flex; gap: 22px; font-size: 11px; flex-wrap: wrap; }
+.ky-foot button { text-decoration: underline; letter-spacing: .03em; }
+.ky-foot span { margin-left: auto; color: #777; }
+.ky-law { padding: 20px 28px; }
+.ky-law h2 { font-size: 20px; font-weight: 700; margin-bottom: 14px !important; }
+.ky-law dl { border-top: 1px solid #000; }
+.ky-law .row { display: grid; grid-template-columns: 200px 1fr; border-bottom: 1px solid var(--ky-mist); font-size: 13px; line-height: 1.6; }
+.ky-law dt { padding: 10px 0; color: var(--ky-2); font-weight: 400; }
+.ky-law dd { padding: 10px 0; }
+.ky-back { display: inline-block; margin: 0 28px 18px; font-size: 12px; text-decoration: underline; }
+/* 注文完了（よくある通販サイトの「ご注文ありがとうございます」の作り） */
+.ky-done { display: grid; grid-template-columns: 1fr 340px; min-height: 100%; }
+.ky-done-l { padding: 22px 34px; }
+.ky-done-r { background: #f5f5f5; border-left: 1px solid var(--ky-mist); padding: 22px 26px; }
+.ky-ok { display: flex; gap: 14px; align-items: center; }
+.ky-ok i { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #000; display: flex; align-items: center; justify-content: center; }
+.ky-ok small { display: block; font-size: 12px; color: #555; }
+.ky-ok b { display: block; font-size: 20px; font-weight: 500; margin-top: 2px; }
+.ky-box { margin-top: 18px; border: 1px solid var(--ky-stone); border-radius: 4px; padding: 14px 16px; font-size: 13px; line-height: 1.7; }
+.ky-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px !important; }
+.ky-bank { margin-top: 8px; }
+.ky-bank div { display: grid; grid-template-columns: 96px 1fr; padding: 5px 0; border-top: 1px solid var(--ky-mist); }
+.ky-bank dt { color: #555; font-weight: 400; }
+.ky-line { display: flex; gap: 12px; align-items: center; }
+.ky-line .th { position: relative; }
+.ky-line img { width: 60px; height: 60px; object-fit: cover; border: 1px solid var(--ky-mist); border-radius: 6px; }
+.ky-line .qty { position: absolute; top: -7px; right: -7px; width: 20px; height: 20px; border-radius: 50%; background: #666; color: #fff; font-size: 11px; line-height: 20px; text-align: center; }
+.ky-line .nm { flex: 1; font-size: 13px; line-height: 1.5; }
+.ky-sum { margin-top: 18px; font-size: 13px; }
+.ky-sum div { display: flex; justify-content: space-between; padding: 4px 0; }
+.ky-sum .tot { border-top: 1px solid var(--ky-stone); margin-top: 8px; padding-top: 12px; font-size: 15px; }
+.ky-sum .tot b { font-size: 20px; font-weight: 500; }
+
+/* =====================================================================
+   ポチッと通販（いつもの通販サイト）— Shop のスタイルを参考：
+   灰色の地に白いカード、大きく丸めた角、丸いボタン、色は1色だけ
+   ===================================================================== */
+.pt { --pt-bg: #f2f4f5; --pt-ink: #000; --pt-gray: #787574; --pt-hair: #ebebeb; --pt-acc: #f08300; background: var(--pt-bg); color: var(--pt-ink); font-family: var(--web); min-height: 100%; }
+.pt-top { display: flex; align-items: center; gap: 24px; padding: 16px 32px; }
+.pt-mark { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.pt-mark i { color: var(--pt-acc); font-style: normal; }
+.pt-search { flex: 1; max-width: 560px; display: flex; align-items: center; background: #fff; border: 1px solid rgba(0,0,0,.1); border-radius: 9999px; padding: 4px 4px 4px 20px; font-size: 15px; color: var(--pt-gray); }
+.pt-search span { flex: 1; }
+.pt-search b { width: 40px; height: 40px; border-radius: 50%; background: var(--pt-acc); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(240,131,0,.34); }
+.pt-cats { display: flex; gap: 8px; padding: 0 32px 6px; }
+.pt-cats span { background: #fff; border: 1px solid var(--pt-hair); border-radius: 9999px; padding: 6px 14px; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.pt-buy { margin: 0 32px 24px; display: inline-flex; background: var(--pt-acc); color: #fff; border-radius: 9999px; padding: 12px 26px; font-size: 14px; font-weight: 600; }
+
+/* =====================================================================
+   ヒツジネット銀行（架空のネット銀行のアプリ）— Varo Bank のスタイルを参考：
+   白い地、1px の黒い線、角は 4px にそろえる、色は1色（操作するものだけ）、影なし
+   ===================================================================== */
+.hb { --hb-acc: #1b6fa3; --hb-ink: #000; --hb-2: #1c1c1c; --hb-gray: #939393; --hb-fog: #eff2f5; flex: 1; min-height: 0; display: flex; flex-direction: column; background: #fff; color: var(--hb-ink); font-family: var(--ios); }
+.hb-head { flex: none; display: flex; align-items: center; justify-content: space-between; padding: 4px 18px 12px; }
+.hb-head .nm { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
+.hb-body { flex: 1; overflow: hidden; padding: 6px 18px 18px; }
+.hb-kick { font-size: 13px; font-weight: 500; color: var(--hb-2); }
+.hb-title { font-size: 24px; font-weight: 500; line-height: 1.2; margin-top: 4px; }
+.hb-card { margin-top: 16px; border: 1px solid #000; border-radius: 4px; }
+.hb-card .row { padding: 12px 14px; border-top: 1px solid #000; }
+.hb-card .row:first-child { border-top: 0; }
+.hb-card small { display: block; font-size: 12px; color: var(--hb-gray); margin-bottom: 3px; }
+.hb-card b { font-size: 17px; font-weight: 500; }
+.hb-card .bal b { font-size: 30px; font-weight: 500; letter-spacing: -.5px; }
+.hb-menu { margin-top: 16px; border-top: 1px solid #000; }
+.hb-menu button { display: flex; width: 100%; justify-content: space-between; align-items: center; padding: 15px 2px; border-bottom: 1px solid #000; font-size: 16px; font-weight: 500; }
+.hb-warn { margin-top: 12px; font-size: 13px; line-height: 1.55; color: #9d1c12; }
+.hb-btn { display: block; width: 100%; margin-top: 18px; background: var(--hb-acc); color: #fff; border: 1px solid var(--hb-acc); border-radius: 4px; padding: 13px; text-align: center; font-size: 16px; font-weight: 500; }
+.hb-btn.ghost { background: #fff; color: #000; border-color: #000; margin-top: 10px; }
+
+/* =====================================================================
+   そよかぜ市（架空の市役所のサイト）— Common のスタイルを参考：
+   白い地、灰色の細い線、角は 6px にそろえる、リンクだけ青、文字は 16px/1.5
+   ===================================================================== */
+.city { --c-ink: #000; --c-gr: #3d3a3e; --c-ash: #6f6c70; --c-mist: #c1c0c2; --c-sil: #e0dfe1; --c-fog: #f0eff0; --c-link: #1f6fd1; font-family: var(--web); color: var(--c-ink); background: #fff; min-height: 100%; }
+.city-util { display: flex; justify-content: flex-end; gap: 14px; padding: 6px 40px; font-size: 12px; color: var(--c-ash); background: var(--c-fog); }
+.city-head { display: flex; align-items: center; gap: 14px; padding: 14px 40px; }
+.city-head .em { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #2f6f4f; display: flex; align-items: center; justify-content: center; color: #2f6f4f; font-size: 13px; font-weight: 700; }
+.city-head .nm { font-size: 21px; font-weight: 600; letter-spacing: .04em; }
+.city-head .srch { margin-left: auto; width: 280px; display: flex; gap: 8px; align-items: center; border: 1px solid var(--c-sil); border-radius: 6px; padding: 8px 10px; font-size: 14px; color: #a09da1; }
+.city-gnav { display: flex; border-top: 1px solid var(--c-sil); border-bottom: 1px solid var(--c-sil); padding: 0 40px; }
+.city-gnav span { padding: 11px 18px; font-size: 14px; }
+.city-gnav span:first-child { padding-left: 0; }
+.city-crumb { padding: 12px 40px 0; font-size: 12.5px; color: var(--c-ash); }
+.city-crumb a, .city a { color: var(--c-link); text-decoration: underline; }
+.city-main { padding: 8px 40px 26px; max-width: 900px; }
+.city-main h2 { font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: .02em; padding-bottom: 10px; border-bottom: 1px solid var(--c-sil); margin-top: 8px !important; }
+.city-meta { font-size: 12.5px; color: var(--c-ash); margin: 8px 0 14px; }
+.city-main p { font-size: 16px; line-height: 1.7; margin-bottom: 10px !important; }
+.city-box { border: 1px solid var(--c-mist); border-radius: 6px; padding: 14px 18px; margin: 12px 0; }
+.city-box h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px !important; }
+.city-box ol { list-style: decimal; padding-left: 22px; font-size: 15.5px; line-height: 1.8; }
+.city-contact { background: var(--c-fog); border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.7; }
+
+/* =====================================================================
+   ことこと献立帖（ふつうのレシピサイト）— Eat Real Food のスタイルを参考：
+   生成りの地、こい墨色、大きく太い見出し、丸いボタン、等幅の小さなラベル
+   ===================================================================== */
+.kk { --kk-bg: #fdfbee; --kk-ink: #110000; --kk-wheat: #f3f0d6; --kk-fog: #e5e5e5; --kk-dust: #8d7d7d; background: var(--kk-bg); color: var(--kk-ink); font-family: var(--web); min-height: 100%; }
+.kk-nav { display: flex; align-items: center; gap: 18px; padding: 16px 32px; }
+.kk-mark { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
+.kk-nav nav { display: flex; gap: 6px; margin-left: 18px; }
+.kk-nav nav span { border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 500; }
+.kk-nav nav .on { background: var(--kk-ink); color: #fff; }
+.kk-nav .srch { margin-left: auto; display: flex; align-items: center; gap: 6px; border: 1.5px solid var(--kk-ink); border-radius: 40px; padding: 7px 14px; font-size: 13px; color: var(--kk-dust); }
+.kk-main { display: grid; grid-template-columns: 1fr 260px; gap: 28px; padding: 6px 32px 28px; }
+.kk-tag { display: inline-block; background: var(--kk-ink); color: #fff; font: 400 11px/1 var(--mono); letter-spacing: .06em; padding: 6px 12px; border-radius: 100px; }
+.kk-main h2 { font-size: 40px; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; margin-top: 12px !important; }
+.kk-meta { display: flex; gap: 18px; margin-top: 12px; font: 400 12px var(--mono); letter-spacing: .04em; color: var(--kk-dust); }
+.kk-photo { margin-top: 16px; width: 100%; height: 300px; object-fit: cover; border-radius: 12px; }
+.kk-ing li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #d8d3c4; font-size: 14px; }
+.kk-side .card { background: #fff; border-radius: 16px; padding: 18px; box-shadow: 0 10px 40px rgba(0,0,0,.08), 0 20px 60px -10px rgba(0,0,0,.08); }
+.kk-side .card + .card { margin-top: 16px; }
+.kk-side h4 { font: 400 11px var(--mono); letter-spacing: .06em; color: var(--kk-dust); margin-bottom: 10px !important; }
+.kk-side .pop li { font-size: 13.5px; padding: 7px 0; border-top: 1px solid var(--kk-fog); }
+/* 広告の枠（よくある広告の見た目。ここを押すと偽の警告に変わる） */
+.kk-ad { display: block; width: 100%; text-align: left; background: #fff; border: 1px solid #dadce0; border-radius: 4px; overflow: hidden; font-family: var(--win); color: #202124; }
+.kk-ad .adbar { display: flex; justify-content: flex-end; gap: 4px; padding: 2px 4px; font-size: 10px; color: #5f6368; background: #f8f9fa; }
+.kk-ad .adbar i { font-style: normal; border: 1px solid #c4c7c5; border-radius: 2px; padding: 0 3px; }
+.kk-ad .ad-in { padding: 12px 14px 14px; }
+.kk-ad b { display: block; font-size: 15px; line-height: 1.4; color: #1a0dab; }
+.kk-ad p { font-size: 12px; color: #4d5156; margin-top: 4px !important; line-height: 1.5; }
+.kk-ad .go { display: inline-block; margin-top: 10px; background: #1a73e8; color: #fff; border-radius: 4px; padding: 6px 14px; font-size: 12px; }
+
+/* =====================================================================
+   偽の警告画面（サポート詐欺）— 実際の詐欺の画面によくある作り：
+   青い全画面、パソコンの部品をまねた窓、大きな電話番号、ブラウザの「〜の内容」の小窓
+   ===================================================================== */
+.ms { position: absolute; inset: 0; background: #0a4fa3; font-family: var(--win); color: #fff; overflow: hidden; }
+.ms-bar { position: absolute; top: 0; left: 0; right: 0; height: 36px; background: #1f1f1f; display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 13px; }
+.ms-bar .ms-ttl { color: #fff; }
+.ms-bar .ms-wc { margin-left: auto; display: flex; gap: 22px; color: #ddd; }
+.ms-win { position: absolute; background: #fff; color: #1f1f1f; border: 1px solid #888; box-shadow: 0 10px 40px rgba(0,0,0,.45); }
+.ms-win .tb { height: 30px; display: flex; align-items: center; gap: 8px; padding: 0 10px; font-size: 12px; background: #f3f3f3; border-bottom: 1px solid #ddd; }
+.ms-win .tb .x { margin-left: auto; color: #444; }
+.ms-main { top: 92px; left: 50%; transform: translateX(-50%); width: 600px; }
+.ms-main .red { background: #c42b1c; color: #fff; padding: 12px 18px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.ms-main .cnt { padding: 16px 20px 18px; font-size: 14px; line-height: 1.75; }
+.ms-tel { text-align: center; margin: 12px 0 8px; }
+.ms-tel b { display: block; font-size: 36px; color: #c42b1c; letter-spacing: 1px; line-height: 1.2; }
+.ms-tel small { font-size: 12px; color: #555; }
+.ms-count { background: #fff4ce; border: 1px solid #e3c05c; padding: 7px 10px; font-size: 13px; font-weight: 700; text-align: center; }
+.ms-scan { left: 22px; bottom: 22px; width: 330px; }
+.ms-scan .in { padding: 10px 12px 12px; font-size: 12px; line-height: 1.7; }
+.ms-scan .bar { height: 10px; background: #e6e6e6; margin: 6px 0; }
+.ms-scan .bar i { display: block; height: 100%; width: 76%; background: #2a8a2a; }
+.ms-scan .bad { color: #c42b1c; }
+.ms-alert { right: 30px; bottom: 54px; width: 320px; border-radius: 8px; border-color: #c8c8c8; }
+.ms-alert .in { padding: 16px 18px 14px; font-size: 13px; line-height: 1.6; }
+.ms-alert .in b { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.ms-alert .ok { display: flex; justify-content: flex-end; padding: 0 14px 14px; }
+.ms-alert .ok span { background: #0b57d0; color: #fff; border-radius: 16px; padding: 6px 20px; font-size: 13px; }
+.ms-spk { position: absolute; right: 22px; bottom: 22px; display: flex; align-items: center; gap: 6px; font-size: 12px; opacity: .9; }
+
+/* =====================================================================
+   リモッテ（偽の遠隔操作アプリのサイト）— Cap のスタイルを参考：
+   ほぼ白の地、丸いボタン（黒と青の2つ）、小さな大文字のラベル、1px の線のカード
+   ===================================================================== */
+.rm { --rm-ink: #202020; --rm-gr: #838383; --rm-fog: #e0e0e0; --rm-mist: #f0f0f0; --rm-blue: #2563eb; background: #fcfcfc; color: var(--rm-ink); font-family: var(--web); min-height: 100%; position: relative; }
+.rm-nav { margin: 14px 24px 0; display: flex; align-items: center; gap: 22px; border: 1px solid #e5e7eb; border-radius: 9999px; padding: 8px 10px 8px 20px; background: #fcfcfc; font-size: 14px; }
+.rm-nav .mk { font-weight: 700; font-size: 17px; letter-spacing: -.01em; display: flex; align-items: center; gap: 6px; }
+.rm-nav .mk i { width: 18px; height: 18px; border-radius: 6px; background: var(--rm-blue); display: block; }
+.rm-nav nav { display: flex; gap: 18px; color: #444; }
+.rm-nav .sp { margin-left: auto; display: flex; gap: 8px; }
+.rm-p { border-radius: 9999px; padding: 8px 16px; font-size: 13px; font-weight: 500; border: 1px solid var(--rm-fog); }
+.rm-p.blk { background: var(--rm-ink); color: #fcfcfc; border-color: var(--rm-ink); }
+.rm-p.blu { background: var(--rm-blue); color: #fcfcfc; border-color: var(--rm-blue); box-shadow: 0 4px 10px rgba(0,0,0,.05); }
+.rm-hero { display: grid; grid-template-columns: 55% 45%; gap: 10px; padding: 40px 40px 20px; }
+.rm-eye { font-size: 12px; font-weight: 500; letter-spacing: .2em; color: #b45f06; }
+.rm-hero h2 { font-size: 42px; line-height: 1.1; font-weight: 700; margin-top: 10px !important; }
+.rm-hero p { font-size: 15px; line-height: 1.63; color: #555; margin-top: 12px !important; max-width: 440px; }
+.rm-cta { display: flex; gap: 8px; margin-top: 20px; }
+.rm-cta .rm-p { padding: 11px 20px; font-size: 14px; }
+.rm-card { border: 1px solid var(--rm-fog); border-radius: 12px; background: #fcfcfc; padding: 22px; box-shadow: 0 20px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05); }
+.rm-card small { font-size: 12px; color: var(--rm-gr); }
+.rm-card .id { font: 700 32px/1.2 var(--web); letter-spacing: 3px; margin-top: 4px; }
+.rm-card .pw { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rm-fog); font-size: 13px; color: #444; }
+.rm-dim { position: absolute; inset: 0; background: rgba(0,0,0,.28); }
+.rm-uac { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); width: 420px; background: #fff; border: 1px solid #bbb; box-shadow: 0 14px 44px rgba(0,0,0,.35); font-family: var(--win); color: #1f1f1f; }
+.rm-uac .tb { background: #f3f3f3; padding: 9px 14px; font-size: 12px; color: #444; border-bottom: 1px solid #ddd; }
+.rm-uac .in { padding: 16px 18px; font-size: 14px; line-height: 1.6; display: flex; gap: 14px; }
+.rm-uac .in i { width: 40px; height: 40px; flex: none; border-radius: 8px; background: var(--rm-blue); display: block; }
+.rm-uac .in b { display: block; font-size: 15px; margin: 4px 0; }
+.rm-uac .bt { display: flex; gap: 8px; justify-content: flex-end; padding: 0 18px 16px; }
+.rm-uac .bt button { min-width: 92px; border: 1px solid #b5b5b5; border-radius: 4px; padding: 6px 16px; font-size: 13px; text-align: center; background: #fdfdfd; }
+.rm-uac .bt button.p { background: #0067c0; color: #fff; border-color: #0067c0; }
+
+/* Template Party のレシピ詳細（tp_recipe1_brown/item.html）。
+   写真と材料を左、作り方を右に置き、仮想PCの幅に合わせて配分する。 */
+.kk-nav { background: #fff; border-top: 5px solid #715b38; border-bottom: 1px solid #ded7c6; }
+.kk-mark { font-family: "Yu Mincho","Noto Serif CJK JP",serif; color: #594329; }
+.kk-main { padding-top: 20px; }
+.kk-main h2 { font: 700 32px/1.35 "Yu Mincho","Noto Serif CJK JP",serif; }
+.kk-tag { background: none; color: #665539; padding: 0; }
+.kk-meta { color: #675c4d; }
+.kk-detail { display: flow-root; margin-top: 20px; }
+.kk-detail h3 { font-size: 17px; padding-bottom: 8px; margin-bottom: 8px !important; border-bottom: 2px solid #715b38; }
+.kk .recipe-img { float: left; width: 44%; }
+.kk .recipe-img figure { margin-bottom: 20px; border-radius: 10px; overflow: hidden; }
+.kk .recipe-img img { width: 100%; height: 180px; margin-top: 0; object-fit: cover; }
+.kk .recipe { float: right; width: 51%; }
+.kk .recipe ol { list-style: decimal inside; padding-left: 0; }
+.kk .recipe ol li { border: 1px solid #d7d0be; background: #fff; margin-bottom: 12px; border-radius: 8px; text-indent: -1.3em; padding: 12px 12px 12px 2.3em; font-size: 14px; line-height: 1.75; }
+.kk-side .card { box-shadow: none; border: 1px solid #dad3c2; border-radius: 6px; margin-top: 16px; }
+.kk-side h4 { color: #594329; font-size: 14px; }
+.sim-site-credit { clear: both; padding: 12px 24px; text-align: right; font-size: 12px; color: #49514c; background: #f6f6f3; }
+.sim-site-credit a { color: inherit; text-decoration: underline; }
+
+/* tp_shop11_brown_A の list-grid1。商品は仮想画面の幅で4列。 */
+.pt { --pt-acc: #9d542e; background: #f7f5f1; }
+.pt-top { border-top: 5px solid #a6603a; background: #fff; }
+.pt-cats { padding-block: 10px; background: #fff; border-bottom: 1px solid #ddd5cc; }
+.pt-cats span { border: 0; box-shadow: none; padding: 4px 14px; }
+.pt-cats span:last-child { background: #f0e7df; color: #683d26; }
+.store-catalog { padding: 18px 32px; }
+.pt .store-path { font-size: 12px; color: #665f58; }
+.store-catalog h2 { margin: 10px 0 16px; font-size: 24px; }
+.pt .list-grid1 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.pt .list-grid1 .list { position: relative; display: grid; grid-template-rows: auto 1fr; padding: 12px; background: white; box-shadow: 3px 4px 14px rgba(55,35,15,.08); }
+.pt .list-grid1 .list * { margin: 0; }
+.pt .list-grid1 figure img { width: 100%; height: 133px; object-fit: cover; margin-bottom: 8px; }
+.pt .list-grid1 h4 { font-size: 14px; line-height: 1.55; }
+.pt .list-grid1 small, .pt .rating { font-size: 11px; color: #685341; }
+.pt .price { font-size: 16px; font-weight: 700; }
+.pt-buy { background: #864827; }
+
+/* tp_universal1_jichikai の日付と本文を組にしたお知らせ欄。 */
+.hs-hero { background: #e9eeea; color: #1b2922; }
+.hs-hero .hs-pill { background: var(--hs); color: white; }
+.hs-track .row { margin: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; }
+.hs-track .row > * { width: auto; margin: 0; }
+.hs dl.news { display: grid; grid-template-columns: max-content minmax(0,1fr); margin: 0; font-size: 15px; line-height: 1.65; }
+.hs dl.news dt, .hs dl.news dd { border-bottom: 1px solid var(--hs-hair); padding: 14px 0; }
+.hs dl.news dt { padding-right: 24px; color: #505b54; font-weight: 500; font-variant-numeric: tabular-nums; }
+.city-main { margin-inline: auto; }
+.city-main h2 { border-bottom: 2px solid #345e4b; padding-bottom: 14px; }
+.city-box { background: #f5f7f5; }

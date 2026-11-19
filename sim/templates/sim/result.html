@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}結果：{{ play.ending.title }}｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap">
+  <section class="result {{ play.ending.kind }}"><div class="small fw-bold mb-1">{{ sc.number }} {{ sc.title }}の結果　<span class="text-secondary fw-normal">{{ play.created_at|date:"Y年n月j日 H:i" }}</span></div>
+    <h1>{{ play.ending.title }}</h1>
+    <p class="mt-2">{{ play.ending.short }}</p>
+    {% if play.ending.after %}<p class="mt-2">{% if play.ending.kind == 'ng' %}<b>その後：</b>{% endif %}{{ play.ending.after }}</p>{% endif %}
+  </section>
+  <h2 class="sec-h">あなたの行動</h2>
+  <div class="panel"><p class="mb-2">「調べる」操作をした回数：<b>{{ play.check_count }}回</b>　／　ヒント：{{ play.hint_count }}回</p>
+    <ol class="actlog">{% for s in steps %}<li><span class="tag {{ s.kind }}">{{ s.get_kind_display }}</span>{% if s.device %}<span class="tag dev">{{ s.get_device_display }}</span>{% endif %}<span>{{ s.label }}</span></li>{% empty %}<li>記録はありません</li>{% endfor %}</ol></div>
+  {% if not user.is_authenticated %}<div class="notice mt-3">この記録は、このブラウザでだけ見られます。<a href="{% url 'accounts:signup' %}">会員登録</a>または<a href="{% url 'accounts:login' %}">ログイン</a>すると、マイページに残せます（今までの記録も引き継ぎます）。</div>{% endif %}
+  <div class="btn-row"><a class="btn btn-main btn-lg" href="{% url 'sim:explain' sc.slug %}">解説を見る</a><a class="btn btn-sub" href="{% url 'sim:start' sc.slug %}">もう一度体験する</a><a class="btn btn-sub" href="{% url 'sim:stats' %}">みんなの結果を見る</a></div>
+</div>
+{% endblock %}

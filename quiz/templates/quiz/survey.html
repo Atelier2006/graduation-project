@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}アンケート｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap narrow"><h1 class="page-h">アンケート</h1>
+  <p class="page-lead">教材をよくするために使います。1（そう思わない）〜 5（とてもそう思う）で答えてください。答えは名前なしで集計します。</p>
+  <form method="post" class="survey" novalidate>{% csrf_token %}
+    {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+    {% for f in form %}{% if f.name != 'comment' %}
+    <fieldset class="panel qbox{% if f.errors %} missing{% endif %}"><legend>{{ f.label }}</legend>
+      <div class="scale">{% for r in f %}<label class="scale-pt">{{ r.tag }}<span>{{ r.choice_label }}</span></label>{% endfor %}</div>
+      <div class="scale-ends"><span>そう思わない</span><span>とてもそう思う</span></div>
+      {% if f.errors %}<p class="qerr">1〜5から選んでください</p>{% endif %}</fieldset>
+    {% else %}
+    <div class="panel"><label class="form-label fw-bold" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}{% for e in f.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}</div>
+    {% endif %}{% endfor %}
+    <div class="btn-row"><button type="submit" class="btn btn-main btn-lg">送る</button></div>
+  </form>
+</div>
+{% endblock %}

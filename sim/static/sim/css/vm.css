@@ -1,0 +1,109 @@
+/* 詐欺シミュ プロトタイプ：仮想環境（帯・2台の配置・切り替え・通知・ヒント・結果のシート）
+   デバイスとサイトの見た目は devices.css */
+
+body.playing { overflow: hidden; }
+.vm { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: #e7e9ec; font-family: var(--font); }
+
+/* 上の帯（いつも表示する） */
+.vm-band { flex: none; display: flex; align-items: center; gap: 10px; padding: 8px 14px; background: #fff; border-bottom: 3px solid #d9822b; font-size: 15px; }
+.vm-tag { flex: none; background: #d9822b; color: #fff; font-weight: 800; border-radius: 6px; padding: 3px 10px; }
+.vm-title { flex: none; }
+.vm-mission { flex: 1; min-width: 0; color: #3c4043; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vm-btn { flex: none; border: 2px solid #5f6368; background: #fff; border-radius: 8px; padding: 5px 14px; font-weight: 700; font-size: 15px; color: #202124; }
+.vm-btn:hover { background: #f1f3f4; }
+.vm-btn.quit { border-color: #c5221f; color: #c5221f; }
+
+/* 2台を置く場所 */
+.vm-stage { flex: 1; min-height: 0; overflow: auto; display: flex; justify-content: flex-start; align-items: flex-start; padding: 14px 12px 8px; position: relative; }
+.vm-holder { position: relative; flex: none; margin: 0 auto; }
+.vm-fit { position: absolute; top: 0; left: 0; display: flex; gap: 40px; align-items: flex-start; transform-origin: 0 0; }
+.vm-label { text-align: center; font-size: 14px; font-weight: 700; color: #3a6f99; margin-top: 8px; font-family: var(--font); }
+.vm-pc .vm-label { color: #6b5aa6; }
+.vm.narrow .vm-dev:not(.on) { display: none; }
+.vm.narrow .vm-fit { gap: 0; }
+.vm-zoom { position: absolute; right: 12px; top: 10px; z-index: 5; border: 2px solid #6b5aa6; background: #fff; color: #4b3a8a; border-radius: 8px; padding: 4px 12px; font-weight: 700; }
+
+/* 下の切り替えボタン（スマホの幅のときだけ） */
+.vm-dock { flex: none; display: none; border-top: 2px solid #5f6368; background: #fff; }
+.vm.narrow .vm-dock { display: flex; }
+.vm-dock button { flex: 1; border: 0; background: #fff; padding: 12px 0; font-size: 17px; font-weight: 800; color: #3c4043; position: relative; }
+.vm-dock button.on { background: #7FB2D9; color: #0b2540; }
+.vm-dock .dot { display: none; position: absolute; top: 8px; margin-left: 6px; width: 12px; height: 12px; border-radius: 50%; background: #d93025; }
+.vm-dock button.unseen .dot { display: inline-block; }
+
+/* 通知が来たときにスマホを揺らす・上に出る通知 */
+.phone.buzz { animation: buzz .5s linear 2; }
+@keyframes buzz { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-4px) rotate(-1deg); } 75% { transform: translateX(4px) rotate(1deg); } }
+.p-banner { position: absolute; top: 48px; left: 8px; right: 8px; z-index: 25; animation: drop .25s ease-out; }
+.p-banner .noti { background: rgba(250,250,252,.97); box-shadow: 0 6px 20px rgba(0,0,0,.22); }
+@keyframes drop { from { transform: translateY(-30px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* 全画面の警告（Escキーの長押しで終わる） */
+.pc-fs { position: absolute; inset: 0; }
+.fs-hold { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30; background: rgba(32,33,36,.94); color: #fff; font: 400 13px var(--win); padding: 9px 18px 11px; border-radius: 8px; text-align: center; user-select: none; touch-action: none; cursor: pointer; overflow: hidden; }
+.fs-hold kbd { background: #fff; color: #202124; border-radius: 4px; padding: 1px 6px; font: 600 12px var(--win); }
+.fs-hold small { display: block; font-size: 11px; opacity: .75; margin-top: 3px; }
+.fs-hold .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: #8ab4f8; }
+.fs-hold.holding .bar { width: 100%; transition: width 1s linear; }
+.pc-closed { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #2b3a4d; color: #fff; font-size: 15px; }
+.pc-closed button { background: #fff; color: #202124; border-radius: 8px; padding: 8px 18px; font-weight: 700; }
+
+/* 「調べる」で出る説明のカード（デバイスの中） */
+.vm-info { position: absolute; left: 10px; right: 10px; bottom: 12px; z-index: 40; background: #fff; color: #202124; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.3); padding: 14px 16px; font: 400 13.5px/1.6 var(--font); border: 2px solid #3a6f99; }
+.vm-info h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 700; }
+.vm-info .close { display: block; margin: 10px 0 0 auto; background: #3a6f99; color: #fff; border-radius: 8px; padding: 6px 16px; font-weight: 700; }
+.pc-frame .vm-info { left: auto; right: 20px; top: 120px; bottom: auto; width: 440px; }
+.url-full { font-family: var(--mono); word-break: break-all; background: #f1f3f4; border-radius: 6px; padding: 4px 8px; display: block; margin: 4px 0; font-size: 12.5px; }
+
+/* チャット・通話の文が1つずつ出る */
+.seq { display: none; }
+.seq.show { display: block; animation: pop .2s ease-out; }
+.after-seq.wait { visibility: hidden; }
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.static .seq { display: block; }
+.static .tm-row.seq { display: flex; }
+
+/* ヒント：見るとよい場所を光らせる */
+.clue.hint { outline: 3px solid #fbbc04 !important; outline-offset: 3px; box-shadow: 0 0 0 6px rgba(251,188,4,.35); border-radius: 4px; animation: glow 1s ease-in-out 3; }
+@keyframes glow { 50% { box-shadow: 0 0 0 10px rgba(251,188,4,.15); } }
+
+/* 下に出るお知らせ */
+.vm-toast { position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); z-index: 70; background: #202124; color: #fff; border-radius: 10px; padding: 10px 16px; font-size: 14px; max-width: min(560px, 92vw); text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+
+/* 体験の終わりのシート */
+.vm-sheet { position: absolute; inset: 0; z-index: 80; background: rgba(15,23,35,.55); display: flex; align-items: flex-end; justify-content: center; padding: 16px; }
+.vm-sheet-card { width: min(560px, 100%); background: #fff; border-radius: 18px 18px 12px 12px; padding: 20px 22px; box-shadow: 0 -6px 30px rgba(0,0,0,.25); animation: up .3s ease-out; border-top: 8px solid #5f6368; }
+.vm-sheet-card.ok { border-top-color: #1e8e3e; }
+.vm-sheet-card.ng { border-top-color: #c5221f; }
+.vm-sheet-card .pre { font-size: 13px; color: #5f6368; font-weight: 700; }
+.vm-sheet-card h3 { margin: 4px 0 8px; font-size: 21px; }
+.vm-sheet-card.ok h3 { color: #137333; }
+.vm-sheet-card.ng h3 { color: #b3261e; }
+.vm-sheet-card p { margin: 0 0 14px; font-size: 15px; line-height: 1.7; }
+.vm-primary { display: block; width: 100%; border: 0; border-radius: 10px; background: #1f3a5f; color: #fff; font-size: 17px; font-weight: 800; padding: 13px; }
+@keyframes up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* 遠隔操作されている演出 */
+.remote-on { position: absolute; inset: 0; z-index: 25; pointer-events: none; }
+.remote-on .banner { position: absolute; top: 0; left: 0; right: 0; background: #c42b1c; color: #fff; text-align: center; font-weight: 700; padding: 6px; font-size: 13px; }
+.remote-on .cursor { position: absolute; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 22px solid #202124; transform: rotate(-30deg); animation: wander 4s ease-in-out infinite; }
+@keyframes wander { 0% { left: 20%; top: 30%; } 30% { left: 60%; top: 45%; } 60% { left: 40%; top: 70%; } 100% { left: 20%; top: 30%; } }
+
+@media (max-width: 899px) {
+  .vm-band { font-size: 13px; gap: 6px; padding: 7px 8px; flex-wrap: wrap; }
+  .vm-mission { order: 9; flex-basis: 100%; white-space: normal; font-size: 12.5px; }
+  .vm-btn { padding: 4px 10px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone.buzz, .clue.hint, .seq.show, .vm-sheet-card, .p-banner, .remote-on .cursor { animation: none; }
+}
+
+.vm { background: #e8edea; }
+.vm-band { border-bottom: 1px solid #b9c8c0; }
+.vm-tag { color: white; background: #215149; border-radius: 4px; }
+.vm-btn { border-width: 1px; border-radius: 5px; min-height: 34px; }
+.vm-label, .vm-pc .vm-label { color: #43574d; }
+.vm-zoom { border: 1px solid #7c9086; color: #244a3e; border-radius: 5px; }
+.vm-dock { border-top: 1px solid #aabbb1; }
+.vm-dock button.on { background: #e1ebe6; color: #154b47; box-shadow: inset 0 3px #215149; }
+.vm-sheet-card { border-radius: 10px; border-top-width: 4px; }

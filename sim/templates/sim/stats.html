@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}みんなの結果｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">みんなの結果</h1>
+  <p class="page-lead">この教材で体験した人の結果です。名前は、ランキングに出すことを選んだ会員のニックネームだけを出しています。</p>
+
+  <h2 class="sec-h">シナリオごとの結果</h2>
+  <div class="stat-grid">{% for r in rows %}
+    <section class="panel stat">
+      <h3 class="h5 fw-bold">{{ r.sc.number }} {{ r.sc.title }}<small>{{ r.total }}回</small></h3>
+      {% if r.total %}
+      <div class="bar" role="img" aria-label="見抜けた {{ r.ok }}%、だまされた {{ r.ng }}%、途中でやめた {{ r.quit }}%"><i class="ok" style="width:{{ r.ok }}%"></i><i class="ng" style="width:{{ r.ng }}%"></i><i class="quit" style="width:{{ r.quit }}%"></i></div>
+      <ul class="legend"><li><i class="ok"></i>見抜けた {{ r.ok }}%</li><li><i class="ng"></i>だまされた {{ r.ng }}%</li><li><i class="quit"></i>やめた {{ r.quit }}%</li></ul>
+      <h4 class="stat-h">「調べる」操作をした人・しなかった人の、見抜けた割合</h4>
+      <div class="pair"><span>調べた（{{ r.checked_n }}回）</span><div class="bar thin"><i class="ok" style="width:{{ r.checked_ok }}%"></i></div><b>{{ r.checked_ok }}%</b></div>
+      <div class="pair"><span>調べなかった（{{ r.unchecked_n }}回）</span><div class="bar thin"><i class="ok" style="width:{{ r.unchecked_ok }}%"></i></div><b>{{ r.unchecked_ok }}%</b></div>
+      {% if r.traps %}<h4 class="stat-h">だまされた人が、最後に選んだこと</h4><ol class="traps">{% for label, n in r.traps %}<li>{{ label }}<small>{{ n }}人</small></li>{% endfor %}</ol>{% endif %}
+      {% else %}<p class="text-secondary mb-0">まだ体験した人がいません。</p>{% endif %}
+    </section>{% endfor %}
+  </div>
+
+  <h2 class="sec-h">力だめしテスト（体験の前と後）</h2>
+  <div class="panel">
+    <div class="pair"><span>体験の前（{{ tests.pre.n }}回）</span><div class="bar thin"><i class="pre" style="width:{{ tests.pre.rate }}%"></i></div><b>{{ tests.pre.rate }}%</b></div>
+    <div class="pair"><span>体験の後（{{ tests.post.n }}回）</span><div class="bar thin"><i class="ok" style="width:{{ tests.post.rate }}%"></i></div><b>{{ tests.post.rate }}%</b></div>
+    <p class="small text-secondary mt-2 mb-0">平均の正答率です。同じ10問を、体験の前と後に解いてもらっています。</p>
+  </div>
+
+  {% if survey_n %}<h2 class="sec-h">アンケート（{{ survey_n }}人・5段階の平均）</h2>
+  <div class="panel survey-avg"><div><b>{{ survey_avg.clarity }}</b>分かりやすさ</div><div><b>{{ survey_avg.tension }}</b>緊張感</div><div><b>{{ survey_avg.usefulness }}</b>役に立ちそう</div><div><b>{{ survey_avg.again }}</b>また使いたい</div></div>{% endif %}
+
+  <h2 class="sec-h">ランキング（見抜けたシナリオの数）</h2>
+  <div class="panel">{% if ranking %}<table class="table rank mb-0"><thead><tr><th>順位</th><th>ニックネーム</th><th>見抜けた</th><th>体験の後のテスト</th></tr></thead><tbody>
+    {% for r in ranking %}<tr><td>{{ forloop.counter }}</td><td>{{ r.name }}</td><td>{{ r.ok }}本</td><td>{% if r.post is not None %}{{ r.post }}点{% else %}ー{% endif %}</td></tr>{% endfor %}
+  </tbody></table>{% else %}<p class="mb-0 text-secondary">まだランキングに入る人がいません。会員登録して体験すると、ここに名前が出ます（出さないこともできます）。</p>{% endif %}</div>
+</div>
+{% endblock %}

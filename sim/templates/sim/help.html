@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}相談先｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">相談先</h1><p class="page-lead">だまされたかもしれないとき、迷ったときの相談先です。この画面の番号は本物です（2026年11月19日に公式の情報で確かめました）。</p>
+  {% include "sim/_contacts.html" %}
+  <div class="panel mt-3"><h2 class="h5 fw-bold">ほかにも</h2><ul class="list-dot">
+    <li>カードを使われたかもしれないとき：カードの裏にある電話番号から、カード会社に連絡する</li>
+    <li>お金を振り込んでしまったとき：振込先の銀行と、警察に連絡する</li>
+    <li>事件・事故で緊急のとき：110番</li></ul></div></div>
+{% endblock %}

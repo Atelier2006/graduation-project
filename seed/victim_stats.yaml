@@ -1,0 +1,213 @@
+# 実際の被害のデータ（公的機関の統計）。要件定義書の F-20 の初期データ。
+# 値は出典のPDFのグラフに書かれた数値を読み取ったもの。2026-10-29 に出典のPDFを開いて確かめた。
+# 内訳を足した値が、出典に書かれた合計と合うことを確かめた（当初接触ツール・交付形態など）。
+# 区分名は出典のとおりに書く（問題の画面ではなく、出典を示した統計の引用のため）。
+# グラフに数値が書かれていない区分（10代以下など）は入れない。計算で埋めない。
+
+sources:
+  - key: npa-2025-final
+    publisher: 警察庁
+    title: 令和７年における特殊詐欺及びＳＮＳ型投資・ロマンス詐欺の認知・検挙状況等について（確定値）
+    url: https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/sagi_keihatsu2025.pdf
+    checked: 2026-10-29
+
+# scam_type：seed の詐欺の種類（scam_types）のコード
+#   tokusyu：特殊詐欺（全体） / nise_keisatsu：ニセ警察詐欺 / sns_toushi：SNS型投資詐欺 / romance：SNS型ロマンス詐欺
+# dimension：区分の軸（年代・当初接触ツール・当初接触手段・交付形態・既遂1件当たりの被害額）
+stats:
+  - source: npa-2025-final
+    page: 4
+    scam_type: tokusyu
+    year: 2025
+    dimension: 年代
+    unit: 件
+    note: 認知件数。法人被害を除く。10代以下はグラフに数値の記載がない
+    values:
+      20代: 3058
+      30代: 3145
+      40代: 2513
+      50代: 2775
+      60代: 4401
+      70代: 5206
+      80代以上: 6527
+
+  - source: npa-2025-final
+    page: 4
+    scam_type: tokusyu
+    year: 2025
+    dimension: 当初接触ツール
+    unit: 件
+    note: 認知件数
+    values:
+      電話: 21940
+      SMS・SNS・メール等: 3844
+      ポップアップ等: 1284
+      その他: 764
+
+  - source: npa-2025-final
+    page: 4
+    scam_type: tokusyu
+    year: 2025
+    dimension: 交付形態
+    unit: 件
+    note: 認知件数（主な被害金等交付形態別）
+    values:
+      振込型: 16894
+      現金手交型: 4058
+      キャッシュカード手交型・窃取型: 3152
+      電子マネー型: 1592
+      暗号資産送信型: 1243
+      現金送付型: 734
+      その他: 159
+
+  - source: npa-2025-final
+    page: 9
+    scam_type: nise_keisatsu
+    year: 2025
+    dimension: 年代×当初接触ツール
+    unit: 件
+    note: 認知件数。法人被害を除く。出典では「被害者の年代については30代が最多」「40代以下は携帯電話が９割以上であり、50代以上は固定電話が約６割」
+    values:
+      10代以下/携帯電話: 39
+      10代以下/固定電話: 1
+      10代以下/その他: 8
+      20代/携帯電話: 1624
+      20代/固定電話: 43
+      20代/その他: 51
+      30代/携帯電話: 2170
+      30代/固定電話: 43
+      30代/その他: 26
+      40代/携帯電話: 1480
+      40代/固定電話: 122
+      40代/その他: 10
+      50代/携帯電話: 920
+      50代/固定電話: 439
+      50代/その他: 17
+      60代/携帯電話: 636
+      60代/固定電話: 875
+      60代/その他: 34
+      70代/携帯電話: 408
+      70代/固定電話: 1116
+      70代/その他: 30
+      80代以上/携帯電話: 175
+      80代以上/固定電話: 728
+      80代以上/その他: 17
+
+  - source: npa-2025-final
+    page: 9
+    scam_type: nise_keisatsu
+    year: 2025
+    dimension: 既遂1件当たりの被害額
+    unit: 万円
+    note: 法人被害を除く。出典では「既遂１件当たりの被害額は70代が最多」
+    values:
+      10代以下: 177.1
+      20代: 281.6
+      30代: 396.1
+      40代: 587.4
+      50代: 862.9
+      60代: 1674.9
+      70代: 1819.8
+      80代以上: 1402.7
+
+  - source: npa-2025-final
+    page: 13
+    scam_type: sns_toushi
+    year: 2025
+    dimension: 年代
+    unit: 件
+    note: 認知件数。法人被害を除く。10代以下はグラフに数値の記載がない。出典では「50代が最多」「増加率は30代が最多、次いで40代」
+    values:
+      20代: 556
+      30代: 924
+      40代: 1623
+      50代: 2559
+      60代: 2250
+      70代: 1270
+      80代以上: 303
+
+  - source: npa-2025-final
+    page: 13
+    scam_type: sns_toushi
+    year: 2025
+    dimension: 当初接触手段
+    unit: 件
+    note: 認知件数
+    values:
+      バナー等広告: 3785
+      ダイレクトメッセージ: 3549
+      投稿: 1279
+      その他: 910
+
+  - source: npa-2025-final
+    page: 13
+    scam_type: sns_toushi
+    year: 2025
+    dimension: 当初接触ツール
+    unit: 件
+    note: 認知件数
+    values:
+      Instagram: 1934
+      YouTube: 1229
+      LINE: 1211
+      TikTok: 830
+      Facebook: 822
+      X(Twitter): 815
+      その他SNS: 522
+      投資のサイト: 1071
+      その他: 1089
+
+  - source: npa-2025-final
+    page: 13
+    scam_type: sns_toushi
+    year: 2025
+    dimension: 交付形態
+    unit: 件
+    note: 認知件数（主な被害金等交付形態別）
+    values:
+      振込型: 7135
+      暗号資産送信型: 1898
+      その他: 490
+
+  - source: npa-2025-final
+    page: 18
+    scam_type: romance
+    year: 2025
+    dimension: 年代
+    unit: 件
+    note: 認知件数。10代以下はグラフに数値の記載がない。出典では「40代～60代の被害が全体の75.6％を占める」
+    values:
+      20代: 303
+      30代: 656
+      40代: 1280
+      50代: 1720
+      60代: 1265
+      70代: 363
+      80代以上: 44
+
+  - source: npa-2025-final
+    page: 18
+    scam_type: romance
+    year: 2025
+    dimension: 当初接触ツール
+    unit: 件
+    note: 認知件数。出典では「マッチングアプリが全体の32.7％」
+    values:
+      マッチングアプリ: 1846
+      Instagram: 1288
+      Facebook: 1049
+      その他SNS: 820
+      TikTok: 471
+      その他: 171
+
+  - source: npa-2025-final
+    page: 18
+    scam_type: romance
+    year: 2025
+    dimension: 交付形態
+    unit: 件
+    note: 認知件数（主な被害金等交付形態別）
+    values:
+      振込型: 3055
+      暗号資産送信型: 2177
+      その他: 413
