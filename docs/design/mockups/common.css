@@ -36,7 +36,7 @@ body { margin: 0; background: var(--bg); font-family: var(--font); color: var(--
 .phone::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 14px; background: #1f2328; z-index: 10; }
 .sbar { height: 40px; flex: none; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 22px 6px; font-size: 13px; font-weight: 700; }
 .sbar span { white-space: nowrap; }
-.sbar .r { font-size: 11px; letter-spacing: 1px; }
+.sbar .sig { font-size: 11px; letter-spacing: 1px; }
 .home-ind { height: 22px; flex: none; display: flex; justify-content: center; align-items: center; }
 .home-ind::after { content: ""; width: 120px; height: 5px; border-radius: 3px; background: #1f2328; opacity: .85; }
 .screen { flex: 1; overflow: hidden; display: flex; flex-direction: column; position: relative; }
