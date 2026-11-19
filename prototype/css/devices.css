@@ -225,9 +225,6 @@ button.bmi:hover { background: #eef1f5; }
 .hs-hero .hs-pill { color: #fff; }
 .hs-two { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 34px 40px; }
 .hs-cap { font-size: 15px; line-height: 1.43; }
-.hs-news li { display: flex; gap: 24px; padding: 14px 0; border-top: 1px solid var(--hs-hair); font-size: 15px; line-height: 1.6; }
-.hs-news li:last-child { border-bottom: 1px solid var(--hs-hair); }
-.hs-news .d { color: var(--hs-steel); flex: none; width: 92px; }
 .hs-imp { color: #b3261e; margin-right: 6px; }
 .hs-foot { border-top: 1px solid var(--hs-linen); padding: 16px 40px; font-size: 13px; color: var(--hs-steel); display: flex; gap: 22px; }
 /* スマホの公式アプリ */
@@ -397,13 +394,6 @@ button.bmi:hover { background: #eef1f5; }
 .pt-search b { width: 40px; height: 40px; border-radius: 50%; background: var(--pt-acc); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(240,131,0,.34); }
 .pt-cats { display: flex; gap: 8px; padding: 0 32px 6px; }
 .pt-cats span { background: #fff; border: 1px solid var(--pt-hair); border-radius: 9999px; padding: 6px 14px; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-.pt-h { display: flex; align-items: center; gap: 4px; padding: 18px 32px 12px; font-size: 19px; font-weight: 600; letter-spacing: -.03em; }
-.pt-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 32px 20px; }
-.pt-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.08); }
-.pt-card img { width: 100%; height: 150px; object-fit: cover; }
-.pt-card .b { padding: 10px 14px 14px; font-size: 13px; line-height: 1.5; }
-.pt-card .p { font-size: 15px; font-weight: 600; margin-top: 2px; }
-.pt-card .r { font-size: 11px; color: var(--pt-gray); }
 .pt-buy { margin: 0 32px 24px; display: inline-flex; background: var(--pt-acc); color: #fff; border-radius: 9999px; padding: 12px 26px; font-size: 14px; font-weight: 600; }
 
 /* =====================================================================
@@ -468,11 +458,7 @@ button.bmi:hover { background: #eef1f5; }
 .kk-main h2 { font-size: 40px; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; margin-top: 12px !important; }
 .kk-meta { display: flex; gap: 18px; margin-top: 12px; font: 400 12px var(--mono); letter-spacing: .04em; color: var(--kk-dust); }
 .kk-photo { margin-top: 16px; width: 100%; height: 300px; object-fit: cover; border-radius: 12px; }
-.kk-cols { display: grid; grid-template-columns: 1fr 1.3fr; gap: 26px; margin-top: 20px; }
-.kk-cols h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px !important; }
 .kk-ing li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #d8d3c4; font-size: 14px; }
-.kk-steps li { display: grid; grid-template-columns: 30px 1fr; padding: 6px 0; font-size: 14px; line-height: 1.7; }
-.kk-steps li b { font-size: 18px; }
 .kk-side .card { background: #fff; border-radius: 16px; padding: 18px; box-shadow: 0 10px 40px rgba(0,0,0,.08), 0 20px 60px -10px rgba(0,0,0,.08); }
 .kk-side .card + .card { margin-top: 16px; }
 .kk-side h4 { font: 400 11px var(--mono); letter-spacing: .06em; color: var(--kk-dust); margin-bottom: 10px !important; }
@@ -548,3 +534,54 @@ button.bmi:hover { background: #eef1f5; }
 .rm-uac .bt { display: flex; gap: 8px; justify-content: flex-end; padding: 0 18px 16px; }
 .rm-uac .bt button { min-width: 92px; border: 1px solid #b5b5b5; border-radius: 4px; padding: 6px 16px; font-size: 13px; text-align: center; background: #fdfdfd; }
 .rm-uac .bt button.p { background: #0067c0; color: #fff; border-color: #0067c0; }
+
+/* Template Party のレシピ詳細（tp_recipe1_brown/item.html）。
+   写真と材料を左、作り方を右に置き、仮想PCの幅に合わせて配分する。 */
+.kk-nav { background: #fff; border-top: 5px solid #715b38; border-bottom: 1px solid #ded7c6; }
+.kk-mark { font-family: "Yu Mincho","Noto Serif CJK JP",serif; color: #594329; }
+.kk-main { padding-top: 20px; }
+.kk-main h2 { font: 700 32px/1.35 "Yu Mincho","Noto Serif CJK JP",serif; }
+.kk-tag { background: none; color: #665539; padding: 0; }
+.kk-meta { color: #675c4d; }
+.kk-detail { display: flow-root; margin-top: 20px; }
+.kk-detail h3 { font-size: 17px; padding-bottom: 8px; margin-bottom: 8px !important; border-bottom: 2px solid #715b38; }
+.kk .recipe-img { float: left; width: 44%; }
+.kk .recipe-img figure { margin-bottom: 20px; border-radius: 10px; overflow: hidden; }
+.kk .recipe-img img { width: 100%; height: 180px; margin-top: 0; object-fit: cover; }
+.kk .recipe { float: right; width: 51%; }
+.kk .recipe ol { list-style: decimal inside; padding-left: 0; }
+.kk .recipe ol li { border: 1px solid #d7d0be; background: #fff; margin-bottom: 12px; border-radius: 8px; text-indent: -1.3em; padding: 12px 12px 12px 2.3em; font-size: 14px; line-height: 1.75; }
+.kk-side .card { box-shadow: none; border: 1px solid #dad3c2; border-radius: 6px; margin-top: 16px; }
+.kk-side h4 { color: #594329; font-size: 14px; }
+.sim-site-credit { clear: both; padding: 12px 24px; text-align: right; font-size: 12px; color: #49514c; background: #f6f6f3; }
+.sim-site-credit a { color: inherit; text-decoration: underline; }
+
+/* tp_shop11_brown_A の list-grid1。商品は仮想画面の幅で4列。 */
+.pt { --pt-acc: #9d542e; background: #f7f5f1; }
+.pt-top { border-top: 5px solid #a6603a; background: #fff; }
+.pt-cats { padding-block: 10px; background: #fff; border-bottom: 1px solid #ddd5cc; }
+.pt-cats span { border: 0; box-shadow: none; padding: 4px 14px; }
+.pt-cats span:last-child { background: #f0e7df; color: #683d26; }
+.store-catalog { padding: 18px 32px; }
+.pt .store-path { font-size: 12px; color: #665f58; }
+.store-catalog h2 { margin: 10px 0 16px; font-size: 24px; }
+.pt .list-grid1 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.pt .list-grid1 .list { position: relative; display: grid; grid-template-rows: auto 1fr; padding: 12px; background: white; box-shadow: 3px 4px 14px rgba(55,35,15,.08); }
+.pt .list-grid1 .list * { margin: 0; }
+.pt .list-grid1 figure img { width: 100%; height: 133px; object-fit: cover; margin-bottom: 8px; }
+.pt .list-grid1 h4 { font-size: 14px; line-height: 1.55; }
+.pt .list-grid1 small, .pt .rating { font-size: 11px; color: #685341; }
+.pt .price { font-size: 16px; font-weight: 700; }
+.pt-buy { background: #864827; }
+
+/* tp_universal1_jichikai の日付と本文を組にしたお知らせ欄。 */
+.hs-hero { background: #e9eeea; color: #1b2922; }
+.hs-hero .hs-pill { background: var(--hs); color: white; }
+.hs-track .row { margin: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; }
+.hs-track .row > * { width: auto; margin: 0; }
+.hs dl.news { display: grid; grid-template-columns: max-content minmax(0,1fr); margin: 0; font-size: 15px; line-height: 1.65; }
+.hs dl.news dt, .hs dl.news dd { border-bottom: 1px solid var(--hs-hair); padding: 14px 0; }
+.hs dl.news dt { padding-right: 24px; color: #505b54; font-weight: 500; font-variant-numeric: tabular-nums; }
+.city-main { margin-inline: auto; }
+.city-main h2 { border-bottom: 2px solid #345e4b; padding-bottom: 14px; }
+.city-box { background: #f5f7f5; }

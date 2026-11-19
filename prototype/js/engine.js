@@ -1,7 +1,7 @@
 /*
  * 詐欺シミュ プロトタイプ：仮想環境のエンジン
  * 仮想スマホと仮想パソコンを1つのページの中に作り、シナリオのデータ（js/scenarios/*.js）のとおりに動かす。
- * 入力欄には練習用の値だけを入れ、入力した内容はどこにも保存・送信しない。
+ * 検索や荷物照会は端末内で処理する。認証情報や決済情報には練習用の値を使う。
  */
 (function () {
   'use strict';
@@ -89,11 +89,11 @@
     const omni = `<span class="tune">${I.tune}</span><span class="host">${esc(u.host)}</span><span class="path">${esc(u.path)}</span><span class="star">${I.star}</span>`;
     return `<div class="b-tabs">
         <div class="b-tab on">${favHTML(scr)}<span class="tt">${esc(scr.title || '')}</span>${b('data-vm="close-tab" aria-label="タブを閉じる"', I.x, 'x')}</div>
-        <span class="newtab">${I.plus}</span>
+        ${b('data-web="web/home/search/" aria-label="教材内検索を開く"', I.plus, 'newtab')}
         <span class="win"><span>${I.min}</span><span>${I.max}</span><span class="cl">${I.close}</span></span></div>
-      <div class="b-bar">${b('data-back aria-label="戻る"', I.back, 'nav')}<span class="nav dim">${I.fwd}</span><span class="nav">${I.reload}</span>
+      <div class="b-bar">${b('data-back aria-label="戻る"', I.back, 'nav')}${b('data-vm="forward" aria-label="進む"', I.fwd, 'nav')}${b('data-vm="reload" aria-label="再読み込み"', I.reload, 'nav')}
         ${live ? `<button type="button" class="b-omni" data-vm="url" aria-label="アドレスを確かめる">${omni}</button>` : `<div class="b-omni">${omni}</div>`}
-        <span class="prof">${I.user}</span></div>
+        ${b('data-vm="find" aria-label="ページ内検索"', I.search, 'nav')}</div>
       ${bookmarksHTML(sc, !live)}
       <div class="b-body">${html}</div>`;
   }
@@ -127,6 +127,8 @@
     constructor(root, sc, opts = {}) {
       this.root = root; this.sc = sc; this.opts = opts;
       this.flags = {};
+      this.webAccounts = { pc: new Set(), phone: new Set() };
+      this.savedRecipe = false;
       this.state = {
         active: sc.first || 'phone',
         phone: { stack: ['lock'], notes: [] },
@@ -179,12 +181,15 @@
         <div class="vm-sheet" hidden></div>
       </div>`;
       this.el = this.root.firstElementChild;
+      this.el.addEventListener('submit', (e) => S.web.submit(this, e));
       this.el.addEventListener('click', (e) => this.click(e));
       this.el.addEventListener('pointerdown', (e) => this.holdStart(e));
       ['pointerup', 'pointerleave', 'pointercancel'].forEach((t) => this.el.addEventListener(t, (e) => this.holdEnd(e)));
     }
     devEl(dev) { return this.el.querySelector(dev === 'phone' ? '.vm-phone .phone' : '.vm-pc .pc-frame'); }
-    screen(id) { return this.sc.screens[id]; }
+    screen(id, dev = 'pc') {
+      return id.startsWith('web/') ? S.web.view(this, id, dev) : this.sc.screens[id];
+    }
     top(dev) { const s = this.state[dev].stack; return s[s.length - 1]; }
 
     /* ----- 描く ----- */
@@ -194,7 +199,7 @@
       if (id === 'lock') { inner = this.lockHTML(); bar = 'lock'; }
       else if (id === 'home') { inner = this.homeHTML(); bar = 'home'; }
       else if (id.startsWith('app:')) { inner = this.placeholderHTML(id.slice(4)); }
-      else { const scr = this.screen(id); inner = screenHTML(scr, this); bar = scr.bar || 'light'; }
+      else { const scr = this.screen(id, 'phone'); inner = screenHTML(scr, this); bar = scr.bar || 'light'; }
       el.className = `phone ${barClass(bar)}`;
       el.innerHTML = `${sbarHTML(this.sc, bar)}<div class="pscreen">${inner}</div>
         <div class="home-ind" data-vm="home" role="button" tabindex="0" aria-label="ホーム画面に戻る" ${typeof bar === 'object' ? `style="background:${bar.bg2 || '#fff'}"` : ''}></div>`;
@@ -245,6 +250,7 @@
     go(dev, id, o = {}) {
       if (this.state.ended && !o.force) return;
       const st = this.state[dev];
+      if (!o.replace) st.forward = [];
       if (dev === 'phone' && (this.top('phone') === 'lock')) st.stack = ['home'];
       if (o.replace) st.stack[st.stack.length - 1] = id; else st.stack.push(id);
       if (dev === 'pc') { st.closed = false; st.fullscreen = !!(this.screen(id) && this.screen(id).fullscreen); }
@@ -252,16 +258,21 @@
       this.enter(dev);
     }
     enter(dev) {
-      const id = this.top(dev); const scr = this.screen(id);
+      const id = this.top(dev); const scr = this.sc.screens[id];
       if (scr && scr.onEnter) scr.onEnter(this);
     }
     back(dev) {
       const st = this.state[dev];
-      if (dev === 'phone') { if (st.stack.length > 1 && this.top('phone') !== 'home') st.stack.pop(); this.renderPhone(); return; }
-      if (st.stack.length > 1) { st.stack.pop(); st.fullscreen = false; this.renderPC(); }
+      if (st.stack.length < 2 || (dev === 'phone' && this.top(dev) === 'home')) return;
+      (st.forward ||= []).push(st.stack.pop());
+      this.redraw(dev);
     }
-    home() { if (this.top('phone') === 'lock') return; this.state.phone.stack = ['home']; this.renderPhone(); }
-    unlock() { this.state.phone.stack = ['home']; this.renderPhone(); }
+    redraw(dev) {
+      if (dev === 'pc') { this.state.pc.fullscreen = false; this.renderPC(); }
+      else this.renderPhone();
+    }
+    home() { if (this.top('phone') !== 'lock') this.unlock(); }
+    unlock() { this.state.phone.stack = ['home']; this.state.phone.forward = []; this.renderPhone(); }
     switchTo(dev) { this.state.active = dev; this.state.unseen[dev] = false; this.updateDock(); this.fit(); }
     isVisible(dev) { return !this.el.classList.contains('narrow') || this.state.active === dev; }
 
@@ -310,7 +321,7 @@
       el.appendChild(box);
     }
     showUrl(dev) {
-      const scr = this.screen(this.top(dev)); if (!scr || !scr.url) return;
+      const scr = this.screen(this.top(dev), dev); if (!scr || !scr.url) return;
       const u = splitUrl(scr.url);
       this.log('check', 'アドレスバーのURLを確かめた', dev);
       this.info(dev, 'このページのアドレス（URL）', `<span class="url-full">${esc(scr.url)}</span>
@@ -330,6 +341,13 @@
 
     /* 全画面の警告：Escキーの長押し（画面の上の黒い帯の長押しでもよい） */
     key(e) {
+      if (e.type === 'keydown' && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+        const dev = e.target.closest?.('[data-dev]')?.dataset.dev || this.state.active;
+        if (this.devEl(dev).querySelector('.mb-page,.b-body') && !this.state.ended) {
+          e.preventDefault(); S.web.findInPage(this,dev);
+        }
+        return;
+      }
       if (e.key !== 'Escape' || !this.state.pc.fullscreen) return;
       if (e.type === 'keydown' && !e.repeat) this.startHold();
       if (e.type === 'keyup') this.cancelHold();
@@ -400,9 +418,24 @@
 
     /* ----- 押されたもの ----- */
     click(e) {
-      const t = e.target.closest('[data-vm],[data-act],[data-go],[data-back]');
+      const t = e.target.closest('[data-vm],[data-act],[data-go],[data-back],[data-shoe],[data-web],[data-doc],[data-web-action]');
       if (!t || !this.el.contains(t)) return;
       const devBox = t.closest('[data-dev]'); const dev = devBox ? devBox.dataset.dev : this.state.active;
+      if (t.dataset.shoe && this.sc.id === 'fake-shop' && this.top(dev) === 'shop' && !this.state.ended) {
+        const key=t.dataset.shoe, value=t.dataset.value;
+        if(key==='color'){this.flags.shoeColor=value;this.flags.shoePhoto=value;}
+        if(key==='size')this.flags.shoeSize=value;
+        if(key==='photo')this.flags.shoePhoto=value;
+        const scroll=this.devEl(dev).querySelector('.b-body').scrollTop;
+        this.renderPC();
+        this.devEl(dev).querySelector('.b-body').scrollTop=scroll;
+        this.devEl(dev).querySelector('[data-shoe="'+key+'"][data-value="'+value+'"]')?.focus({preventScroll:true});
+        return;
+      }
+      if (t.matches('[data-web],[data-doc],[data-web-action]')) {
+        if (!this.state.ended) S.web.click(this,t,dev);
+        return;
+      }
       if (t.hasAttribute('data-back')) { this.back(dev); return; }
       if (t.dataset.act) { this.act(t.dataset.act, dev); return; }
       if (t.dataset.go) { const [d, id] = t.dataset.go.includes(':') ? t.dataset.go.split(':') : [dev, t.dataset.go]; this.go(d, id); return; }
@@ -411,6 +444,11 @@
       else if (v === 'quit') this.end('quit');
       else if (v === 'switch') this.switchTo(t.dataset.to);
       else if (v === 'zoom') { this.state.pcZoom = !this.state.pcZoom; this.fit(); }
+      else if (v === 'find') S.web.findInPage(this, dev);
+      else if (v === 'reload') this.redraw(dev);
+      else if (v === 'forward' && this.state[dev].forward?.length) {
+        this.state[dev].stack.push(this.state[dev].forward.pop()); this.redraw(dev);
+      }
       else if (v === 'home') this.home();
       else if (v === 'unlock') this.unlock();
       else if (v === 'note') this.openNote(+t.dataset.i);
@@ -419,7 +457,7 @@
       else if (v === 'url') this.showUrl(dev);
       else if (v === 'info-close') { const b = t.closest('.vm-info'); if (b) b.remove(); }
       else if (v === 'close-tab') this.closeTab();
-      else if (v === 'reopen') { this.state.pc.closed = false; this.state.pc.stack = [this.sc.pc.start]; this.state.pc.fullscreen = false; this.renderPC(); }
+      else if (v === 'reopen') { this.state.pc.closed = false; this.state.pc.stack = [this.sc.pc.start]; this.state.pc.forward = []; this.state.pc.fullscreen = false; this.renderPC(); }
       else if (v === 'result' && this.opts.onResult) this.opts.onResult(this.state.ended);
     }
     openApp(id) {
@@ -427,13 +465,16 @@
       this.state.phone.notes.forEach((n) => { if (n.app === id) n.read = true; });
       if (a.act) this.act(a.act, 'phone');
       else if (a.go) this.go('phone', typeof a.go === 'function' ? a.go(this) : a.go);
+      else if (id === 'browser') this.go('phone','web/home/search/');
+      else if (id === 'hashire' || id === 'bank') this.go('phone','web/account/' + (id === 'bank' ? 'bank' : 'ship') + '/');
       else this.go('phone', 'app:' + id);
     }
     openBookmark(i) {
       const b = this.sc.pc.bookmarks[i]; if (!b) return;
       if (b.act) this.act(b.act, 'pc');
       else if (b.go) this.go('pc', b.go);
-      else this.info('pc', b.label, 'このサイトは、この練習では使いません。');
+      else if (b.label === 'サガシモ') this.go('pc','web/home/search/');
+      else S.web.openDoc(this,'pc',{'ことこと献立帖':'teriyaki','ヒツジネット銀行':'balance','ポチッと通販':'shoes','ハシレ運輸':'delivery'}[b.label]);
     }
 
     updateDock() {

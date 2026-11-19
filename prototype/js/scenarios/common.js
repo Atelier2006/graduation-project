@@ -3,6 +3,7 @@
   'use strict';
   const S = (window.SagiSim = window.SagiSim || {});
   const I = S.ico;
+  S.templateCredit = '<span class="pr"><a href="https://template-party.com/" target="_blank" rel="noopener nofollow">《Web Design:Template-Party》</a></span>';
 
   /* ===== 架空ブランドのロゴ ===== */
   S.logo = {
@@ -13,8 +14,7 @@
       `<svg width="${size}" height="${size}" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="${bg}"/><circle cx="11" cy="14" r="5" fill="#cfe9f7"/><circle cx="17" cy="12" r="5" fill="#cfe9f7"/><circle cx="19" cy="17" r="5" fill="#cfe9f7"/><circle cx="12" cy="18" r="5" fill="#cfe9f7"/><circle cx="21" cy="21" r="3" fill="#1b6fa3"/></svg>`,
     hoshizora: (size = 28) =>
       `<svg width="${size}" height="${size}" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#1b2a5c"/><path d="M15 6.5l2.4 5 5.4.7-4 3.7 1 5.4-4.8-2.7-4.8 2.7 1-5.4-4-3.7 5.4-.7z" fill="#f4d35e"/></svg>`,
-    /* 検索サイト「サガシモ」：文字だけ。色は1色（Perplexity のスタイルを参考） */
-    sagashimo: (size = 26) => `<span class="sg-mark" style="font-size:${size}px">サガシモ<i></i></span>`,
+
   };
 
   /* ===== ホーム画面のアプリ =====
@@ -44,7 +44,7 @@
   S.mBrowser = ({ host, body, close, clue }) => `<div class="mb-page">${body}</div>
     <div class="mb-bar"><button type="button" class="mb-url ${clue ? 'clue' : ''}" data-vm="url" ${clue || ''}><span class="aa">ぁあ</span><span class="host">${S.esc(host)}</span><span class="re">${I.reload}</span></button>
       ${close ? `<button type="button" class="mb-x" data-act="${close}" aria-label="ページを閉じる">${I.x}</button>` : ''}</div>
-    <div class="mb-tool"><button type="button" data-back aria-label="戻る">${I.back}</button><span class="dim">${I.fwd}</span><span>${I.share}</span><span>${I.book}</span><span>${I.tabs}</span></div>`;
+    <div class="mb-tool"><button type="button" data-back aria-label="戻る">${I.back}</button><button type="button" data-vm="forward" aria-label="進む">${I.fwd}</button><button type="button" data-vm="find" aria-label="ページ内検索">${I.search}</button><button type="button" data-web="web/home/search/" aria-label="検索ホーム">${I.tabs}</button></div>`;
 
   /* ===== 家族とのチャット（トモトモ）。相談する前と後の2つの画面 ===== */
   const tomoHead = `<div class="tm-head"><button type="button" class="back" data-back aria-label="戻る">${I.back}</button><span class="tm-av">家</span><span class="tm-tt"><b>家族</b><small>お母さん、ゆうき</small></span></div>`;

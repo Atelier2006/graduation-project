@@ -6,12 +6,17 @@
   const SHOP = 'kutsuyasu-market.example';
   const ITEM = '定番キャンバススニーカー ローカット（男女兼用）';
 
-  const sgTop = (q) => `<div class="sg-top">${L.sagashimo(26)}<div class="sg-box">${I.search}<span class="q">${S.esc(q)}</span>${I.mic}</div></div>
-    <div class="sg-tabs"><span class="on">すべて</span><span>ショッピング</span><span>画像</span><span>ニュース</span><span>地図</span></div>`;
+  const sgTop = q => `<div class="vw-top"><button data-web="web/home/search/" aria-label="検索ホーム">${S.web.logo()}</button>${S.web.form(q)}</div>
+    <nav class="vw-tabs"><button aria-pressed="true" data-web="web/results/search/${encodeURIComponent(q)}">すべて</button><button data-web="web/images/search/${encodeURIComponent(q)}">画像</button></nav>`;
   const sgSite = (ch, name, url, st = '') => `<div class="sg-site"><span class="fv" ${st}>${ch}</span><span><b>${name}</b><small>${url}</small></span></div>`;
   const kyAnn = `<div class="ky-ann"><span class="clue" data-n="3" data-tip="日本語が少しおかしくないかな？">全商品は送料無料させていただきます！</span>　本日限りの大特価 SALE</div>`;
-  const kyNav = (n) => `<div class="ky-nav"><nav><span>メンズ</span><span>レディース</span><span>キッズ</span><span>SALE</span></nav>
-    <div class="ky-mark">KUTSU-YASU<small>MARKET</small></div><div class="ky-icons">${I.search}${I.user}${I.heart}<span class="bagn">${I.bag}<b>${n}</b></span></div></div>`;
+  const colors = {red:['レッド','#b8262b'], navy:['ネイビー','#23304a']};
+  const sizes = ['23.0','24.0','25.0','26.0','27.0','28.0'];
+  const colorOf = vm => vm.flags.shoeColor || 'red';
+  const sizeOf = vm => vm.flags.shoeSize || '25.0';
+  const kyNav = vm => `<div class="ky-nav"><nav><button data-go="pc:shop">商品</button><button data-act="open-law">会社概要</button><button data-act="contact">お問い合わせ</button></nav>
+    <div class="ky-mark">KUTSU-YASU<small>MARKET</small></div><div class="ky-icons"><button data-web="web/home/search/" aria-label="検索">${I.search}</button><button data-web="web/account/market/" aria-label="体験用会員ページ">${I.user}</button>
+    <button data-act="favorite" aria-label="お気に入り" aria-pressed="${!!vm.flags.favorite}">${I.heart}</button><button class="bagn" data-act="show-cart" aria-label="カート">${I.bag}<b>${vm.flags.inCart?1:0}</b></button></div></div>`;
   const kyFav = '<span class="fav" style="background:#000">K</span>';
 
   S.register({
@@ -37,7 +42,7 @@
     screens: Object.assign({
       search1: {
         dev: 'pc', url: 'https://www.sagashimo.example/search?q=人気スニーカー+激安', title: '人気スニーカー 激安 - サガシモ', favColor: '#27251e',
-        html: `<div class="sg">${sgTop('人気スニーカー 激安')}<div class="sg-res"><div class="sg-count">約 1,240,000 件の結果</div>
+        html: `<div class="sg">${sgTop('人気スニーカー 激安')}<div class="sg-res"><div class="sg-count">検索結果　3件</div>
           <div class="sg-r">${sgSite('K', 'KUTSU-YASU MARKET', `https://${SHOP} › sale`, 'style="background:#000;color:#fff;border-color:#000"')}
             <h3 class="clue" data-n="1" data-tip="「公式」「最大70%OFF」…ほかの店とくらべて安すぎないかな？"><button type="button" data-act="open-shop">【公式】人気スニーカーが最大70%OFF｜KUTSU-YASU MARKET</button></h3>
             <p>人気ブランドのスニーカーが今だけ最大70%OFF！全品送料無料・即日発送。在庫限りの閉店セールを開催中…</p></div>
@@ -50,17 +55,14 @@
       },
       'search-home': {
         dev: 'pc', url: 'https://www.sagashimo.example/', title: 'サガシモ', favColor: '#27251e',
-        html: (vm) => `<div class="sg sg-new">${L.sagashimo(40)}<div class="sg-box">${I.search}<span class="q">サガシモで検索、または URL を入力</span></div>
-          <div class="sg-label">最近の検索</div>
-          <div class="sg-chips"><button type="button" data-go="pc:search1">${I.search} 人気スニーカー 激安</button>
-          ${vm.flags.shopSeen ? `<button type="button" data-act="search-review">${I.search} KUTSU-YASU MARKET 評判</button>` : ''}</div></div>`,
+        html: vm => S.web.searchPage(vm,''),
       },
       city: {
         dev: 'pc', url: 'https://www.city.soyokaze.example/kurashi/shohi/1004321.html', title: '偽の通販サイトにご注意ください｜そよかぜ市', favColor: '#2f6f4f',
-        html: `<div class="city"><div class="city-util"><span>文字サイズ　標準　拡大</span><span>背景色</span><span>Foreign Language</span><span>サイトマップ</span></div>
-          <div class="city-head"><span class="em">そ</span><span class="nm">そよかぜ市</span><span class="srch">${I.search}サイト内検索</span></div>
-          <div class="city-gnav"><span>くらし・手続き</span><span>子育て・教育</span><span>健康・福祉</span><span>防災・安全</span><span>市政情報</span></div>
-          <div class="city-crumb"><a>ホーム</a> ＞ <a>くらし・手続き</a> ＞ <a>消費生活</a> ＞ 偽の通販サイトにご注意ください</div>
+        html: `<div class="city"><div class="city-util"><button data-web="web/results/city/">サイトマップ</button></div>
+          <div class="city-head"><span class="em">そ</span><span class="nm">そよかぜ市</span>${S.web.form('','city')}</div>
+          <div class="city-gnav"><button data-web="web/results/city/">くらし・手続き</button><button data-doc="alert">防犯情報</button><button data-doc="scams">消費生活</button></div>
+          <div class="city-crumb"><button data-web="web/results/city/">ホーム</button> ＞ <button data-web="web/results/city/">くらし・手続き</button> ＞ 消費生活 ＞ 偽の通販サイトにご注意ください</div>
           <div class="city-main"><h2>偽の通販サイトにご注意ください</h2><div class="city-meta">ページ番号 1004321　更新日：2026年11月10日</div>
             <p>インターネットの通販サイトで買い物をして、「お金を払ったのに商品が届かない」「店と連絡がつかない」という相談が増えています。</p>
             <div class="city-box clue good" data-n="1"><h3>次のようなサイトに注意しましょう</h3><ol>
@@ -71,36 +73,36 @@
       },
       pochitto: {
         dev: 'pc', url: 'https://www.pochitto.example/shoes', title: 'スニーカー 人気ランキング｜ポチッと通販', favColor: '#f08300',
-        html: `<div class="pt"><div class="pt-top"><span class="pt-mark">ポチッと<i>通販</i></span><span class="pt-search"><span>スニーカー</span><b>${I.search}</b></span></div>
-          <div class="pt-cats"><span>すべて</span><span>メンズ</span><span>レディース</span><span>キッズ</span><span>ランキング</span></div>
-          <div class="pt-h">スニーカー 人気ランキング ${I.chevron}</div>
-          <div class="pt-grid">
-            <div class="pt-card"><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 30%"><div class="b">キャンバススニーカー ハイカット<div class="p">9,900円</div><div class="r">★4.6（1,204件）</div></div></div>
-            <div class="pt-card"><img src="img/sneaker-navy.jpg" alt=""><div class="b">キャンバススニーカー ネイビー<div class="p">8,800円</div><div class="r">★4.5（872件）</div></div></div>
-            <div class="pt-card"><img src="img/sneaker-red.jpg" alt="" style="object-position:20% 50%"><div class="b">キャンバススニーカー レッド<div class="p">8,800円</div><div class="r">★4.4（530件）</div></div></div>
-            <div class="pt-card"><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 80%"><div class="b">ローカット スニーカー<div class="p">7,700円</div><div class="r">★4.5（2,318件）</div></div></div></div>
-          <button type="button" class="pt-buy" data-act="buy-trusted">いつもの店で、ふつうの値段で買う</button></div>`,
+        html: `<div class="pt"><div class="pt-top"><span class="pt-mark">ポチッと<i>通販</i></span>${S.web.form('', 'shop')}${S.web.accountBtn('shop')}</div>
+          <div class="pt-cats"><button data-web="web/results/shop/">すべて</button><button data-web="web/results/shop/メンズ">メンズ</button><button data-web="web/results/shop/レディース">レディース</button><button data-web="web/results/shop/キッズ">キッズ</button><button data-go="pc:pochitto">ランキング</button></div>
+          <div class="store-catalog"><p class="store-path">トップ　／　シューズ　／　スニーカー</p>
+          <h2>スニーカー 人気ランキング</h2>
+          <div class="list-grid1"><article class="list"><figure><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 30%"></figure><div class="text"><small>人気 1 位</small><h4><button data-doc="high">キャンバススニーカー ハイカット</button></h4><p class="price">9,900円</p><p class="rating">★4.6（1,204件）</p></div></article>
+<article class="list"><figure><img src="img/sneaker-navy.jpg" alt=""></figure><div class="text"><small>人気 2 位</small><h4><button data-doc="navy">キャンバススニーカー ネイビー</button></h4><p class="price">8,800円</p><p class="rating">★4.5（872件）</p></div></article>
+<article class="list"><figure><img src="img/sneaker-red.jpg" alt="" style="object-position:20% 50%"></figure><div class="text"><small>人気 3 位</small><h4><button data-doc="red">キャンバススニーカー レッド</button></h4><p class="price">8,800円</p><p class="rating">★4.4（530件）</p></div></article>
+<article class="list"><figure><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 80%"></figure><div class="text"><small>人気 4 位</small><h4><button data-doc="low">ローカット スニーカー</button></h4><p class="price">7,700円</p><p class="rating">★4.5（2,318件）</p></div></article></div></div>
+          <button type="button" class="pt-buy" data-act="buy-trusted">いつもの店で、ふつうの値段で買う</button><div class="sim-site-credit">${S.templateCredit}</div></div>`,
       },
       shop: {
         dev: 'pc', url: `https://${SHOP}/products/canvas-low-red`, title: '【閉店セール】KUTSU-YASU MARKET', fav: kyFav,
         urlNote: '<br>はじめて見るお店のアドレスです。アドレスだけでは安全かどうか分からないので、会社の情報や評判も確かめましょう。',
         onEnter: (vm) => { vm.flags.shopSeen = true; },
-        html: `<div class="ky">${kyAnn}${kyNav(0)}<div class="ky-crumb">ホーム / スニーカー / ${ITEM}</div>
-          <div class="ky-prod"><div class="ky-thumbs"><img class="on" src="img/sneaker-red.jpg" alt=""><img src="img/sneaker-navy.jpg" alt=""><img src="img/sneaker-shelf.jpg" alt=""></div>
-            <img class="ky-main" src="img/sneaker-red.jpg" alt="赤いキャンバススニーカー">
+        html: vm => `<div class="ky">${kyAnn}${kyNav(vm)}<div class="ky-crumb">ホーム / スニーカー / ${ITEM}</div>
+          <div class="ky-prod"><div class="ky-thumbs">${['red','navy','shelf'].map(key=>`<button data-shoe="photo" data-value="${key}" aria-label="${key==='shelf'?'売り場':colors[key][0]}の写真"><img src="img/sneaker-${key}.jpg" alt=""></button>`).join('')}</div>
+            <img class="ky-main" src="img/sneaker-${vm.flags.shoePhoto || colorOf(vm)}.jpg" alt="選択した商品写真">
             <div class="ky-info"><div class="ky-brand">KUTSU-YASU ORIGINAL</div><h2>${ITEM}</h2>
               <div class="ky-price clue" data-n="1" data-tip="ほかの店とくらべて、安すぎないかな？"><s>通常価格 14,300円</s><b>4,290円</b><span class="ky-off">70%OFF</span><span class="ky-tax">税込</span></div>
               <div class="ky-timer clue" data-n="2" data-tip="時間で急がせていないかな？">${S.svg('<circle cx="12" cy="13" r="7"/><path d="M12 9.5V13l2.5 1.5M9.5 3.5h5"/>', { s: 15 })}セール終了まで 00:14:59</div>
               <div class="ky-stock">残りわずか：あと3点</div>
-              <div class="ky-opt">カラー：レッド<div class="ky-sw"><i class="on" style="background:#b8262b"></i><i style="background:#23304a"></i><i style="background:#f2f0ea;box-shadow:inset 0 0 0 1px #ccc"></i></div></div>
-              <div class="ky-opt">サイズ<div class="ky-sizes"><span>23.0</span><span>24.0</span><span class="on">25.0</span><span>26.0</span><span class="out">27.0</span><span>28.0</span></div></div>
-              <button type="button" class="ky-btn" data-act="order">カートに入れる</button><button type="button" class="ky-btn fill" data-act="order">今すぐ購入</button>
+              <div class="ky-opt">カラー：${colors[colorOf(vm)][0]}<div class="ky-sw">${Object.entries(colors).map(([key,[name,color]])=>`<button data-shoe="color" data-value="${key}" aria-label="${name}" aria-pressed="${key===colorOf(vm)}" style="background:${color}"></button>`).join('')}</div></div>
+              <div class="ky-opt">サイズ<div class="ky-sizes">${sizes.map(sz=>`<button data-shoe="size" data-value="${sz}" aria-pressed="${sz===sizeOf(vm)}" ${sz==='27.0'?'disabled title="在庫なし"':''}>${sz}</button>`).join('')}</div></div>
+              <button type="button" class="ky-btn" data-act="add-cart">カートに入れる</button><button type="button" class="ky-btn fill" data-act="order">今すぐ購入</button>
               <div class="ky-trust"><span>${I.check}本物保証100%</span><span>${I.check}安心安全</span><span>${I.check}即日発送</span></div></div></div>
           <div class="ky-foot"><button type="button" class="clue good" data-n="4" data-act="open-law">会社概要</button><button type="button" data-act="open-law">特定商取引法に基づく表記</button><button type="button" data-act="contact">お問い合わせ</button><button type="button" data-act="contact">配送・返品について</button><span>© KUTSU-YASU MARKET</span></div></div>`,
       },
       law: {
         dev: 'pc', url: `https://${SHOP}/pages/legal`, title: '特定商取引法に基づく表記｜KUTSU-YASU MARKET', fav: kyFav,
-        html: `<div class="ky">${kyNav(0)}<div class="ky-law"><h2>特定商取引法に基づく表記</h2><dl>
+        html: vm => `<div class="ky">${kyNav(vm)}<div class="ky-law"><h2>特定商取引法に基づく表記</h2><dl>
           <div class="row"><dt>販売業者</dt><dd>クツヤス商事株式会社</dd></div>
           <div class="row"><dt>所在地</dt><dd><span class="clue" data-n="1" data-tip="住所は、番地まで書いてあるかな？">東京都中央区銀座1丁目</span></dd></div>
           <div class="row"><dt>電話番号</dt><dd><span class="clue" data-n="2" data-tip="電話番号は書いてあるかな？">お問い合わせはメールのみ受け付けております</span></dd></div>
@@ -112,17 +114,17 @@
       },
       search2: {
         dev: 'pc', url: 'https://www.sagashimo.example/search?q=KUTSU-YASU+MARKET+評判', title: 'KUTSU-YASU MARKET 評判 - サガシモ', favColor: '#27251e',
-        html: `<div class="sg">${sgTop('KUTSU-YASU MARKET 評判')}<div class="sg-res"><div class="sg-count">約 312 件の結果</div>
+        html: `<div class="sg">${sgTop('KUTSU-YASU MARKET 評判')}<div class="sg-res"><div class="sg-count">検索結果　3件</div>
           <div class="sg-r clue good" data-n="1">${sgSite('Q', 'しつもん広場', 'https://qa-hiroba.example › question › 88213')}
-            <h3><button type="button">KUTSU-YASU MARKETで注文したのに商品が届きません</button></h3><p>先週、代金を振り込みましたが、商品が届かず、メールの返事もありません。同じ人はいますか？…</p></div>
+            <h3><button type="button" data-doc="question">KUTSU-YASU MARKETで注文したのに商品が届きません</button></h3><p>先週、代金を振り込みましたが、商品が届かず、メールの返事もありません。同じ人はいますか？…</p></div>
           <div class="sg-r">${sgSite('ひ', '通販ひょうばん帳', 'https://tsuhan-hyoban.example › shop › kutsuyasu')}
-            <h3><button type="button">KUTSU-YASU MARKETの口コミ・評判</button></h3><p><span class="sg-stars">★☆☆☆☆ 1.2</span>　「届かない」「連絡がつかない」という口コミが多数あります…</p></div>
+            <h3><button type="button" data-doc="reviews">KUTSU-YASU MARKETの口コミ・評判</button></h3><p><span class="sg-stars">★☆☆☆☆ 1.2</span>　「届かない」「連絡がつかない」という口コミが多数あります…</p></div>
           <div class="sg-r clue good" data-n="2">${sgSite('市', 'そよかぜ市', 'https://www.city.soyokaze.example › kurashi › shohi')}
-            <h3><button type="button">相談が多い通販サイトの一覧｜そよかぜ市</button></h3><p>商品が届かないという相談が寄せられているサイト：KUTSU-YASU MARKET ほか…</p></div></div></div>`,
+            <h3><button type="button" data-doc="scams">相談が多い通販サイトの一覧｜そよかぜ市</button></h3><p>商品が届かないという相談が寄せられているサイト：KUTSU-YASU MARKET ほか…</p></div></div></div>`,
       },
       order: {
         dev: 'pc', url: `https://${SHOP}/checkouts/thank-you`, title: 'ご注文完了｜KUTSU-YASU MARKET', fav: kyFav,
-        html: `<div class="ky"><div class="ky-nav"><span></span><div class="ky-mark">KUTSU-YASU<small>MARKET</small></div><span></span></div>
+        html: vm => `<div class="ky"><div class="ky-nav"><span></span><div class="ky-mark">KUTSU-YASU<small>MARKET</small></div><span></span></div>
           <div class="ky-done"><div class="ky-done-l">
             <div class="ky-ok"><i>${I.check}</i><div><small>ご注文番号 #KY-20261118-0413</small><b>ご注文ありがとうございます</b></div></div>
             <div class="ky-box"><h3>お支払いについて</h3>下記の口座へ <b class="clue" data-n="2" data-tip="また急がせていないかな？">24時間以内</b> にお振込みください。お振込みの確認ができない場合、ご注文はキャンセルとなります。
@@ -130,19 +132,19 @@
                 <div><dt>口座名義</dt><dd><span class="clue" data-n="1" data-tip="振込先は、お店（会社）の名前かな？">ヤマダ タロウ</span></dd></div><div><dt>お振込金額</dt><dd>4,290円</dd></div></dl></div>
             <div class="ky-box"><h3>発送について</h3>お振込みの確認後、3〜5営業日以内に発送します。</div>
             <button type="button" class="ky-btn fill" style="width:auto;display:inline-block;padding:12px 26px" data-act="go-bank">スマホの銀行アプリで振り込む</button></div>
-            <div class="ky-done-r"><div class="ky-line"><span class="th"><img src="img/sneaker-red.jpg" alt=""><span class="qty">1</span></span><span class="nm">定番キャンバススニーカー ローカット<br><small style="color:#666">レッド / 25.0</small></span><span>4,290円</span></div>
+            <div class="ky-done-r"><div class="ky-line"><span class="th"><img src="img/sneaker-${colorOf(vm)}.jpg" alt=""><span class="qty">1</span></span><span class="nm">定番キャンバススニーカー ローカット<br><small style="color:#666">${colors[colorOf(vm)][0]} / ${sizeOf(vm)}</small></span><span>4,290円</span></div>
               <div class="ky-sum"><div><span>小計</span><span>4,290円</span></div><div><span>配送料</span><span>無料</span></div><div class="tot"><span>合計</span><b>4,290円</b></div></div></div></div></div>`,
       },
       'bank-home': {
         dev: 'phone',
-        html: `<div class="hb"><div class="hb-head"><span class="nm">${L.hitsuji(26)}ヒツジネット銀行</span>${I.menu}</div>
+        html: `<div class="hb"><div class="hb-head"><span class="nm">${L.hitsuji(26)}ヒツジネット銀行</span>${S.web.accountBtn('bank')}</div>
           <div class="hb-body"><div class="hb-kick">普通預金</div>
             <div class="hb-card"><div class="row bal"><small>残高</small><b>128,450円</b></div><div class="row"><small>口座</small>本店　普通　76XXXXX</div></div>
-            <div class="hb-menu"><button type="button" data-act="bank-transfer-menu">振込 ${I.chevron}</button><button type="button" data-act="bank-other">入出金明細 ${I.chevron}</button><button type="button" data-act="bank-other">定期預金 ${I.chevron}</button><button type="button" data-act="bank-other">設定 ${I.chevron}</button></div></div></div>`,
+            <div class="hb-menu"><button type="button" data-act="bank-transfer-menu">振込 ${I.chevron}</button><button type="button" data-web="web/account/bank/">入出金明細 ${I.chevron}</button><button type="button" data-doc="deposit">定期預金 ${I.chevron}</button><button type="button" data-web="web/account/bank/">会員情報 ${I.chevron}</button></div></div></div>`,
       },
       'bank-transfer': {
         dev: 'phone',
-        html: `<div class="hb"><div class="hb-head"><span class="nm">${L.hitsuji(26)}ヒツジネット銀行</span>${I.menu}</div>
+        html: `<div class="hb"><div class="hb-head"><span class="nm">${L.hitsuji(26)}ヒツジネット銀行</span>${S.web.accountBtn('bank')}</div>
           <div class="hb-body"><div class="hb-kick">振込</div><div class="hb-title">振込内容の確認</div>
             <div class="hb-card"><div class="row"><small>振込先</small><b>コトリ銀行　さくら支店</b><br>普通　1234XXX</div>
               <div class="row"><small>受取人名</small><b class="clue" data-n="1" data-tip="受取人は、お店（会社）の名前かな？">ヤマダ タロウ</b></div>
@@ -164,11 +166,17 @@
       'search-review': { kind: 'check', label: '店の名前で評判を検索した', run: (vm) => vm.go('pc', 'search2') },
       'open-law': { kind: 'check', label: '特定商取引法に基づく表記を確かめた', run: (vm) => vm.go('pc', 'law') },
       contact: { run: (vm) => vm.info('pc', 'お問い合わせ', 'お問い合わせは、メールのフォームだけです。電話番号はのっていません。') },
-      order: { kind: 'decide', label: 'カートに入れて注文した', run: (vm) => vm.go('pc', 'order') },
+      favorite: { run: vm => { vm.flags.favorite=!vm.flags.favorite;vm.renderPC();vm.toast(vm.flags.favorite?'お気に入りに追加しました':'お気に入りから外しました'); } },
+      'add-cart': { run: vm => { vm.flags.inCart=true;vm.flags.cartColor=colorOf(vm);vm.flags.cartSize=sizeOf(vm);vm.renderPC();vm.act('show-cart','pc'); } },
+      'show-cart': { run: vm => vm.info('pc','カート',vm.flags.inCart
+        ? `キャンバススニーカー　${colors[vm.flags.cartColor][0]} / ${vm.flags.cartSize}　4,290円<button class="vw-cart-order" data-act="cart-order">注文に進む</button><button class="vw-cart-order" data-act="remove-cart">カートから削除</button>`
+        : 'カートに商品はありません。') },
+      'remove-cart': { run: vm => {vm.flags.inCart=false;vm.renderPC();vm.act('show-cart','pc');} },
+      'cart-order': { run: vm => {vm.flags.shoeColor=vm.flags.cartColor;vm.flags.shoeSize=vm.flags.cartSize;vm.act('order','pc');} },
+      order: { kind: 'decide', label: 'スニーカーを注文した', run: vm => {vm.flags.inCart=false;vm.go('pc','order');} },
       'go-bank': { kind: 'decide', label: '銀行振込に進んだ', run: (vm) => { vm.flags.ordered = true; vm.go('phone', 'bank-transfer'); vm.switchTo('phone'); } },
       'open-bank': { run: (vm) => vm.go('phone', 'bank-home') },
       'bank-transfer-menu': { run: (vm) => (vm.flags.ordered ? vm.go('phone', 'bank-transfer') : vm.info('phone', '振込', 'まだ振り込む相手が決まっていません。')) },
-      'bank-other': { run: (vm) => vm.info('phone', 'ヒツジネット銀行', 'この練習では使いません。') },
       transfer: { kind: 'decide', label: '個人の名前の口座に振り込んだ', run: (vm) => vm.end('ng') },
       'cancel-transfer': { kind: 'decide', label: '振込先がおかしいと気づいて、やめた', run: (vm) => vm.end('ok') },
       'close-shop': { kind: 'decide', label: 'おかしいと思って、お店のページを閉じた', run: (vm) => vm.end('ok') },

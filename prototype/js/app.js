@@ -13,6 +13,10 @@
   'use strict';
   const S = window.SagiSim; const esc = S.esc;
   const page = document.getElementById('page');
+  document.querySelector('.skip').addEventListener('click', (event) => {
+    event.preventDefault();
+    document.getElementById('main').focus();
+  });
   const vmRoot = document.getElementById('vm-root');
   let vm = null;
 
@@ -46,44 +50,48 @@
   const scenarioList = () => S.order.map((id) => S.scenarios[id]);
   const resultOf = (id) => store.get('result:' + id, null) || memory.result[id] || null;
 
-  /* ===== ホーム ===== */
-  function renderHome() {
-    document.title = '詐欺シミュ（プロトタイプ）';
-    page.innerHTML = `<div class="wrap">
-      <section class="hero-box">
-        <div><h1>実際にあるネット犯罪を<br>体験して防ごう</h1>
-          <p>詐欺シミュは、だまされた「その後」まで体験できるWebアプリです。ブラウザの中の<b>仮想スマホ</b>と<b>仮想パソコン</b>を使い分けて、本物そっくりの詐欺を見抜く練習をします。</p>
-          <div class="btn-row" style="margin-top:16px"><a class="btn btn-main btn-lg" href="#/mode">体験をはじめる</a><a class="btn btn-sub" href="#/help">相談先を見る</a></div></div>
-        <div class="hero-art" aria-hidden="true"><div class="pcmini"></div><div class="phmini"></div></div>
-      </section>
-      <div class="steps3">
-        <div class="st"><b>1</b><h2 class="h5 fw-bold">詐欺の場面を選んで体験</h2><p class="mb-0">フィッシング・偽通販・サポート詐欺の3つから選びます。</p></div>
-        <div class="st"><b>2</b><h2 class="h5 fw-bold">だまされたら「その後」へ</h2><p class="mb-0">カードの不正利用や、届かない商品など、被害のその後まで体験します。</p></div>
-        <div class="st"><b>3</b><h2 class="h5 fw-bold">解説で見抜き方を学ぶ</h2><p class="mb-0">どこを見ればよかったか、だまされたときの連絡先を確かめます。</p></div>
-      </div>
-      <div class="notice"><b>これは練習用です。</b>出てくる会社・サイト・アプリはすべて架空です。入力欄には練習用の値が入っていて、入力した内容は保存も送信もしません。ログインしなくても、すべて体験できます。</div>
-    </div>`;
+  const scenes = {
+    phishing: { photo: 'parcel.jpg', title: '宅配の不在通知が届いたら', summary: 'SMSに届いた再配達の案内。どこから荷物を確かめますか。' },
+    'fake-shop': { photo: 'sneaker-red.jpg', title: '欲しかった靴が安くなっていたら', summary: '検索で見つけたスニーカー。注文する前に、店の情報を確認します。' },
+    'support-scam': { photo: 'teriyaki.jpg', title: 'レシピを見ていて警告が出たら', summary: '料理の記事を読んでいると、突然パソコンに警告が表示されます。' },
+  };
+
+  function scenarioCards(showLearning = false) {
+    return `<div class="list1">${scenarioList().map(sc => {
+      const scene = scenes[sc.id], result = resultOf(sc.id);
+      const ending = result && sc.endings[result.ending];
+      const status = ending ? { ok: '見抜けた', ng: '被害を体験', quit: '途中で終了' }[ending.type] : '';
+      return `<article class="list">
+        <img class="scene-photo" src="img/${scene.photo}" alt="">
+        <div class="list-body"><div class="scene-meta"><span>${esc(sc.title)}</span><span>${esc(sc.minutes)}</span></div>
+        <h3><a href="#/start/${sc.id}">${esc(scene.title)}</a></h3>
+        <p>${esc(showLearning ? sc.learn : scene.summary)}</p>${status ? `<small class="progress-note">前回の結果　${esc(status)}</small>` : ''}</div>
+      </article>`;
+    }).join('')}</div>`;
   }
 
-  /* ===== モード選択 ===== */
+  function renderHome() {
+    document.title = '詐欺シミュ｜ネット犯罪体験教材';
+    page.innerHTML = `<section class="mainimg">
+      <div class="text"><h1>ネット詐欺を、<br>体験して学ぶ。</h1>
+      <p>宅配のSMS、ネット通販、突然の警告。<br>身近な場面を仮想のスマホとパソコンで体験し、<wbr>自分の判断を振り返ってみましょう。</p>
+      <div class="btn-container"><a class="btn btn-main" href="#/mode">体験をはじめる <span aria-hidden="true">→</span></a></div></div>
+      <div class="image"><img src="img/desk.jpg" width="1200" height="800" alt="机の上でパソコンとスマートフォンを使う人"></div>
+      </section><div class="wrap home-sections">
+      <section><h2 class="section-title">どの場面を体験しますか？</h2>${scenarioCards()}</section>
+      <aside class="notice"><b>体験の前に</b>検索欄に好きな言葉を入力できます。サイトへのログインは体験用会員を選ぶだけです。だまされた場合は、その後に何が起きるかも体験できます。最後に、自分が選んだ行動と見抜くポイントを確認しましょう。</aside></div>`;
+  }
+
   function renderMode() {
-    document.title = '体験する詐欺を選ぶ｜詐欺シミュ';
-    page.innerHTML = `<div class="wrap"><h1 class="page-h">体験する詐欺を選ぶ</h1><p class="page-lead">どれから体験してもかまいません。1つ3〜5分です。</p>
-      <div class="modes">${scenarioList().map((sc) => {
-        const r = resultOf(sc.id); const e = r && sc.endings[r.ending];
-        const badge = e ? `<span class="done-badge ${e.type === 'ng' ? 'ng' : ''}">体験済み：${e.type === 'ok' ? '見抜けた' : e.type === 'ng' ? 'だまされた' : 'やめた'}</span>` : '';
-        return `<article class="mode-card"><div class="top" style="background:${sc.color}"></div><div class="bd">
-          <h2>${esc(sc.no)} ${esc(sc.title)}${badge}</h2>
-          <div class="meta"><b>入口：</b>${esc(sc.entry)}<br><b>学べること：</b>${esc(sc.learn)}<br><b>時間：</b>${esc(sc.minutes)}</div>
-          <a class="btn btn-main go" href="#/start/${sc.id}">この詐欺を体験する</a></div></article>`;
-      }).join('')}</div></div>`;
+    document.title = '体験を選ぶ｜詐欺シミュ';
+    page.innerHTML = `<div class="wrap"><h1 class="page-h">体験を選ぶ</h1><p class="page-lead">1つの体験は3〜5分です。各場面で確かめられることを紹介します。</p>${scenarioCards(true)}</div>`;
   }
 
   /* ===== 詐欺シミュ開始画面 ===== */
   function renderStart(sc) {
     document.title = `${sc.no} ${sc.title}をはじめる｜詐欺シミュ`;
     const sound = pref.get('sound', 'off');
-    page.innerHTML = `<div class="wrap"><h1 class="page-h">${esc(sc.no)} ${esc(sc.title)}</h1><p class="page-lead">${esc(sc.entry)}</p>
+    page.innerHTML = `<div class="wrap"><div class="start-intro"><div><p class="scene-kind">${esc(sc.title)}　／　${esc(sc.minutes)}</p><h1 class="page-h">${esc(scenes[sc.id].title)}</h1><p class="page-lead">${esc(sc.entry)}</p></div><img src="img/${scenes[sc.id].photo}" alt=""></div>
       <section class="panel"><h2 class="h5 fw-bold">これから起きること</h2><p class="situation mb-1">${esc(sc.situation)}</p><span class="mission">ミッション：${esc(sc.mission)}</span></section>
       <section class="panel"><h2 class="h5 fw-bold">使うもの</h2><p class="mb-2">${esc(sc.devices)}</p>
         <ul class="list-dot"><li>パソコンやタブレットでは、仮想パソコンと仮想スマホが並んで出ます。スマホでは、下のボタンで切り替えます。</li>
@@ -179,6 +187,17 @@
     else if (name === 'explain' && sc) renderExplain(sc);
     else if (name === 'help') renderHelp();
     else renderHome();
+    if (name && name !== 'play') {
+      const wrap = page.querySelector('.wrap');
+      if (wrap) {
+        const crumb = document.createElement('nav');
+        crumb.className = 'trail';
+        crumb.setAttribute('aria-label', 'パンくずリスト');
+        const labels = { mode: '体験を選ぶ', start: '体験の準備', result: '結果', explain: '解説', help: '相談先' };
+        crumb.innerHTML = `<a href="#/">ホーム</a>${sc ? '<a href="#/mode">体験を選ぶ</a>' : ''}<span aria-current="page">${esc(labels[name] || 'ホーム')}</span>`;
+        wrap.prepend(crumb);
+      }
+    }
     if (name !== 'play') { window.scrollTo(0, 0); document.getElementById('main').focus({ preventScroll: true }); }
   }
   window.addEventListener('hashchange', route);

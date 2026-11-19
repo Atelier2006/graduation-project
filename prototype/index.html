@@ -6,27 +6,40 @@
 <title>詐欺シミュ（プロトタイプ）</title>
 <meta name="description" content="実際にあるネット犯罪を体験して防ごう。仮想スマホと仮想パソコンで詐欺を体験するWebアプリのプロトタイプ（チームF）">
 <link rel="stylesheet" href="vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/template-party.css">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/devices.css">
 <link rel="stylesheet" href="css/vm.css">
+<link rel="stylesheet" href="css/web.css">
 </head>
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
+<div id="container">
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="#/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2 L30 7 V16 C30 24 24 30 17 32 C10 30 4 24 4 16 V7 Z" fill="#1f3a5f"/><path d="M11 17 l4 4 l8 -9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>詐欺シミュ<small>プロトタイプ</small></a>
-    <div class="textsize" role="group" aria-label="文字の大きさ">文字の大きさ
-      <button type="button" data-textsize="md" aria-pressed="true">標準</button><button type="button" data-textsize="lg" aria-pressed="false">大</button></div>
+    <a class="brand" href="#/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2 L30 7 V16 C30 24 24 30 17 32 C10 30 4 24 4 16 V7 Z" fill="currentColor"/><path d="M11 17 l4 4 l8 -9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>詐欺シミュ<small>ネット犯罪体験教材</small></a>
+    <div class="header-box" id="f-size">
+      <p id="f-size-label">文字サイズ</p>
+      <div class="f-size-btns" role="group" aria-labelledby="f-size-label">
+        <button type="button" data-textsize="md" aria-pressed="true">標準</button>
+        <button type="button" data-textsize="lg" aria-pressed="false">大</button>
+      </div>
+    </div>
   </div>
 </header>
-<nav class="site-nav" aria-label="メインメニュー">
-  <ul><li><a href="#/" data-nav="home">ホーム</a></li><li><a href="#/mode" data-nav="mode">体験する</a></li><li><a href="#/help" data-nav="help">相談先</a></li></ul>
+<nav id="menubar" class="site-nav" aria-label="メインメニュー">
+  <ul><li><a href="#/" data-nav="home">ホーム</a></li><li><a href="#/mode" data-nav="mode">体験を選ぶ</a></li><li><a href="#/help" data-nav="help">相談先</a></li></ul>
 </nav>
 <main id="main" tabindex="-1"><div id="page"></div></main>
-<footer class="site-footer">詐欺シミュ（プロトタイプ）｜チームF｜出てくる会社・サイト・アプリ・電話番号はすべて架空です（相談先の窓口を除く）</footer>
+<footer class="site-footer"><div class="footer-inner">
+  <div class="info"><strong>詐欺シミュ</strong><small>チームF　卒業制作プロトタイプ</small></div>
+  <p>体験に登場する会社・サイト・電話番号はすべて架空です。相談先には実際の窓口を掲載しています。</p>
+  <span class="pr"><a href="https://template-party.com/" target="_blank" rel="noopener nofollow">《Web Design:Template-Party》</a></span>
+</div></footer></div>
 <div id="vm-root"></div>
 <script src="js/engine.js"></script>
 <script src="js/scenarios/common.js"></script>
+<script src="js/web.js"></script>
 <script src="js/scenarios/phishing.js"></script>
 <script src="js/scenarios/fake-shop.js"></script>
 <script src="js/scenarios/support-scam.js"></script>

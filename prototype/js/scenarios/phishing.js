@@ -7,7 +7,7 @@
   const SMS = '【ハシレ運輸】お客様宛にお荷物のお届けにあがりましたが不在の為持ち帰りました。';
 
   /* 偽のサイトは、本物のハシレ運輸のスマホ用サイトをそっくりまねている */
-  const fakeHead = `<div class="hs-m-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 24)}ハシレ運輸</span>${I.menu}</div>`;
+  const fakeHead = `<div class="hs-m-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 24)}ハシレ運輸</span><button type="button" data-act="training-menu" aria-label="メニュー">${I.menu}</button></div>`;
 
   S.register({
     id: 'phishing', no: '①', title: 'フィッシング', color: '#0a7d4f',
@@ -53,7 +53,7 @@
               <label class="hs-f">お客様ID（メールアドレス・電話番号）<input readonly value="hashire@example.jp" aria-label="お客様ID（練習用の値）"></label>
               <label class="hs-f">パスワード<input readonly type="password" value="renshu1234" aria-label="パスワード（練習用の値）"></label>
               <button type="button" class="hs-btn" data-act="login">ログインして再配達を申し込む</button>
-              <p class="hs-sub">パスワードをお忘れの方</p>
+              <button type="button" class="hs-sub" data-act="account-help">パスワードをお忘れの方</button>
               <p class="hs-sub" style="font-size:11px">入力欄には練習用の値が入っています</p></div>
             <div class="hs-m-foot"><span class="clue" data-n="2" data-tip="ページのいちばん下の会社名を、よく読んでみよう">© 2019 ハシレ運輸株式会杜</span></div></div>`,
         }),
@@ -76,8 +76,8 @@
       },
       'hs-app': {
         dev: 'phone',
-        html: `<div class="hs hs-app"><div class="hs-app-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 28)}ハシレ運輸</span>${I.user}</div>
-          <div class="hs-tabs"><span class="on">荷物</span><span>受け取り設定</span><span>お知らせ</span></div>
+        html: `<div class="hs hs-app"><div class="hs-app-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 28)}ハシレ運輸</span>${S.web.accountBtn('ship')}</div>
+          <div class="hs-tabs"><span class="on">荷物</span><button data-web="web/account/ship/">受け取り設定</button><button data-doc="notice">お知らせ</button></div>
           <div class="hs-app-body">
             <div class="hs-sec">お届け予定のお荷物</div>
             <div class="hs-empty clue good" data-n="1"><b>現在、お届け予定のお荷物はありません</b><span>不在のお知らせもありません</span></div>
@@ -88,25 +88,20 @@
       },
       newtab: {
         dev: 'pc', url: 'https://www.sagashimo.example/', title: '新しいタブ',
-        html: `<div class="sg sg-new">${L.sagashimo(40)}<div class="sg-box">${I.search}<span class="q">サガシモで検索、または URL を入力</span></div>
-          <div class="sg-tiles">
-            <button type="button" class="sg-tile" data-act="open-hs-site"><i style="background:#0a7d4f">ハ</i>ハシレ運輸</button>
-            <button type="button" class="sg-tile" data-vm="bm" data-i="1"><i style="background:#1b6fa3">ヒ</i>ヒツジネット銀行</button>
-            <button type="button" class="sg-tile" data-vm="bm" data-i="2"><i style="background:#110000">こ</i>ことこと献立帖</button>
-            <span class="sg-tile"><i style="background:#e8e6e1;color:#72706b">${I.plus}</i>追加</span></div></div>`,
+        html: vm => S.web.searchPage(vm, ''),
       },
       'hs-site': {
         dev: 'pc', url: 'https://www.hashire-unyu.example/', title: 'ハシレ運輸｜個人のお客様', fav: L.hashire('#0a7d4f', '#fff', 16),
         urlNote: '<br>ハシレ運輸の公式のアドレスです。',
         html: `<div class="hs"><div class="hs-nav"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 30)}ハシレ運輸</span>
-            <nav><span>個人のお客様</span><span>法人のお客様</span><span>サービス</span><span>よくある質問</span></nav><span class="hs-pill">ログイン</span></div>
+            <nav><button data-web="web/tracking/ship/">個人のお客様</button><button data-doc="business">法人のお客様</button><button data-web="web/results/ship/">サービス</button><button data-doc="faq">よくある質問</button></nav><button class="hs-pill" data-web="web/account/ship/">会員ページ・ログイン</button></div>
           <div class="hs-hero"><div><h2>荷物を調べる</h2><p>お問い合わせ番号で、お荷物の状況を確かめられます。<br>受け取りの日時や場所の変更もできます。</p></div>
-            <div class="hs-track"><label>お問い合わせ番号（12桁）</label><div class="row"><span class="hs-in">0000-0000-0000</span><span class="hs-pill">調べる</span></div></div></div>
-          <div class="hs-two"><div class="hs-cap">お知らせ</div><ul class="hs-news">
-            <li class="clue good" data-n="1"><span class="d">2026.11.15</span><span><span class="hs-imp">重要</span>当社をかたる「なりすましSMS・メール」にご注意ください。当社はSMSで不在のお知らせを送っていません。</span></li>
-            <li><span class="d">2026.11.01</span><span>年末年始の営業とお届けについて</span></li>
-            <li><span class="d">2026.10.20</span><span>受け取り場所の指定サービスを始めました</span></li></ul></div>
-          <div class="hs-foot"><span>© 2026 ハシレ運輸株式会社</span><span>サイトのご利用について</span><span>個人情報の取り扱い</span></div></div>`,
+            <div class="hs-track"><form data-tracking><label for="ship-number">お問い合わせ番号（練習用 1234-5678-9012）</label><div class="row"><input id="ship-number" name="number" class="hs-in" placeholder="0000-0000-0000" inputmode="numeric" maxlength="14" required><button class="hs-pill">調べる</button></div></form><p role="status"></p></div></div>
+          <div class="hs-two"><div class="hs-cap">お知らせ</div><dl class="news">
+            <dt>2026.11.15</dt><dd class="clue good" data-n="1"><span class="hs-imp">重要</span>当社をかたる「なりすましSMS・メール」にご注意ください。当社はSMSで不在のお知らせを送っていません。</dd>
+            <dt>2026.11.01</dt><dd>年末年始の営業とお届けについて</dd>
+            <dt>2026.10.20</dt><dd>受け取り場所の指定サービスを始めました</dd></dl></div>
+          <div class="hs-foot"><span>© 2026 ハシレ運輸株式会社</span><button data-doc="faq">よくある質問</button><button data-doc="notice">SMSについて</button></div><div class="sim-site-credit">${S.templateCredit}</div></div>`,
       },
     }, S.tomoScreens({
       ask: '宅配の不在のSMSが来たんだけど、リンクを押しても大丈夫？',
@@ -114,6 +109,8 @@
     })),
 
     actions: {
+      'training-menu': { run: vm => vm.info('phone','ページの確認','<button data-vm="url">アドレスを確かめる</button> ／ <button data-web="web/home/search/">検索を開く</button>') },
+      'account-help': { run: vm => vm.info('phone','体験用のログイン情報','この画面には練習用の値が入っています。会員情報は公式アプリのマイページで確認できます。') },
       'tap-link': { kind: 'decide', label: 'SMSのリンクを押した', run: (vm) => vm.go('phone', 'fake-login') },
       report: { kind: 'decide', label: '迷惑メッセージとして報告した', run: (vm) => vm.end('ok') },
       delete: { kind: 'decide', label: 'SMSを削除した', run: (vm) => vm.end('ok') },

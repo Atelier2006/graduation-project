@@ -12,15 +12,16 @@
   const keys = [['1', ''], ['2', 'ABC'], ['3', 'DEF'], ['4', 'GHI'], ['5', 'JKL'], ['6', 'MNO'], ['7', 'PQRS'], ['8', 'TUV'], ['9', 'WXYZ'], ['*', ''], ['0', '+'], ['#', '']];
   const rmNav = `<div class="rm-nav"><span class="mk"><i></i>リモッテ</span><nav><span>機能</span><span>料金</span><span>サポート</span><span>ダウンロード</span></nav><span class="sp"><span class="rm-p">ログイン</span><span class="rm-p blk">無料で始める</span></span></div>`;
 
-  const recipe = `<div class="kk"><div class="kk-nav"><span class="kk-mark">ことこと献立帖</span><nav><span class="on">今日の献立</span><span>主菜</span><span>副菜</span><span>お弁当</span><span>作りおき</span></nav><span class="srch">${I.search}レシピを探す</span></div>
-    <div class="kk-main"><div><span class="kk-tag">主菜 ／ 鶏肉</span><h2>甘辛だれが決め手。<br>フライパンで鶏の照り焼き</h2>
-      <div class="kk-meta"><span>調理時間 20分</span><span>2人分</span><span>冷蔵で2日</span></div>
-      <img class="kk-photo" src="img/teriyaki.jpg" alt="照り焼きチキン">
-      <div class="kk-cols"><div><h3>材料</h3><ul class="kk-ing"><li><span>鶏もも肉</span><span>1枚（300g）</span></li><li><span>しょうゆ</span><span>大さじ2</span></li><li><span>みりん</span><span>大さじ2</span></li><li><span>砂糖</span><span>大さじ1</span></li><li><span>サラダ油</span><span>小さじ1</span></li></ul></div>
-        <div><h3>作り方</h3><ol class="kk-steps"><li><b>1</b>鶏肉は皮目を下にしてフライパンに入れ、中火で5分ほど焼く。</li><li><b>2</b>裏返してふたをし、弱火で5分蒸し焼きにする。</li><li><b>3</b>たれを加え、からめながら照りが出るまで煮詰める。</li></ol></div></div></div>
+  const recipe = `<div class="kk"><div class="kk-nav"><span class="kk-mark">ことこと献立帖</span><nav><button data-doc="teriyaki">今日の献立</button><button data-web="web/results/cook/主菜">主菜</button><button data-web="web/results/cook/副菜">副菜</button><button data-web="web/results/cook/お弁当">お弁当</button><button data-web="web/results/cook/作りおき">作りおき</button></nav>${S.web.goBtn('レシピを探す','results','cook','','srch')}${S.web.accountBtn('cook')}</div>
+    <div class="kk-main"><article><span class="kk-tag">主菜　／　鶏肉のレシピ</span>
+      <h2>フライパンで作る、鶏の照り焼き</h2>
+      <div class="kk-meta"><span>調理時間 20分</span><span>2人分</span></div>
+      <div class="kk-detail"><div class="recipe-img"><figure><img class="kk-photo" src="img/teriyaki.jpg" alt="鶏の照り焼きの盛り付け"></figure>
+        <h3>材料（2人分）</h3><ul class="kk-ing"><li><span>鶏もも肉</span><span>1枚（300g）</span></li><li><span>しょうゆ</span><span>大さじ2</span></li><li><span>みりん</span><span>大さじ2</span></li><li><span>砂糖</span><span>大さじ1</span></li><li><span>サラダ油</span><span>小さじ1</span></li></ul></div>
+      <div class="recipe"><h3>作り方</h3><ol><li>鶏肉は皮目を下にしてフライパンに入れ、中火で5分ほど焼く。</li><li>裏返してふたをし、弱火で5分蒸し焼きにする。</li><li>たれを加え、からめながら照りが出るまで煮詰める。</li></ol></div></div></article>
       <aside class="kk-side"><button type="button" class="kk-ad clue" data-n="1" data-act="tap-ad" data-tip="広告を押すと、別のサイトに移ることがあるよ"><span class="adbar"><span>広告</span><i>i</i><i>×</i></span>
         <span class="ad-in"><b>今だけ！動画が見放題 30日間無料</b><p>人気のドラマ・アニメが見放題。登録はかんたん1分。</p><span class="go">いますぐ見る</span></span></button>
-        <div class="card"><h4>よく見られているレシピ</h4><ul class="pop"><li>豚の生姜焼き</li><li>小松菜と油揚げの煮びたし</li><li>だし巻き卵</li><li>具だくさん豚汁</li></ul></div></aside></div></div>`;
+        <div class="card"><h4>よく見られているレシピ</h4><ul class="pop"><li><button data-doc="ginger">豚の生姜焼き</button></li><li><button data-doc="greens">小松菜と油揚げの煮びたし</button></li><li><button data-doc="egg">だし巻き卵</button></li><li><button data-doc="soup">具だくさん豚汁</button></li></ul></div></aside></div><div class="sim-site-credit">${S.templateCredit}</div></div>`;
 
   S.register({
     id: 'support-scam', no: '③', title: 'サポート詐欺', color: '#0a4fa3',
@@ -38,7 +39,7 @@
       bookmarks: [{ label: 'サガシモ', color: '#27251e', ch: 'サ' }, { label: 'ことこと献立帖', go: 'recipe', color: '#110000', ch: 'こ' }, { label: 'ヒツジネット銀行', color: '#1b6fa3', ch: 'ヒ' }],
     },
     /* しばらく見ていると、広告を押さなくても警告に変わる */
-    events: [{ at: 9000, run: (vm) => { if (!vm.flags.warned) vm.act('auto-warning', 'pc'); } }],
+    events: [{ at: 9000, run: (vm) => { if (!vm.flags.warned && vm.top('pc') === 'recipe' && !vm.state.pc.closed) vm.act('auto-warning', 'pc'); } }],
     onExitFullscreen: (vm) => { vm.log('check', 'Escキーを長押しして、全画面を終わらせた', 'pc'); vm.toast('全画面が終わりました。タブの × で、この画面を閉じられます。'); },
     onCloseTab: (vm, id) => {
       if (id === 'warning') { vm.act('close-warning', 'pc'); return false; }
@@ -89,20 +90,16 @@
       },
       'm-search-home': {
         dev: 'phone', url: 'https://www.sagashimo.example/',
-        html: (vm) => S.mBrowser({
-          host: 'www.sagashimo.example',
-          body: `<div class="sg sg-m" style="text-align:center;padding-top:40px">${L.sagashimo(30)}<div class="sg-box" style="margin-top:16px;text-align:left;color:#72706b">${I.search}<span class="q">検索、または URL を入力</span></div>
-            <div class="sg-chips" style="flex-direction:column;align-items:stretch">${vm.flags.warned ? `<button type="button" data-act="search-warning">${I.search} ウイルスを検出しました 電話番号 050</button>` : ''}<button type="button" data-act="search-other">${I.search} 今日の天気</button></div></div>`,
-        }),
+        html: vm => S.mBrowser({host:'www.sagashimo.example',body:S.web.searchPage(vm,'')+(vm.flags.warned?'<div class="vw-previous"><button data-act="search-warning">警告に出た文を検索</button></div>':'')}),
       },
       'm-search': {
         dev: 'phone', url: 'https://www.sagashimo.example/search?q=ウイルスを検出しました+電話番号+050',
         html: S.mBrowser({
           host: 'www.sagashimo.example',
-          body: `<div class="sg sg-m"><div class="sg-box">${I.search}<span class="q">ウイルスを検出しました 電話番号 050</span></div>
-            <div class="sg-r clue good" data-n="1"><div class="sg-site"><span class="fv">警</span><span><b>そよかぜ警察署</b><small>police.soyokaze.example › bohan</small></span></div><h3><button type="button">偽のセキュリティ警告に注意（サポート詐欺）</button></h3><p>画面に出た番号に電話しないでください。Escキーを長押しして全画面を終わらせ、ブラウザを閉じましょう…</p></div>
-            <div class="sg-r clue good" data-n="2"><div class="sg-site"><span class="fv">ミ</span><span><b>ミハリ番セキュリティ</b><small>mihariban-sec.example › faq</small></span></div><h3><button type="button">当社の名前をかたる警告画面について</button></h3><p>当社が、ブラウザの警告画面で電話番号を表示し、お電話をお願いすることはありません…</p></div>
-            <div class="sg-r"><div class="sg-site"><span class="fv">Q</span><span><b>しつもん広場</b><small>qa-hiroba.example › question</small></span></div><h3><button type="button">パソコンに「ウイルス感染」と出て音が鳴りやみません</button></h3><p>ベストアンサー：それはサポート詐欺です。電話してはいけません…</p></div></div>`,
+          body: `<div class="sg sg-m">${S.web.form('ウイルスを検出しました 電話番号 050')}
+            <div class="sg-r clue good" data-n="1"><div class="sg-site"><span class="fv">警</span><span><b>そよかぜ警察署</b><small>police.soyokaze.example › bohan</small></span></div><h3><button type="button" data-doc="alert">偽のセキュリティ警告に注意（サポート詐欺）</button></h3><p>画面に出た番号に電話しないでください。Escキーを長押しして全画面を終わらせ、ブラウザを閉じましょう…</p></div>
+            <div class="sg-r clue good" data-n="2"><div class="sg-site"><span class="fv">ミ</span><span><b>ミハリ番セキュリティ</b><small>mihariban-sec.example › faq</small></span></div><h3><button type="button" data-doc="maker">当社の名前をかたる警告画面について</button></h3><p>当社が、ブラウザの警告画面で電話番号を表示し、お電話をお願いすることはありません…</p></div>
+            <div class="sg-r"><div class="sg-site"><span class="fv">Q</span><span><b>しつもん広場</b><small>qa-hiroba.example › question</small></span></div><h3><button type="button" data-doc="sound">パソコンに「ウイルス感染」と出て音が鳴りやみません</button></h3><p>ベストアンサー：それはサポート詐欺です。電話してはいけません…</p></div></div>`,
         }),
       },
       call1: {
@@ -148,7 +145,6 @@
         vm.log('decide', '警告画面の番号に電話した', 'phone'); vm.alarm(false); vm.go('phone', 'call1');
       } },
       'search-warning': { kind: 'check', label: 'スマホで、警告の文を検索した', run: (vm) => vm.go('phone', 'm-search') },
-      'search-other': { run: (vm) => vm.info('phone', '検索', 'この練習では使いません。') },
       obey: { kind: 'decide', label: '言われたとおり、遠隔操作のアプリを入れようとした', run: (vm) => { vm.go('pc', 'remote'); vm.switchTo('pc'); } },
       'say-family': { kind: 'decide', label: '「家族に相談する」と言った', run: (vm) => vm.go('phone', 'call1b', { replace: true }) },
       hangup: { kind: 'decide', label: '電話を切った', run: (vm) => vm.end('ok') },

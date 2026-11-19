@@ -97,3 +97,13 @@ body.playing { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .phone.buzz, .clue.hint, .seq.show, .vm-sheet-card, .p-banner, .remote-on .cursor { animation: none; }
 }
+
+.vm { background: #e8edea; }
+.vm-band { border-bottom: 1px solid #b9c8c0; }
+.vm-tag { color: white; background: #215149; border-radius: 4px; }
+.vm-btn { border-width: 1px; border-radius: 5px; min-height: 34px; }
+.vm-label, .vm-pc .vm-label { color: #43574d; }
+.vm-zoom { border: 1px solid #7c9086; color: #244a3e; border-radius: 5px; }
+.vm-dock { border-top: 1px solid #aabbb1; }
+.vm-dock button.on { background: #e1ebe6; color: #154b47; box-shadow: inset 0 3px #215149; }
+.vm-sheet-card { border-radius: 10px; border-top-width: 4px; }
