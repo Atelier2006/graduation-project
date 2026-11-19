@@ -9,6 +9,8 @@
   S.scenarios = S.scenarios || {};
   S.order = S.order || [];
   S.register = (sc) => { S.scenarios[sc.id] = sc; S.order.push(sc.id); };
+  /* 写真の置き場所。Django のページでは、読み込む前に window.SagiSim.IMG に static のアドレスを入れる */
+  S.IMG = S.IMG || 'img/';
 
   const PHONE = { w: 360, h: 740 };
   const PC = { w: 1000, h: 684 };

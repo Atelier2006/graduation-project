@@ -78,7 +78,7 @@
     const offer = vm.sc.id === 'fake-shop' && dev === 'pc' && site === 'search' && tab === 'all'
       && terms.length > 0 && terms.every(term => storeWords.includes(term));
     const exerciseResult = offer ? '<article class="vw-hit"><small>KUTSU-YASU MARKET　·　kutsuyasu-market.example</small><h3><button data-act="open-shop">KUTSU-YASU MARKET｜スニーカー</button></h3><p>スニーカーの商品ページ。</p></article>' : '';
-    const results = exerciseResult + hits.map(d => `<article class="vw-hit">${tab==='images' ? `<img src="img/${d.photo}" alt="">` : ''}<small>${esc(sites[d.site][0])}　·　${esc(sites[d.site][1])}</small><h3>${docBtn(d.id)}</h3><p>${esc(d.body)}</p></article>`).join('');
+    const results = exerciseResult + hits.map(d => `<article class="vw-hit">${tab==='images' ? `<img src="${S.IMG}${d.photo}" alt="">` : ''}<small>${esc(sites[d.site][0])}　·　${esc(sites[d.site][1])}</small><h3>${docBtn(d.id)}</h3><p>${esc(d.body)}</p></article>`).join('');
     return `<div class="vw-results"><div class="vw-top">${site==='search' ? '<button type="button" data-web="web/home/search/" aria-label="検索ホーム">'+logo()+'</button>' : '<b>'+esc(sites[site][0])+'</b>'}${form(q,site)}</div>${tabs}<section class="vw-hits"><p class="vw-count" role="status">${q ? '「'+esc(q)+'」の検索結果' : '掲載ページ'}　${hits.length + Number(offer)}件</p>${results || '<p>該当するページがありません。短い言葉で検索してみてください。</p>'}</section></div>`;
   }
   function siteHeader(site) {
@@ -91,7 +91,7 @@
     if (d.id==='delivery') extra=goBtn('荷物を調べる','tracking','ship','');
     if (d.photo && d.site==='shop' && dev==='pc' && vm.sc.id==='fake-shop') extra=btn('いつもの店で購入する','data-act="buy-trusted"','vw-primary');
     if (d.photo && d.site==='cook') extra=goBtn('保存したレシピを管理','account','cook','');
-    return `<section class="vw-site vw-${d.site}">${siteHeader(d.site)}<article class="vw-article"><h2>${esc(d.title)}</h2>${d.photo ? '<img class="vw-photo" src="img/'+d.photo+'" alt="">' : ''}<p>${esc(d.body)}</p>${extra}${related.length ? '<h3>関連ページ</h3><ul>'+related.map(x=>'<li>'+docBtn(x.id)+'</li>').join('')+'</ul>' : ''}</article></section>`;
+    return `<section class="vw-site vw-${d.site}">${siteHeader(d.site)}<article class="vw-article"><h2>${esc(d.title)}</h2>${d.photo ? '<img class="vw-photo" src="'+S.IMG+d.photo+'" alt="">' : ''}<p>${esc(d.body)}</p>${extra}${related.length ? '<h3>関連ページ</h3><ul>'+related.map(x=>'<li>'+docBtn(x.id)+'</li>').join('')+'</ul>' : ''}</article></section>`;
   }
   function account(vm,dev,site) {
     const logged = vm.webAccounts[dev].has(site);

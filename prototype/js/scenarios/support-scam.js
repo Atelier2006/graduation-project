@@ -16,7 +16,7 @@
     <div class="kk-main"><article><span class="kk-tag">主菜　／　鶏肉のレシピ</span>
       <h2>フライパンで作る、鶏の照り焼き</h2>
       <div class="kk-meta"><span>調理時間 20分</span><span>2人分</span></div>
-      <div class="kk-detail"><div class="recipe-img"><figure><img class="kk-photo" src="img/teriyaki.jpg" alt="鶏の照り焼きの盛り付け"></figure>
+      <div class="kk-detail"><div class="recipe-img"><figure><img class="kk-photo" src="${S.IMG}teriyaki.jpg" alt="鶏の照り焼きの盛り付け"></figure>
         <h3>材料（2人分）</h3><ul class="kk-ing"><li><span>鶏もも肉</span><span>1枚（300g）</span></li><li><span>しょうゆ</span><span>大さじ2</span></li><li><span>みりん</span><span>大さじ2</span></li><li><span>砂糖</span><span>大さじ1</span></li><li><span>サラダ油</span><span>小さじ1</span></li></ul></div>
       <div class="recipe"><h3>作り方</h3><ol><li>鶏肉は皮目を下にしてフライパンに入れ、中火で5分ほど焼く。</li><li>裏返してふたをし、弱火で5分蒸し焼きにする。</li><li>たれを加え、からめながら照りが出るまで煮詰める。</li></ol></div></div></article>
       <aside class="kk-side"><button type="button" class="kk-ad clue" data-n="1" data-act="tap-ad" data-tip="広告を押すと、別のサイトに移ることがあるよ"><span class="adbar"><span>広告</span><i>i</i><i>×</i></span>

@@ -77,10 +77,10 @@
           <div class="pt-cats"><button data-web="web/results/shop/">すべて</button><button data-web="web/results/shop/メンズ">メンズ</button><button data-web="web/results/shop/レディース">レディース</button><button data-web="web/results/shop/キッズ">キッズ</button><button data-go="pc:pochitto">ランキング</button></div>
           <div class="store-catalog"><p class="store-path">トップ　／　シューズ　／　スニーカー</p>
           <h2>スニーカー 人気ランキング</h2>
-          <div class="list-grid1"><article class="list"><figure><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 30%"></figure><div class="text"><small>人気 1 位</small><h4><button data-doc="high">キャンバススニーカー ハイカット</button></h4><p class="price">9,900円</p><p class="rating">★4.6（1,204件）</p></div></article>
-<article class="list"><figure><img src="img/sneaker-navy.jpg" alt=""></figure><div class="text"><small>人気 2 位</small><h4><button data-doc="navy">キャンバススニーカー ネイビー</button></h4><p class="price">8,800円</p><p class="rating">★4.5（872件）</p></div></article>
-<article class="list"><figure><img src="img/sneaker-red.jpg" alt="" style="object-position:20% 50%"></figure><div class="text"><small>人気 3 位</small><h4><button data-doc="red">キャンバススニーカー レッド</button></h4><p class="price">8,800円</p><p class="rating">★4.4（530件）</p></div></article>
-<article class="list"><figure><img src="img/sneaker-shelf.jpg" alt="" style="object-position:50% 80%"></figure><div class="text"><small>人気 4 位</small><h4><button data-doc="low">ローカット スニーカー</button></h4><p class="price">7,700円</p><p class="rating">★4.5（2,318件）</p></div></article></div></div>
+          <div class="list-grid1"><article class="list"><figure><img src="${S.IMG}sneaker-shelf.jpg" alt="" style="object-position:50% 30%"></figure><div class="text"><small>人気 1 位</small><h4><button data-doc="high">キャンバススニーカー ハイカット</button></h4><p class="price">9,900円</p><p class="rating">★4.6（1,204件）</p></div></article>
+<article class="list"><figure><img src="${S.IMG}sneaker-navy.jpg" alt=""></figure><div class="text"><small>人気 2 位</small><h4><button data-doc="navy">キャンバススニーカー ネイビー</button></h4><p class="price">8,800円</p><p class="rating">★4.5（872件）</p></div></article>
+<article class="list"><figure><img src="${S.IMG}sneaker-red.jpg" alt="" style="object-position:20% 50%"></figure><div class="text"><small>人気 3 位</small><h4><button data-doc="red">キャンバススニーカー レッド</button></h4><p class="price">8,800円</p><p class="rating">★4.4（530件）</p></div></article>
+<article class="list"><figure><img src="${S.IMG}sneaker-shelf.jpg" alt="" style="object-position:50% 80%"></figure><div class="text"><small>人気 4 位</small><h4><button data-doc="low">ローカット スニーカー</button></h4><p class="price">7,700円</p><p class="rating">★4.5（2,318件）</p></div></article></div></div>
           <button type="button" class="pt-buy" data-act="buy-trusted">いつもの店で、ふつうの値段で買う</button><div class="sim-site-credit">${S.templateCredit}</div></div>`,
       },
       shop: {
@@ -88,8 +88,8 @@
         urlNote: '<br>はじめて見るお店のアドレスです。アドレスだけでは安全かどうか分からないので、会社の情報や評判も確かめましょう。',
         onEnter: (vm) => { vm.flags.shopSeen = true; },
         html: vm => `<div class="ky">${kyAnn}${kyNav(vm)}<div class="ky-crumb">ホーム / スニーカー / ${ITEM}</div>
-          <div class="ky-prod"><div class="ky-thumbs">${['red','navy','shelf'].map(key=>`<button data-shoe="photo" data-value="${key}" aria-label="${key==='shelf'?'売り場':colors[key][0]}の写真"><img src="img/sneaker-${key}.jpg" alt=""></button>`).join('')}</div>
-            <img class="ky-main" src="img/sneaker-${vm.flags.shoePhoto || colorOf(vm)}.jpg" alt="選択した商品写真">
+          <div class="ky-prod"><div class="ky-thumbs">${['red','navy','shelf'].map(key=>`<button data-shoe="photo" data-value="${key}" aria-label="${key==='shelf'?'売り場':colors[key][0]}の写真"><img src="${S.IMG}sneaker-${key}.jpg" alt=""></button>`).join('')}</div>
+            <img class="ky-main" src="${S.IMG}sneaker-${vm.flags.shoePhoto || colorOf(vm)}.jpg" alt="選択した商品写真">
             <div class="ky-info"><div class="ky-brand">KUTSU-YASU ORIGINAL</div><h2>${ITEM}</h2>
               <div class="ky-price clue" data-n="1" data-tip="ほかの店とくらべて、安すぎないかな？"><s>通常価格 14,300円</s><b>4,290円</b><span class="ky-off">70%OFF</span><span class="ky-tax">税込</span></div>
               <div class="ky-timer clue" data-n="2" data-tip="時間で急がせていないかな？">${S.svg('<circle cx="12" cy="13" r="7"/><path d="M12 9.5V13l2.5 1.5M9.5 3.5h5"/>', { s: 15 })}セール終了まで 00:14:59</div>
@@ -132,7 +132,7 @@
                 <div><dt>口座名義</dt><dd><span class="clue" data-n="1" data-tip="振込先は、お店（会社）の名前かな？">ヤマダ タロウ</span></dd></div><div><dt>お振込金額</dt><dd>4,290円</dd></div></dl></div>
             <div class="ky-box"><h3>発送について</h3>お振込みの確認後、3〜5営業日以内に発送します。</div>
             <button type="button" class="ky-btn fill" style="width:auto;display:inline-block;padding:12px 26px" data-act="go-bank">スマホの銀行アプリで振り込む</button></div>
-            <div class="ky-done-r"><div class="ky-line"><span class="th"><img src="img/sneaker-${colorOf(vm)}.jpg" alt=""><span class="qty">1</span></span><span class="nm">定番キャンバススニーカー ローカット<br><small style="color:#666">${colors[colorOf(vm)][0]} / ${sizeOf(vm)}</small></span><span>4,290円</span></div>
+            <div class="ky-done-r"><div class="ky-line"><span class="th"><img src="${S.IMG}sneaker-${colorOf(vm)}.jpg" alt=""><span class="qty">1</span></span><span class="nm">定番キャンバススニーカー ローカット<br><small style="color:#666">${colors[colorOf(vm)][0]} / ${sizeOf(vm)}</small></span><span>4,290円</span></div>
               <div class="ky-sum"><div><span>小計</span><span>4,290円</span></div><div><span>配送料</span><span>無料</span></div><div class="tot"><span>合計</span><b>4,290円</b></div></div></div></div></div>`,
       },
       'bank-home': {
