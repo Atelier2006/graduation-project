@@ -1,12 +1,13 @@
-/* ① フィッシング：宅配業者を名乗るSMS → 偽のログイン画面（画面は docs/design/mockups/phishing.html） */
+/* ① フィッシング：宅配業者を名乗るSMS → 偽のログイン画面 */
 (function () {
   'use strict';
   const S = window.SagiSim;
-  const L = S.logo;
+  const L = S.logo; const I = S.ico;
   const FAKE_HOST = 'hashire-unyu.redelivery-info.example';
+  const SMS = '【ハシレ運輸】お客様宛にお荷物のお届けにあがりましたが不在の為持ち帰りました。';
 
-  const fakeHead = `<div class="hs-head"><span class="logo">${L.hashire()}ハシレ運輸</span></div>`;
-  const phoneTool = `<div class="m-tool"><button type="button" data-back aria-label="戻る">‹</button><span>›</span><span>⇪</span><span>▢</span></div>`;
+  /* 偽のサイトは、本物のハシレ運輸のスマホ用サイトをそっくりまねている */
+  const fakeHead = `<div class="hs-m-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 24)}ハシレ運輸</span>${I.menu}</div>`;
 
   S.register({
     id: 'phishing', no: '①', title: 'フィッシング', color: '#0a7d4f',
@@ -16,100 +17,96 @@
     situation: 'あなたのスマホに、宅配業者からのSMSが届きます。荷物を頼んだ覚えはありますか？ スマホとパソコンを使って、本物かどうか確かめてみましょう。',
     mission: '届いたSMSに対応しよう',
     devices: '仮想スマホ（メッセージ・ハシレ運輸の公式アプリ・家族とのチャット）、仮想パソコン（ブラウザ）',
-    first: 'phone', clock: '9:41', date: '11月18日（水）',
+    first: 'phone', clock: '9:41', date: '11月18日 水曜日',
 
-    phone: {
-      apps: S.apps({ sms: { go: 'sms' }, hashire: { act: 'open-hs-app' }, tomo: { go: 'tomo' } }),
-      homeHint: 'アプリを押すと開きます。下の白い線を押すと、この画面に戻ります。',
-    },
+    phone: { apps: S.apps({ sms: { go: 'sms' }, hashire: { act: 'open-hs-app' }, tomo: { go: 'tomo' } }) },
     pc: {
       start: 'newtab',
-      bookmarks: [{ label: 'ハシレ運輸', act: 'open-hs-site' }, { label: 'ヒツジネット銀行' }, { label: 'ことこと献立帖' }],
+      bookmarks: [{ label: 'ハシレ運輸', act: 'open-hs-site', color: '#0a7d4f', ch: 'ハ' }, { label: 'ヒツジネット銀行', color: '#1b6fa3', ch: 'ヒ' }, { label: 'ことこと献立帖', color: '#110000', ch: 'こ' }],
     },
 
     events: [{
-      at: 1800, run: (vm) => vm.notify({
-        app: 'sms', appName: 'メッセージ', icon: '✉', color: '#34a853', go: 'sms',
-        title: '+81 80-XXXX-XXXX', body: '【ハシレ運輸】お客様宛にお荷物のお届けにあがりましたが不在の為持ち帰りました。保管期限は本日までです…',
-      }),
+      at: 1800, run: (vm) => vm.notify({ app: 'sms', go: 'sms', head: '+81 80-XXXX-XXXX', body: `${SMS}保管期限は本日までです。下記よりご確認ください。` }),
     }],
 
     screens: Object.assign({
       sms: {
         dev: 'phone',
-        html: `<div class="app-head"><button type="button" class="back" data-back aria-label="戻る">‹</button><span><span class="clue" data-n="1" data-tip="だれから届いたSMSか、差出人を見てみよう">+81 80-XXXX-XXXX</span><span class="sub">SMS</span></span></div>
-          <div class="screen"><div class="chat">
-            <div class="day">今日 9:41</div>
-            <div class="bub in">【ハシレ運輸】お客様宛にお荷物のお届けにあがりましたが不在の為持ち帰りました。<span class="clue" data-n="3" data-tip="期限を決めて、急がせていないかな？">保管期限は本日までです。</span>下記よりご確認ください。<br>
-              <button type="button" class="linklike clue" data-n="2" data-act="tap-link" data-tip="リンクの行き先は、本物のハシレ運輸のアドレスかな？">https://${FAKE_HOST}/xR7k2</button></div>
-            <div class="bub-time">9:41</div>
-            <div class="sms-actions"><button type="button" data-act="report">迷惑メッセージとして報告</button><button type="button" data-act="delete">削除する</button></div>
-          </div></div>
-          <div class="inputbar"><span style="color:#1a73e8;font-size:18px">＋</span><span class="box">テキストメッセージ</span></div>`,
+        html: `<div class="msg-head"><button type="button" class="back" data-back aria-label="戻る">${I.back}</button><span class="msg-av"></span>
+            <span class="num clue" data-n="1" data-tip="だれから届いたSMSか、差出人を見てみよう">+81 80-XXXX-XXXX ${S.svg('<path d="M9.5 7l5 5-5 5"/>', { s: 10, w: 2.4 })}</span></div>
+          <div class="msg-body">
+            <div class="msg-when"><b>テキストメッセージ・SMS</b><br>今日 9:41</div>
+            <div class="bub-in">${SMS}<span class="clue" data-n="3" data-tip="期限を決めて、急がせていないかな？">保管期限は本日までです。</span>下記よりご確認ください。<br>
+              <button type="button" class="lnk clue" data-n="2" data-act="tap-link" data-tip="リンクの行き先は、本物のハシレ運輸のアドレスかな？">https://${FAKE_HOST}/xR7k2</button></div>
+            <div class="msg-unknown">この送信者は連絡先に登録されていません。<div class="acts"><button type="button" data-act="report">迷惑メッセージを報告</button><button type="button" class="del" data-act="delete">削除</button></div></div>
+          </div>
+          <div class="msg-input"><span class="plus">${I.plus}</span><span class="field">テキストメッセージ・SMS ${I.mic}</span></div>`,
       },
       'fake-login': {
         dev: 'phone', url: `https://${FAKE_HOST}/login`,
         urlNote: '<br>本物のハシレ運輸は <b>hashire-unyu.example</b> です。前に「hashire-unyu.」が付いていても、持ち主は別の人です。',
-        html: `<div class="m-omni"><button type="button" class="bar clue" data-n="1" data-vm="url" data-tip="アドレスバーを押すと、アドレスをくわしく確かめられるよ"><span class="lockmark">🔒</span><span class="host">${FAKE_HOST}</span><span class="path">/login</span></button><button type="button" class="m-x" data-act="close-fake" aria-label="ページを閉じる">✕</button></div>
-          <div class="screen web">${fakeHead}
-            <div class="hs-title">再配達のお申し込み</div>
-            <div class="hs-wrap">
-              <div class="warnbox">お荷物の保管期限が迫っています。ログインして、再配達の日時を指定してください。</div>
-              <label class="f-label">お客様ID（メールアドレス・電話番号）</label><input class="f-input" readonly value="hashire@example.jp" aria-label="お客様ID（練習用の値）">
-              <label class="f-label">パスワード</label><input class="f-input" readonly type="password" value="renshu1234" aria-label="パスワード（練習用の値）">
-              <button type="button" class="f-btn" style="background:var(--hs);color:#fff" data-act="login">ログインして再配達を申し込む</button>
-              <div class="practice-note">入力欄には練習用の値が入っています（本物の情報は入れません）</div>
-            </div>
-            <div class="foot-s"><span class="clue" data-n="2" data-tip="ページのいちばん下の会社名を、よく読んでみよう">© 2019 ハシレ運輸株式会杜</span></div>
-          </div>${phoneTool}`,
+        html: S.mBrowser({
+          host: FAKE_HOST, close: 'close-fake', clue: 'data-n="1" data-tip="下のアドレスを押すと、アドレスをくわしく確かめられるよ"',
+          body: `<div class="hs">${fakeHead}
+            <div class="hs-m"><h2>再配達のお申し込み</h2>
+              <p class="lead">お荷物の保管期限が迫っています。ログインして、再配達の日時を指定してください。</p>
+              <label class="hs-f">お客様ID（メールアドレス・電話番号）<input readonly value="hashire@example.jp" aria-label="お客様ID（練習用の値）"></label>
+              <label class="hs-f">パスワード<input readonly type="password" value="renshu1234" aria-label="パスワード（練習用の値）"></label>
+              <button type="button" class="hs-btn" data-act="login">ログインして再配達を申し込む</button>
+              <p class="hs-sub">パスワードをお忘れの方</p>
+              <p class="hs-sub" style="font-size:11px">入力欄には練習用の値が入っています</p></div>
+            <div class="hs-m-foot"><span class="clue" data-n="2" data-tip="ページのいちばん下の会社名を、よく読んでみよう">© 2019 ハシレ運輸株式会杜</span></div></div>`,
+        }),
       },
       'fake-pay': {
         dev: 'phone', url: `https://${FAKE_HOST}/payment`,
         urlNote: '<br>本物のハシレ運輸は <b>hashire-unyu.example</b> です。',
-        html: `<div class="m-omni"><button type="button" class="bar" data-vm="url"><span class="lockmark">🔒</span><span class="host">${FAKE_HOST}</span><span class="path">/payment</span></button><button type="button" class="m-x" data-act="quit-pay" aria-label="ページを閉じる">✕</button></div>
-          <div class="screen web">${fakeHead}
-            <div class="steps"><span>1 ログイン ✓</span><span class="on">2 お支払い</span><span>3 完了</span></div>
-            <div class="hs-title" style="font-size:17px">再配達手数料のお支払い</div>
-            <div class="hs-wrap">
-              <div style="font-size:13px;line-height:1.6">再配達には <b class="clue" data-n="1" data-tip="本物の宅配業者は、再配達にお金を取るかな？">手数料 330円（税込）</b> が必要です。クレジットカードでお支払いください。</div>
-              <label class="f-label">カード番号</label><input class="f-input" readonly value="1234 5678 9012 3456" aria-label="カード番号（練習用の値）">
-              <div style="display:flex;gap:10px"><div style="flex:1"><label class="f-label">有効期限</label><input class="f-input" readonly value="12 / 30"></div><div style="flex:1"><label class="f-label clue" data-n="2" data-tip="カードの裏の番号まで聞かれていないかな？">セキュリティコード</label><input class="f-input" readonly value="123"></div></div>
-              <button type="button" class="f-btn" style="background:var(--hs);color:#fff" data-act="pay">支払って再配達を申し込む</button>
-              <button type="button" class="f-btn outline" style="color:#5f6368;margin-top:8px" data-act="quit-pay">やめる</button>
-            </div>
-          </div>${phoneTool}`,
+        html: S.mBrowser({
+          host: FAKE_HOST, close: 'quit-pay',
+          body: `<div class="hs">${fakeHead}
+            <div class="hs-m"><div class="hs-steps"><span>ログイン</span><span class="on">お支払い</span><span>完了</span></div>
+              <h2>再配達手数料のお支払い</h2>
+              <p class="lead">再配達には <b class="clue" data-n="1" data-tip="本物の宅配業者は、再配達にお金を取るかな？">手数料 330円（税込）</b> が必要です。クレジットカードでお支払いください。</p>
+              <label class="hs-f">カード番号<input readonly value="1234 5678 9012 3456" aria-label="カード番号（練習用の値）"></label>
+              <div class="hs-two-in"><label class="hs-f">有効期限<input readonly value="12 / 30"></label><label class="hs-f clue" data-n="2" data-tip="カードの裏の番号まで聞かれていないかな？">セキュリティコード<input readonly value="123"></label></div>
+              <label class="hs-f">カード名義（ローマ字）<input readonly value="TARO HASHIRE"></label>
+              <button type="button" class="hs-btn" data-act="pay">支払って再配達を申し込む</button>
+              <button type="button" class="hs-btn ghost" data-act="quit-pay">やめる</button></div></div>`,
+        }),
       },
       'hs-app': {
-        dev: 'phone', bar: { bg: '#0a7d4f', fg: '#fff' },
-        html: `<div class="app-hs"><span class="logo">${L.hashire('#fff', '#0a7d4f', 28)}ハシレ運輸</span></div>
-          <div class="app-tabs"><span class="on">荷物</span><span>受け取り設定</span><span>お知らせ</span></div>
-          <div class="screen" style="background:#f6f8f7">
-            <div class="hs-card" style="background:#fff"><h3>お届け予定のお荷物</h3>
-              <div class="empty clue good" data-n="1"><b>現在、お届け予定のお荷物はありません</b>不在のお知らせもありません</div></div>
-            <div class="alert-red clue good" data-n="2"><b>【ご注意】</b>当社をかたる不審なSMSが届いています。当社はSMSで不在のお知らせを送ることはありません。</div>
-            <div class="hs-card" style="background:#fff"><h3>最近のお荷物</h3><ul class="hist"><li><span>11月10日</span><span>お届け済み</span></li><li><span>10月28日</span><span>お届け済み</span></li></ul></div>
-          </div>`,
+        dev: 'phone',
+        html: `<div class="hs hs-app"><div class="hs-app-head"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 28)}ハシレ運輸</span>${I.user}</div>
+          <div class="hs-tabs"><span class="on">荷物</span><span>受け取り設定</span><span>お知らせ</span></div>
+          <div class="hs-app-body">
+            <div class="hs-sec">お届け予定のお荷物</div>
+            <div class="hs-empty clue good" data-n="1"><b>現在、お届け予定のお荷物はありません</b><span>不在のお知らせもありません</span></div>
+            <div class="hs-alert clue good" data-n="2"><b>当社をかたる不審なSMSにご注意ください</b>当社はSMSで不在のお知らせを送ることはありません。</div>
+            <div class="hs-sec" style="margin-top:6px">最近のお荷物</div>
+            <ul class="hs-list"><li><span>11月10日　ポチッと通販</span><span>お届け済み</span></li><li><span>10月28日　ふるさとカゴ</span><span>お届け済み</span></li></ul>
+          </div></div>`,
       },
       newtab: {
         dev: 'pc', url: 'https://www.sagashimo.example/', title: '新しいタブ',
-        html: `<div class="newtab">${L.sagashimo()}<div class="srch-box">検索するか、URLを入力</div>
-          <div class="tile-grid">
-            <button type="button" class="tile" data-act="open-hs-site"><i style="background:#0a7d4f;color:#fff">ハ</i>ハシレ運輸</button>
-            <button type="button" class="tile" data-vm="bm" data-i="1"><i style="background:#3aa0d8;color:#fff">ヒ</i>ヒツジネット銀行</button>
-            <button type="button" class="tile" data-vm="bm" data-i="2"><i style="background:#d9661f;color:#fff">こ</i>ことこと献立帖</button>
-            <span class="tile"><i>＋</i>追加</span></div></div>`,
+        html: `<div class="sg sg-new">${L.sagashimo(40)}<div class="sg-box">${I.search}<span class="q">サガシモで検索、または URL を入力</span></div>
+          <div class="sg-tiles">
+            <button type="button" class="sg-tile" data-act="open-hs-site"><i style="background:#0a7d4f">ハ</i>ハシレ運輸</button>
+            <button type="button" class="sg-tile" data-vm="bm" data-i="1"><i style="background:#1b6fa3">ヒ</i>ヒツジネット銀行</button>
+            <button type="button" class="sg-tile" data-vm="bm" data-i="2"><i style="background:#110000">こ</i>ことこと献立帖</button>
+            <span class="sg-tile"><i style="background:#e8e6e1;color:#72706b">${I.plus}</i>追加</span></div></div>`,
       },
       'hs-site': {
-        dev: 'pc', url: 'https://www.hashire-unyu.example/', title: 'ハシレ運輸｜個人のお客様',
+        dev: 'pc', url: 'https://www.hashire-unyu.example/', title: 'ハシレ運輸｜個人のお客様', fav: L.hashire('#0a7d4f', '#fff', 16),
         urlNote: '<br>ハシレ運輸の公式のアドレスです。',
-        html: `<div class="site-head"><span class="logo">${L.hashire('#0a7d4f', '#fff', 34)}ハシレ運輸</span><nav><span>個人のお客様</span><span>法人のお客様</span><span>荷物を調べる</span><span>よくある質問</span></nav></div>
-          <div class="hero"><div><h2>荷物を調べる</h2><p>お問い合わせ番号で、お荷物の状況を確かめられます。</p></div>
-            <div class="track"><b style="font-size:13px">お問い合わせ番号（12桁）</b><div class="f-input">0000-0000-0000</div><div class="f-btn" style="background:var(--hs);color:#fff;margin-top:10px">調べる</div></div></div>
-          <div class="news"><h3>お知らせ</h3><ul>
-            <li class="clue good" data-n="1"><span class="d">2026.11.15</span><span><span class="badge-imp">重要</span>当社をかたる「なりすましSMS・メール」にご注意ください。当社はSMSで不在のお知らせを送っていません。</span></li>
+        html: `<div class="hs"><div class="hs-nav"><span class="hs-logo">${L.hashire('#0a7d4f', '#fff', 30)}ハシレ運輸</span>
+            <nav><span>個人のお客様</span><span>法人のお客様</span><span>サービス</span><span>よくある質問</span></nav><span class="hs-pill">ログイン</span></div>
+          <div class="hs-hero"><div><h2>荷物を調べる</h2><p>お問い合わせ番号で、お荷物の状況を確かめられます。<br>受け取りの日時や場所の変更もできます。</p></div>
+            <div class="hs-track"><label>お問い合わせ番号（12桁）</label><div class="row"><span class="hs-in">0000-0000-0000</span><span class="hs-pill">調べる</span></div></div></div>
+          <div class="hs-two"><div class="hs-cap">お知らせ</div><ul class="hs-news">
+            <li class="clue good" data-n="1"><span class="d">2026.11.15</span><span><span class="hs-imp">重要</span>当社をかたる「なりすましSMS・メール」にご注意ください。当社はSMSで不在のお知らせを送っていません。</span></li>
             <li><span class="d">2026.11.01</span><span>年末年始の営業とお届けについて</span></li>
             <li><span class="d">2026.10.20</span><span>受け取り場所の指定サービスを始めました</span></li></ul></div>
-          <div class="site-foot" style="position:static;margin-top:40px">© 2026 ハシレ運輸株式会社</div>`,
+          <div class="hs-foot"><span>© 2026 ハシレ運輸株式会社</span><span>サイトのご利用について</span><span>個人情報の取り扱い</span></div></div>`,
       },
     }, S.tomoScreens({
       ask: '宅配の不在のSMSが来たんだけど、リンクを押しても大丈夫？',
@@ -134,12 +131,12 @@
         after: '本物のハシレ運輸は、SMSで不在のお知らせを送りません。迷ったときは、公式アプリや前に登録したブックマークから確かめるのが安全です。' },
       ng1: { type: 'ng', title: 'だまされた：IDとパスワードを盗まれた', short: '支払いはやめましたが、入力したIDとパスワードは、もう相手に届いています。',
         after: 'しばらくすると、知らない端末からあなたのアカウントにログインがありました。同じパスワードを使っているほかのサービスも、乗っ取られるおそれがあります。',
-        onEnd: (vm) => vm.later(600, () => vm.notify({ app: 'hashire', appName: 'ハシレ運輸', icon: '≡', color: '#0a7d4f', title: '新しい端末からのログイン', body: 'お客様のアカウントに、新しい端末からログインがありました。' })) },
+        onEnd: (vm) => vm.later(600, () => vm.notify({ app: 'hashire', head: 'ハシレ運輸', body: 'お客様のアカウントに、新しい端末からログインがありました。心当たりがない場合は、パスワードを変更してください。' })) },
       ng2: { type: 'ng', title: 'だまされた：カード番号も盗まれた', short: '入力したカード番号が、すぐに知らない店で使われました。',
         after: '入力してから数分で、カード会社から「ご利用のお知らせ」が2回届きました。合わせて 143,800円 です。',
         onEnd: (vm) => {
-          vm.later(500, () => vm.notify({ app: 'card', appName: 'ホシゾラカード', icon: '★', color: '#1b2a5c', title: '【ご利用のお知らせ】', body: '11/18 10:02　98,000円　ご利用先：ONLINE-SHOP' }));
-          vm.later(1300, () => vm.notify({ app: 'card', appName: 'ホシゾラカード', icon: '★', color: '#1b2a5c', title: '【ご利用のお知らせ】', body: '11/18 10:05　45,800円　ご利用先：ONLINE-SHOP' }));
+          vm.later(500, () => vm.notify({ app: 'card', head: 'ホシゾラカード', body: '【ご利用のお知らせ】11/18 10:02　98,000円（ご利用先：ONLINE-SHOP）' }));
+          vm.later(1300, () => vm.notify({ app: 'card', head: 'ホシゾラカード', body: '【ご利用のお知らせ】11/18 10:05　45,800円（ご利用先：ONLINE-SHOP）' }));
         }, delay: 2600 },
       quit: { type: 'quit', title: '途中でやめました', short: '解説で、見抜くポイントと確かめ方を見てみましょう。', after: '' },
     },
@@ -147,14 +144,14 @@
     explain: {
       points: [
         { screen: 'sms', items: ['宅配業者からのSMSなのに、差出人が個人の携帯電話の番号', 'リンクの登録ドメインは <b>redelivery-info.example</b>。公式は hashire-unyu.example', '「本日まで」と期限で急がせる'] },
-        { screen: 'fake-login', items: ['アドレスバーの登録ドメインが公式と違う。前に「hashire-unyu.」が付いていてまぎらわしい', '会社名の字が違う（「社」→「杜」）。年も古いまま'] },
+        { screen: 'fake-login', items: ['アドレスの登録ドメインが公式と違う。前に「hashire-unyu.」が付いていてまぎらわしい。見た目は本物のサイトとそっくり', '会社名の字が違う（「社」→「杜」）。年も古いまま'] },
         { screen: 'fake-pay', items: ['宅配業者は、再配達にお金を取らない', 'カードの裏のセキュリティコードまで入れさせる'] },
       ],
       checks: [
         { screen: 'hs-app', items: ['公式アプリで確かめると、届く予定の荷物はない', '公式のお知らせで、SMSで不在の連絡はしないと分かる'] },
         { screen: 'hs-site', items: ['パソコンのブックマークから開いた公式サイトにも、同じ注意が出ている'] },
       ],
-      prevent: ['SMSやメールのリンクは押さない', '公式アプリや、前に登録したブックマークから確かめる', 'アドレスバーの登録ドメインを見る（hashire-unyu.example と redelivery-info.example は、持ち主が別）', '迷ったら、家族や周りの人に相談する'],
+      prevent: ['SMSやメールのリンクは押さない', '公式アプリや、前に登録したブックマークから確かめる', 'アドレスの登録ドメインを見る（hashire-unyu.example と redelivery-info.example は、持ち主が別）', '迷ったら、家族や周りの人に相談する'],
       ifScammed: ['パスワードを入れてしまったら、すぐにパスワードを変える（同じパスワードを使っているほかのサービスも）', 'カード番号を入れてしまったら、カードの裏の電話番号でカード会社に連絡し、カードを止める', '警察相談専用電話（#9110）に相談する。SMSの画面は、相談のときのために残しておく'],
     },
   });

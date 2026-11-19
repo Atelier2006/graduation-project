@@ -1,6 +1,7 @@
 # 詐欺シミュ プロトタイプ
 
 > チームF｜2026年11月19日｜検討資料の [4章 仮想環境](../docs/design/04-virtual-env.md) と [5章 画面デザイン](../docs/design/05-screen-design.md) を、実際に動かして確かめるための試作品
+> 画面の見た目は、実在のサイトのスタイル（[Refero Styles](https://styles.refero.design)）を参考に作っている：[DESIGN.md](DESIGN.md)
 
 ブラウザの中の**仮想環境**（仮想パソコンと仮想スマホ）で、3本のシナリオを最後まで体験できます。HTML・CSS・JavaScript だけで作っていて、サーバーもインターネットも要りません。
 
@@ -44,7 +45,7 @@
 
 ![③ サポート詐欺：突然の全画面の警告（上の黒い帯は Escキーの長押しで全画面を終える案内）](../docs/design/img/proto-support-warning.png)
 
-![解説：体験した画面に、見抜くポイントの印を重ねて見せる](../docs/design/img/proto-explain.png)
+![解説：体験した画面に、見抜くポイントの印を重ねて見せる](../docs/design/img/proto-explain-phishing.png)
 
 ## 入っていないもの（本番の Django で作る）
 
@@ -64,7 +65,9 @@
 | `js/app.js` | アプリの画面（ホーム・モード選択・開始・結果・解説・相談先） |
 | `js/scenarios/common.js` | 3本で共通の部品（スマホのアプリ、ロゴ、家族とのチャット、相談窓口） |
 | `js/scenarios/phishing.js` ほか | シナリオのデータ（画面・操作・結末・解説） |
-| `css/devices.css` | 仮想デバイスとシナリオの画面の見た目（[見本](../docs/design/mockups/) のCSSから作った） |
+| `css/devices.css` | 仮想デバイスとシナリオに出てくるサイト・アプリの見た目（参考にしたスタイルは [DESIGN.md](DESIGN.md)） |
+| `img/` | 写真（CC0・パブリックドメイン。出典は [img/CREDITS.md](img/CREDITS.md)） |
+| `DESIGN.md` | 場面ごとに参考にした Refero Styles のスタイルと、借りた数値 |
 | `css/vm.css` | 仮想環境の配置（帯・2台・切り替え・シート） |
 | `css/app.css` | アプリの画面の見た目 |
 | `vendor/bootstrap.min.css` | Bootstrap 5.3.3（MITライセンス）。インターネットにつながらなくても使えるように同梱 |

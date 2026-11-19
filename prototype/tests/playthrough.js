@@ -46,6 +46,7 @@ async function finish(p, expect) {
   await p.click('.vm-phone [data-vm="home"]'); await p.click('.vm-phone [data-app="tomo"]'); await act(p, 'consult'); await wait(p, 2500);
   await p.click('.vm-phone [data-vm="home"]'); await p.click('.vm-phone [data-app="sms"]');
   await p.click('[data-vm="hint"]'); await wait(p, 300); await p.screenshot({ path: `${OUT}/p1-hint.png` });
+  await p.click('.vm-phone [data-vm="home"]'); await p.screenshot({ path: `${OUT}/p1-home.png` }); await p.click('.vm-phone [data-app="sms"]');
   await act(p, 'delete'); console.log('①B', await finish(p, '見抜けた'));
   const log1 = await p.$$eval('.actlog li', (l) => l.map((x) => x.textContent));
   console.log('  行動:', log1.join(' / '));
@@ -53,7 +54,7 @@ async function finish(p, expect) {
   // ② だまされる道
   await start(p, 'fake-shop'); await wait(p, 300); await p.screenshot({ path: `${OUT}/p2-search.png` });
   await act(p, 'open-shop'); await p.screenshot({ path: `${OUT}/p2-shop.png` });
-  await act(p, 'open-law'); await p.click('.vm-pc .law-back'); await act(p, 'order');
+  await act(p, 'open-law'); await p.screenshot({ path: `${OUT}/p2-law.png` }); await p.click('.vm-pc .law-back'); await act(p, 'order'); await p.screenshot({ path: `${OUT}/p2-order.png` });
   await act(p, 'go-bank'); await wait(p, 300); await p.screenshot({ path: `${OUT}/p2-bank.png` });
   await act(p, 'transfer'); console.log('②A', await finish(p, '振り込んだ'));
   // ② 評判を調べて、タブを閉じる道
@@ -66,7 +67,7 @@ async function finish(p, expect) {
   // ③ だまされる道（電話 → 遠隔操作 → 電子マネー）
   await start(p, 'support-scam'); await act(p, 'tap-ad'); await wait(p, 300);
   await p.screenshot({ path: `${OUT}/p3-warning.png` });
-  await p.click('.vm-phone [data-vm="unlock"]'); await p.click('.vm-phone [data-app="tel"]'); await act(p, 'call');
+  await p.click('.vm-phone [data-vm="unlock"]'); await p.click('.vm-phone [data-app="tel"]'); await act(p, 'type-number'); await p.screenshot({ path: `${OUT}/p3-dialer.png` }); await act(p, 'call');
   await wait(p, 6200); await p.screenshot({ path: `${OUT}/p3-call1.png` });
   await act(p, 'obey'); await wait(p, 300); await p.screenshot({ path: `${OUT}/p3-remote.png` });
   await act(p, 'allow'); await wait(p, 2200); await wait(p, 4600);

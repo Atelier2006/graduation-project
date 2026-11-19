@@ -10,7 +10,7 @@
 | [2. 画面一覧と画面遷移](02-screen-flow.md) | 画面の一覧（16画面）、全体の画面遷移、シナリオ3本の場面の流れ（仮想スマホと仮想パソコンの使い分け）、テストの流れ | [PDF](pdf/02-screen-flow.pdf) |
 | [3. テンプレートの選定](03-template.md) | Template Party から候補を比べ、tp_universal1 をすすめる理由、規約とGoogleドライブでの保存、Bootstrap との併用 | [PDF](pdf/03-template.pdf) |
 | [4. 仮想環境](04-virtual-env.md) | ブラウザの中の仮想環境（仮想パソコン・仮想スマホ）の考え方、画面の配置、アプリ、操作のきまり、作り方の方針 | [PDF](pdf/04-virtual-env.pdf) |
-| [5. シナリオ別の画面デザイン](05-screen-design.md) | ①〜③の詐欺の画面と本物の画面（20画面）のデザイン見本、見抜くポイント、ブランドと色 | [PDF](pdf/05-screen-design.pdf) |
+| [5. シナリオ別の画面デザイン](05-screen-design.md) | ①〜③の詐欺の画面と本物の画面のデザイン（実在サイトのスタイルを参考に作り直した）、見抜くポイント、ブランドと見た目、名前の確認 | [PDF](pdf/05-screen-design.pdf) |
 
 ## プロトタイプ（11/19）
 

@@ -33,6 +33,71 @@
   /* 画面のHTML（関数のときは状態を見て作る） */
   const screenHTML = (scr, vm) => (typeof scr.html === 'function' ? scr.html(vm) : scr.html);
 
+  /* ===== アイコン（線の絵。絵文字は使わない） ===== */
+  const svg = (d, o = {}) => `<svg class="ic" viewBox="0 0 24 24" width="${o.s || 18}" height="${o.s || 18}" aria-hidden="true" ${o.fill ? 'fill="currentColor" stroke="none"' : `fill="none" stroke="currentColor" stroke-width="${o.w || 1.8}" stroke-linecap="round" stroke-linejoin="round"`}>${d}</svg>`;
+  S.svg = svg;
+  S.ico = {
+    back: svg('<path d="M15 5l-7 7 7 7"/>'), fwd: svg('<path d="M9 5l7 7-7 7"/>'),
+    reload: svg('<path d="M19 12a7 7 0 1 1-2-4.9"/><path d="M19 4.5v3.5h-3.5"/>'),
+    tune: svg('<path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/>', { s: 16 }),
+    star: svg('<path d="M12 4.5l2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 16.3l-4.6 2.4.9-5.1L4.5 10l5.2-.8z"/>', { s: 16, w: 1.6 }),
+    x: svg('<path d="M7.5 7.5l9 9M16.5 7.5l-9 9"/>', { s: 14 }), plus: svg('<path d="M12 6v12M6 12h12"/>', { s: 16 }),
+    min: svg('<path d="M7 12h10"/>', { s: 14, w: 1.2 }), max: svg('<rect x="7" y="7" width="10" height="10"/>', { s: 14, w: 1.2 }), close: svg('<path d="M7 7l10 10M17 7L7 17"/>', { s: 14, w: 1.2 }),
+    search: svg('<circle cx="11" cy="11" r="6"/><path d="M15.5 15.5l4 4"/>'),
+    user: svg('<circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c1.3-3.3 4-4.5 7-4.5s5.7 1.2 7 4.5"/>'),
+    heart: svg('<path d="M12 19s-6.5-4.1-6.5-9.2A3.7 3.7 0 0 1 12 7.6a3.7 3.7 0 0 1 6.5 2.2C18.5 14.9 12 19 12 19z"/>'),
+    bag: svg('<path d="M6 8.5h12l-1 11H7z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/>'),
+    share: svg('<path d="M12 4v10M8.5 7.5L12 4l3.5 3.5"/><path d="M8 10.5H6.5v9h11v-9H16"/>', { s: 22 }),
+    book: svg('<path d="M12 7c-1.5-1.3-4-2-7-2v12c3 0 5.5.7 7 2 1.5-1.3 4-2 7-2V5c-3 0-5.5.7-7 2zM12 7v12"/>', { s: 22 }),
+    tabs: svg('<rect x="5" y="5" width="11" height="11" rx="2.5"/><path d="M9 19h7.5a2.5 2.5 0 0 0 2.5-2.5V9"/>', { s: 22 }),
+    check: svg('<path d="M5.5 12.5l4 4L18.5 7.5"/>'),
+    warn: svg('<path d="M12 4L3 19.5h18z"/><path d="M12 10v4.5M12 17v.4"/>', { w: 2 }),
+    speaker: svg('<path d="M4.5 9.5h3.5l4.5-4v13l-4.5-4H4.5z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5M18.5 7a7 7 0 0 1 0 10"/>'),
+    chevron: svg('<path d="M9.5 6l6 6-6 6"/>'),
+    info: svg('<circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8v.3"/>'),
+    menu: svg('<path d="M4.5 7h15M4.5 12h15M4.5 17h15"/>'),
+    mic: svg('<rect x="9.5" y="4" width="5" height="10" rx="2.5"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3"/>'),
+    lock: svg('<rect x="6" y="10.5" width="12" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>'),
+    flash: svg('<path d="M9 3.5h6v4l-2 3v9.5h-2V10.5l-2-3z"/>', { s: 20 }),
+    camera: svg('<path d="M4.5 8.5h3l1.5-2h6l1.5 2h3v10h-15z"/><circle cx="12" cy="13" r="3.2"/>', { s: 20 }),
+    signal: '<svg class="ic" viewBox="0 0 18 12" width="17" height="11" aria-hidden="true" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg>',
+    wifi: '<svg class="ic" viewBox="0 0 16 12" width="15" height="11" aria-hidden="true" fill="currentColor"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.3-1.4A10.1 10.1 0 0 0 8 .3 10.1 10.1 0 0 0 .7 3.3L2 4.7a8.1 8.1 0 0 1 6-2.4zm0 3.6c1.4 0 2.6.5 3.6 1.4l1.3-1.4A7 7 0 0 0 8 3.9a7 7 0 0 0-4.9 2l1.3 1.4C5.4 6.4 6.6 5.9 8 5.9zm0 5.8l2.1-2.2a3 3 0 0 0-4.2 0z"/></svg>',
+    battery: '<svg class="ic" viewBox="0 0 27 12" width="25" height="11" aria-hidden="true"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M24 4v4c.8-.3 1.5-1 1.5-2S24.8 4.3 24 4z" fill="currentColor" opacity=".45"/></svg>',
+  };
+  const I = S.ico;
+
+  /* 状態バー（時刻・電波・Wi-Fi・電池） */
+  const sbarHTML = (sc, bar) => {
+    const st = typeof bar === 'object' ? ` style="background:${bar.bg};color:${bar.fg}"` : '';
+    return `<div class="sbar"${st}><span class="t">${esc(sc.clock || '9:41')}</span><span class="ind">${I.signal}${I.wifi}${I.battery}</span></div>`;
+  };
+  const barClass = (bar) => (typeof bar === 'string' ? `bar-${bar}` : 'bar-custom');
+
+  /* パソコンのブラウザの枠（タブ・アドレスバー・ブックマーク） */
+  const favHTML = (o) => o.fav || `<span class="fav" style="background:${o.favColor || '#80868b'}">${esc(o.favCh || (o.title || o.label || '?').replace(/^[【\[]/, '').trim().charAt(0))}</span>`;
+  function bookmarksHTML(sc, inert) {
+    const bms = (sc.pc && sc.pc.bookmarks) || [];
+    if (!bms.length) return '';
+    return `<div class="bm">${bms.map((b, i) => {
+      const f = favHTML({ fav: b.fav, favColor: b.color, favCh: b.ch, label: b.label });
+      return inert ? `<span class="bmi">${f}${esc(b.label)}</span>` : `<button type="button" class="bmi" data-vm="bm" data-i="${i}">${f}${esc(b.label)}</button>`;
+    }).join('')}</div>`;
+  }
+  function pcChromeHTML(sc, scr, html, live) {
+    const u = splitUrl(scr.url);
+    const b = (attrs, inner, cls) => (live ? `<button type="button" class="${cls}" ${attrs}>${inner}</button>` : `<span class="${cls}">${inner}</span>`);
+    const omni = `<span class="tune">${I.tune}</span><span class="host">${esc(u.host)}</span><span class="path">${esc(u.path)}</span><span class="star">${I.star}</span>`;
+    return `<div class="b-tabs">
+        <div class="b-tab on">${favHTML(scr)}<span class="tt">${esc(scr.title || '')}</span>${b('data-vm="close-tab" aria-label="タブを閉じる"', I.x, 'x')}</div>
+        <span class="newtab">${I.plus}</span>
+        <span class="win"><span>${I.min}</span><span>${I.max}</span><span class="cl">${I.close}</span></span></div>
+      <div class="b-bar">${b('data-back aria-label="戻る"', I.back, 'nav')}<span class="nav dim">${I.fwd}</span><span class="nav">${I.reload}</span>
+        ${live ? `<button type="button" class="b-omni" data-vm="url" aria-label="アドレスを確かめる">${omni}</button>` : `<div class="b-omni">${omni}</div>`}
+        <span class="prof">${I.user}</span></div>
+      ${bookmarksHTML(sc, !live)}
+      <div class="b-body">${html}</div>`;
+  }
+
   /* ===== 静止画として描く（解説の画面で、見抜くポイントの印を重ねて見せる） ===== */
   S.renderStatic = (sc, id, opt = {}) => {
     const scr = sc.screens[id];
@@ -40,18 +105,10 @@
     const html = screenHTML(scr, dummy);
     if (scr.dev === 'phone') {
       const bar = scr.bar || 'light';
-      const cls = typeof bar === 'string' ? `bar-${bar}` : '';
-      const st = typeof bar === 'object' ? `style="background:${bar.bg};color:${bar.fg}"` : '';
       return `<div class="mini" data-w="${PHONE.w}" data-h="${PHONE.h}" data-max="0.82"><div class="mini-in reveal static" inert>
-        <div class="phone ${cls}"><div class="sbar" ${st}><span>${esc(sc.clock || '9:41')}</span><span class="sig">▮▮▮ 5G ▭</span></div>
-        <div class="pscreen">${html}</div><div class="home-ind"></div></div></div></div>`;
+        <div class="phone ${barClass(bar)}">${sbarHTML(sc, bar)}<div class="pscreen">${html}</div><div class="home-ind"></div></div></div></div>`;
     }
-    const u = splitUrl(scr.url);
-    const body = scr.fullscreen
-      ? `<div class="pc-fs">${html}</div>`
-      : `<div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div><div class="b-tab on">${esc(scr.title || '')}</div></div>
-         <div class="b-bar"><span class="nav">‹</span><span class="nav">›</span><span class="nav">↻</span><div class="b-omni"><span class="lockmark">🔒</span><span class="host">${esc(u.host)}</span><span class="path">${esc(u.path)}</span></div><span>☆</span></div>
-         ${bookmarksHTML(sc, true)}<div class="b-body">${html}</div>`;
+    const body = scr.fullscreen ? `<div class="pc-fs">${html}</div>` : pcChromeHTML(sc, scr, html, false);
     return `<div class="mini" data-w="${PC.w}" data-h="${PC.h}" data-max="0.7"><div class="mini-in reveal static" inert><div class="pc-frame">${body}</div></div></div>`;
   };
   /* 静止画を、置いた場所の幅に合わせて縮める */
@@ -64,11 +121,6 @@
       m.firstElementChild.style.transform = `scale(${s})`;
     });
   };
-  function bookmarksHTML(sc, inert) {
-    const bms = (sc.pc && sc.pc.bookmarks) || [];
-    if (!bms.length) return '';
-    return `<div class="bm">${bms.map((b, i) => inert ? `<span>★ ${esc(b.label)}</span>` : `<button type="button" data-vm="bm" data-i="${i}">★ ${esc(b.label)}</button>`).join('')}</div>`;
-  }
 
   /* ===== 仮想環境 ===== */
   class VM {
@@ -143,36 +195,35 @@
       else if (id === 'home') { inner = this.homeHTML(); bar = 'home'; }
       else if (id.startsWith('app:')) { inner = this.placeholderHTML(id.slice(4)); }
       else { const scr = this.screen(id); inner = screenHTML(scr, this); bar = scr.bar || 'light'; }
-      const cls = typeof bar === 'string' ? `bar-${bar}` : '';
-      const st = typeof bar === 'object' ? `style="background:${bar.bg};color:${bar.fg}"` : '';
-      el.className = `phone ${cls}`;
-      el.innerHTML = `<div class="sbar" ${st}><span>${esc(this.sc.clock || '9:41')}</span><span class="sig">▮▮▮ 5G ▭</span></div>
-        <div class="pscreen">${inner}</div>
-        <div class="home-ind" data-vm="home" role="button" tabindex="0" aria-label="ホーム画面に戻る" ${typeof bar === 'object' ? `style="background:${bar.bg}"` : ''}></div>`;
+      el.className = `phone ${barClass(bar)}`;
+      el.innerHTML = `${sbarHTML(this.sc, bar)}<div class="pscreen">${inner}</div>
+        <div class="home-ind" data-vm="home" role="button" tabindex="0" aria-label="ホーム画面に戻る" ${typeof bar === 'object' ? `style="background:${bar.bg2 || '#fff'}"` : ''}></div>`;
     }
     lockHTML() {
       const notes = this.state.phone.notes;
-      return `<div class="lock-time">${esc(this.sc.clock || '9:41')}</div><div class="lock-date">${esc(this.sc.date || '')}</div>
-        <div class="lock-notes">${notes.length ? notes.map((n, i) => this.notiHTML(n, i)).join('') : '<div class="lock-empty">通知はありません</div>'}</div>
-        <button type="button" class="lock-open" data-vm="unlock">ここを押してロックを外す</button>`;
+      return `<div class="lock-top"><div class="lock-date">${esc(this.sc.date || '')}</div><div class="lock-time">${esc(this.sc.clock || '9:41')}</div></div>
+        <div class="lock-notes">${notes.map((n, i) => this.notiHTML(n, i)).join('')}</div>
+        <div class="lock-bottom"><span class="lk">${I.flash}</span><button type="button" class="lock-open" data-vm="unlock">押して開く</button><span class="lk">${I.camera}</span></div>`;
     }
+    appOf(id) { return this.sc.phone.apps.find((x) => x.id === id) || {}; }
     notiHTML(n, i) {
-      return `<button type="button" class="noti" data-vm="note" data-i="${i}">
-        <span class="head"><span class="app-ico" style="background:${n.color}">${esc(n.icon)}</span><b>${esc(n.appName)}</b><span class="t">${esc(n.when || '今')}</span></span>
-        ${n.titleHTML || `<b>${esc(n.title)}</b>`}<br>${n.bodyHTML || esc(n.body)}</button>`;
+      const a = this.appOf(n.app);
+      return `<button type="button" class="noti" data-vm="note" data-i="${i}"><span class="ni" style="background:${a.bg || '#8e8e93'}">${a.glyph || ''}</span>
+        <span class="nb"><span class="nh"><b>${esc(n.head || n.title || a.name || '')}</b><span class="nt">${esc(n.when || '今')}</span></span><span class="nx">${n.bodyHTML || esc(n.body || '')}</span></span></button>`;
     }
     homeHTML() {
       const apps = this.sc.phone.apps;
       const unread = (id) => this.state.phone.notes.filter((n) => n.app === id && !n.read).length;
-      return `<div class="home-grid">${apps.map((a) => {
-        const u = unread(a.id);
-        return `<button type="button" class="hicon" data-vm="app" data-app="${a.id}"><i style="background:${a.color}">${esc(a.icon)}</i>${esc(a.name)}${u ? `<span class="badge-n">${u}</span>` : ''}</button>`;
-      }).join('')}</div>${this.sc.phone.homeHint ? `<div class="home-hint">${this.sc.phone.homeHint}</div>` : ''}`;
+      const icon = (a) => { const u = unread(a.id);
+        return `<button type="button" class="hicon" data-vm="app" data-app="${a.id}"><i style="background:${a.bg}">${a.glyph}</i><span>${esc(a.name)}</span>${u ? `<b class="badge-n">${u}</b>` : ''}</button>`; };
+      return `<div class="home-grid">${apps.filter((a) => !a.dock).map(icon).join('')}</div>
+        <div class="home-dots"><i class="on"></i><i></i></div>
+        <div class="home-dock">${apps.filter((a) => a.dock).map(icon).join('')}</div>`;
     }
     placeholderHTML(appId) {
-      const a = this.sc.phone.apps.find((x) => x.id === appId) || { name: 'アプリ' };
-      return `<div class="app-head"><button type="button" class="back" data-back aria-label="戻る">‹</button><span>${esc(a.name)}</span></div>
-        <div class="placeholder">このアプリは、この練習では使いません。<br>ホーム画面に戻って、ほかのアプリを使ってみよう。</div>`;
+      const a = this.appOf(appId);
+      return `<div class="ios-nav"><button type="button" class="back" data-back aria-label="戻る">${I.back}</button><b>${esc(a.name || 'アプリ')}</b><span></span></div>
+        <div class="placeholder">このアプリは、この練習では使いません。</div>`;
     }
     renderPC() {
       const fr = this.devEl('pc'); const st = this.state.pc;
@@ -183,18 +234,11 @@
       const id = this.top('pc'); const scr = this.screen(id); const html = screenHTML(scr, this);
       if (st.fullscreen) {
         fr.innerHTML = `<div class="pc-fs">${html}
-          <div class="fs-hold" data-hold role="button" tabindex="0">全画面表示を終了するには <b>Esc</b> キーを長押ししてください
+          <div class="fs-hold" data-hold role="button" tabindex="0">全画面表示を終了するには <kbd>Esc</kbd> キーを長押ししてください
           <small>（スマホやタブレットでは、ここを長押し）</small><span class="bar"></span></div></div>`;
         return;
       }
-      const u = splitUrl(scr.url);
-      fr.innerHTML = `
-        <div class="b-tabs"><div class="b-dots"><i></i><i></i><i></i></div>
-          <div class="b-tab on"><span>${esc(scr.title || '')}</span><button type="button" class="x" data-vm="close-tab" aria-label="タブを閉じる">✕</button></div></div>
-        <div class="b-bar"><button type="button" class="nav" data-back aria-label="戻る">‹</button><span class="nav">›</span><span class="nav">↻</span>
-          <button type="button" class="b-omni" data-vm="url" aria-label="アドレスを確かめる"><span class="lockmark">🔒</span><span class="host">${esc(u.host)}</span><span class="path">${esc(u.path)}</span></button><span>☆</span></div>
-        ${bookmarksHTML(this.sc, false)}
-        <div class="b-body">${html}</div>`;
+      fr.innerHTML = pcChromeHTML(this.sc, scr, html, true);
     }
 
     /* ----- 動かす ----- */
