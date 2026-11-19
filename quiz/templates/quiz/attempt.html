@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}テストの結果｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap narrow"><nav class="trail" aria-label="現在地"><a href="{% url 'quiz:index' %}">力だめしテスト</a><span>{{ a.get_phase_display }}のテストの結果</span></nav>
+  <section class="result {% if a.rate >= 80 %}ok{% elif a.rate < 50 %}ng{% endif %}">
+    <div class="small fw-bold mb-1">{{ a.get_phase_display }}のテスト　<span class="text-secondary fw-normal">{{ a.created_at|date:"Y年n月j日 H:i" }}</span></div>
+    <h1>{{ a.total }}問中 {{ a.score }}問 正解</h1>
+    {% if pre and post %}<p class="mt-2">体験の前 <b>{{ pre.score }}点</b> → 体験の後 <b>{{ post.score }}点</b>
+      {% if post.score > pre.score %}（見抜ける問題が増えました）{% elif post.score == pre.score %}（同じ点数でした。解説を読み直してみましょう）{% else %}（前より下がりました。解説をもう一度確かめましょう）{% endif %}</p>{% endif %}
+  </section>
+  <div class="btn-row">
+    {% if a.phase == 'pre' %}<a class="btn btn-main btn-lg" href="{% url 'sim:mode' %}">体験を始める</a>{% else %}{% if not surveyed %}<a class="btn btn-main btn-lg" href="{% url 'quiz:survey' %}">アンケートに答える</a>{% endif %}<a class="btn btn-sub" href="{% url 'sim:stats' %}">みんなの結果を見る</a>{% endif %}
+    <a class="btn btn-sub" href="{% url 'quiz:index' %}">テストのページへ</a>
+  </div>
+  <h2 class="sec-h">答え合わせ</h2>
+  {% for x in answers %}
+  <div class="panel qans {% if x.is_correct %}good{% else %}bad{% endif %}">
+    <p class="qtext"><span class="qmark" aria-label="{% if x.is_correct %}正解{% else %}不正解{% endif %}">{% if x.is_correct %}○{% else %}×{% endif %}</span>{{ x.question.text }}</p>
+    <p class="qline"><span>あなたの答え</span>{{ x.choice.text }}</p>
+    {% if not x.is_correct and x.correct_choice %}<p class="qline right"><span>正しい答え</span>{{ x.correct_choice.text }}</p>{% endif %}
+    <p class="qexp">{{ x.question.explanation }}</p>
+  </div>
+  {% endfor %}
+  {% if not user.is_authenticated %}<div class="notice">この結果は、このブラウザでだけ見られます。<a href="{% url 'accounts:signup' %}">会員登録</a>すると、マイページに残せます。</div>{% endif %}
+</div>
+{% endblock %}

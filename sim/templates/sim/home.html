@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% load static %}
+{% block content %}
+<section class="mainimg">
+  <div class="text"><h1>ネット詐欺を、<br>体験して学ぶ。</h1>
+    <p>宅配のSMS、ネット通販、突然の警告。<br>身近な場面を仮想のスマホとパソコンで体験し、<wbr>自分の判断を振り返ってみましょう。</p>
+    <div class="btn-container"><a class="btn btn-main" href="{% url 'sim:mode' %}">体験をはじめる <span aria-hidden="true">→</span></a></div></div>
+  <div class="image"><img src="{% static 'sim/img/desk.jpg' %}" width="1200" height="800" alt="机の上でパソコンとスマートフォンを使う人"></div>
+</section>
+<div class="wrap home-sections">
+  <section><h2 class="section-title">どの場面を体験しますか？</h2>{% include "sim/_cards.html" %}</section>
+  <aside class="notice"><b>体験の前に</b>検索欄に好きな言葉を入力できます。サイトへのログインは体験用会員を選ぶだけです。だまされた場合は、その後に何が起きるかも体験できます。最後に、自分が選んだ行動と見抜くポイントを確認しましょう。</aside>
+  <section class="home-more">
+    <a class="more-card" href="{% url 'quiz:index' %}"><b>力だめしテスト</b><span>体験の前と後に同じ10問を解いて、正答率がどれだけ上がるか確かめます。</span></a>
+    <a class="more-card" href="{% url 'sim:stats' %}"><b>みんなの結果</b><span>ほかの人がどこで見抜き、どこでだまされたかを見られます。</span></a>
+    <a class="more-card" href="{% if user.is_authenticated %}{% url 'accounts:mypage' %}{% else %}{% url 'accounts:signup' %}{% endif %}"><b>{% if user.is_authenticated %}マイページ{% else %}会員登録（なくても体験できます）{% endif %}</b><span>体験した記録とテストの結果を残せます。</span></a>
+  </section>
+</div>
+{% endblock %}

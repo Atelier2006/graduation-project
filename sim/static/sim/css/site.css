@@ -1,0 +1,128 @@
+/* 詐欺シミュ：Django の画面だけで使う見た目（会員・テスト・みんなの結果など）。
+   色と余白は app.css（Template Party のテーマ）に合わせる。 */
+
+/* ===== ヘッダー：文字サイズとログイン ===== */
+.header-right { display: flex; align-items: center; gap: 1rem; }
+.account-box { display: flex; align-items: center; gap: .25rem; }
+.account-box form { margin: 0; }
+.account-box .btn-sub { padding: .35rem .8rem; font-size: .82rem; gap: 0; }
+.account-box .btn-link { color: var(--navy); font-size: .82rem; font-weight: 700; text-underline-offset: 3px; }
+.messages { padding-bottom: 0; }
+.messages .alert { margin: 0; border-radius: 4px; font-size: .92rem; }
+
+.wrap.narrow { max-width: 760px; }
+#main a:not([class]) { color: var(--navy); text-underline-offset: 3px; }
+
+/* ===== ホームの「もっと使う」 ===== */
+.home-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
+.more-card { display: flex; flex-direction: column; gap: .35rem; border: 1px solid var(--line); border-radius: 5px; padding: 1.1rem 1.2rem; text-decoration: none; color: var(--ink); background: #fff; transition: border-color .15s; }
+.more-card:hover { border-color: var(--navy); color: var(--ink); }
+.more-card b { color: var(--navy); font-size: 1.02rem; }
+.more-card small { color: var(--sub); line-height: 1.7; }
+
+/* ===== フォーム ===== */
+.form-panel { border-bottom: 0; }
+.form-panel input[type=text], .form-panel input[type=password], .form-panel select { display: block; width: 100%; padding: .6rem .8rem; font-size: 1rem; border: 1px solid #b7c4bf; border-radius: 4px; background: #fff; }
+.form-panel input:focus, .form-panel select:focus, .survey textarea:focus { outline: 2px solid var(--navy); outline-offset: 1px; border-color: var(--navy); }
+.form-panel .form-text ul { margin: .3rem 0 0; padding-left: 1.2rem; }
+.form-check-input, .qchoice input, .scale input { accent-color: var(--navy); }
+.form-panel .form-check input { margin-right: .5rem; }
+
+/* ===== 力だめしテスト ===== */
+.quiz-steps { display: grid; gap: 0; }
+.qstep { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--ink); }
+.qstep:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.qstep > div { flex: 1; display: flex; flex-direction: column; }
+.qstep b { color: var(--ink); font-size: 1.05rem; }
+.qstep small { color: var(--sub); }
+.qstep .go { color: var(--navy); font-weight: 700; font-size: .9rem; white-space: nowrap; }
+.qnum { flex: none; width: 2.2rem; height: 2.2rem; border-radius: 50%; display: grid; place-items: center; background: #edf4f0; color: var(--navy); font-weight: 800; }
+
+.qbox { margin: 0; min-width: 0; }
+.qbox legend { float: none; width: auto; font-size: 1.02rem; font-weight: 700; line-height: 1.75; margin-bottom: .75rem; }
+.qno { display: inline-block; margin-right: .6rem; color: var(--navy); font-weight: 800; }
+.qchoice { display: flex; align-items: flex-start; gap: .7rem; padding: .7rem .9rem; border: 1px solid var(--line); border-radius: 5px; margin-bottom: .5rem; cursor: pointer; line-height: 1.65; background: #fff; }
+.qchoice:hover { border-color: #8aa59c; }
+.qchoice input { flex: none; width: 1.1rem; height: 1.1rem; margin-top: .25rem; }
+.qchoice:has(input:checked) { border-color: var(--navy); background: #f0f6f3; }
+.qbox.missing { box-shadow: inset 4px 0 0 var(--ng); padding-left: 1rem; }
+.qerr { color: var(--ng); font-weight: 700; font-size: .88rem; margin: .4rem 0 0; }
+
+.qans .qtext { font-weight: 700; line-height: 1.75; display: flex; gap: .6rem; margin-bottom: .5rem; }
+.qmark { flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center; font-size: .95rem; font-weight: 800; color: #fff; background: var(--ok); }
+.qans.bad .qmark { background: var(--ng); }
+.qline { display: flex; gap: .7rem; line-height: 1.7; margin: .2rem 0; font-size: .94rem; }
+.qline span { flex: none; font-size: .75rem; font-weight: 700; border-radius: 4px; padding: .1rem .5rem; margin-top: .2rem; background: #f1f3f4; color: var(--sub); }
+.qans.bad .qline:not(.right) span { background: var(--ng-bg); color: var(--ng); }
+.qline.right span, .qans.good .qline span { background: var(--ok-bg); color: var(--ok); }
+.qexp { margin: .6rem 0 0; padding: .7rem .9rem; background: #f2f5f2; border-radius: 4px; font-size: .9rem; line-height: 1.85; color: var(--ink); }
+
+/* アンケートの5段階 */
+.scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; max-width: 440px; }
+.scale-pt { display: flex; flex-direction: column; align-items: center; gap: .2rem; padding: .5rem 0; border: 1px solid var(--line); border-radius: 5px; cursor: pointer; font-weight: 700; }
+.scale-pt input { width: 1.1rem; height: 1.1rem; margin: 0; }
+.scale-pt:has(input:checked) { border-color: var(--navy); background: #f0f6f3; color: var(--navy); }
+.scale-pt label { display: contents; }
+.scale-ends { display: flex; justify-content: space-between; max-width: 440px; font-size: .75rem; color: var(--sub); margin-top: .3rem; }
+.survey textarea { font-size: 1rem; }
+
+/* ===== マイページ ===== */
+.progress-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.prog { display: flex; flex-direction: column; gap: .25rem; border: 1px solid var(--line); border-radius: 5px; padding: 1rem 1.1rem; text-decoration: none; color: var(--ink); background: #fff; }
+.prog + .prog { margin-top: 0; }
+.prog small { color: var(--sub); font-weight: 700; }
+.prog b { font-size: 1.1rem; }
+.prog span { color: var(--navy); font-size: .85rem; }
+.prog.ok { border-color: #81c995; background: var(--ok-bg); }
+.prog.ok b { color: var(--ok); }
+.prog.ng { border-color: #f6aea9; background: var(--ng-bg); }
+.prog.ng b { color: var(--ng); }
+.tag.ng { background: var(--ng-bg); color: var(--ng); }
+
+/* ===== みんなの結果 ===== */
+.stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
+.stat { border: 1px solid var(--line); border-radius: 5px; padding: 1.1rem 1.2rem; }
+.stat + .stat { margin-top: 0; }
+.stat h3 { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+.stat h3 small { font-size: .8rem; color: var(--sub); font-weight: 500; }
+.stat-h { font-size: .85rem; font-weight: 700; margin: 1.1rem 0 .5rem; color: var(--sub); }
+.bar { display: flex; height: 18px; border-radius: 3px; overflow: hidden; background: #eceff1; }
+.bar.thin { height: 10px; flex: 1; }
+.bar i { display: block; height: 100%; }
+.bar .ok, .legend .ok { background: #2e7d4f; }
+.bar .ng, .legend .ng { background: #c5221f; }
+.bar .quit, .legend .quit { background: #9aa5a1; }
+.bar .pre, .legend .pre { background: #c27626; }
+.legend { display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none; padding: 0; margin: .5rem 0 0; font-size: .8rem; color: var(--sub); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: .35rem; vertical-align: -1px; }
+.pair { display: flex; align-items: center; gap: .8rem; margin: .45rem 0; font-size: .85rem; }
+.pair > span { flex: none; width: 9.5em; color: var(--sub); }
+.pair > b { flex: none; width: 3.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.traps { margin: 0; padding-left: 1.3rem; font-size: .86rem; line-height: 1.8; }
+.traps small { margin-left: .5rem; color: var(--sub); }
+.survey-avg { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; text-align: center; font-size: .85rem; color: var(--sub); }
+.survey-avg b { display: block; font-size: 1.8rem; color: var(--navy); font-variant-numeric: tabular-nums; }
+.rank td, .rank th { font-size: .92rem; }
+.rank td:first-child { font-weight: 800; color: var(--navy); width: 4em; }
+
+/* ===== スマホ ===== */
+@media (max-width: 860px) {
+  .stat-grid, .home-more, .progress-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .nav-long { display: none; }
+  .header-right { gap: .4rem; }
+  #f-size p { display: none; }
+  .account-box .btn-sub { padding: .3rem .55rem; font-size: .75rem; }
+  .account-box .btn-link { padding-inline: .3rem; font-size: .75rem; }
+  .survey-avg { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pair > span { width: 7.5em; }
+  .qstep .go { display: none; }
+  .table { font-size: .85rem; }
+}
+@media (max-width: 420px) {
+  .account-box .btn-link { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .more-card { transition: none; }
+}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ phase_label }}のテスト｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap narrow"><nav class="trail" aria-label="現在地"><a href="{% url 'quiz:index' %}">力だめしテスト</a><span>{{ phase_label }}のテスト</span></nav>
+  <h1 class="page-h">{{ phase_label }}のテスト</h1>
+  <p class="page-lead">全{{ questions|length }}問です。いちばん正しいと思うものを1つ選んでください。{% if phase == 'pre' %}分からなくても大丈夫。今の自分の考えで選びましょう。{% endif %}</p>
+  <form method="post" class="quiz" novalidate>{% csrf_token %}<input type="hidden" name="seed" value="{{ seed }}">
+    {% for q in questions %}
+    <fieldset class="panel qbox{% if q.id in missing %} missing{% endif %}" id="q{{ q.id }}">
+      <legend><span class="qno">問{{ forloop.counter }}</span>{{ q.text }}</legend>
+      {% for c in q.shuffled %}
+      <label class="qchoice"><input type="radio" name="q{{ q.id }}" value="{{ c.id }}" {% for qid, cid in picked.items %}{% if qid == q.id and cid == c.id %}checked{% endif %}{% endfor %} required><span>{{ c.text }}</span></label>
+      {% endfor %}
+      {% if q.id in missing %}<p class="qerr">この問題に答えてください</p>{% endif %}
+    </fieldset>
+    {% endfor %}
+    <div class="btn-row"><button type="submit" class="btn btn-main btn-lg">答え合わせをする</button><a class="btn btn-sub" href="{% url 'quiz:index' %}">やめる</a></div>
+  </form>
+</div>
+{% endblock %}

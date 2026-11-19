@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}会員の情報｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap narrow"><h1 class="page-h">会員の情報</h1>
+  <form method="post" class="panel form-panel" novalidate>{% csrf_token %}{% include "_form.html" %}<button type="submit" class="btn btn-main">保存する</button>
+  <a class="btn btn-sub ms-2" href="{% url 'accounts:mypage' %}">戻る</a></form></div>
+{% endblock %}

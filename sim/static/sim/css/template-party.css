@@ -1,0 +1,245 @@
+/* Template Party | tp_universal1_jichikai — navigation, mainimg and list1. */
+
+#f-size {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+	@media (max-width:900px) {
+
+	#f-size {
+		justify-content: center;
+	}
+
+	}
+
+#f-size p {
+	margin: 0;
+	font-size: 0.9rem;
+}
+
+#f-size .f-size-btns {
+	display: flex;
+	border: 2px solid var(--primary-color);
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+#f-size button {
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1;
+	min-width: 4rem;
+	min-height: 2.75rem;
+	padding: 0 0.8rem;
+	border: none;
+	background: var(--bg-color);
+	color: var(--primary-color);
+	cursor: pointer;
+}
+#f-size button + button {
+	border-left: 2px solid var(--primary-color);
+}
+
+#f-size #f-large {
+	font-size: 1.3rem;
+}
+
+#f-size button[aria-pressed="true"] {
+	background: var(--primary-color);
+	color: var(--primary-inverse-color);
+}
+
+#f-size button:focus-visible {
+	outline-offset: -6px;
+	outline-color: var(--accent-color);
+}
+
+#menubar {
+	border-top: 1px solid var(--bg-border-color);
+	border-bottom: 1px solid var(--bg-border-color);
+	padding: 0 var(--content-space-l);
+}
+#menubar ul {
+	display: flex;
+}
+#menubar li {
+	flex: 1;
+}
+
+#menubar a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 4rem;
+	padding: 0.5rem;
+	text-decoration: none;
+	text-align: center;
+	font-weight: 500;
+	font-size: 1.05rem;
+	line-height: 1.4;
+	border-bottom: 4px solid transparent;
+}
+
+#menubar a:hover {
+	background: var(--light-color);
+}
+
+#menubar a[aria-current="page"] {
+	font-weight: bold;
+	color: var(--primary-color);
+	border-bottom-color: var(--primary-color);
+}
+
+#menubar a:focus-visible {
+	outline-offset: -3px;
+}
+
+.mainimg * {margin: 0;padding: 0;}
+
+.mainimg {
+	display: grid;
+	grid-template-columns: 1fr 1.25fr;
+	align-items: center;
+	gap: 4vw;
+	padding: 3vw 0 4vw var(--content-space-l);
+}
+
+.mainimg .text {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.mainimg .text h1 {
+	font-size: max(1.8rem, 2.8vw);
+	font-weight: bold;
+	line-height: 1.5;
+	color: var(--primary-color);
+	word-break: auto-phrase;
+}
+
+.mainimg .text p {
+	font-size: 1.05rem;
+	word-break: auto-phrase;
+}
+
+.mainimg .image img {
+	display: block;
+	width: 100%;
+	border-radius: 3rem 0 0 3rem;
+}
+
+	@media (max-width:900px) {
+
+	.mainimg {
+		grid-template-columns: 1fr;
+		padding-top: 1rem;
+	}
+	.mainimg .text {
+		padding-right: var(--content-space-l);
+	}
+	.mainimg .text h1 {
+		font-size: 1.6rem;
+	}
+
+	}
+
+.mainimg .btn-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+}
+.mainimg .btn a {
+	gap: 0.6rem;
+	font-size: 1.1rem;
+	padding: 1rem 2rem;
+	border-radius: 5px;
+}
+
+	@media (max-width:600px) {
+
+	.mainimg .btn-container .btn {
+		width: 100%;
+	}
+	.mainimg .btn a {
+		width: 100%;
+		justify-content: center;
+	}
+
+	}
+
+.list1 * {margin: 0;padding: 0;}
+
+.list1 {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+	@container (max-width: 899px) {
+		.list1 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	}
+
+	@container (max-width: 600px) {
+		.list1 { grid-template-columns: 1fr; }
+	}
+
+.list1 .list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+	position: relative;
+	padding: 2rem;
+	border: 1px solid var(--bg-border-color);
+	border-radius: 10px;
+	background: var(--bg-color);
+	transition: 0.3s;
+}
+
+.list1 .list:has(a):hover {
+	border-color: var(--primary-color);
+	box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08);
+}
+
+.list1 h3 {
+	font-size: 1.25rem;
+	line-height: 1.5;
+}
+.list1 h3 a {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	color: var(--primary-color);
+}
+
+.list1 h3 a::after {
+	content: "→";
+	font-family: sans-serif;
+	font-weight: 900;
+	font-size: 0.8em;
+}
+
+.list1 h3 a::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 10px;
+}
+
+.list1 h3 a:focus-visible {
+	outline: none;
+}
+.list1 .list:has(a:focus-visible) {
+	outline: 3px solid var(--primary-color);
+	outline-offset: 3px;
+}
+
+.list1 p {
+	line-height: 1.8;
+}

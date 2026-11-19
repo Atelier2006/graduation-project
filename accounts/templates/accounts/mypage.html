@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}マイページ｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">{{ profile.nickname }} さんのマイページ</h1>
+  <p class="page-lead">見抜けたシナリオ：<b>{{ ok_count }}</b> / {{ progress|length }}本　<a class="small ms-2" href="{% url 'accounts:profile' %}">会員の情報を変える</a></p>
+
+  <h2 class="sec-h">シナリオごとの記録</h2>
+  <div class="progress-grid">{% for r in progress %}
+    <a class="panel prog {% if r.play %}{{ r.play.ending.kind }}{% endif %}" href="{% if r.play %}{% url 'sim:result' r.play.id %}{% else %}{% url 'sim:start' r.sc.slug %}{% endif %}">
+      <small>{{ r.sc.number }} {{ r.sc.title }}</small><b>{% if r.play %}{{ r.play.ending.get_kind_display }}{% else %}まだ体験していません{% endif %}</b>
+      <span>{% if r.play %}{{ r.play.created_at|date:"n月j日" }}{% else %}体験する →{% endif %}</span></a>{% endfor %}
+  </div>
+
+  <h2 class="sec-h">力だめしテスト</h2>
+  <div class="panel">
+    {% if pre or post %}
+    <div class="pair"><span>体験の前</span><div class="bar thin"><i class="pre" style="width:{{ pre.rate|default:0 }}%"></i></div><b>{% if pre %}{{ pre.score }}/{{ pre.total }}{% else %}ー{% endif %}</b></div>
+    <div class="pair"><span>体験の後</span><div class="bar thin"><i class="ok" style="width:{{ post.rate|default:0 }}%"></i></div><b>{% if post %}{{ post.score }}/{{ post.total }}{% else %}ー{% endif %}</b></div>
+    <p class="small text-secondary mt-2 mb-0">いちばん新しい結果です。</p>
+    {% else %}<p class="mb-0">まだテストを受けていません。<a href="{% url 'quiz:take' 'pre' %}">体験の前のテスト</a>から始めましょう。</p>{% endif %}
+  </div>
+
+  <h2 class="sec-h">体験の履歴</h2>
+  <div class="panel">{% if plays %}<table class="table mb-0"><thead><tr><th>日時</th><th>シナリオ</th><th>結果</th><th>調べた</th><th></th></tr></thead><tbody>
+    {% for p in plays %}<tr><td>{{ p.created_at|date:"n/j H:i" }}</td><td>{{ p.scenario.number }} {{ p.scenario.title }}</td><td><span class="tag {% if p.ending.kind == 'ok' %}check{% elif p.ending.kind == 'ng' %}ng{% else %}dev{% endif %}">{{ p.ending.get_kind_display }}</span></td><td>{{ p.check_count }}回</td><td><a href="{% url 'sim:result' p.id %}">くわしく</a></td></tr>{% endfor %}
+  </tbody></table>{% else %}<p class="mb-0">まだ体験していません。<a href="{% url 'sim:mode' %}">体験を選ぶ</a></p>{% endif %}</div>
+</div>
+{% endblock %}

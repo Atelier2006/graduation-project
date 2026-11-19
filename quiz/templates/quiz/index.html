@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}力だめしテスト｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">力だめしテスト</h1>
+  <p class="page-lead">同じ{{ count }}問を、体験の<b>前</b>と<b>後</b>に解きます。点数を比べると、体験でどれだけ見抜けるようになったかが分かります。問題と選択肢の順番は、受けるたびに入れ替わります。</p>
+  <div class="quiz-steps">
+    <a class="panel qstep" href="{% url 'quiz:take' 'pre' %}"><span class="qnum">1</span><div><b>体験の前のテスト</b><small>{% if pre %}前回 {{ pre.score }}/{{ pre.total }}点（{{ pre.created_at|date:"n月j日" }}）{% else %}まだ受けていません{% endif %}</small></div><span class="go">受ける →</span></a>
+    <a class="panel qstep" href="{% url 'sim:mode' %}"><span class="qnum">2</span><div><b>3つのシナリオを体験する</b><small>フィッシング・偽通販・サポート詐欺</small></div><span class="go">選ぶ →</span></a>
+    <a class="panel qstep" href="{% url 'quiz:take' 'post' %}"><span class="qnum">3</span><div><b>体験の後のテスト</b><small>{% if post %}前回 {{ post.score }}/{{ post.total }}点（{{ post.created_at|date:"n月j日" }}）{% else %}まだ受けていません{% endif %}</small></div><span class="go">受ける →</span></a>
+    <a class="panel qstep" href="{% url 'quiz:survey' %}"><span class="qnum">4</span><div><b>アンケートに答える</b><small>{% if surveyed %}答えてくれてありがとうございます{% else %}1分で終わります{% endif %}</small></div><span class="go">答える →</span></a>
+  </div>
+  <p class="small text-secondary mt-3">テストの結果は、名前なしで「みんなの結果」の平均に使います。{% if not user.is_authenticated %}会員でなくても受けられます。{% endif %}</p>
+</div>
+{% endblock %}

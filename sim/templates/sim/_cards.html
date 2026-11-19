@@ -1,0 +1,10 @@
+{% load static %}<div class="list1">{% for c in cards %}
+  <article class="list">
+    <img class="scene-photo" src="{% static 'sim/img/' %}{{ c.sc.photo }}" alt="">
+    <div class="list-body"><div class="scene-meta"><span>{{ c.sc.number }} {{ c.sc.title }}</span><span>{{ c.sc.minutes }}</span></div>
+      <h3><a href="{% url 'sim:start' c.sc.slug %}">{{ c.sc.scene_title }}</a></h3>
+      <p>{% if learning %}{{ c.sc.learn }}{% else %}{{ c.sc.summary }}{% endif %}</p>
+      {% if c.last %}<small class="progress-note">前回の結果　{{ c.last.ending.get_kind_display }}</small>{% endif %}
+    </div>
+  </article>{% endfor %}
+</div>

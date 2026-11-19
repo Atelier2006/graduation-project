@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}体験を選ぶ｜詐欺シミュ{% endblock %}
+{% block content %}
+<div class="wrap"><h1 class="page-h">体験を選ぶ</h1><p class="page-lead">1つの体験は3〜5分です。各場面で確かめられることを紹介します。</p>
+{% include "sim/_cards.html" with learning=True %}
+<p class="mt-4 small text-secondary">体験の前に<a href="{% url 'quiz:take' 'pre' %}">体験の前のテスト</a>を受けておくと、体験のあとでどれだけ見抜けるようになったかを比べられます。</p></div>
+{% endblock %}
